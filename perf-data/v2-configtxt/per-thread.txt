@@ -1,0 +1,50 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 259K of event 'cycles:P'
+# Event count (approx.): 306813582742
+#
+# Children      Self  Command           Pid:Command       Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............  ....................  ............................................................................................  ....................
+#
+    66.09%    62.87%  top.lbm-exe    277530:top.lbm-exe   [.] compute_cell_collision(double*, double*)                                                  -      -            
+            |          
+             --65.26%--compute_cell_collision(double*, double*)
+
+    29.12%    29.00%  top.lbm-exe    277530:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --29.12%--propagation(Mesh*, Mesh const*)
+
+     3.74%     2.99%  top.lbm-exe    277530:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+            |--2.52%--compute_cell_collision(double*, double*)
+            |          
+             --1.13%--collision(Mesh*, Mesh const*)
+
+     2.75%     0.00%  top.lbm-exe    277530:top.lbm-exe   [k] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+                --2.57%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.61%     0.00%  top.lbm-exe    277530:top.lbm-exe   [.] 0x0000000200000002                                                                        -      -            
+            |
+            ---0x200000002
+               0xa200000322
+               |          
+                --2.57%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.59%     2.56%  top.lbm-exe    277530:top.lbm-exe   [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --2.56%--0x200000002
+                       0xa200000322
+                       |          
+                        --2.54%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
