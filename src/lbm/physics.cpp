@@ -109,31 +109,44 @@ void compute_cell_collision(lbm_mesh_cell_t cell_out, const lbm_mesh_cell_t cell
   const double f7 = cell_in[7];
   const double f8 = cell_in[8];
 
-  const double density = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
+  const double density     = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
   const double inv_density = 1.0 / density;
   const double vx          = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
   const double vy          = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
-  const double velocity_norm_2 = vx * vx + vy * vy;
+  const double vx2         = vx * vx;
+  const double vy2         = vy * vy;
+  const double velocity_norm_2 = vx2 + vy2;
+  const double sum         = vx + vy;
+  const double diff        = vx - vy;
+  const double sum2        = sum * sum;
+  const double diff2       = diff * diff;
 
-  const double f_eq0 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 0);
-  const double f_eq1 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 1);
-  const double f_eq2 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 2);
-  const double f_eq3 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 3);
-  const double f_eq4 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 4);
-  const double f_eq5 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 5);
-  const double f_eq6 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 6);
-  const double f_eq7 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 7);
-  const double f_eq8 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 8);
+  const double omega       = RELAX_PARAMETER;
+  const double one_minus_omega = 1.0 - omega;
+  const double common      = 1.0 - 1.5 * velocity_norm_2;
+  const double rho0        = (4.0 / 9.0) * density;
+  const double rho_axis    = (1.0 / 9.0) * density;
+  const double rho_diag    = (1.0 / 36.0) * density;
 
-  cell_out[0] = f0 - RELAX_PARAMETER * (f0 - f_eq0);
-  cell_out[1] = f1 - RELAX_PARAMETER * (f1 - f_eq1);
-  cell_out[2] = f2 - RELAX_PARAMETER * (f2 - f_eq2);
-  cell_out[3] = f3 - RELAX_PARAMETER * (f3 - f_eq3);
-  cell_out[4] = f4 - RELAX_PARAMETER * (f4 - f_eq4);
-  cell_out[5] = f5 - RELAX_PARAMETER * (f5 - f_eq5);
-  cell_out[6] = f6 - RELAX_PARAMETER * (f6 - f_eq6);
-  cell_out[7] = f7 - RELAX_PARAMETER * (f7 - f_eq7);
-  cell_out[8] = f8 - RELAX_PARAMETER * (f8 - f_eq8);
+  const double feq0 = rho0 * common;
+  const double feq1 = rho_axis * (common + 3.0 * vx + 4.5 * vx2);
+  const double feq2 = rho_axis * (common + 3.0 * vy + 4.5 * vy2);
+  const double feq3 = rho_axis * (common - 3.0 * vx + 4.5 * vx2);
+  const double feq4 = rho_axis * (common - 3.0 * vy + 4.5 * vy2);
+  const double feq5 = rho_diag * (common + 3.0 * sum + 4.5 * sum2);
+  const double feq6 = rho_diag * (common + 3.0 * (vy - vx) + 4.5 * diff2);
+  const double feq7 = rho_diag * (common - 3.0 * sum + 4.5 * sum2);
+  const double feq8 = rho_diag * (common + 3.0 * diff + 4.5 * diff2);
+
+  cell_out[0] = one_minus_omega * f0 + omega * feq0;
+  cell_out[1] = one_minus_omega * f1 + omega * feq1;
+  cell_out[2] = one_minus_omega * f2 + omega * feq2;
+  cell_out[3] = one_minus_omega * f3 + omega * feq3;
+  cell_out[4] = one_minus_omega * f4 + omega * feq4;
+  cell_out[5] = one_minus_omega * f5 + omega * feq5;
+  cell_out[6] = one_minus_omega * f6 + omega * feq6;
+  cell_out[7] = one_minus_omega * f7 + omega * feq7;
+  cell_out[8] = one_minus_omega * f8 + omega * feq8;
 }
 
 void compute_bounce_back(lbm_mesh_cell_t cell) {
@@ -230,16 +243,48 @@ void collision(Mesh* mesh_out, const Mesh* mesh_in) {
 }
 
 void propagation(Mesh* mesh_out, const Mesh* mesh_in) {
-  // Loop on all cells
-  for (size_t j = 0; j < mesh_out->height; j++) {
-    for (size_t i = 0; i < mesh_out->width; i++) {
-      // For all direction
+  const size_t width       = mesh_out->width;
+  const size_t height      = mesh_out->height;
+  const size_t cell_stride = DIRECTIONS;
+  const size_t col_stride  = height * cell_stride;
+
+  const double* __restrict in = mesh_in->cells;
+  double* __restrict out      = mesh_out->cells;
+
+  // Interior cells dominate runtime, so propagate them with a branchless pull-style kernel.
+  for (size_t i = 1; i + 1 < width; i++) {
+    const size_t dst_col   = i * col_stride;
+    const size_t west_col  = (i - 1) * col_stride;
+    const size_t east_col  = (i + 1) * col_stride;
+
+    for (size_t j = 1; j + 1 < height; j++) {
+      const size_t dst  = dst_col + j * cell_stride;
+      const size_t west = west_col + j * cell_stride;
+      const size_t east = east_col + j * cell_stride;
+
+      out[dst + 0] = in[dst + 0];
+      out[dst + 1] = in[west + 1];
+      out[dst + 2] = in[dst_col + (j - 1) * cell_stride + 2];
+      out[dst + 3] = in[east + 3];
+      out[dst + 4] = in[dst_col + (j + 1) * cell_stride + 4];
+      out[dst + 5] = in[west_col + (j - 1) * cell_stride + 5];
+      out[dst + 6] = in[east_col + (j - 1) * cell_stride + 6];
+      out[dst + 7] = in[east_col + (j + 1) * cell_stride + 7];
+      out[dst + 8] = in[west_col + (j + 1) * cell_stride + 8];
+    }
+  }
+
+  // Borders are a small fraction of the mesh; keep the generic safe handling here.
+  for (size_t i = 0; i < width; i++) {
+    for (size_t j = 0; j < height; j++) {
+      const bool is_border = (i == 0 || j == 0 || i + 1 == width || j + 1 == height);
+      if (!is_border) {
+        continue;
+      }
       for (size_t k = 0; k < DIRECTIONS; k++) {
-        // Compute destination point
-        ssize_t ii = (i + direction_matrix[k][0]);
-        ssize_t jj = (j + direction_matrix[k][1]);
-        // Propagate to neighboor nodes
-        if ((ii >= 0 && ii < mesh_out->width) && (jj >= 0 && jj < mesh_out->height)) {
+        const ssize_t ii = (i + direction_matrix[k][0]);
+        const ssize_t jj = (j + direction_matrix[k][1]);
+        if ((ii >= 0 && ii < static_cast<ssize_t>(width)) && (jj >= 0 && jj < static_cast<ssize_t>(height))) {
           Mesh_get_cell(mesh_out, ii, jj)[k] = Mesh_get_cell(mesh_in, i, j)[k];
         }
       }
