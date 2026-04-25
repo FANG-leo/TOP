@@ -38,6 +38,21 @@ const int opposite_of[DIRECTIONS] = {0, 3, 4, 1, 2, 7, 8, 5, 6};
 #error Need to define adapted equilibrium distribution function
 #endif
 
+static inline double compute_equilibrium_profile_components(
+  const double vx,
+  const double vy,
+  const double density,
+  const double velocity_norm_2,
+  const int direction
+) {
+  static constexpr double direction_x[DIRECTIONS] = {0.0, 1.0, 0.0, -1.0, 0.0, 1.0, -1.0, -1.0, 1.0};
+  static constexpr double direction_y[DIRECTIONS] = {0.0, 0.0, 1.0, 0.0, -1.0, 1.0, 1.0, -1.0, -1.0};
+
+  const double p      = direction_x[direction] * vx + direction_y[direction] * vy;
+  const double common = 1.0 - 1.5 * velocity_norm_2;
+  return equil_weight[direction] * density * (common + 3.0 * p + 4.5 * p * p);
+}
+
 double get_vect_norm_2(Vector const a, Vector const b) {
   double res = 0.0;
   for (size_t k = 0; k < DIMENSIONS; k++) {
@@ -74,34 +89,51 @@ void get_cell_velocity(Vector v, const lbm_mesh_cell_t cell, double cell_density
 }
 
 double compute_equilibrium_profile(Vector velocity, double density, int direction) {
-  const double v2 = get_vect_norm_2(velocity, velocity);
-
-  // Compute `e_i * v_i / c`
-  const double p  = get_vect_norm_2(direction_matrix[direction], velocity);
-  const double p2 = p * p;
-
-  // Terms without density and direction weight
-  double f_eq = 1.0 + (3.0 * p) + ((9.0 / 2.0) * p2) - ((3.0 / 2.0) * v2);
-
-  // Multiply everything by the density and direction weight
-  f_eq *= equil_weight[direction] * density;
-
-  return f_eq;
+  return compute_equilibrium_profile_components(
+    velocity[0],
+    velocity[1],
+    density,
+    velocity[0] * velocity[0] + velocity[1] * velocity[1],
+    direction
+  );
 }
 
 void compute_cell_collision(lbm_mesh_cell_t cell_out, const lbm_mesh_cell_t cell_in) {
-  // Compute macroscopic values
-  const double density = get_cell_density(cell_in);
-  Vector v;
-  get_cell_velocity(v, cell_in, density);
+  const double f0 = cell_in[0];
+  const double f1 = cell_in[1];
+  const double f2 = cell_in[2];
+  const double f3 = cell_in[3];
+  const double f4 = cell_in[4];
+  const double f5 = cell_in[5];
+  const double f6 = cell_in[6];
+  const double f7 = cell_in[7];
+  const double f8 = cell_in[8];
 
-  // Loop on microscopic directions
-  for (size_t k = 0; k < DIRECTIONS; k++) {
-    // Compute f at equilibrium
-    double f_eq = compute_equilibrium_profile(v, density, k);
-    // Compute f_out
-    cell_out[k] = cell_in[k] - RELAX_PARAMETER * (cell_in[k] - f_eq);
-  }
+  const double density = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
+  const double inv_density = 1.0 / density;
+  const double vx          = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
+  const double vy          = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
+  const double velocity_norm_2 = vx * vx + vy * vy;
+
+  const double f_eq0 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 0);
+  const double f_eq1 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 1);
+  const double f_eq2 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 2);
+  const double f_eq3 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 3);
+  const double f_eq4 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 4);
+  const double f_eq5 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 5);
+  const double f_eq6 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 6);
+  const double f_eq7 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 7);
+  const double f_eq8 = compute_equilibrium_profile_components(vx, vy, density, velocity_norm_2, 8);
+
+  cell_out[0] = f0 - RELAX_PARAMETER * (f0 - f_eq0);
+  cell_out[1] = f1 - RELAX_PARAMETER * (f1 - f_eq1);
+  cell_out[2] = f2 - RELAX_PARAMETER * (f2 - f_eq2);
+  cell_out[3] = f3 - RELAX_PARAMETER * (f3 - f_eq3);
+  cell_out[4] = f4 - RELAX_PARAMETER * (f4 - f_eq4);
+  cell_out[5] = f5 - RELAX_PARAMETER * (f5 - f_eq5);
+  cell_out[6] = f6 - RELAX_PARAMETER * (f6 - f_eq6);
+  cell_out[7] = f7 - RELAX_PARAMETER * (f7 - f_eq7);
+  cell_out[8] = f8 - RELAX_PARAMETER * (f8 - f_eq8);
 }
 
 void compute_bounce_back(lbm_mesh_cell_t cell) {
