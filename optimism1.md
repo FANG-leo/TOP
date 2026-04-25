@@ -84,3 +84,63 @@ Using `800 * 160 * 1000 = 128,000,000` lattice updates, this corresponds to an e
 
 - The topology print from `lbm_comm_print()` still appears, but it is outside the timed section and does not affect the measured FOM.
 - This baseline is intended for step 1: removing system-level interference before touching the numerical kernel itself.
+
+## Rerun Log
+
+Measured again on `2026-04-25` from the existing `build-release` directory:
+
+- Command:
+  `LD_LIBRARY_PATH=/home/fzj/桌面/top/top-new/TOP/build-release/lib OMP_NUM_THREADS=1 mpirun -np 1 /home/fzj/桌面/top/top-new/TOP/build-release/top.lbm-exe /home/fzj/桌面/top/top-new/TOP/config.baseline-1000.txt`
+- Result:
+  `FOM = 13.33 MLUPS`
+
+This rerun is faster than the earlier `9.86 MLUPS` average recorded above, which means the current `build-release` binary or runtime environment differs from the one used for the first baseline table.
+
+## Perf Collection
+
+Collected on `2026-04-25` for the same `config.baseline-1000.txt` single-rank baseline.
+
+- Raw stdout log:
+  [stdout.log](/home/fzj/桌面/top/top-new/TOP/perf-data/baseline-1000/stdout.log)
+- Raw perf CSV:
+  [perf.csv](/home/fzj/桌面/top/top-new/TOP/perf-data/baseline-1000/perf.csv)
+- Collection script:
+  [run_perf_baseline.sh](/home/fzj/桌面/top/top-new/TOP/scripts/run_perf_baseline.sh)
+- Parser:
+  [parse_perf_stat.py](/home/fzj/桌面/top/top-new/TOP/scripts/parse_perf_stat.py)
+
+Parsed result:
+
+| Run | FOM (MLUPS) | IPC | CPU Util | Cache Hit Rate | Branch Pred Hit | L1 Hit Rate | Task Clock (s) | Memory Accesses |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `baseline-1000` | `18.57` | `3.63` | `0.923` | `94.09%` | `99.92%` | `96.81%` | `7.179` | `42,123,778,649` L1 loads |
+
+Generated analysis files:
+
+- Hotspot report:
+  [hotspot.txt](/home/fzj/桌面/top/top-new/TOP/perf-data/baseline-1000/hotspot.txt)
+- Per-thread report:
+  [per-thread.txt](/home/fzj/桌面/top/top-new/TOP/perf-data/baseline-1000/per-thread.txt)
+- Per-core report:
+  [per-core.txt](/home/fzj/桌面/top/top-new/TOP/perf-data/baseline-1000/per-core.txt)
+
+Top hotspot symbols in this run:
+
+1. `compute_equilibrium_profile(double*, double, int)`
+2. `compute_cell_collision(double*, double*)`
+3. `get_vect_norm_2(double const*, double const*)`
+4. `propagation(Mesh*, Mesh const*)`
+5. `get_cell_velocity(double*, double*, double)`
+
+Recommended collection command:
+
+```bash
+cd /home/fzj/桌面/top/top-new/TOP
+./scripts/run_perf_suite.sh
+```
+
+Recommended parsing command for one or more runs:
+
+```bash
+python3 scripts/parse_perf_stat.py perf-data/*/stdout.log perf-data/*/perf.csv
+```

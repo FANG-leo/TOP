@@ -1,0 +1,66 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 570K of event 'cycles:P'
+# Event count (approx.): 679434678537
+#
+# Children      Self  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............................................................................................  ....................
+#
+    51.27%    33.94%  [.] compute_equilibrium_profile(double*, double, int)                                         -      -            
+            |          
+             --17.33%--compute_equilibrium_profile(double*, double, int)
+
+    32.96%    15.57%  [.] compute_cell_collision(double*, double*)                                                  -      -            
+            |          
+             --17.52%--compute_cell_collision(double*, double*)
+
+    30.06%    19.91%  [.] get_vect_norm_2(double const*, double const*)                                             -      -            
+            |          
+             --10.16%--get_vect_norm_2(double const*, double const*)
+
+    14.09%     3.49%  [.] get_cell_velocity(double*, double*, double)                                               -      -            
+            |          
+             --10.61%--get_cell_velocity(double*, double*, double)
+
+    13.96%    13.91%  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --13.96%--propagation(Mesh*, Mesh const*)
+
+     8.41%     1.35%  [.] get_cell_density(double*)                                                                 -      -            
+            |          
+             --7.06%--get_cell_density(double*)
+
+     6.63%     5.62%  [.] get_vect_norm_2(double const*, double const*)@plt                                         -      -            
+            |          
+             --1.01%--get_vect_norm_2(double const*, double const*)@plt
+
+     3.74%     1.95%  [.] compute_equilibrium_profile(double*, double, int)@plt                                     -      -            
+            |          
+             --1.79%--compute_equilibrium_profile(double*, double, int)@plt
+
+     1.91%     1.47%  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+     1.25%     0.00%  [k] 0x000000a200000322                                                                        -      -            
+            |          
+             --1.17%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.20%     0.00%  [.] 0x0000000200000002                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+                --1.17%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.19%     1.18%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --1.18%--0x200000002
+                       0xa200000322
+                       |          
+                        --1.16%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

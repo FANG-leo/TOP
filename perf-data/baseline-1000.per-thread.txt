@@ -1,0 +1,160 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 29K of event 'cycles:P'
+# Event count (approx.): 33867625280
+#
+# Children      Self  Command           Pid:Command       Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............  ....................  ............................................................................................  ....................
+#
+    48.85%    32.95%  top.lbm-exe    259573:top.lbm-exe   [.] compute_equilibrium_profile(double*, double, int)                                         -      -            
+            |          
+            |--15.90%--compute_equilibrium_profile(double*, double, int)
+            |          
+            |--1.66%--0x3fbc71c71c71c71f
+            |          
+            |--1.38%--0x3fbc71c71c71c71d
+            |          
+             --1.23%--0x3fbc71c71c71c71b
+
+    33.26%    15.79%  top.lbm-exe    259573:top.lbm-exe   [.] compute_cell_collision(double*, double*)                                                  -      -            
+            |          
+             --17.57%--compute_cell_collision(double*, double*)
+
+    28.48%    18.67%  top.lbm-exe    259573:top.lbm-exe   [.] get_vect_norm_2(double const*, double const*)                                             -      -            
+            |          
+            |--9.82%--get_vect_norm_2(double const*, double const*)
+            |          
+            |--1.24%--0x3fbc71c71c71c71d
+            |          
+             --1.17%--0x3fbc71c71c71c71f
+
+    14.50%    14.46%  top.lbm-exe    259573:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |
+            ---propagation(Mesh*, Mesh const*)
+
+    13.98%     3.08%  top.lbm-exe    259573:top.lbm-exe   [.] get_cell_velocity(double*, double*, double)                                               -      -            
+            |          
+             --10.90%--get_cell_velocity(double*, double*, double)
+
+     8.95%     1.18%  top.lbm-exe    259573:top.lbm-exe   [.] get_cell_density(double*)                                                                 -      -            
+            |          
+             --7.76%--get_cell_density(double*)
+
+     7.11%     6.01%  top.lbm-exe    259573:top.lbm-exe   [.] get_vect_norm_2(double const*, double const*)@plt                                         -      -            
+            |          
+             --1.10%--get_vect_norm_2(double const*, double const*)@plt
+
+     4.32%     0.00%  top.lbm-exe    259573:top.lbm-exe   [.] 0x3fbc71c71c71c71f                                                                        -      -            
+            |
+            ---0x3fbc71c71c71c71f
+               |          
+                --2.10%--compute_cell_collision(double*, double*)
+
+     4.06%     0.00%  top.lbm-exe    259573:top.lbm-exe   [.] 0x3fbc71c71c71c71d                                                                        -      -            
+            |
+            ---0x3fbc71c71c71c71d
+               |          
+                --2.05%--compute_cell_collision(double*, double*)
+
+     3.33%     1.77%  top.lbm-exe    259573:top.lbm-exe   [.] compute_equilibrium_profile(double*, double, int)@plt                                     -      -            
+            |          
+             --1.56%--compute_equilibrium_profile(double*, double, int)@plt
+
+     2.87%     0.00%  top.lbm-exe    259573:top.lbm-exe   [.] 0x3fbc71c71c71c71b                                                                        -      -            
+            |
+            ---0x3fbc71c71c71c71b
+               |          
+                --1.20%--compute_cell_collision(double*, double*)
+
+     1.73%     1.29%  top.lbm-exe    259573:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                             -      -            
+     1.45%     0.00%  mpirun         259560:mpirun        [.] 0xffffffffa300012b                                                                        -      -            
+            |          
+             --1.45%--0xffffffffa300012b
+                       |          
+                        --1.44%--0xffffffffa4594660
+                                  |          
+                                   --1.09%--0xffffffffa328af36
+                                             0xffffffffa38060c2
+
+     1.44%     0.00%  mpirun         259560:mpirun        [.] 0xffffffffa4594660                                                                        -      -            
+            |
+            ---0xffffffffa4594660
+               |          
+                --1.09%--0xffffffffa328af36
+                          0xffffffffa38060c2
+
+     1.14%     0.00%  top.lbm-exe    259573:top.lbm-exe   [.] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+                --1.11%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.14%     0.00%  mpirun         259560:mpirun        [k] 0xd389485354415541                                                                        -      -            
+            |
+            ---0xd389485354415541
+               0x733032602fd5
+               0x73302e7882ab
+               0x73302e78728b
+
+     1.14%     0.00%  mpirun         259560:mpirun        [.] 0x0000733032602fd5                                                                        -      -            
+            |
+            ---0x733032602fd5
+               0x73302e7882ab
+               0x73302e78728b
+
+     1.14%     0.00%  mpirun         259560:mpirun        [.] 0x000073302e7882ab                                                                        -      -            
+            |
+            ---0x73302e7882ab
+               0x73302e78728b
+
+     1.14%     0.00%  mpirun         259560:mpirun        [.] 0x000073302e78728b                                                                        -      -            
+            |
+            ---0x73302e78728b
+
+     1.13%     0.00%  top.lbm-exe    259573:top.lbm-exe   [.] 0x0000000200000002                                                                        -      -            
+            |
+            ---0x200000002
+               0xa200000322
+               |          
+                --1.11%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.13%     1.12%  top.lbm-exe    259573:top.lbm-exe   [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --1.12%--0x200000002
+                       0xa200000322
+                       |          
+                        --1.10%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.11%     0.00%  top.lbm-exe    259573:top.lbm-exe   [.] 0000000000000000                                                                          -      -            
+            |
+            ---0
+
+     1.09%     0.00%  mpirun         259560:mpirun        [.] __GI___ioctl                                                                              -      -            
+            |
+            ---__GI___ioctl
+               0xffffffffa300012b
+               0xffffffffa4594660
+               0xffffffffa328af36
+               0xffffffffa38060c2
+
+     1.09%     0.00%  mpirun         259560:mpirun        [.] 0xffffffffa328af36                                                                        -      -            
+            |
+            ---0xffffffffa328af36
+               0xffffffffa38060c2
+
+     1.09%     0.00%  mpirun         259560:mpirun        [.] 0xffffffffa38060c2                                                                        -      -            
+            |
+            ---0xffffffffa38060c2
+
+     1.07%     0.00%  top.lbm-exe    259573:top.lbm-exe   [.] 0x3c77ffffffffffff                                                                        -      -            
+            |
+            ---0x3c77ffffffffffff
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
