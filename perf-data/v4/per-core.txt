@@ -1,0 +1,106 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 159K of event 'cycles:P'
+# Event count (approx.): 189868837009
+#
+# Children      Self  CPU  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ...  ............................................................................................  ....................
+#
+    47.55%     0.00%  016  [.] 0x3fbc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fbc71c71c71c71c
+               |          
+               |--37.86%--0xa200000322
+               |          |          
+               |           --37.81%--collision(Mesh*, Mesh const*)
+               |          
+                --9.69%--propagation(Mesh*, Mesh const*)
+
+    45.13%     0.00%  000  [.] 0x3fbc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fbc71c71c71c71c
+               |          
+               |--35.95%--0xa200000322
+               |          |          
+               |           --35.92%--collision(Mesh*, Mesh const*)
+               |          
+                --9.18%--propagation(Mesh*, Mesh const*)
+
+    40.05%     0.00%  016  [.] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+               |--37.81%--collision(Mesh*, Mesh const*)
+               |          
+                --2.15%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+    38.13%     0.00%  000  [k] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+               |--35.92%--collision(Mesh*, Mesh const*)
+               |          
+                --2.05%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+    37.81%    37.68%  016  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --37.68%--0x3fbc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --37.68%--collision(Mesh*, Mesh const*)
+
+    35.92%    35.78%  000  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --35.78%--0x3fbc71c71c71c71c
+                       |          
+                        --35.77%--0xa200000322
+                                  |          
+                                   --35.77%--collision(Mesh*, Mesh const*)
+
+     9.69%     9.66%  016  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --9.66%--0x3fbc71c71c71c71c
+                       propagation(Mesh*, Mesh const*)
+
+     9.18%     9.14%  000  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --9.14%--0x3fbc71c71c71c71c
+                       |          
+                        --9.14%--propagation(Mesh*, Mesh const*)
+
+     2.19%     0.00%  016  [.] 0x0000000200000002                                                                        -      -            
+            |
+            ---0x200000002
+               0xa200000322
+               |          
+                --2.15%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.18%     2.16%  016  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --2.16%--0x200000002
+                       0xa200000322
+                       |          
+                        --2.13%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.08%     0.00%  000  [.] 0x0000000200000002                                                                        -      -            
+            |
+            ---0x200000002
+               0xa200000322
+               |          
+                --2.05%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.07%     2.06%  000  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --2.06%--0x200000002
+                       0xa200000322
+                       |          
+                        --2.03%--special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
