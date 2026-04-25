@@ -8,6 +8,7 @@
 
 /// @brief A cell is an array of double `DIRECTIONS` to store microscopic / probabilities (`f_i`).
 typedef double* lbm_mesh_cell_t;
+typedef const double* lbm_mesh_const_cell_t;
 
 /// @brief Representation of a vector to manipulate macroscopic velocities.
 typedef double Vector[DIMENSIONS];
@@ -99,13 +100,55 @@ void fatal(const char* message);
 
 /// @brief Retrieves a cell of a mesh given its coordinates.
 static inline lbm_mesh_cell_t Mesh_get_cell(const Mesh* mesh, int x, int y) {
-  return &mesh->cells[(x * mesh->height + y) * DIRECTIONS];
+  (void)mesh;
+  (void)x;
+  (void)y;
+  return NULL;
 }
 
 /// @brief Retrieves a column of a mesh given the `x` coordinate.
 static inline lbm_mesh_cell_t Mesh_get_col(const Mesh* mesh, int x) {
-  // `+ DIRECTIONS` to skip the first (phantom) line
-  return &mesh->cells[x * mesh->height * DIRECTIONS + DIRECTIONS];
+  (void)mesh;
+  (void)x;
+  return NULL;
+}
+
+static inline size_t Mesh_scalar_index(const Mesh* mesh, uint32_t x, uint32_t y) {
+  return static_cast<size_t>(x) * mesh->height + y;
+}
+
+static inline size_t Mesh_plane_size(const Mesh* mesh) {
+  return static_cast<size_t>(mesh->width) * mesh->height;
+}
+
+static inline double* Mesh_direction_plane(const Mesh* mesh, uint32_t direction) {
+  return &mesh->cells[static_cast<size_t>(direction) * Mesh_plane_size(mesh)];
+}
+
+static inline const double* Mesh_direction_plane_const(const Mesh* mesh, uint32_t direction) {
+  return &mesh->cells[static_cast<size_t>(direction) * Mesh_plane_size(mesh)];
+}
+
+static inline double Mesh_get_value(const Mesh* mesh, uint32_t x, uint32_t y, uint32_t direction) {
+  return Mesh_direction_plane_const(mesh, direction)[Mesh_scalar_index(mesh, x, y)];
+}
+
+static inline void Mesh_set_value(Mesh* mesh, uint32_t x, uint32_t y, uint32_t direction, double value) {
+  Mesh_direction_plane(mesh, direction)[Mesh_scalar_index(mesh, x, y)] = value;
+}
+
+static inline void Mesh_load_cell(const Mesh* mesh, uint32_t x, uint32_t y, double* out_cell) {
+  const size_t idx = Mesh_scalar_index(mesh, x, y);
+  for (size_t k = 0; k < DIRECTIONS; k++) {
+    out_cell[k] = Mesh_direction_plane_const(mesh, k)[idx];
+  }
+}
+
+static inline void Mesh_store_cell(Mesh* mesh, uint32_t x, uint32_t y, const double* in_cell) {
+  const size_t idx = Mesh_scalar_index(mesh, x, y);
+  for (size_t k = 0; k < DIRECTIONS; k++) {
+    Mesh_direction_plane(mesh, k)[idx] = in_cell[k];
+  }
 }
 
 /// @brief Retrieves a pointer on the cell type of a mesh given its coordinates.

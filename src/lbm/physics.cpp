@@ -114,7 +114,7 @@ double get_vect_norm_2(Vector const a, Vector const b) {
   return res;
 }
 
-double get_cell_density(const lbm_mesh_cell_t cell) {
+double get_cell_density(lbm_mesh_const_cell_t __restrict cell) {
   assert(cell != NULL);
   double res = 0.0;
   for (size_t k = 0; k < DIRECTIONS; k++) {
@@ -123,7 +123,7 @@ double get_cell_density(const lbm_mesh_cell_t cell) {
   return res;
 }
 
-void get_cell_velocity(Vector v, const lbm_mesh_cell_t cell, double cell_density) {
+void get_cell_velocity(Vector v, lbm_mesh_const_cell_t __restrict cell, double cell_density) {
   assert(v != NULL);
   assert(cell != NULL);
 
@@ -151,11 +151,11 @@ double compute_equilibrium_profile(Vector velocity, double density, int directio
   );
 }
 
-void compute_cell_collision(lbm_mesh_cell_t cell_out, const lbm_mesh_cell_t cell_in) {
+void compute_cell_collision(lbm_mesh_cell_t __restrict cell_out, lbm_mesh_const_cell_t __restrict cell_in) {
   collide_cell_d2q9(cell_out, cell_in, RELAX_PARAMETER, 1.0 - RELAX_PARAMETER);
 }
 
-void compute_bounce_back(lbm_mesh_cell_t cell) {
+void compute_bounce_back(lbm_mesh_cell_t __restrict cell) {
   double tmp[DIRECTIONS];
   for (size_t k = 0; k < DIRECTIONS; k++) {
     tmp[k] = cell[opposite_of[k]];
@@ -171,7 +171,7 @@ double helper_compute_poiseuille(const size_t i, const size_t size) {
   return 4.0 * INFLOW_MAX_VELOCITY / (L * L) * (L * y - y * y);
 }
 
-void compute_inflow_zou_he_poiseuille_distr(const Mesh* mesh, lbm_mesh_cell_t cell, size_t id_y) {
+void compute_inflow_zou_he_poiseuille_distr(const Mesh* mesh, lbm_mesh_cell_t __restrict cell, size_t id_y) {
 #if DIRECTIONS != 9
 #error Implemented only for 9 directions
 #endif
@@ -194,7 +194,7 @@ void compute_inflow_zou_he_poiseuille_distr(const Mesh* mesh, lbm_mesh_cell_t ce
   // No need to copy already known one as the value will be "loss" in the wall at propagatation time
 }
 
-void compute_outflow_zou_he_const_density(lbm_mesh_cell_t cell) {
+void compute_outflow_zou_he_const_density(lbm_mesh_cell_t __restrict cell) {
 #if DIRECTIONS != 9
 #error Implemented only for 9 directions
 #endif
@@ -215,7 +215,8 @@ void compute_outflow_zou_he_const_density(lbm_mesh_cell_t cell) {
             - (1.0 / 6.0) * (rho * v);
 }
 
-void special_cells(Mesh* mesh, lbm_mesh_type_t* mesh_type, const lbm_comm_t* mesh_comm) {
+void special_cells(Mesh* __restrict mesh, lbm_mesh_type_t* __restrict mesh_type, const lbm_comm_t* __restrict mesh_comm) {
+  double cell[DIRECTIONS];
   // Loop on all inner cells
   for (size_t i = 1; i < mesh->width - 1; i++) {
     for (size_t j = 1; j < mesh->height - 1; j++) {
@@ -223,75 +224,146 @@ void special_cells(Mesh* mesh, lbm_mesh_type_t* mesh_type, const lbm_comm_t* mes
       case CELL_FUILD:
         break;
       case CELL_BOUNCE_BACK:
-        compute_bounce_back(Mesh_get_cell(mesh, i, j));
+        Mesh_load_cell(mesh, i, j, cell);
+        compute_bounce_back(cell);
+        Mesh_store_cell(mesh, i, j, cell);
         break;
       case CELL_LEFT_IN:
-        compute_inflow_zou_he_poiseuille_distr(mesh, Mesh_get_cell(mesh, i, j), j + mesh_comm->y);
+        Mesh_load_cell(mesh, i, j, cell);
+        compute_inflow_zou_he_poiseuille_distr(mesh, cell, j + mesh_comm->y);
+        Mesh_store_cell(mesh, i, j, cell);
         break;
       case CELL_RIGHT_OUT:
-        compute_outflow_zou_he_const_density(Mesh_get_cell(mesh, i, j));
+        Mesh_load_cell(mesh, i, j, cell);
+        compute_outflow_zou_he_const_density(cell);
+        Mesh_store_cell(mesh, i, j, cell);
         break;
       }
     }
   }
 }
 
-void collision(Mesh* mesh_out, const Mesh* mesh_in) {
+void collision(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   assert(mesh_in->width == mesh_out->width);
   assert(mesh_in->height == mesh_out->height);
 
   const size_t width       = mesh_in->width;
   const size_t height      = mesh_in->height;
-  const size_t cell_stride = DIRECTIONS;
-  const size_t col_stride  = height * cell_stride;
   const double omega       = RELAX_PARAMETER;
   const double one_minus_omega = 1.0 - omega;
 
-  const double* __restrict in = mesh_in->cells;
-  double* __restrict out      = mesh_out->cells;
+  const double* __restrict in0 = Mesh_direction_plane_const(mesh_in, 0);
+  const double* __restrict in1 = Mesh_direction_plane_const(mesh_in, 1);
+  const double* __restrict in2 = Mesh_direction_plane_const(mesh_in, 2);
+  const double* __restrict in3 = Mesh_direction_plane_const(mesh_in, 3);
+  const double* __restrict in4 = Mesh_direction_plane_const(mesh_in, 4);
+  const double* __restrict in5 = Mesh_direction_plane_const(mesh_in, 5);
+  const double* __restrict in6 = Mesh_direction_plane_const(mesh_in, 6);
+  const double* __restrict in7 = Mesh_direction_plane_const(mesh_in, 7);
+  const double* __restrict in8 = Mesh_direction_plane_const(mesh_in, 8);
+  double* __restrict out0      = Mesh_direction_plane(mesh_out, 0);
+  double* __restrict out1      = Mesh_direction_plane(mesh_out, 1);
+  double* __restrict out2      = Mesh_direction_plane(mesh_out, 2);
+  double* __restrict out3      = Mesh_direction_plane(mesh_out, 3);
+  double* __restrict out4      = Mesh_direction_plane(mesh_out, 4);
+  double* __restrict out5      = Mesh_direction_plane(mesh_out, 5);
+  double* __restrict out6      = Mesh_direction_plane(mesh_out, 6);
+  double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
+  double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
 
   for (size_t i = 1; i + 1 < width; i++) {
-    const size_t col_base = i * col_stride;
-    for (size_t j = 1; j + 1 < height; j++) {
-      const size_t idx = col_base + j * cell_stride;
-      collide_cell_d2q9(out + idx, in + idx, omega, one_minus_omega);
+    const size_t col_base = i * height;
+    #pragma omp simd
+    for (size_t j = 1; j < height - 1; j++) {
+      const size_t idx = col_base + j;
+      const double f0 = in0[idx];
+      const double f1 = in1[idx];
+      const double f2 = in2[idx];
+      const double f3 = in3[idx];
+      const double f4 = in4[idx];
+      const double f5 = in5[idx];
+      const double f6 = in6[idx];
+      const double f7 = in7[idx];
+      const double f8 = in8[idx];
+
+      const double density         = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
+      const double inv_density     = 1.0 / density;
+      const double vx              = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
+      const double vy              = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
+      const double vx2             = vx * vx;
+      const double vy2             = vy * vy;
+      const double velocity_norm_2 = vx2 + vy2;
+      const double sum             = vx + vy;
+      const double diff            = vx - vy;
+      const double sum2            = sum * sum;
+      const double diff2           = diff * diff;
+      const double common          = 1.0 - 1.5 * velocity_norm_2;
+      const double rho0            = (4.0 / 9.0) * density;
+      const double rho_axis        = (1.0 / 9.0) * density;
+      const double rho_diag        = (1.0 / 36.0) * density;
+
+      out0[idx] = one_minus_omega * f0 + omega * (rho0 * common);
+      out1[idx] = one_minus_omega * f1 + omega * (rho_axis * (common + 3.0 * vx + 4.5 * vx2));
+      out2[idx] = one_minus_omega * f2 + omega * (rho_axis * (common + 3.0 * vy + 4.5 * vy2));
+      out3[idx] = one_minus_omega * f3 + omega * (rho_axis * (common - 3.0 * vx + 4.5 * vx2));
+      out4[idx] = one_minus_omega * f4 + omega * (rho_axis * (common - 3.0 * vy + 4.5 * vy2));
+      out5[idx] = one_minus_omega * f5 + omega * (rho_diag * (common + 3.0 * sum + 4.5 * sum2));
+      out6[idx] = one_minus_omega * f6 + omega * (rho_diag * (common + 3.0 * (vy - vx) + 4.5 * diff2));
+      out7[idx] = one_minus_omega * f7 + omega * (rho_diag * (common - 3.0 * sum + 4.5 * sum2));
+      out8[idx] = one_minus_omega * f8 + omega * (rho_diag * (common + 3.0 * diff + 4.5 * diff2));
     }
   }
 }
 
-void propagation(Mesh* mesh_out, const Mesh* mesh_in) {
+void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   const size_t width       = mesh_out->width;
   const size_t height      = mesh_out->height;
-  const size_t cell_stride = DIRECTIONS;
-  const size_t col_stride  = height * cell_stride;
+  const size_t plane_size  = Mesh_plane_size(mesh_out);
 
-  const double* __restrict in = mesh_in->cells;
-  double* __restrict out      = mesh_out->cells;
+  const double* __restrict in0 = Mesh_direction_plane_const(mesh_in, 0);
+  const double* __restrict in1 = Mesh_direction_plane_const(mesh_in, 1);
+  const double* __restrict in2 = Mesh_direction_plane_const(mesh_in, 2);
+  const double* __restrict in3 = Mesh_direction_plane_const(mesh_in, 3);
+  const double* __restrict in4 = Mesh_direction_plane_const(mesh_in, 4);
+  const double* __restrict in5 = Mesh_direction_plane_const(mesh_in, 5);
+  const double* __restrict in6 = Mesh_direction_plane_const(mesh_in, 6);
+  const double* __restrict in7 = Mesh_direction_plane_const(mesh_in, 7);
+  const double* __restrict in8 = Mesh_direction_plane_const(mesh_in, 8);
+  double* __restrict out0      = Mesh_direction_plane(mesh_out, 0);
+  double* __restrict out1      = Mesh_direction_plane(mesh_out, 1);
+  double* __restrict out2      = Mesh_direction_plane(mesh_out, 2);
+  double* __restrict out3      = Mesh_direction_plane(mesh_out, 3);
+  double* __restrict out4      = Mesh_direction_plane(mesh_out, 4);
+  double* __restrict out5      = Mesh_direction_plane(mesh_out, 5);
+  double* __restrict out6      = Mesh_direction_plane(mesh_out, 6);
+  double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
+  double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
+
+  for (size_t idx = 0; idx < plane_size; idx++) {
+    out0[idx] = in0[idx];
+  }
 
   // Interior cells dominate runtime, so propagate them with a branchless pull-style kernel.
   for (size_t i = 1; i + 1 < width; i++) {
-    const size_t dst_col   = i * col_stride;
-    const size_t west_col  = (i - 1) * col_stride;
-    const size_t east_col  = (i + 1) * col_stride;
+    const size_t col      = i * height;
+    const size_t west_col = (i - 1) * height;
+    const size_t east_col = (i + 1) * height;
 
     for (size_t j = 1; j + 1 < height; j++) {
-      const size_t dst  = dst_col + j * cell_stride;
-      const size_t west = west_col + j * cell_stride;
-      const size_t east = east_col + j * cell_stride;
-
-      out[dst + 0] = in[dst + 0];
-      out[dst + 1] = in[west + 1];
-      out[dst + 2] = in[dst_col + (j - 1) * cell_stride + 2];
-      out[dst + 3] = in[east + 3];
-      out[dst + 4] = in[dst_col + (j + 1) * cell_stride + 4];
-      out[dst + 5] = in[west_col + (j - 1) * cell_stride + 5];
-      out[dst + 6] = in[east_col + (j - 1) * cell_stride + 6];
-      out[dst + 7] = in[east_col + (j + 1) * cell_stride + 7];
-      out[dst + 8] = in[west_col + (j + 1) * cell_stride + 8];
+      const size_t idx = col + j;
+      out1[idx] = in1[west_col + j];
+      out2[idx] = in2[col + (j - 1)];
+      out3[idx] = in3[east_col + j];
+      out4[idx] = in4[col + (j + 1)];
+      out5[idx] = in5[west_col + (j - 1)];
+      out6[idx] = in6[east_col + (j - 1)];
+      out7[idx] = in7[east_col + (j + 1)];
+      out8[idx] = in8[west_col + (j + 1)];
     }
   }
 
   // Borders are a small fraction of the mesh; keep the generic safe handling here.
+  double cell[DIRECTIONS];
   for (size_t i = 0; i < width; i++) {
     for (size_t j = 0; j < height; j++) {
       const bool is_border = (i == 0 || j == 0 || i + 1 == width || j + 1 == height);
@@ -302,7 +374,7 @@ void propagation(Mesh* mesh_out, const Mesh* mesh_in) {
         const ssize_t ii = (i + direction_matrix[k][0]);
         const ssize_t jj = (j + direction_matrix[k][1]);
         if ((ii >= 0 && ii < static_cast<ssize_t>(width)) && (jj >= 0 && jj < static_cast<ssize_t>(height))) {
-          Mesh_get_cell(mesh_out, ii, jj)[k] = Mesh_get_cell(mesh_in, i, j)[k];
+          Mesh_set_value(mesh_out, ii, jj, k, Mesh_get_value(mesh_in, i, j, k));
         }
       }
     }

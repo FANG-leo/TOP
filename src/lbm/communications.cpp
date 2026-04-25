@@ -27,9 +27,11 @@ void save_frame(FILE* fp, const Mesh* mesh) {
   for (size_t i = 1; i < mesh->width - 1; i++) {
     for (size_t j = 1; j < mesh->height - 1; j++) {
       // Compute macroscopic values
-      const double density = get_cell_density(Mesh_get_cell(mesh, i, j));
+      double cell[DIRECTIONS];
+      Mesh_load_cell(mesh, i, j, cell);
+      const double density = get_cell_density(cell);
       Vector v;
-      get_cell_velocity(v, Mesh_get_cell(mesh, i, j), density);
+      get_cell_velocity(v, cell, density);
       const double norm = std::sqrt(get_vect_norm_2(v, v));
       // Fill buffer
       buffer[cnt].rho = density;
@@ -196,12 +198,16 @@ static void lbm_comm_sync_ghosts_horizontal(
   switch (comm_type) {
   case COMM_SEND:
     for (size_t y = 0; y < mesh->height - 2; y++) {
-      MPI_Send(&Mesh_get_col(mesh_to_process, x)[y], DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD);
+      double cell[DIRECTIONS];
+      Mesh_load_cell(mesh_to_process, x, y + 1, cell);
+      MPI_Send(cell, DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD);
     }
     break;
   case COMM_RECV:
     for (size_t y = 0; y < mesh->height - 2; y++) {
-      MPI_Recv(&Mesh_get_col(mesh_to_process, x)[y], DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD, &status);
+      double cell[DIRECTIONS];
+      MPI_Recv(cell, DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD, &status);
+      Mesh_store_cell(mesh_to_process, x, y + 1, cell);
     }
     break;
   default:
@@ -230,10 +236,18 @@ static void lbm_comm_sync_ghosts_diagonal(
   MPI_Status status;
   switch (comm_type) {
   case COMM_SEND:
-    MPI_Send(Mesh_get_cell(mesh_to_process, x, y), DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD);
+    {
+      double cell[DIRECTIONS];
+      Mesh_load_cell(mesh_to_process, x, y, cell);
+      MPI_Send(cell, DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD);
+    }
     break;
   case COMM_RECV:
-    MPI_Recv(Mesh_get_cell(mesh_to_process, x, y), DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD, &status);
+    {
+      double cell[DIRECTIONS];
+      MPI_Recv(cell, DIRECTIONS, MPI_DOUBLE, target_rank, 0, MPI_COMM_WORLD, &status);
+      Mesh_store_cell(mesh_to_process, x, y, cell);
+    }
     break;
   default:
     fatal("unknown type of communication");
@@ -256,17 +270,20 @@ lbm_comm_sync_ghosts_vertical(Mesh* mesh_to_process, lbm_comm_type_t comm_type, 
   switch (comm_type) {
   case COMM_SEND:
     for (size_t x = 1; x < mesh_to_process->width - 2; x++) {
+      double cell[DIRECTIONS];
+      Mesh_load_cell(mesh_to_process, x, y, cell);
       for (size_t k = 0; k < DIRECTIONS; k++) {
-        MPI_Send(&Mesh_get_cell(mesh_to_process, x, y)[k], 1, MPI_DOUBLE, target_rank, k, MPI_COMM_WORLD);
+        MPI_Send(&cell[k], 1, MPI_DOUBLE, target_rank, k, MPI_COMM_WORLD);
       }
     }
     break;
   case COMM_RECV:
     for (size_t x = 1; x < mesh_to_process->width - 2; x++) {
+      double cell[DIRECTIONS];
       for (size_t k = 0; k < DIRECTIONS; k++) {
         MPI_Recv(
-          &Mesh_get_cell(mesh_to_process, x, y)[k],
-          DIRECTIONS,
+          &cell[k],
+          1,
           MPI_DOUBLE,
           target_rank,
           k,
@@ -274,6 +291,7 @@ lbm_comm_sync_ghosts_vertical(Mesh* mesh_to_process, lbm_comm_type_t comm_type, 
           &status
         );
       }
+      Mesh_store_cell(mesh_to_process, x, y, cell);
     }
     break;
   default:
