@@ -53,6 +53,59 @@ static inline double compute_equilibrium_profile_components(
   return equil_weight[direction] * density * (common + 3.0 * p + 4.5 * p * p);
 }
 
+static inline void collide_cell_d2q9(
+  double* __restrict cell_out,
+  const double* __restrict cell_in,
+  const double omega,
+  const double one_minus_omega
+) {
+  const double f0 = cell_in[0];
+  const double f1 = cell_in[1];
+  const double f2 = cell_in[2];
+  const double f3 = cell_in[3];
+  const double f4 = cell_in[4];
+  const double f5 = cell_in[5];
+  const double f6 = cell_in[6];
+  const double f7 = cell_in[7];
+  const double f8 = cell_in[8];
+
+  const double density          = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
+  const double inv_density      = 1.0 / density;
+  const double vx               = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
+  const double vy               = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
+  const double vx2              = vx * vx;
+  const double vy2              = vy * vy;
+  const double velocity_norm_2  = vx2 + vy2;
+  const double sum              = vx + vy;
+  const double diff             = vx - vy;
+  const double sum2             = sum * sum;
+  const double diff2            = diff * diff;
+  const double common           = 1.0 - 1.5 * velocity_norm_2;
+  const double rho0             = (4.0 / 9.0) * density;
+  const double rho_axis         = (1.0 / 9.0) * density;
+  const double rho_diag         = (1.0 / 36.0) * density;
+
+  const double feq0 = rho0 * common;
+  const double feq1 = rho_axis * (common + 3.0 * vx + 4.5 * vx2);
+  const double feq2 = rho_axis * (common + 3.0 * vy + 4.5 * vy2);
+  const double feq3 = rho_axis * (common - 3.0 * vx + 4.5 * vx2);
+  const double feq4 = rho_axis * (common - 3.0 * vy + 4.5 * vy2);
+  const double feq5 = rho_diag * (common + 3.0 * sum + 4.5 * sum2);
+  const double feq6 = rho_diag * (common + 3.0 * (vy - vx) + 4.5 * diff2);
+  const double feq7 = rho_diag * (common - 3.0 * sum + 4.5 * sum2);
+  const double feq8 = rho_diag * (common + 3.0 * diff + 4.5 * diff2);
+
+  cell_out[0] = one_minus_omega * f0 + omega * feq0;
+  cell_out[1] = one_minus_omega * f1 + omega * feq1;
+  cell_out[2] = one_minus_omega * f2 + omega * feq2;
+  cell_out[3] = one_minus_omega * f3 + omega * feq3;
+  cell_out[4] = one_minus_omega * f4 + omega * feq4;
+  cell_out[5] = one_minus_omega * f5 + omega * feq5;
+  cell_out[6] = one_minus_omega * f6 + omega * feq6;
+  cell_out[7] = one_minus_omega * f7 + omega * feq7;
+  cell_out[8] = one_minus_omega * f8 + omega * feq8;
+}
+
 double get_vect_norm_2(Vector const a, Vector const b) {
   double res = 0.0;
   for (size_t k = 0; k < DIMENSIONS; k++) {
@@ -99,54 +152,7 @@ double compute_equilibrium_profile(Vector velocity, double density, int directio
 }
 
 void compute_cell_collision(lbm_mesh_cell_t cell_out, const lbm_mesh_cell_t cell_in) {
-  const double f0 = cell_in[0];
-  const double f1 = cell_in[1];
-  const double f2 = cell_in[2];
-  const double f3 = cell_in[3];
-  const double f4 = cell_in[4];
-  const double f5 = cell_in[5];
-  const double f6 = cell_in[6];
-  const double f7 = cell_in[7];
-  const double f8 = cell_in[8];
-
-  const double density     = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
-  const double inv_density = 1.0 / density;
-  const double vx          = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
-  const double vy          = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
-  const double vx2         = vx * vx;
-  const double vy2         = vy * vy;
-  const double velocity_norm_2 = vx2 + vy2;
-  const double sum         = vx + vy;
-  const double diff        = vx - vy;
-  const double sum2        = sum * sum;
-  const double diff2       = diff * diff;
-
-  const double omega       = RELAX_PARAMETER;
-  const double one_minus_omega = 1.0 - omega;
-  const double common      = 1.0 - 1.5 * velocity_norm_2;
-  const double rho0        = (4.0 / 9.0) * density;
-  const double rho_axis    = (1.0 / 9.0) * density;
-  const double rho_diag    = (1.0 / 36.0) * density;
-
-  const double feq0 = rho0 * common;
-  const double feq1 = rho_axis * (common + 3.0 * vx + 4.5 * vx2);
-  const double feq2 = rho_axis * (common + 3.0 * vy + 4.5 * vy2);
-  const double feq3 = rho_axis * (common - 3.0 * vx + 4.5 * vx2);
-  const double feq4 = rho_axis * (common - 3.0 * vy + 4.5 * vy2);
-  const double feq5 = rho_diag * (common + 3.0 * sum + 4.5 * sum2);
-  const double feq6 = rho_diag * (common + 3.0 * (vy - vx) + 4.5 * diff2);
-  const double feq7 = rho_diag * (common - 3.0 * sum + 4.5 * sum2);
-  const double feq8 = rho_diag * (common + 3.0 * diff + 4.5 * diff2);
-
-  cell_out[0] = one_minus_omega * f0 + omega * feq0;
-  cell_out[1] = one_minus_omega * f1 + omega * feq1;
-  cell_out[2] = one_minus_omega * f2 + omega * feq2;
-  cell_out[3] = one_minus_omega * f3 + omega * feq3;
-  cell_out[4] = one_minus_omega * f4 + omega * feq4;
-  cell_out[5] = one_minus_omega * f5 + omega * feq5;
-  cell_out[6] = one_minus_omega * f6 + omega * feq6;
-  cell_out[7] = one_minus_omega * f7 + omega * feq7;
-  cell_out[8] = one_minus_omega * f8 + omega * feq8;
+  collide_cell_d2q9(cell_out, cell_in, RELAX_PARAMETER, 1.0 - RELAX_PARAMETER);
 }
 
 void compute_bounce_back(lbm_mesh_cell_t cell) {
@@ -234,10 +240,21 @@ void collision(Mesh* mesh_out, const Mesh* mesh_in) {
   assert(mesh_in->width == mesh_out->width);
   assert(mesh_in->height == mesh_out->height);
 
-  // Loop on all inner cells
-  for (size_t j = 1; j < mesh_in->height - 1; j++) {
-    for (size_t i = 1; i < mesh_in->width - 1; i++) {
-      compute_cell_collision(Mesh_get_cell(mesh_out, i, j), Mesh_get_cell(mesh_in, i, j));
+  const size_t width       = mesh_in->width;
+  const size_t height      = mesh_in->height;
+  const size_t cell_stride = DIRECTIONS;
+  const size_t col_stride  = height * cell_stride;
+  const double omega       = RELAX_PARAMETER;
+  const double one_minus_omega = 1.0 - omega;
+
+  const double* __restrict in = mesh_in->cells;
+  double* __restrict out      = mesh_out->cells;
+
+  for (size_t i = 1; i + 1 < width; i++) {
+    const size_t col_base = i * col_stride;
+    for (size_t j = 1; j + 1 < height; j++) {
+      const size_t idx = col_base + j * cell_stride;
+      collide_cell_d2q9(out + idx, in + idx, omega, one_minus_omega);
     }
   }
 }
