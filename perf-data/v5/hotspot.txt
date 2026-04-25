@@ -1,0 +1,44 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 103K of event 'cycles:P'
+# Event count (approx.): 122525673190
+#
+# Children      Self  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............................................................................................  ....................
+#
+    67.18%    66.97%  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+    22.27%    22.20%  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+            |--20.37%--propagation(Mesh*, Mesh const*)
+            |          
+             --1.90%--0x3fdc71c71c71c71c
+                       |          
+                        --1.90%--propagation(Mesh*, Mesh const*)
+
+     6.33%     6.27%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+     2.13%     0.00%  [k] 0x3fdc71c71c71c71c                                                                        -      -            
+            |          
+             --1.90%--propagation(Mesh*, Mesh const*)
+
+     2.08%     0.00%  [k] 0xffffffffa300012b                                                                        -      -            
+            |          
+             --2.08%--0xffffffffa300012b
+                       |          
+                        --2.03%--0xffffffffa4594660
+
+     2.04%     0.00%  [k] 0xffffffffa4594660                                                                        -      -            
+            |          
+             --2.03%--0xffffffffa4594660
+
+     1.83%     0.56%  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --1.27%--save_frame(_IO_FILE*, Mesh const*)
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
