@@ -157,7 +157,14 @@ void lbm_comm_init(lbm_comm_t* mesh_comm, int rank, int comm_size, uint32_t widt
 
   // If more than 1 on y, need transmission buffer
   if (nb_y > 1) {
-    mesh_comm->buffer = static_cast<double*>(malloc(sizeof(double) * DIRECTIONS * width / nb_x));
+    if (posix_memalign(
+          reinterpret_cast<void**>(&mesh_comm->buffer),
+          64,
+          sizeof(double) * DIRECTIONS * width / nb_x
+        ) != 0) {
+      perror("posix_memalign");
+      abort();
+    }
   } else {
     mesh_comm->buffer = NULL;
   }
