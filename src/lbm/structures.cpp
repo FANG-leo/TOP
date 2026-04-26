@@ -4,21 +4,13 @@
 #include <cstdio>
 #include <cstdlib>
 
-namespace {
-constexpr size_t kCacheLineBytes = 64;
-}
-
 void Mesh_init(Mesh* mesh, uint32_t width, uint32_t height) {
   // Setup parameters
   mesh->width  = width;
   mesh->height = height;
 
   // Allocate memory for cells
-  const size_t bytes = static_cast<size_t>(width) * height * DIRECTIONS * sizeof(double);
-  if (posix_memalign(reinterpret_cast<void**>(&mesh->cells), kCacheLineBytes, bytes) != 0) {
-    perror("posix_memalign");
-    abort();
-  }
+  mesh->cells = static_cast<double*>(malloc(width * height * DIRECTIONS * sizeof(double)));
 }
 
 void Mesh_release(Mesh* mesh) {
@@ -33,9 +25,9 @@ void lbm_mesh_type_t_init(lbm_mesh_type_t* meshtype, uint32_t width, uint32_t he
   meshtype->height = height;
 
   // Allocate memory for cells
-  const size_t bytes = static_cast<size_t>(width + 2) * height * sizeof(lbm_cell_type_t);
-  if (posix_memalign(reinterpret_cast<void**>(&meshtype->types), kCacheLineBytes, bytes) != 0) {
-    perror("posix_memalign");
+  meshtype->types = static_cast<lbm_cell_type_t*>(malloc((width + 2) * height * sizeof(lbm_cell_type_t)));
+  if (meshtype->types == NULL) {
+    perror("malloc");
     abort();
   }
 }

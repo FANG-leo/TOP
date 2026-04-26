@@ -81,6 +81,15 @@ Observed result:
 | Elapsed time | `24.60 s` |
 | FOM | `105.54 MLUPS` |
 
+Additional OpenMP re-measurement on the same code version:
+
+- OpenMP: `OMP_NUM_THREADS=8 OMP_PROC_BIND=close OMP_PLACES=cores`
+
+| Metric | Value |
+| --- | ---: |
+| Elapsed time | `29.04 s` |
+| FOM | `90.02 MLUPS` |
+
 ## Comparison
 
 Compared with the previous best serial kernel version:
@@ -89,6 +98,13 @@ Compared with the previous best serial kernel version:
 | --- | ---: | ---: |
 | `optimism8` serial best | `23.70 s` | `109.62 MLUPS` |
 | this alignment + pointer-walk version | `24.60 s` | `105.54 MLUPS` |
+
+Compared with the previous OpenMP result from `optimism9.md`:
+
+| Version | Time | FOM |
+| --- | ---: | ---: |
+| previous OpenMP `collision + propagation` version | `28.44 s` | `91.56 MLUPS` |
+| this alignment + pointer-walk version with the same OpenMP setting | `29.04 s` | `90.02 MLUPS` |
 
 ## Interpretation
 
@@ -99,6 +115,7 @@ The likely reason is that these changes reduced some local hot-loop overhead, bu
 - the baseline was already highly optimized
 - output and non-hot-path costs were unchanged
 - alignment and pointer-walk cleanups appear to have smaller impact than the earlier larger structural wins
+- under the `8`-thread OpenMP comparison, the new version also failed to improve over the earlier multithreaded result
 
 ## Conclusion
 
@@ -106,6 +123,7 @@ This is a useful negative result:
 
 - memory-layout cleanup alone still has some theoretical appeal
 - but this specific alignment-and-pointer-walk pass did not beat the current best serial version
+- and it also did not improve the previously measured OpenMP `8`-thread result
 - the next meaningful gains will probably need either:
   - a more effective structural reduction in memory traffic
   - or a correctness-preserving partial fusion strategy with tighter scope than the earlier failed full fusion
