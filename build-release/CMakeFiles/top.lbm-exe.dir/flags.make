@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/h/topnew/TOP-26/project/include -I/home/h/topnew/TOP-26/project/build-release/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi -isystem /usr/lib/x86_64-linux-gnu/openmpi/include
 
-CXX_FLAGS = -O3 -DNDEBUG -fopenmp
+CXX_FLAGS = -O3 -DNDEBUG -march=native -fopenmp
 

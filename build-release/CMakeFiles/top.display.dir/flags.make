@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/h/topnew/TOP-26/project/include -I/home/h/topnew/TOP-26/project/build-release/include
 
-CXX_FLAGS = -O3 -DNDEBUG
+CXX_FLAGS = -O3 -DNDEBUG -march=native
 

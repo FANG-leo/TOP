@@ -1,6 +1,7 @@
 #include <lbm/physics.hpp>
 
 #include <cassert>
+#include <cstring>
 #include <cstdlib>
 
 #include <omp.h>
@@ -339,17 +340,19 @@ void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
   double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
 
-  for (size_t idx = 0; idx < plane_size; idx++) {
-    out0[idx] = in0[idx];
-  }
+  std::memcpy(out0, in0, plane_size * sizeof(double));
 
   // Interior cells dominate runtime, so propagate them with a branchless pull-style kernel.
-  for (size_t i = 1; i + 1 < width; i++) {
+  const size_t interior_width_end  = (width > 0) ? (width - 1) : 0;
+  const size_t interior_height_end = (height > 0) ? (height - 1) : 0;
+
+  for (size_t i = 1; i < interior_width_end; i++) {
     const size_t col      = i * height;
     const size_t west_col = (i - 1) * height;
     const size_t east_col = (i + 1) * height;
 
-    for (size_t j = 1; j + 1 < height; j++) {
+    #pragma omp simd
+    for (size_t j = 1; j < interior_height_end; j++) {
       const size_t idx = col + j;
       out1[idx] = in1[west_col + j];
       out2[idx] = in2[col + (j - 1)];
@@ -362,19 +365,92 @@ void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
     }
   }
 
-  // Borders are a small fraction of the mesh; keep the generic safe handling here.
-  double cell[DIRECTIONS];
-  for (size_t i = 0; i < width; i++) {
-    for (size_t j = 0; j < height; j++) {
-      const bool is_border = (i == 0 || j == 0 || i + 1 == width || j + 1 == height);
-      if (!is_border) {
-        continue;
-      }
-      for (size_t k = 0; k < DIRECTIONS; k++) {
-        const ssize_t ii = (i + direction_matrix[k][0]);
-        const ssize_t jj = (j + direction_matrix[k][1]);
-        if ((ii >= 0 && ii < static_cast<ssize_t>(width)) && (jj >= 0 && jj < static_cast<ssize_t>(height))) {
-          Mesh_set_value(mesh_out, ii, jj, k, Mesh_get_value(mesh_in, i, j, k));
+  // Handle the borders separately so the dominant interior kernel stays branch-free.
+  if (width >= 2 && height > 2) {
+    const size_t left_col  = 0;
+    const size_t right_col = (width - 1) * height;
+
+    #pragma omp simd
+    for (size_t j = 1; j < interior_height_end; j++) {
+      const size_t left_idx  = left_col + j;
+      const size_t right_idx = right_col + j;
+
+      out2[left_idx] = in2[left_idx - 1];
+      out3[left_idx] = in3[height + j];
+      out4[left_idx] = in4[left_idx + 1];
+      out6[left_idx] = in6[height + (j - 1)];
+      out7[left_idx] = in7[height + (j + 1)];
+
+      out1[right_idx] = in1[right_col - height + j];
+      out2[right_idx] = in2[right_idx - 1];
+      out4[right_idx] = in4[right_idx + 1];
+      out5[right_idx] = in5[right_col - height + (j - 1)];
+      out8[right_idx] = in8[right_col - height + (j + 1)];
+    }
+  }
+
+  if (width > 2 && height >= 2) {
+    const size_t bottom_j = 0;
+    const size_t top_j    = height - 1;
+
+    #pragma omp simd
+    for (size_t i = 1; i < interior_width_end; i++) {
+      const size_t col      = i * height;
+      const size_t west_col = (i - 1) * height;
+      const size_t east_col = (i + 1) * height;
+      const size_t bottom   = col + bottom_j;
+      const size_t top      = col + top_j;
+
+      out1[bottom] = in1[west_col + bottom_j];
+      out3[bottom] = in3[east_col + bottom_j];
+      out4[bottom] = in4[bottom + 1];
+      out7[bottom] = in7[east_col + 1];
+      out8[bottom] = in8[west_col + 1];
+
+      out1[top] = in1[west_col + top_j];
+      out2[top] = in2[top - 1];
+      out3[top] = in3[east_col + top_j];
+      out5[top] = in5[west_col + (top_j - 1)];
+      out6[top] = in6[east_col + (top_j - 1)];
+    }
+  }
+
+  if (width >= 2 && height >= 2) {
+    const size_t right_col = (width - 1) * height;
+    const size_t top_j     = height - 1;
+
+    // Bottom-left corner (0, 0)
+    out3[0] = in3[height];
+    out4[0] = in4[1];
+    out7[0] = in7[height + 1];
+
+    // Top-left corner (0, height - 1)
+    out2[top_j] = in2[top_j - 1];
+    out3[top_j] = in3[height + top_j];
+    out6[top_j] = in6[height + (top_j - 1)];
+
+    // Bottom-right corner (width - 1, 0)
+    out1[right_col] = in1[right_col - height];
+    out4[right_col] = in4[right_col + 1];
+    out8[right_col] = in8[right_col - height + 1];
+
+    // Top-right corner (width - 1, height - 1)
+    out1[right_col + top_j] = in1[right_col - height + top_j];
+    out2[right_col + top_j] = in2[right_col + (top_j - 1)];
+    out5[right_col + top_j] = in5[right_col - height + (top_j - 1)];
+  } else {
+    for (size_t i = 0; i < width; i++) {
+      for (size_t j = 0; j < height; j++) {
+        const bool is_border = (i == 0 || j == 0 || i + 1 == width || j + 1 == height);
+        if (!is_border) {
+          continue;
+        }
+        for (size_t k = 0; k < DIRECTIONS; k++) {
+          const ssize_t ii = (i + direction_matrix[k][0]);
+          const ssize_t jj = (j + direction_matrix[k][1]);
+          if ((ii >= 0 && ii < static_cast<ssize_t>(width)) && (jj >= 0 && jj < static_cast<ssize_t>(height))) {
+            Mesh_set_value(mesh_out, ii, jj, k, Mesh_get_value(mesh_in, i, j, k));
+          }
         }
       }
     }
