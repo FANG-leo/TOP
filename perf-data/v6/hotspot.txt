@@ -1,0 +1,381 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 45K of event 'cycles:P'
+# Event count (approx.): 53794030875
+#
+# Children      Self  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............................................................................................  ....................
+#
+    76.08%     0.02%  [.] main                                                                                      -      -            
+            |          
+             --76.06%--main
+                       |          
+                       |--43.44%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--28.63%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --3.12%--__memmove_avx512_unaligned_erms
+
+    75.86%     0.00%  [k] 0x000000a200000322                                                                        -      -            
+            |          
+             --75.82%--main
+                       |          
+                       |--43.44%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--28.63%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --3.13%--__memmove_avx512_unaligned_erms
+
+    75.55%     0.00%  [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |          
+             --75.54%--0xa200000322
+                       |          
+                        --75.50%--main
+                                  |          
+                                  |--43.44%--collision(Mesh*, Mesh const*)
+                                  |          
+                                  |--28.63%--propagation(Mesh*, Mesh const*)
+                                  |          
+                                   --3.13%--__memmove_avx512_unaligned_erms
+
+    43.45%    43.24%  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --43.24%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --43.23%--main
+                                  |          
+                                   --43.23%--collision(Mesh*, Mesh const*)
+
+    28.64%    28.51%  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --28.51%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --28.51%--main
+                                  |          
+                                   --28.50%--propagation(Mesh*, Mesh const*)
+
+    16.06%    15.80%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --1.57%--0x3f9cc98151aac448
+                       0x79eaf2be34f0
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     4.67%     0.00%  [k] 0xffffffffa680012b                                                                        -      -            
+            |          
+             --4.67%--0xffffffffa680012b
+                       |          
+                        --4.58%--0xffffffffa7d94660
+                                  |          
+                                  |--1.74%--0xffffffffa6a89d89
+                                  |          |          
+                                  |           --1.74%--0xffffffffa6fe8529
+                                  |                     |          
+                                  |                      --1.50%--0xffffffffa6fe8481
+                                  |                                |          
+                                  |                                 --1.33%--0xffffffffa6fe7eeb
+                                  |                                           0xffffffffa70f1aef
+                                  |                                           |          
+                                  |                                            --1.18%--0xffffffffa70f14dd
+                                  |          
+                                   --1.27%--0xffffffffa6a8af36
+                                             0xffffffffa70060c2
+                                             |          
+                                              --1.01%--0xffffffffc2e603ca
+                                                        0xffffffffc2e602da
+                                                        0xffffffffc2e5ef21
+                                                        0xffffffffc2e762e6
+                                                        0xffffffffc2e7afaf
+
+     4.59%     0.01%  [k] 0xffffffffa7d94660                                                                        -      -            
+            |          
+             --4.58%--0xffffffffa7d94660
+                       |          
+                       |--1.74%--0xffffffffa6a89d89
+                       |          |          
+                       |           --1.74%--0xffffffffa6fe8529
+                       |                     |          
+                       |                      --1.50%--0xffffffffa6fe8481
+                       |                                |          
+                       |                                 --1.33%--0xffffffffa6fe7eeb
+                       |                                           0xffffffffa70f1aef
+                       |                                           |          
+                       |                                            --1.18%--0xffffffffa70f14dd
+                       |          
+                        --1.27%--0xffffffffa6a8af36
+                                  0xffffffffa70060c2
+                                  |          
+                                   --1.01%--0xffffffffc2e603ca
+                                             0xffffffffc2e602da
+                                             0xffffffffc2e5ef21
+                                             0xffffffffc2e762e6
+                                             0xffffffffc2e7afaf
+
+     4.55%     1.69%  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --2.86%--save_frame(_IO_FILE*, Mesh const*)
+                       |          
+                        --1.57%--_IO_fwrite
+                                  |          
+                                   --1.56%--_IO_file_xsputn@@GLIBC_2.2.5
+                                             |          
+                                              --1.05%--_IO_file_write@@GLIBC_2.2.5
+                                                        __GI___libc_write
+                                                        |          
+                                                         --1.04%--0xffffffffa680012b
+                                                                   |          
+                                                                    --1.04%--0xffffffffa7d94660
+                                                                              0xffffffffa6a89d89
+                                                                              0xffffffffa6fe8529
+                                                                              |          
+                                                                               --1.01%--0xffffffffa6fe8481
+
+     3.20%     3.16%  [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --3.11%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --3.10%--__memmove_avx512_unaligned_erms
+
+     1.82%     0.03%  [.] __GI___libc_write                                                                         -      -            
+            |          
+             --1.79%--__GI___libc_write
+                       |          
+                        --1.76%--0xffffffffa680012b
+                                  |          
+                                   --1.74%--0xffffffffa7d94660
+                                             0xffffffffa6a89d89
+                                             0xffffffffa6fe8529
+                                             |          
+                                              --1.50%--0xffffffffa6fe8481
+                                                        |          
+                                                         --1.33%--0xffffffffa6fe7eeb
+                                                                   0xffffffffa70f1aef
+                                                                   |          
+                                                                    --1.18%--0xffffffffa70f14dd
+
+     1.79%     0.00%  [.] _IO_file_xsputn@@GLIBC_2.2.5                                                              -      -            
+            |          
+             --1.79%--_IO_file_xsputn@@GLIBC_2.2.5
+                       |          
+                        --1.27%--_IO_file_write@@GLIBC_2.2.5
+                                  __GI___libc_write
+                                  |          
+                                   --1.25%--0xffffffffa680012b
+                                             |          
+                                              --1.24%--0xffffffffa7d94660
+                                                        0xffffffffa6a89d89
+                                                        0xffffffffa6fe8529
+                                                        |          
+                                                         --1.01%--0xffffffffa6fe8481
+
+     1.78%     0.00%  [.] _IO_file_write@@GLIBC_2.2.5                                                               -      -            
+            |          
+             --1.78%--_IO_file_write@@GLIBC_2.2.5
+                       __GI___libc_write
+                       |          
+                        --1.74%--0xffffffffa680012b
+                                  |          
+                                   --1.73%--0xffffffffa7d94660
+                                             0xffffffffa6a89d89
+                                             0xffffffffa6fe8529
+                                             |          
+                                              --1.49%--0xffffffffa6fe8481
+                                                        |          
+                                                         --1.33%--0xffffffffa6fe7eeb
+                                                                   0xffffffffa70f1aef
+                                                                   |          
+                                                                    --1.18%--0xffffffffa70f14dd
+
+     1.74%     0.00%  [.] 0xffffffffa6a89d89                                                                        -      -            
+            |          
+             --1.74%--0xffffffffa6a89d89
+                       |          
+                        --1.74%--0xffffffffa6fe8529
+                                  |          
+                                   --1.50%--0xffffffffa6fe8481
+                                             |          
+                                              --1.33%--0xffffffffa6fe7eeb
+                                                        0xffffffffa70f1aef
+                                                        |          
+                                                         --1.18%--0xffffffffa70f14dd
+
+     1.74%     0.00%  [.] 0xffffffffa6fe8529                                                                        -      -            
+            |          
+             --1.50%--0xffffffffa6fe8481
+                       |          
+                        --1.33%--0xffffffffa6fe7eeb
+                                  0xffffffffa70f1aef
+                                  |          
+                                   --1.18%--0xffffffffa70f14dd
+
+     1.64%     0.00%  [.] __libc_start_main@@GLIBC_2.34                                                             -      -            
+            |          
+             --1.40%--__libc_start_call_main
+                       |          
+                        --1.03%--0x6430a687a2f4
+                                  event_base_loop
+
+     1.58%     0.00%  [.] 0x000079eaf2be34f0                                                                        -      -            
+            |
+            ---special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.58%     0.00%  [.] 0x3f9cc98151aac448                                                                        -      -            
+            |
+            ---0x79eaf2be34f0
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.57%     0.00%  [.] _IO_fwrite                                                                                -      -            
+            |          
+             --1.56%--_IO_file_xsputn@@GLIBC_2.2.5
+                       |          
+                        --1.05%--_IO_file_write@@GLIBC_2.2.5
+                                  __GI___libc_write
+                                  |          
+                                   --1.04%--0xffffffffa680012b
+                                             |          
+                                              --1.04%--0xffffffffa7d94660
+                                                        0xffffffffa6a89d89
+                                                        0xffffffffa6fe8529
+                                                        |          
+                                                         --1.01%--0xffffffffa6fe8481
+
+     1.50%     0.00%  [.] 0xffffffffa6fe8481                                                                        -      -            
+            |          
+             --1.33%--0xffffffffa6fe7eeb
+                       0xffffffffa70f1aef
+                       |          
+                        --1.18%--0xffffffffa70f14dd
+
+     1.40%     0.00%  [.] __libc_start_call_main                                                                    -      -            
+            |          
+             --1.03%--0x6430a687a2f4
+                       event_base_loop
+
+     1.37%     0.00%  [.] 0x00006430a687a415                                                                        -      -            
+            |
+            ---__libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+               |          
+                --1.03%--0x6430a687a2f4
+                          event_base_loop
+
+     1.34%     0.00%  [.] 0xffffffffa70f1aef                                                                        -      -            
+            |          
+             --1.33%--0xffffffffa70f1aef
+                       |          
+                        --1.18%--0xffffffffa70f14dd
+
+     1.33%     0.00%  [.] 0xffffffffa6fe7eeb                                                                        -      -            
+            |
+            ---0xffffffffa70f1aef
+               |          
+                --1.18%--0xffffffffa70f14dd
+
+     1.31%     0.00%  [k] 0xd389485354415541                                                                        -      -            
+            |          
+             --1.15%--0x753657602fd5
+                       0x7536537882ab
+                       0x75365378728b
+
+     1.27%     0.00%  [.] __GI___ioctl                                                                              -      -            
+            |
+            ---0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               |          
+                --1.01%--0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.27%     0.00%  [.] 0xffffffffa6a8af36                                                                        -      -            
+            |
+            ---0xffffffffa70060c2
+               |          
+                --1.01%--0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.27%     0.00%  [.] 0xffffffffa70060c2                                                                        -      -            
+            |          
+             --1.01%--0xffffffffc2e603ca
+                       0xffffffffc2e602da
+                       0xffffffffc2e5ef21
+                       0xffffffffc2e762e6
+                       0xffffffffc2e7afaf
+
+     1.18%     0.00%  [.] 0xffffffffa70f14dd                                                                        -      -            
+            |          
+             --1.18%--0xffffffffa70f14dd
+
+     1.18%     0.00%  [.] 0xffffffffc11685af                                                                        -      -            
+            |          
+             --1.07%--0xffffffffc102c15d
+                       |          
+                        --1.06%--0xffffffffc10024ee
+
+     1.15%     0.00%  [.] 0x0000753657602fd5                                                                        -      -            
+            |
+            ---0x7536537882ab
+               0x75365378728b
+
+     1.15%     0.00%  [.] 0x00007536537882ab                                                                        -      -            
+            |
+            ---0x75365378728b
+
+     1.15%     0.00%  [.] 0x000075365378728b                                                                        -      -            
+     1.09%     0.18%  [.] compute_bounce_back(double*)                                                              -      -            
+     1.07%     0.00%  [.] 0xffffffffc102c15d                                                                        -      -            
+            |          
+             --1.07%--0xffffffffc102c15d
+                       |          
+                        --1.06%--0xffffffffc10024ee
+
+     1.06%     0.01%  [.] event_base_loop                                                                           -      -            
+            |          
+             --1.06%--event_base_loop
+
+     1.06%     0.00%  [.] 0xffffffffc10024ee                                                                        -      -            
+     1.03%     0.00%  [.] 0x00006430a687a2f4                                                                        -      -            
+            |
+            ---event_base_loop
+
+     1.01%     0.00%  [.] 0xffffffffc2e603ca                                                                        -      -            
+            |
+            ---0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.01%     0.00%  [.] 0xffffffffc2e602da                                                                        -      -            
+            |
+            ---0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.01%     0.00%  [.] 0xffffffffc2e5ef21                                                                        -      -            
+            |
+            ---0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.01%     0.00%  [.] 0xffffffffc2e762e6                                                                        -      -            
+            |
+            ---0xffffffffc2e7afaf
+
+     1.01%     0.00%  [.] 0xffffffffc2e7afaf                                                                        -      -            
+     1.00%     1.00%  [k] 0xffffffffa6c36c3a                                                                        -      -            
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
