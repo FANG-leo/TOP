@@ -272,56 +272,87 @@ void collision(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
   double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
 
-  // Parallelize the independent interior columns first; this is the lowest-risk OpenMP entry point.
+  auto collide_columns = [&](const size_t i_begin, const size_t i_end) {
+    for (size_t i = i_begin; i < i_end; i++) {
+      const size_t col_base = i * height;
+      const double* __restrict in0_col = in0 + col_base + 1;
+      const double* __restrict in1_col = in1 + col_base + 1;
+      const double* __restrict in2_col = in2 + col_base + 1;
+      const double* __restrict in3_col = in3 + col_base + 1;
+      const double* __restrict in4_col = in4 + col_base + 1;
+      const double* __restrict in5_col = in5 + col_base + 1;
+      const double* __restrict in6_col = in6 + col_base + 1;
+      const double* __restrict in7_col = in7 + col_base + 1;
+      const double* __restrict in8_col = in8 + col_base + 1;
+      double* __restrict out0_col      = out0 + col_base + 1;
+      double* __restrict out1_col      = out1 + col_base + 1;
+      double* __restrict out2_col      = out2 + col_base + 1;
+      double* __restrict out3_col      = out3 + col_base + 1;
+      double* __restrict out4_col      = out4 + col_base + 1;
+      double* __restrict out5_col      = out5 + col_base + 1;
+      double* __restrict out6_col      = out6 + col_base + 1;
+      double* __restrict out7_col      = out7 + col_base + 1;
+      double* __restrict out8_col      = out8 + col_base + 1;
+
+      #pragma omp simd
+      for (size_t j = 1; j < height - 1; j++) {
+        const size_t row = j - 1;
+        const double f0  = in0_col[row];
+        const double f1  = in1_col[row];
+        const double f2  = in2_col[row];
+        const double f3  = in3_col[row];
+        const double f4  = in4_col[row];
+        const double f5  = in5_col[row];
+        const double f6  = in6_col[row];
+        const double f7  = in7_col[row];
+        const double f8  = in8_col[row];
+
+        const double density         = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
+        const double inv_density     = 1.0 / density;
+        const double vx              = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
+        const double vy              = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
+        const double vx2             = vx * vx;
+        const double vy2             = vy * vy;
+        const double velocity_norm_2 = vx2 + vy2;
+        const double sum             = vx + vy;
+        const double diff            = vx - vy;
+        const double sum2            = sum * sum;
+        const double diff2           = diff * diff;
+        const double common          = 1.0 - 1.5 * velocity_norm_2;
+        const double rho0            = (4.0 / 9.0) * density;
+        const double rho_axis        = (1.0 / 9.0) * density;
+        const double rho_diag        = (1.0 / 36.0) * density;
+
+        out0_col[row] = one_minus_omega * f0 + omega * (rho0 * common);
+        out1_col[row] = one_minus_omega * f1 + omega * (rho_axis * (common + 3.0 * vx + 4.5 * vx2));
+        out2_col[row] = one_minus_omega * f2 + omega * (rho_axis * (common + 3.0 * vy + 4.5 * vy2));
+        out3_col[row] = one_minus_omega * f3 + omega * (rho_axis * (common - 3.0 * vx + 4.5 * vx2));
+        out4_col[row] = one_minus_omega * f4 + omega * (rho_axis * (common - 3.0 * vy + 4.5 * vy2));
+        out5_col[row] = one_minus_omega * f5 + omega * (rho_diag * (common + 3.0 * sum + 4.5 * sum2));
+        out6_col[row] = one_minus_omega * f6 + omega * (rho_diag * (common + 3.0 * (vy - vx) + 4.5 * diff2));
+        out7_col[row] = one_minus_omega * f7 + omega * (rho_diag * (common - 3.0 * sum + 4.5 * sum2));
+        out8_col[row] = one_minus_omega * f8 + omega * (rho_diag * (common + 3.0 * diff + 4.5 * diff2));
+      }
+    }
+  };
+
+  if (omp_get_max_threads() <= 1) {
+    collide_columns(1, width - 1);
+    return;
+  }
+
   #pragma omp parallel for schedule(static)
   for (size_t i = 1; i < static_cast<size_t>(width - 1); i++) {
-    const size_t col_base = i * height;
-    #pragma omp simd
-    for (size_t j = 1; j < height - 1; j++) {
-      const size_t idx = col_base + j;
-      const double f0 = in0[idx];
-      const double f1 = in1[idx];
-      const double f2 = in2[idx];
-      const double f3 = in3[idx];
-      const double f4 = in4[idx];
-      const double f5 = in5[idx];
-      const double f6 = in6[idx];
-      const double f7 = in7[idx];
-      const double f8 = in8[idx];
-
-      const double density         = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
-      const double inv_density     = 1.0 / density;
-      const double vx              = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
-      const double vy              = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
-      const double vx2             = vx * vx;
-      const double vy2             = vy * vy;
-      const double velocity_norm_2 = vx2 + vy2;
-      const double sum             = vx + vy;
-      const double diff            = vx - vy;
-      const double sum2            = sum * sum;
-      const double diff2           = diff * diff;
-      const double common          = 1.0 - 1.5 * velocity_norm_2;
-      const double rho0            = (4.0 / 9.0) * density;
-      const double rho_axis        = (1.0 / 9.0) * density;
-      const double rho_diag        = (1.0 / 36.0) * density;
-
-      out0[idx] = one_minus_omega * f0 + omega * (rho0 * common);
-      out1[idx] = one_minus_omega * f1 + omega * (rho_axis * (common + 3.0 * vx + 4.5 * vx2));
-      out2[idx] = one_minus_omega * f2 + omega * (rho_axis * (common + 3.0 * vy + 4.5 * vy2));
-      out3[idx] = one_minus_omega * f3 + omega * (rho_axis * (common - 3.0 * vx + 4.5 * vx2));
-      out4[idx] = one_minus_omega * f4 + omega * (rho_axis * (common - 3.0 * vy + 4.5 * vy2));
-      out5[idx] = one_minus_omega * f5 + omega * (rho_diag * (common + 3.0 * sum + 4.5 * sum2));
-      out6[idx] = one_minus_omega * f6 + omega * (rho_diag * (common + 3.0 * (vy - vx) + 4.5 * diff2));
-      out7[idx] = one_minus_omega * f7 + omega * (rho_diag * (common - 3.0 * sum + 4.5 * sum2));
-      out8[idx] = one_minus_omega * f8 + omega * (rho_diag * (common + 3.0 * diff + 4.5 * diff2));
-    }
+    collide_columns(i, i + 1);
   }
 }
 
-void propagation_interior_core(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
+void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   const size_t width       = mesh_out->width;
   const size_t height      = mesh_out->height;
+  const size_t plane_size  = Mesh_plane_size(mesh_out);
 
+  const double* __restrict in0 = Mesh_direction_plane_const(mesh_in, 0);
   const double* __restrict in1 = Mesh_direction_plane_const(mesh_in, 1);
   const double* __restrict in2 = Mesh_direction_plane_const(mesh_in, 2);
   const double* __restrict in3 = Mesh_direction_plane_const(mesh_in, 3);
@@ -330,6 +361,7 @@ void propagation_interior_core(Mesh* __restrict mesh_out, const Mesh* __restrict
   const double* __restrict in6 = Mesh_direction_plane_const(mesh_in, 6);
   const double* __restrict in7 = Mesh_direction_plane_const(mesh_in, 7);
   const double* __restrict in8 = Mesh_direction_plane_const(mesh_in, 8);
+  double* __restrict out0      = Mesh_direction_plane(mesh_out, 0);
   double* __restrict out1      = Mesh_direction_plane(mesh_out, 1);
   double* __restrict out2      = Mesh_direction_plane(mesh_out, 2);
   double* __restrict out3      = Mesh_direction_plane(mesh_out, 3);
@@ -339,97 +371,55 @@ void propagation_interior_core(Mesh* __restrict mesh_out, const Mesh* __restrict
   double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
   double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
 
-  const size_t interior_width_end  = (width > 0) ? (width - 1) : 0;
-  const size_t interior_height_end = (height > 0) ? (height - 1) : 0;
-  const size_t overlap_width_begin = 2;
-  const size_t overlap_width_end   = (width > 2) ? (width - 2) : 0;
-  const size_t overlap_height_begin = 2;
-  const size_t overlap_height_end   = (height > 2) ? (height - 2) : 0;
-
-  if (width >= 4 && height >= 4) {
-    #pragma omp parallel
-    {
-      #pragma omp for schedule(static)
-      for (size_t i = overlap_width_begin; i < overlap_width_end; i++) {
-        const size_t col      = i * height;
-        const size_t west_col = (i - 1) * height;
-        const size_t east_col = (i + 1) * height;
-
-        #pragma omp simd
-        for (size_t j = overlap_height_begin; j < overlap_height_end; j++) {
-          const size_t idx = col + j;
-          out1[idx] = in1[west_col + j];
-          out2[idx] = in2[col + (j - 1)];
-          out3[idx] = in3[east_col + j];
-          out4[idx] = in4[col + (j + 1)];
-          out5[idx] = in5[west_col + (j - 1)];
-          out6[idx] = in6[east_col + (j - 1)];
-          out7[idx] = in7[east_col + (j + 1)];
-          out8[idx] = in8[west_col + (j + 1)];
-        }
-      }
-
-    }
-  }
-}
-
-void propagation_finish_boundary(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
-  const size_t width       = mesh_out->width;
-  const size_t height      = mesh_out->height;
-
-  const double* __restrict in1 = Mesh_direction_plane_const(mesh_in, 1);
-  const double* __restrict in2 = Mesh_direction_plane_const(mesh_in, 2);
-  const double* __restrict in3 = Mesh_direction_plane_const(mesh_in, 3);
-  const double* __restrict in4 = Mesh_direction_plane_const(mesh_in, 4);
-  const double* __restrict in5 = Mesh_direction_plane_const(mesh_in, 5);
-  const double* __restrict in6 = Mesh_direction_plane_const(mesh_in, 6);
-  const double* __restrict in7 = Mesh_direction_plane_const(mesh_in, 7);
-  const double* __restrict in8 = Mesh_direction_plane_const(mesh_in, 8);
-  double* __restrict out1      = Mesh_direction_plane(mesh_out, 1);
-  double* __restrict out2      = Mesh_direction_plane(mesh_out, 2);
-  double* __restrict out3      = Mesh_direction_plane(mesh_out, 3);
-  double* __restrict out4      = Mesh_direction_plane(mesh_out, 4);
-  double* __restrict out5      = Mesh_direction_plane(mesh_out, 5);
-  double* __restrict out6      = Mesh_direction_plane(mesh_out, 6);
-  double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
-  double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
+  std::memcpy(out0, in0, plane_size * sizeof(double));
 
   const size_t interior_width_end  = (width > 0) ? (width - 1) : 0;
   const size_t interior_height_end = (height > 0) ? (height - 1) : 0;
 
   if (width >= 2 && height >= 2) {
-    #pragma omp parallel
-    {
-      #pragma omp for schedule(static)
-      for (size_t i = 1; i < interior_width_end; i++) {
-        const bool near_vertical_edge = (i == 1 || i + 2 == width);
-        if (!near_vertical_edge) {
-          continue;
-        }
+    auto propagate_interior_columns = [&](const size_t i_begin, const size_t i_end) {
+      for (size_t i = i_begin; i < i_end; i++) {
         const size_t col      = i * height;
         const size_t west_col = (i - 1) * height;
         const size_t east_col = (i + 1) * height;
+        const double* __restrict in1_col = in1 + west_col + 1;
+        const double* __restrict in2_col = in2 + col;
+        const double* __restrict in3_col = in3 + east_col + 1;
+        const double* __restrict in4_col = in4 + col + 2;
+        const double* __restrict in5_col = in5 + west_col;
+        const double* __restrict in6_col = in6 + east_col;
+        const double* __restrict in7_col = in7 + east_col + 2;
+        const double* __restrict in8_col = in8 + west_col + 2;
+        double* __restrict out1_col      = out1 + col + 1;
+        double* __restrict out2_col      = out2 + col + 1;
+        double* __restrict out3_col      = out3 + col + 1;
+        double* __restrict out4_col      = out4 + col + 1;
+        double* __restrict out5_col      = out5 + col + 1;
+        double* __restrict out6_col      = out6 + col + 1;
+        double* __restrict out7_col      = out7 + col + 1;
+        double* __restrict out8_col      = out8 + col + 1;
 
         #pragma omp simd
         for (size_t j = 1; j < interior_height_end; j++) {
-          const size_t idx = col + j;
-          out1[idx] = in1[west_col + j];
-          out2[idx] = in2[col + (j - 1)];
-          out3[idx] = in3[east_col + j];
-          out4[idx] = in4[col + (j + 1)];
-          out5[idx] = in5[west_col + (j - 1)];
-          out6[idx] = in6[east_col + (j - 1)];
-          out7[idx] = in7[east_col + (j + 1)];
-          out8[idx] = in8[west_col + (j + 1)];
+          const size_t row = j - 1;
+          out1_col[row] = in1_col[row];
+          out2_col[row] = in2_col[row];
+          out3_col[row] = in3_col[row];
+          out4_col[row] = in4_col[row];
+          out5_col[row] = in5_col[row];
+          out6_col[row] = in6_col[row];
+          out7_col[row] = in7_col[row];
+          out8_col[row] = in8_col[row];
         }
       }
+    };
 
+    auto propagate_top_bottom = [&](const size_t i_begin, const size_t i_end) {
       if (width > 2) {
         const size_t bottom_j = 0;
         const size_t top_j    = height - 1;
 
-        #pragma omp for schedule(static)
-        for (size_t i = 1; i < interior_width_end; i++) {
+        for (size_t i = i_begin; i < i_end; i++) {
           const size_t col      = i * height;
           const size_t west_col = (i - 1) * height;
           const size_t east_col = (i + 1) * height;
@@ -449,90 +439,85 @@ void propagation_finish_boundary(Mesh* __restrict mesh_out, const Mesh* __restri
           out6[top] = in6[east_col + (top_j - 1)];
         }
       }
+    };
 
-      if (height > 2 && width > 4) {
-        const size_t strip_width_end = width - 2;
-        #pragma omp for schedule(static)
-        for (size_t i = 2; i < strip_width_end; i++) {
-          const size_t col      = i * height;
-          const size_t west_col = (i - 1) * height;
-          const size_t east_col = (i + 1) * height;
-
-          const size_t j_bottom = 1;
-          const size_t idx_bottom = col + j_bottom;
-          out1[idx_bottom] = in1[west_col + j_bottom];
-          out2[idx_bottom] = in2[col + (j_bottom - 1)];
-          out3[idx_bottom] = in3[east_col + j_bottom];
-          out4[idx_bottom] = in4[col + (j_bottom + 1)];
-          out5[idx_bottom] = in5[west_col + (j_bottom - 1)];
-          out6[idx_bottom] = in6[east_col + (j_bottom - 1)];
-          out7[idx_bottom] = in7[east_col + (j_bottom + 1)];
-          out8[idx_bottom] = in8[west_col + (j_bottom + 1)];
-
-          const size_t j_top = height - 2;
-          const size_t idx_top = col + j_top;
-          out1[idx_top] = in1[west_col + j_top];
-          out2[idx_top] = in2[col + (j_top - 1)];
-          out3[idx_top] = in3[east_col + j_top];
-          out4[idx_top] = in4[col + (j_top + 1)];
-          out5[idx_top] = in5[west_col + (j_top - 1)];
-          out6[idx_top] = in6[east_col + (j_top - 1)];
-          out7[idx_top] = in7[east_col + (j_top + 1)];
-          out8[idx_top] = in8[west_col + (j_top + 1)];
-        }
-      }
-
-      // Handle the ghost borders separately so the dominant interior kernel stays branch-free.
-      #pragma omp single
-      {
-        if (height > 2) {
-          const size_t left_col  = 0;
-          const size_t right_col = (width - 1) * height;
-
-          #pragma omp simd
-          for (size_t j = 1; j < interior_height_end; j++) {
-            const size_t left_idx  = left_col + j;
-            const size_t right_idx = right_col + j;
-
-            out2[left_idx] = in2[left_idx - 1];
-            out3[left_idx] = in3[height + j];
-            out4[left_idx] = in4[left_idx + 1];
-            out6[left_idx] = in6[height + (j - 1)];
-            out7[left_idx] = in7[height + (j + 1)];
-
-            out1[right_idx] = in1[right_col - height + j];
-            out2[right_idx] = in2[right_idx - 1];
-            out4[right_idx] = in4[right_idx + 1];
-            out5[right_idx] = in5[right_col - height + (j - 1)];
-            out8[right_idx] = in8[right_col - height + (j + 1)];
-          }
-        }
-      }
-
-      #pragma omp single
-      {
+    auto propagate_left_right = [&]() {
+      if (height > 2) {
+        const size_t left_col  = 0;
         const size_t right_col = (width - 1) * height;
-        const size_t top_j     = height - 1;
 
-        // Bottom-left corner (0, 0)
-        out3[0] = in3[height];
-        out4[0] = in4[1];
-        out7[0] = in7[height + 1];
+        #pragma omp simd
+        for (size_t j = 1; j < interior_height_end; j++) {
+          const size_t left_idx  = left_col + j;
+          const size_t right_idx = right_col + j;
 
-        // Top-left corner (0, height - 1)
-        out2[top_j] = in2[top_j - 1];
-        out3[top_j] = in3[height + top_j];
-        out6[top_j] = in6[height + (top_j - 1)];
+          out2[left_idx] = in2[left_idx - 1];
+          out3[left_idx] = in3[height + j];
+          out4[left_idx] = in4[left_idx + 1];
+          out6[left_idx] = in6[height + (j - 1)];
+          out7[left_idx] = in7[height + (j + 1)];
 
-        // Bottom-right corner (width - 1, 0)
-        out1[right_col] = in1[right_col - height];
-        out4[right_col] = in4[right_col + 1];
-        out8[right_col] = in8[right_col - height + 1];
+          out1[right_idx] = in1[right_col - height + j];
+          out2[right_idx] = in2[right_idx - 1];
+          out4[right_idx] = in4[right_idx + 1];
+          out5[right_idx] = in5[right_col - height + (j - 1)];
+          out8[right_idx] = in8[right_col - height + (j + 1)];
+        }
+      }
+    };
 
-        // Top-right corner (width - 1, height - 1)
-        out1[right_col + top_j] = in1[right_col - height + top_j];
-        out2[right_col + top_j] = in2[right_col + (top_j - 1)];
-        out5[right_col + top_j] = in5[right_col - height + (top_j - 1)];
+    auto propagate_corners = [&]() {
+      const size_t right_col = (width - 1) * height;
+      const size_t top_j     = height - 1;
+
+      // Bottom-left corner (0, 0)
+      out3[0] = in3[height];
+      out4[0] = in4[1];
+      out7[0] = in7[height + 1];
+
+      // Top-left corner (0, height - 1)
+      out2[top_j] = in2[top_j - 1];
+      out3[top_j] = in3[height + top_j];
+      out6[top_j] = in6[height + (top_j - 1)];
+
+      // Bottom-right corner (width - 1, 0)
+      out1[right_col] = in1[right_col - height];
+      out4[right_col] = in4[right_col + 1];
+      out8[right_col] = in8[right_col - height + 1];
+
+      // Top-right corner (width - 1, height - 1)
+      out1[right_col + top_j] = in1[right_col - height + top_j];
+      out2[right_col + top_j] = in2[right_col + (top_j - 1)];
+      out5[right_col + top_j] = in5[right_col - height + (top_j - 1)];
+    };
+
+    if (omp_get_max_threads() <= 1) {
+      propagate_interior_columns(1, interior_width_end);
+      propagate_top_bottom(1, interior_width_end);
+      propagate_left_right();
+      propagate_corners();
+    } else {
+      #pragma omp parallel
+      {
+        #pragma omp for schedule(static)
+        for (size_t i = 1; i < interior_width_end; i++) {
+          propagate_interior_columns(i, i + 1);
+        }
+
+        #pragma omp for schedule(static)
+        for (size_t i = 1; i < interior_width_end; i++) {
+          propagate_top_bottom(i, i + 1);
+        }
+
+        #pragma omp single
+        {
+          propagate_left_right();
+        }
+
+        #pragma omp single
+        {
+          propagate_corners();
+        }
       }
     }
   } else {
@@ -552,11 +537,4 @@ void propagation_finish_boundary(Mesh* __restrict mesh_out, const Mesh* __restri
       }
     }
   }
-}
-
-void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
-  const size_t plane_size = Mesh_plane_size(mesh_out);
-  std::memcpy(Mesh_direction_plane(mesh_out, 0), Mesh_direction_plane_const(mesh_in, 0), plane_size * sizeof(double));
-  propagation_interior_core(mesh_out, mesh_in);
-  propagation_finish_boundary(mesh_out, mesh_in);
 }
