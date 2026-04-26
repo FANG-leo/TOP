@@ -6,8 +6,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <vector>
-
 #include <lbm/communications.hpp>
 #include <lbm/tpl_loader.hpp>
 #include <lbm/physics.hpp>
@@ -152,12 +150,12 @@ void lbm_comm_init(lbm_comm_t* mesh_comm, int rank, int comm_size, uint32_t widt
   mesh_comm->corner_id[CORNER_BOTTOM_LEFT]  = helper_get_rank_id(nb_x, nb_y, rank_x - 1, rank_y + 1);
   mesh_comm->corner_id[CORNER_BOTTOM_RIGHT] = helper_get_rank_id(nb_x, nb_y, rank_x + 1, rank_y + 1);
 
-  // If more than 1 on y, need transmission buffer
-  if (nb_y > 1) {
-    mesh_comm->buffer = static_cast<double*>(malloc(sizeof(double) * DIRECTIONS * width / nb_x));
-  } else {
-    mesh_comm->buffer = NULL;
-  }
+  const size_t column_count = static_cast<size_t>(mesh_comm->height - 2) * DIRECTIONS;
+  const size_t row_count    = static_cast<size_t>(mesh_comm->width - 2) * DIRECTIONS;
+  mesh_comm->column_send_buffer = (column_count > 0) ? static_cast<double*>(malloc(column_count * sizeof(double))) : NULL;
+  mesh_comm->column_recv_buffer = (column_count > 0) ? static_cast<double*>(malloc(column_count * sizeof(double))) : NULL;
+  mesh_comm->row_send_buffer    = (row_count > 0) ? static_cast<double*>(malloc(row_count * sizeof(double))) : NULL;
+  mesh_comm->row_recv_buffer    = (row_count > 0) ? static_cast<double*>(malloc(row_count * sizeof(double))) : NULL;
 
   lbm_comm_print(mesh_comm);
 }
@@ -169,9 +167,14 @@ void lbm_comm_release(lbm_comm_t* mesh_comm) {
   mesh_comm->height   = 0;
   mesh_comm->right_id = -1;
   mesh_comm->left_id  = -1;
-  if (mesh_comm->buffer != NULL) {
-    free(mesh_comm->buffer);
-  }
+  free(mesh_comm->column_send_buffer);
+  free(mesh_comm->column_recv_buffer);
+  free(mesh_comm->row_send_buffer);
+  free(mesh_comm->row_recv_buffer);
+  mesh_comm->column_send_buffer = NULL;
+  mesh_comm->column_recv_buffer = NULL;
+  mesh_comm->row_send_buffer = NULL;
+  mesh_comm->row_recv_buffer = NULL;
 }
 
 namespace {
@@ -186,26 +189,24 @@ enum HaloTag {
   TAG_BOTTOM_LEFT_TO_TOP_RIGHT = 107,
 };
 
-static void pack_column(const Mesh* mesh, uint32_t x, std::vector<double>& buffer) {
+static void pack_column(const Mesh* mesh, uint32_t x, double* buffer) {
   const size_t count = mesh->height - 2;
-  buffer.resize(count * DIRECTIONS);
   for (size_t k = 0; k < DIRECTIONS; k++) {
     const double* plane = Mesh_direction_plane_const(mesh, k) + static_cast<size_t>(x) * mesh->height + 1;
-    std::memcpy(&buffer[k * count], plane, count * sizeof(double));
+    std::memcpy(buffer + k * count, plane, count * sizeof(double));
   }
 }
 
-static void unpack_column(Mesh* mesh, uint32_t x, const std::vector<double>& buffer) {
+static void unpack_column(Mesh* mesh, uint32_t x, const double* buffer) {
   const size_t count = mesh->height - 2;
   for (size_t k = 0; k < DIRECTIONS; k++) {
     double* plane = Mesh_direction_plane(mesh, k) + static_cast<size_t>(x) * mesh->height + 1;
-    std::memcpy(plane, &buffer[k * count], count * sizeof(double));
+    std::memcpy(plane, buffer + k * count, count * sizeof(double));
   }
 }
 
-static void pack_row(const Mesh* mesh, uint32_t y, std::vector<double>& buffer) {
+static void pack_row(const Mesh* mesh, uint32_t y, double* buffer) {
   const size_t count = mesh->width - 2;
-  buffer.resize(count * DIRECTIONS);
   for (size_t k = 0; k < DIRECTIONS; k++) {
     const double* plane = Mesh_direction_plane_const(mesh, k);
     for (size_t x = 1; x < mesh->width - 1; x++) {
@@ -214,7 +215,7 @@ static void pack_row(const Mesh* mesh, uint32_t y, std::vector<double>& buffer) 
   }
 }
 
-static void unpack_row(Mesh* mesh, uint32_t y, const std::vector<double>& buffer) {
+static void unpack_row(Mesh* mesh, uint32_t y, const double* buffer) {
   const size_t count = mesh->width - 2;
   for (size_t k = 0; k < DIRECTIONS; k++) {
     double* plane = Mesh_direction_plane(mesh, k);
@@ -249,16 +250,14 @@ void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
   MPI_Status status;
 
   if (mesh->left_id != -1) {
-    std::vector<double> send_buffer;
-    std::vector<double> recv_buffer(column_count);
-    pack_column(mesh_to_process, 1, send_buffer);
+    pack_column(mesh_to_process, 1, mesh->column_send_buffer);
     MPI_Sendrecv(
-      send_buffer.data(),
+      mesh->column_send_buffer,
       static_cast<int>(column_count),
       MPI_DOUBLE,
       mesh->left_id,
       TAG_RIGHT_TO_LEFT,
-      recv_buffer.data(),
+      mesh->column_recv_buffer,
       static_cast<int>(column_count),
       MPI_DOUBLE,
       mesh->left_id,
@@ -266,20 +265,18 @@ void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
       MPI_COMM_WORLD,
       &status
     );
-    unpack_column(mesh_to_process, 0, recv_buffer);
+    unpack_column(mesh_to_process, 0, mesh->column_recv_buffer);
   }
 
   if (mesh->right_id != -1) {
-    std::vector<double> send_buffer;
-    std::vector<double> recv_buffer(column_count);
-    pack_column(mesh_to_process, mesh->width - 2, send_buffer);
+    pack_column(mesh_to_process, mesh->width - 2, mesh->column_send_buffer);
     MPI_Sendrecv(
-      send_buffer.data(),
+      mesh->column_send_buffer,
       static_cast<int>(column_count),
       MPI_DOUBLE,
       mesh->right_id,
       TAG_LEFT_TO_RIGHT,
-      recv_buffer.data(),
+      mesh->column_recv_buffer,
       static_cast<int>(column_count),
       MPI_DOUBLE,
       mesh->right_id,
@@ -287,20 +284,18 @@ void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
       MPI_COMM_WORLD,
       &status
     );
-    unpack_column(mesh_to_process, mesh->width - 1, recv_buffer);
+    unpack_column(mesh_to_process, mesh->width - 1, mesh->column_recv_buffer);
   }
 
   if (mesh->top_id != -1) {
-    std::vector<double> send_buffer;
-    std::vector<double> recv_buffer(row_count);
-    pack_row(mesh_to_process, 1, send_buffer);
+    pack_row(mesh_to_process, 1, mesh->row_send_buffer);
     MPI_Sendrecv(
-      send_buffer.data(),
+      mesh->row_send_buffer,
       static_cast<int>(row_count),
       MPI_DOUBLE,
       mesh->top_id,
       TAG_BOTTOM_TO_TOP,
-      recv_buffer.data(),
+      mesh->row_recv_buffer,
       static_cast<int>(row_count),
       MPI_DOUBLE,
       mesh->top_id,
@@ -308,20 +303,18 @@ void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
       MPI_COMM_WORLD,
       &status
     );
-    unpack_row(mesh_to_process, 0, recv_buffer);
+    unpack_row(mesh_to_process, 0, mesh->row_recv_buffer);
   }
 
   if (mesh->bottom_id != -1) {
-    std::vector<double> send_buffer;
-    std::vector<double> recv_buffer(row_count);
-    pack_row(mesh_to_process, mesh->height - 2, send_buffer);
+    pack_row(mesh_to_process, mesh->height - 2, mesh->row_send_buffer);
     MPI_Sendrecv(
-      send_buffer.data(),
+      mesh->row_send_buffer,
       static_cast<int>(row_count),
       MPI_DOUBLE,
       mesh->bottom_id,
       TAG_TOP_TO_BOTTOM,
-      recv_buffer.data(),
+      mesh->row_recv_buffer,
       static_cast<int>(row_count),
       MPI_DOUBLE,
       mesh->bottom_id,
@@ -329,7 +322,7 @@ void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
       MPI_COMM_WORLD,
       &status
     );
-    unpack_row(mesh_to_process, mesh->height - 1, recv_buffer);
+    unpack_row(mesh_to_process, mesh->height - 1, mesh->row_recv_buffer);
   }
 
   if (mesh->corner_id[CORNER_TOP_LEFT] != -1) {

@@ -12,6 +12,8 @@ find_package(MPI 3.0 REQUIRED)
 find_package(OpenMP 4.0 REQUIRED)
 include(cmake/third-party.cmake)
 
+option(TOP_LBM_USE_OMP_TARGET "Enable experimental OpenMP target offload path" OFF)
+
 add_library(top.lbm-lib SHARED)
 add_executable(top.lbm-exe)
 add_executable(top.display)

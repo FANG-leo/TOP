@@ -45,7 +45,12 @@ typedef struct lbm_comm_t_s {
   int corner_id[4];
   /// Async requests.
   MPI_Request requests[32];
-  lbm_mesh_cell_t buffer;
+  /// Reusable packed send/recv buffers for column halo exchange.
+  double* column_send_buffer;
+  double* column_recv_buffer;
+  /// Reusable packed send/recv buffers for row halo exchange.
+  double* row_send_buffer;
+  double* row_recv_buffer;
 } lbm_comm_t;
 typedef int MPI_Syncfunc_t(MPI_Comm);
 

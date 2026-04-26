@@ -102,6 +102,9 @@ int main(int argc, char* argv[]) {
   // Setup initial conditions on mesh
   setup_init_state(&mesh, &mesh_type, &mesh_comm);
   setup_init_state(&temp, &mesh_type, &mesh_comm);
+  lbm_mesh_type_sync_host_to_device(&mesh_type);
+  Mesh_sync_host_to_device(&mesh);
+  Mesh_sync_host_to_device(&temp);
 
   // Write initial condition in output file
   if (lbm_gbl_config.output_filename != NULL) {
@@ -129,11 +132,16 @@ int main(int argc, char* argv[]) {
     collision(&temp, &mesh);
 
     // Propagate values from node to neighboors
-    lbm_comm_halo_exchange(&mesh_comm, &temp);
+    if (comm_size > 1) {
+      Mesh_sync_halo_send_device_to_host(&temp);
+      lbm_comm_halo_exchange(&mesh_comm, &temp);
+      Mesh_sync_halo_recv_host_to_device(&temp);
+    }
     propagation(&mesh, &temp);
 
     // Save step
     if (i % WRITE_STEP_INTERVAL == 0 && lbm_gbl_config.output_filename != NULL) {
+      Mesh_sync_device_to_host(&mesh);
       save_frame_all_domain(fp, &mesh, &temp_render);
     }
   }

@@ -18,6 +18,12 @@ typedef double Vector[DIMENSIONS];
 typedef struct Mesh {
   /// Cells of a mesh of dimension `MESH_WIDTH` * `MESH_HEIGHT`.
   lbm_mesh_cell_t cells;
+  /// Optional device-resident copy used by OpenMP target experiments.
+  lbm_mesh_cell_t device_cells;
+  /// Host staging buffer for packed halo rows.
+  double* halo_row_buffer;
+  /// Device staging buffer for packed halo rows.
+  double* device_halo_row_buffer;
   /// Width of the local mesh (phantom meshes included).
   uint32_t width;
   /// Height of the local mesh (phantom meshes included).
@@ -40,6 +46,8 @@ typedef enum lbm_cell_type_e {
 typedef struct lbm_mesh_type_s {
   /// Mesh's types of cells of dimension `MESH_WIDTH` * `MESH_HEIGHT`.
   lbm_cell_type_t* types;
+  /// Optional device-resident copy used by OpenMP target experiments.
+  lbm_cell_type_t* device_types;
   /// Width of the local mesh (phantom meshes included).
   uint32_t width;
   /// Height of the local mesh (phantom meshes included).
@@ -83,6 +91,21 @@ void Mesh_init(Mesh* mesh, uint32_t width, uint32_t height);
 /// @brief Frees the memory of a mesh.
 void Mesh_release(Mesh* mesh);
 
+/// @brief Returns whether the mesh has device-resident storage.
+bool Mesh_has_device_data(const Mesh* mesh);
+
+/// @brief Copies the mesh contents from host memory to device memory when enabled.
+void Mesh_sync_host_to_device(const Mesh* mesh);
+
+/// @brief Copies the mesh contents from device memory to host memory when enabled.
+void Mesh_sync_device_to_host(const Mesh* mesh);
+
+/// @brief Copies only the interior halo-send boundary from device to host.
+void Mesh_sync_halo_send_device_to_host(const Mesh* mesh);
+
+/// @brief Copies only the ghost halo-receive boundary from host to device.
+void Mesh_sync_halo_recv_host_to_device(const Mesh* mesh);
+
 /// @brief Initializes the local mesh type.
 /// @param mesh Mesh type to initialize.
 /// @param width Width of the mesh (phantom meshes included).
@@ -91,6 +114,12 @@ void lbm_mesh_type_t_init(lbm_mesh_type_t* mesh, uint32_t width, uint32_t height
 
 /// @brief Frees the memory of a mesh.
 void lbm_mesh_type_t_release(lbm_mesh_type_t* mesh);
+
+/// @brief Returns whether the mesh type has device-resident storage.
+bool lbm_mesh_type_has_device_data(const lbm_mesh_type_t* mesh);
+
+/// @brief Copies the mesh type contents from host memory to device memory when enabled.
+void lbm_mesh_type_sync_host_to_device(const lbm_mesh_type_t* mesh);
 
 /// @brief Saves the current frame.
 void save_frame(FILE* fp, const Mesh* mesh);

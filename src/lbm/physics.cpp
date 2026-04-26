@@ -39,6 +39,12 @@ const int opposite_of[DIRECTIONS] = {0, 3, 4, 1, 2, 7, 8, 5, 6};
 #error Need to define adapted equilibrium distribution function
 #endif
 
+#if defined(TOP_LBM_USE_OMP_TARGET)
+static inline bool has_omp_target_device() {
+  return omp_get_num_devices() > 0;
+}
+#endif
+
 static inline double compute_equilibrium_profile_components(
   const double vx,
   const double vy,
@@ -217,6 +223,75 @@ void compute_outflow_zou_he_const_density(lbm_mesh_cell_t __restrict cell) {
 }
 
 void special_cells(Mesh* __restrict mesh, lbm_mesh_type_t* __restrict mesh_type, const lbm_comm_t* __restrict mesh_comm) {
+#if defined(TOP_LBM_USE_OMP_TARGET)
+  if (has_omp_target_device() && Mesh_has_device_data(mesh) && lbm_mesh_type_has_device_data(mesh_type)) {
+    const size_t height     = mesh->height;
+    const size_t plane_size = Mesh_plane_size(mesh);
+    double* __restrict cells = mesh->device_cells;
+    const lbm_cell_type_t* __restrict types = mesh_type->device_types;
+    const size_t global_y_offset = mesh_comm->y;
+
+    #pragma omp target teams distribute parallel for collapse(2) is_device_ptr(cells, types)
+    for (size_t i = 1; i < mesh->width - 1; i++) {
+      for (size_t j = 1; j < mesh->height - 1; j++) {
+        const size_t idx = i * height + j;
+        switch (types[idx]) {
+        case CELL_FUILD:
+          break;
+        case CELL_BOUNCE_BACK: {
+          const double f1 = cells[1 * plane_size + idx];
+          const double f2 = cells[2 * plane_size + idx];
+          const double f3 = cells[3 * plane_size + idx];
+          const double f4 = cells[4 * plane_size + idx];
+          const double f5 = cells[5 * plane_size + idx];
+          const double f6 = cells[6 * plane_size + idx];
+          const double f7 = cells[7 * plane_size + idx];
+          const double f8 = cells[8 * plane_size + idx];
+          cells[1 * plane_size + idx] = f3;
+          cells[2 * plane_size + idx] = f4;
+          cells[3 * plane_size + idx] = f1;
+          cells[4 * plane_size + idx] = f2;
+          cells[5 * plane_size + idx] = f7;
+          cells[6 * plane_size + idx] = f8;
+          cells[7 * plane_size + idx] = f5;
+          cells[8 * plane_size + idx] = f6;
+          break;
+        }
+        case CELL_LEFT_IN: {
+          const double v = helper_compute_poiseuille(j + global_y_offset, mesh->height);
+          const double c0 = cells[0 * plane_size + idx];
+          const double c2 = cells[2 * plane_size + idx];
+          const double c3 = cells[3 * plane_size + idx];
+          const double c4 = cells[4 * plane_size + idx];
+          const double c6 = cells[6 * plane_size + idx];
+          const double c7 = cells[7 * plane_size + idx];
+          const double rho = (c0 + c2 + c4 + 2.0 * (c3 + c6 + c7)) / (1.0 - v);
+          cells[1 * plane_size + idx] = c3;
+          cells[5 * plane_size + idx] = c7 - 0.5 * (c2 - c4) + (rho * v) / 6.0;
+          cells[8 * plane_size + idx] = c6 + 0.5 * (c2 - c4) + (rho * v) / 6.0;
+          break;
+        }
+        case CELL_RIGHT_OUT: {
+          const double rho = 1.0;
+          const double c0 = cells[0 * plane_size + idx];
+          const double c1 = cells[1 * plane_size + idx];
+          const double c2 = cells[2 * plane_size + idx];
+          const double c4 = cells[4 * plane_size + idx];
+          const double c5 = cells[5 * plane_size + idx];
+          const double c8 = cells[8 * plane_size + idx];
+          const double v = -1.0 + (c0 + c2 + c4 + 2.0 * (c1 + c5 + c8)) / rho;
+          cells[3 * plane_size + idx] = c1 - (2.0 / 3.0) * rho * v;
+          cells[7 * plane_size + idx] = c5 + 0.5 * (c2 - c4) - (rho * v) / 6.0;
+          cells[6 * plane_size + idx] = c8 + 0.5 * (c4 - c2) - (rho * v) / 6.0;
+          break;
+        }
+        }
+      }
+    }
+    return;
+  }
+#endif
+
   double cell[DIRECTIONS];
   // Loop on all inner cells
   for (size_t i = 1; i < mesh->width - 1; i++) {
@@ -248,9 +323,11 @@ void collision(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   assert(mesh_in->width == mesh_out->width);
   assert(mesh_in->height == mesh_out->height);
 
-  const size_t width       = mesh_in->width;
-  const size_t height      = mesh_in->height;
-  const double omega       = RELAX_PARAMETER;
+  const size_t width            = mesh_in->width;
+  const size_t height           = mesh_in->height;
+  const size_t plane_size       = Mesh_plane_size(mesh_in);
+  const size_t total_scalars    = plane_size * DIRECTIONS;
+  const double omega            = RELAX_PARAMETER;
   const double one_minus_omega = 1.0 - omega;
 
   const double* __restrict in0 = Mesh_direction_plane_const(mesh_in, 0);
@@ -271,6 +348,56 @@ void collision(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   double* __restrict out6      = Mesh_direction_plane(mesh_out, 6);
   double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
   double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
+
+#if defined(TOP_LBM_USE_OMP_TARGET)
+  if (has_omp_target_device() && Mesh_has_device_data(mesh_in) && Mesh_has_device_data(mesh_out) && width > 2 && height > 2) {
+    const double* __restrict in_cells = mesh_in->device_cells;
+    double* __restrict out_cells      = mesh_out->device_cells;
+
+    #pragma omp target teams distribute parallel for collapse(2) is_device_ptr(in_cells, out_cells)
+    for (size_t i = 1; i < width - 1; i++) {
+      for (size_t j = 1; j < height - 1; j++) {
+        const size_t idx = i * height + j;
+        const double f0  = in_cells[0 * plane_size + idx];
+        const double f1  = in_cells[1 * plane_size + idx];
+        const double f2  = in_cells[2 * plane_size + idx];
+        const double f3  = in_cells[3 * plane_size + idx];
+        const double f4  = in_cells[4 * plane_size + idx];
+        const double f5  = in_cells[5 * plane_size + idx];
+        const double f6  = in_cells[6 * plane_size + idx];
+        const double f7  = in_cells[7 * plane_size + idx];
+        const double f8  = in_cells[8 * plane_size + idx];
+
+        const double density         = f0 + f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8;
+        const double inv_density     = 1.0 / density;
+        const double vx              = (f1 - f3 + f5 - f6 - f7 + f8) * inv_density;
+        const double vy              = (f2 - f4 + f5 + f6 - f7 - f8) * inv_density;
+        const double vx2             = vx * vx;
+        const double vy2             = vy * vy;
+        const double velocity_norm_2 = vx2 + vy2;
+        const double sum             = vx + vy;
+        const double diff            = vx - vy;
+        const double sum2            = sum * sum;
+        const double diff2           = diff * diff;
+        const double common          = 1.0 - 1.5 * velocity_norm_2;
+        const double rho0            = (4.0 / 9.0) * density;
+        const double rho_axis        = (1.0 / 9.0) * density;
+        const double rho_diag        = (1.0 / 36.0) * density;
+
+        out_cells[0 * plane_size + idx] = one_minus_omega * f0 + omega * (rho0 * common);
+        out_cells[1 * plane_size + idx] = one_minus_omega * f1 + omega * (rho_axis * (common + 3.0 * vx + 4.5 * vx2));
+        out_cells[2 * plane_size + idx] = one_minus_omega * f2 + omega * (rho_axis * (common + 3.0 * vy + 4.5 * vy2));
+        out_cells[3 * plane_size + idx] = one_minus_omega * f3 + omega * (rho_axis * (common - 3.0 * vx + 4.5 * vx2));
+        out_cells[4 * plane_size + idx] = one_minus_omega * f4 + omega * (rho_axis * (common - 3.0 * vy + 4.5 * vy2));
+        out_cells[5 * plane_size + idx] = one_minus_omega * f5 + omega * (rho_diag * (common + 3.0 * sum + 4.5 * sum2));
+        out_cells[6 * plane_size + idx] = one_minus_omega * f6 + omega * (rho_diag * (common + 3.0 * (vy - vx) + 4.5 * diff2));
+        out_cells[7 * plane_size + idx] = one_minus_omega * f7 + omega * (rho_diag * (common - 3.0 * sum + 4.5 * sum2));
+        out_cells[8 * plane_size + idx] = one_minus_omega * f8 + omega * (rho_diag * (common + 3.0 * diff + 4.5 * diff2));
+      }
+    }
+    return;
+  }
+#endif
 
   auto collide_columns = [&](const size_t i_begin, const size_t i_end) {
     for (size_t i = i_begin; i < i_end; i++) {
@@ -351,6 +478,7 @@ void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   const size_t width       = mesh_out->width;
   const size_t height      = mesh_out->height;
   const size_t plane_size  = Mesh_plane_size(mesh_out);
+  const size_t total_scalars = plane_size * DIRECTIONS;
 
   const double* __restrict in0 = Mesh_direction_plane_const(mesh_in, 0);
   const double* __restrict in1 = Mesh_direction_plane_const(mesh_in, 1);
@@ -371,12 +499,12 @@ void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
   double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
 
-  std::memcpy(out0, in0, plane_size * sizeof(double));
-
   const size_t interior_width_end  = (width > 0) ? (width - 1) : 0;
   const size_t interior_height_end = (height > 0) ? (height - 1) : 0;
 
   if (width >= 2 && height >= 2) {
+    bool interior_done_on_target = false;
+
     auto propagate_interior_columns = [&](const size_t i_begin, const size_t i_end) {
       for (size_t i = i_begin; i < i_end; i++) {
         const size_t col      = i * height;
@@ -413,6 +541,37 @@ void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
         }
       }
     };
+
+#if defined(TOP_LBM_USE_OMP_TARGET)
+    if (has_omp_target_device() && Mesh_has_device_data(mesh_in) && Mesh_has_device_data(mesh_out) && width > 2 && height > 2) {
+      const double* __restrict in_cells = mesh_in->device_cells;
+      double* __restrict out_cells      = mesh_out->device_cells;
+
+      #pragma omp target teams distribute parallel for is_device_ptr(in_cells, out_cells)
+      for (size_t idx = 0; idx < plane_size; idx++) {
+        out_cells[idx] = in_cells[idx];
+      }
+
+      #pragma omp target teams distribute parallel for collapse(2) is_device_ptr(in_cells, out_cells)
+      for (size_t i = 1; i < interior_width_end; i++) {
+        for (size_t j = 1; j < interior_height_end; j++) {
+          const size_t idx      = i * height + j;
+          const size_t west_idx = (i - 1) * height + j;
+          const size_t east_idx = (i + 1) * height + j;
+
+          out_cells[1 * plane_size + idx] = in_cells[1 * plane_size + west_idx];
+          out_cells[2 * plane_size + idx] = in_cells[2 * plane_size + (idx - 1)];
+          out_cells[3 * plane_size + idx] = in_cells[3 * plane_size + east_idx];
+          out_cells[4 * plane_size + idx] = in_cells[4 * plane_size + (idx + 1)];
+          out_cells[5 * plane_size + idx] = in_cells[5 * plane_size + (west_idx - 1)];
+          out_cells[6 * plane_size + idx] = in_cells[6 * plane_size + (east_idx - 1)];
+          out_cells[7 * plane_size + idx] = in_cells[7 * plane_size + (east_idx + 1)];
+          out_cells[8 * plane_size + idx] = in_cells[8 * plane_size + (west_idx + 1)];
+          }
+        }
+      interior_done_on_target = true;
+    }
+#endif
 
     auto propagate_top_bottom = [&](const size_t i_begin, const size_t i_end) {
       if (width > 2) {
@@ -492,16 +651,26 @@ void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
     };
 
     if (omp_get_max_threads() <= 1) {
-      propagate_interior_columns(1, interior_width_end);
+      if (!interior_done_on_target) {
+        std::memcpy(out0, in0, plane_size * sizeof(double));
+      }
+      if (!interior_done_on_target) {
+        propagate_interior_columns(1, interior_width_end);
+      }
       propagate_top_bottom(1, interior_width_end);
       propagate_left_right();
       propagate_corners();
     } else {
+      if (!interior_done_on_target) {
+        std::memcpy(out0, in0, plane_size * sizeof(double));
+      }
       #pragma omp parallel
       {
-        #pragma omp for schedule(static)
-        for (size_t i = 1; i < interior_width_end; i++) {
-          propagate_interior_columns(i, i + 1);
+        if (!interior_done_on_target) {
+          #pragma omp for schedule(static)
+          for (size_t i = 1; i < interior_width_end; i++) {
+            propagate_interior_columns(i, i + 1);
+          }
         }
 
         #pragma omp for schedule(static)
