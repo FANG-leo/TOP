@@ -272,7 +272,9 @@ void collision(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in) {
   double* __restrict out7      = Mesh_direction_plane(mesh_out, 7);
   double* __restrict out8      = Mesh_direction_plane(mesh_out, 8);
 
-  for (size_t i = 1; i + 1 < width; i++) {
+  // Parallelize the independent interior columns first; this is the lowest-risk OpenMP entry point.
+  #pragma omp parallel for schedule(static)
+  for (size_t i = 1; i < static_cast<size_t>(width - 1); i++) {
     const size_t col_base = i * height;
     #pragma omp simd
     for (size_t j = 1; j < height - 1; j++) {
