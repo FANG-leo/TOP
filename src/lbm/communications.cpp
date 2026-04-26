@@ -186,6 +186,22 @@ enum HaloTag {
   TAG_BOTTOM_LEFT_TO_TOP_RIGHT = 107,
 };
 
+enum HaloSlot {
+  SLOT_LEFT = 0,
+  SLOT_RIGHT = 1,
+  SLOT_TOP = 2,
+  SLOT_BOTTOM = 3,
+  SLOT_TOP_LEFT = 4,
+  SLOT_TOP_RIGHT = 5,
+  SLOT_BOTTOM_LEFT = 6,
+  SLOT_BOTTOM_RIGHT = 7,
+  SLOT_COUNT = 8,
+};
+
+static std::vector<double> g_send_buffers[SLOT_COUNT];
+static std::vector<double> g_recv_buffers[SLOT_COUNT];
+static int g_active_requests = 0;
+
 static void pack_column(const Mesh* mesh, uint32_t x, std::vector<double>& buffer) {
   const size_t count = mesh->height - 2;
   buffer.resize(count * DIRECTIONS);
@@ -231,9 +247,38 @@ static void pack_cell_buffer(const Mesh* mesh, uint32_t x, uint32_t y, double* c
 static void unpack_cell_buffer(Mesh* mesh, uint32_t x, uint32_t y, const double* cell) {
   Mesh_store_cell(mesh, x, y, cell);
 }
+
+static inline void post_recv_if_needed(
+  int neighbor,
+  int tag,
+  std::vector<double>& buffer,
+  MPI_Request* request,
+  size_t count
+) {
+  if (neighbor == -1) {
+    *request = MPI_REQUEST_NULL;
+    return;
+  }
+  buffer.resize(count);
+  MPI_Irecv(buffer.data(), static_cast<int>(count), MPI_DOUBLE, neighbor, tag, MPI_COMM_WORLD, request);
 }
 
-void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
+static inline void post_send_if_needed(
+  int neighbor,
+  int tag,
+  std::vector<double>& buffer,
+  MPI_Request* request,
+  size_t count
+) {
+  if (neighbor == -1) {
+    *request = MPI_REQUEST_NULL;
+    return;
+  }
+  MPI_Isend(buffer.data(), static_cast<int>(count), MPI_DOUBLE, neighbor, tag, MPI_COMM_WORLD, request);
+}
+}
+
+void lbm_comm_halo_exchange_begin(lbm_comm_t* mesh, Mesh* mesh_to_process) {
   if (
     mesh->left_id == -1 && mesh->right_id == -1 && mesh->top_id == -1 && mesh->bottom_id == -1
     && mesh->corner_id[CORNER_TOP_LEFT] == -1 && mesh->corner_id[CORNER_TOP_RIGHT] == -1
@@ -242,173 +287,198 @@ void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
     return;
   }
 
-  std::vector<double> send_buffer;
-  std::vector<double> recv_buffer;
-  MPI_Status status;
+  const size_t column_count = static_cast<size_t>(mesh->height - 2) * DIRECTIONS;
+  const size_t row_count    = static_cast<size_t>(mesh->width - 2) * DIRECTIONS;
+  const size_t cell_count   = DIRECTIONS;
+  g_active_requests         = 0;
 
   if (mesh->left_id != -1) {
-    pack_column(mesh_to_process, 1, send_buffer);
-    recv_buffer.resize(send_buffer.size());
-    MPI_Sendrecv(
-      send_buffer.data(),
-      static_cast<int>(send_buffer.size()),
-      MPI_DOUBLE,
-      mesh->left_id,
-      TAG_RIGHT_TO_LEFT,
-      recv_buffer.data(),
-      static_cast<int>(recv_buffer.size()),
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->left_id,
       TAG_LEFT_TO_RIGHT,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_LEFT],
+      &mesh->requests[g_active_requests++],
+      column_count
     );
-    unpack_column(mesh_to_process, 0, recv_buffer);
+    pack_column(mesh_to_process, 1, g_send_buffers[SLOT_LEFT]);
+    post_send_if_needed(
+      mesh->left_id,
+      TAG_RIGHT_TO_LEFT,
+      g_send_buffers[SLOT_LEFT],
+      &mesh->requests[g_active_requests++],
+      column_count
+    );
   }
 
   if (mesh->right_id != -1) {
-    pack_column(mesh_to_process, mesh->width - 2, send_buffer);
-    recv_buffer.resize(send_buffer.size());
-    MPI_Sendrecv(
-      send_buffer.data(),
-      static_cast<int>(send_buffer.size()),
-      MPI_DOUBLE,
-      mesh->right_id,
-      TAG_LEFT_TO_RIGHT,
-      recv_buffer.data(),
-      static_cast<int>(recv_buffer.size()),
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->right_id,
       TAG_RIGHT_TO_LEFT,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_RIGHT],
+      &mesh->requests[g_active_requests++],
+      column_count
     );
-    unpack_column(mesh_to_process, mesh->width - 1, recv_buffer);
+    pack_column(mesh_to_process, mesh->width - 2, g_send_buffers[SLOT_RIGHT]);
+    post_send_if_needed(
+      mesh->right_id,
+      TAG_LEFT_TO_RIGHT,
+      g_send_buffers[SLOT_RIGHT],
+      &mesh->requests[g_active_requests++],
+      column_count
+    );
   }
 
   if (mesh->top_id != -1) {
-    pack_row(mesh_to_process, 1, send_buffer);
-    recv_buffer.resize(send_buffer.size());
-    MPI_Sendrecv(
-      send_buffer.data(),
-      static_cast<int>(send_buffer.size()),
-      MPI_DOUBLE,
-      mesh->top_id,
-      TAG_BOTTOM_TO_TOP,
-      recv_buffer.data(),
-      static_cast<int>(recv_buffer.size()),
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->top_id,
       TAG_TOP_TO_BOTTOM,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_TOP],
+      &mesh->requests[g_active_requests++],
+      row_count
     );
-    unpack_row(mesh_to_process, 0, recv_buffer);
+    pack_row(mesh_to_process, 1, g_send_buffers[SLOT_TOP]);
+    post_send_if_needed(
+      mesh->top_id,
+      TAG_BOTTOM_TO_TOP,
+      g_send_buffers[SLOT_TOP],
+      &mesh->requests[g_active_requests++],
+      row_count
+    );
   }
 
   if (mesh->bottom_id != -1) {
-    pack_row(mesh_to_process, mesh->height - 2, send_buffer);
-    recv_buffer.resize(send_buffer.size());
-    MPI_Sendrecv(
-      send_buffer.data(),
-      static_cast<int>(send_buffer.size()),
-      MPI_DOUBLE,
-      mesh->bottom_id,
-      TAG_TOP_TO_BOTTOM,
-      recv_buffer.data(),
-      static_cast<int>(recv_buffer.size()),
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->bottom_id,
       TAG_BOTTOM_TO_TOP,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_BOTTOM],
+      &mesh->requests[g_active_requests++],
+      row_count
     );
-    unpack_row(mesh_to_process, mesh->height - 1, recv_buffer);
+    pack_row(mesh_to_process, mesh->height - 2, g_send_buffers[SLOT_BOTTOM]);
+    post_send_if_needed(
+      mesh->bottom_id,
+      TAG_TOP_TO_BOTTOM,
+      g_send_buffers[SLOT_BOTTOM],
+      &mesh->requests[g_active_requests++],
+      row_count
+    );
   }
 
   if (mesh->corner_id[CORNER_TOP_LEFT] != -1) {
-    double send_cell[DIRECTIONS];
-    double recv_cell[DIRECTIONS];
-    pack_cell_buffer(mesh_to_process, 1, 1, send_cell);
-    MPI_Sendrecv(
-      send_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
-      mesh->corner_id[CORNER_TOP_LEFT],
-      TAG_BOTTOM_RIGHT_TO_TOP_LEFT,
-      recv_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->corner_id[CORNER_TOP_LEFT],
       TAG_TOP_LEFT_TO_BOTTOM_RIGHT,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_TOP_LEFT],
+      &mesh->requests[g_active_requests++],
+      cell_count
     );
-    unpack_cell_buffer(mesh_to_process, 0, 0, recv_cell);
+    g_send_buffers[SLOT_TOP_LEFT].resize(cell_count);
+    pack_cell_buffer(mesh_to_process, 1, 1, g_send_buffers[SLOT_TOP_LEFT].data());
+    post_send_if_needed(
+      mesh->corner_id[CORNER_TOP_LEFT],
+      TAG_BOTTOM_RIGHT_TO_TOP_LEFT,
+      g_send_buffers[SLOT_TOP_LEFT],
+      &mesh->requests[g_active_requests++],
+      cell_count
+    );
   }
 
   if (mesh->corner_id[CORNER_TOP_RIGHT] != -1) {
-    double send_cell[DIRECTIONS];
-    double recv_cell[DIRECTIONS];
-    pack_cell_buffer(mesh_to_process, mesh->width - 2, 1, send_cell);
-    MPI_Sendrecv(
-      send_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
-      mesh->corner_id[CORNER_TOP_RIGHT],
-      TAG_BOTTOM_LEFT_TO_TOP_RIGHT,
-      recv_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->corner_id[CORNER_TOP_RIGHT],
       TAG_TOP_RIGHT_TO_BOTTOM_LEFT,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_TOP_RIGHT],
+      &mesh->requests[g_active_requests++],
+      cell_count
     );
-    unpack_cell_buffer(mesh_to_process, mesh->width - 1, 0, recv_cell);
+    g_send_buffers[SLOT_TOP_RIGHT].resize(cell_count);
+    pack_cell_buffer(mesh_to_process, mesh->width - 2, 1, g_send_buffers[SLOT_TOP_RIGHT].data());
+    post_send_if_needed(
+      mesh->corner_id[CORNER_TOP_RIGHT],
+      TAG_BOTTOM_LEFT_TO_TOP_RIGHT,
+      g_send_buffers[SLOT_TOP_RIGHT],
+      &mesh->requests[g_active_requests++],
+      cell_count
+    );
   }
 
   if (mesh->corner_id[CORNER_BOTTOM_LEFT] != -1) {
-    double send_cell[DIRECTIONS];
-    double recv_cell[DIRECTIONS];
-    pack_cell_buffer(mesh_to_process, 1, mesh->height - 2, send_cell);
-    MPI_Sendrecv(
-      send_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
-      mesh->corner_id[CORNER_BOTTOM_LEFT],
-      TAG_TOP_RIGHT_TO_BOTTOM_LEFT,
-      recv_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->corner_id[CORNER_BOTTOM_LEFT],
       TAG_BOTTOM_LEFT_TO_TOP_RIGHT,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_BOTTOM_LEFT],
+      &mesh->requests[g_active_requests++],
+      cell_count
     );
-    unpack_cell_buffer(mesh_to_process, 0, mesh->height - 1, recv_cell);
+    g_send_buffers[SLOT_BOTTOM_LEFT].resize(cell_count);
+    pack_cell_buffer(mesh_to_process, 1, mesh->height - 2, g_send_buffers[SLOT_BOTTOM_LEFT].data());
+    post_send_if_needed(
+      mesh->corner_id[CORNER_BOTTOM_LEFT],
+      TAG_TOP_RIGHT_TO_BOTTOM_LEFT,
+      g_send_buffers[SLOT_BOTTOM_LEFT],
+      &mesh->requests[g_active_requests++],
+      cell_count
+    );
   }
 
   if (mesh->corner_id[CORNER_BOTTOM_RIGHT] != -1) {
-    double send_cell[DIRECTIONS];
-    double recv_cell[DIRECTIONS];
-    pack_cell_buffer(mesh_to_process, mesh->width - 2, mesh->height - 2, send_cell);
-    MPI_Sendrecv(
-      send_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
-      mesh->corner_id[CORNER_BOTTOM_RIGHT],
-      TAG_TOP_LEFT_TO_BOTTOM_RIGHT,
-      recv_cell,
-      DIRECTIONS,
-      MPI_DOUBLE,
+    post_recv_if_needed(
       mesh->corner_id[CORNER_BOTTOM_RIGHT],
       TAG_BOTTOM_RIGHT_TO_TOP_LEFT,
-      MPI_COMM_WORLD,
-      &status
+      g_recv_buffers[SLOT_BOTTOM_RIGHT],
+      &mesh->requests[g_active_requests++],
+      cell_count
     );
-    unpack_cell_buffer(mesh_to_process, mesh->width - 1, mesh->height - 1, recv_cell);
+    g_send_buffers[SLOT_BOTTOM_RIGHT].resize(cell_count);
+    pack_cell_buffer(mesh_to_process, mesh->width - 2, mesh->height - 2, g_send_buffers[SLOT_BOTTOM_RIGHT].data());
+    post_send_if_needed(
+      mesh->corner_id[CORNER_BOTTOM_RIGHT],
+      TAG_TOP_LEFT_TO_BOTTOM_RIGHT,
+      g_send_buffers[SLOT_BOTTOM_RIGHT],
+      &mesh->requests[g_active_requests++],
+      cell_count
+    );
   }
+}
+
+void lbm_comm_halo_exchange_end(lbm_comm_t* mesh, Mesh* mesh_to_process) {
+  if (g_active_requests == 0) {
+    return;
+  }
+
+  MPI_Waitall(g_active_requests, mesh->requests, MPI_STATUSES_IGNORE);
+
+  if (mesh->left_id != -1) {
+    unpack_column(mesh_to_process, 0, g_recv_buffers[SLOT_LEFT]);
+  }
+  if (mesh->right_id != -1) {
+    unpack_column(mesh_to_process, mesh->width - 1, g_recv_buffers[SLOT_RIGHT]);
+  }
+  if (mesh->top_id != -1) {
+    unpack_row(mesh_to_process, 0, g_recv_buffers[SLOT_TOP]);
+  }
+  if (mesh->bottom_id != -1) {
+    unpack_row(mesh_to_process, mesh->height - 1, g_recv_buffers[SLOT_BOTTOM]);
+  }
+  if (mesh->corner_id[CORNER_TOP_LEFT] != -1) {
+    unpack_cell_buffer(mesh_to_process, 0, 0, g_recv_buffers[SLOT_TOP_LEFT].data());
+  }
+  if (mesh->corner_id[CORNER_TOP_RIGHT] != -1) {
+    unpack_cell_buffer(mesh_to_process, mesh->width - 1, 0, g_recv_buffers[SLOT_TOP_RIGHT].data());
+  }
+  if (mesh->corner_id[CORNER_BOTTOM_LEFT] != -1) {
+    unpack_cell_buffer(mesh_to_process, 0, mesh->height - 1, g_recv_buffers[SLOT_BOTTOM_LEFT].data());
+  }
+  if (mesh->corner_id[CORNER_BOTTOM_RIGHT] != -1) {
+    unpack_cell_buffer(mesh_to_process, mesh->width - 1, mesh->height - 1, g_recv_buffers[SLOT_BOTTOM_RIGHT].data());
+  }
+
+  g_active_requests = 0;
+}
+
+void lbm_comm_halo_exchange(lbm_comm_t* mesh, Mesh* mesh_to_process) {
+  lbm_comm_halo_exchange_begin(mesh, mesh_to_process);
+  lbm_comm_halo_exchange_end(mesh, mesh_to_process);
 }
 
 void save_frame_all_domain(FILE* fp, Mesh* source_mesh, Mesh* temp) {

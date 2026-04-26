@@ -137,8 +137,15 @@ int main(int argc, char* argv[]) {
     }
 
     // Propagate values from node to neighboors
-    lbm_comm_halo_exchange(&mesh_comm, &temp);
-    propagation(&mesh, &temp);
+    if (comm_size > 1) {
+      lbm_comm_halo_exchange_begin(&mesh_comm, &temp);
+      std::memcpy(Mesh_direction_plane(&mesh, 0), Mesh_direction_plane_const(&temp, 0), Mesh_plane_size(&mesh) * sizeof(double));
+      propagation_interior_core(&mesh, &temp);
+      lbm_comm_halo_exchange_end(&mesh_comm, &temp);
+      propagation_finish_boundary(&mesh, &temp);
+    } else {
+      propagation(&mesh, &temp);
+    }
     // Need to wait all before doing next step
     if (comm_size > 1) {
       MPI_Barrier(MPI_COMM_WORLD);

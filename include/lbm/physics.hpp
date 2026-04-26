@@ -96,3 +96,9 @@ void collision(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in);
 /// @param mesh_out Output mesh.
 /// @param mesh_in Input mesh (cannot be the same).
 void propagation(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in);
+
+/// @brief Propagate only the deep interior region that does not depend on ghost updates.
+void propagation_interior_core(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in);
+
+/// @brief Propagate the remaining strips, ghost borders, and corners after halo completion.
+void propagation_finish_boundary(Mesh* __restrict mesh_out, const Mesh* __restrict mesh_in);
