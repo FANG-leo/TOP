@@ -1,0 +1,547 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 46K of event 'cycles:P'
+# Event count (approx.): 54531442426
+#
+# Children      Self  CPU  Symbol                                                                                                    IPC   [IPC Coverage]
+# ........  ........  ...  ........................................................................................................  ....................
+#
+    29.47%     0.00%  000  [.] collision(Mesh*, Mesh const*)                                                                         -      -            
+            |          
+             --29.46%--collision(Mesh*, Mesh const*)
+                       |          
+                        --29.40%--GOMP_parallel
+                                  |          
+                                   --29.36%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    29.47%     0.00%  000  [.] 0x3f9c71c71c71c71c                                                                                    -      -            
+            |
+            ---0x3f9c71c71c71c71c
+               |          
+                --29.46%--collision(Mesh*, Mesh const*)
+                          |          
+                           --29.40%--GOMP_parallel
+                                     |          
+                                      --29.36%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    29.41%     0.02%  000  [.] GOMP_parallel                                                                                         -      -            
+            |          
+             --29.39%--GOMP_parallel
+                       |          
+                        --29.36%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    29.39%    29.29%  000  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                      -      -            
+            |          
+             --29.29%--0x3f9c71c71c71c71c
+                       |          
+                        --29.29%--collision(Mesh*, Mesh const*)
+                                  GOMP_parallel
+                                  |          
+                                   --29.28%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    21.52%     0.01%  000  [.] main                                                                                                  -      -            
+            |          
+             --21.51%--main
+                       |          
+                       |--18.94%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --1.96%--__memmove_avx512_unaligned_erms
+
+    21.43%     0.00%  000  [k] 0x000000a200000322                                                                                    -      -            
+            |
+            ---0xa200000322
+               |          
+                --21.39%--main
+                          |          
+                          |--18.94%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --1.96%--__memmove_avx512_unaligned_erms
+
+    21.11%     0.00%  000  [.] 0x3fdc71c71c71c71c                                                                                    -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               0xa200000322
+               |          
+                --21.08%--main
+                          |          
+                          |--18.94%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --1.96%--__memmove_avx512_unaligned_erms
+
+    18.95%    18.89%  000  [.] propagation(Mesh*, Mesh const*)                                                                       -      -            
+            |          
+             --18.89%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --18.88%--propagation(Mesh*, Mesh const*)
+
+    14.34%     0.00%  016  [.] collision(Mesh*, Mesh const*)                                                                         -      -            
+            |
+            ---collision(Mesh*, Mesh const*)
+               |          
+                --14.29%--GOMP_parallel
+                          |          
+                           --14.28%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    14.34%     0.00%  016  [.] 0x3f9c71c71c71c71c                                                                                    -      -            
+            |
+            ---0x3f9c71c71c71c71c
+               collision(Mesh*, Mesh const*)
+               |          
+                --14.29%--GOMP_parallel
+                          |          
+                           --14.28%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    14.30%    14.19%  016  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                      -      -            
+            |          
+             --14.19%--0x3f9c71c71c71c71c
+                       collision(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --14.19%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    14.30%     0.00%  016  [.] GOMP_parallel                                                                                         -      -            
+            |          
+             --14.29%--GOMP_parallel
+                       |          
+                        --14.28%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.61%    10.45%  000  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                           -      -            
+            |          
+             --1.12%--0x3fbc71c71c71c71c
+                       |          
+                        --1.11%--0xa1
+                                  special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+    10.59%     0.00%  016  [.] main                                                                                                  -      -            
+            |          
+             --10.58%--main
+                       |          
+                        --9.34%--propagation(Mesh*, Mesh const*)
+
+    10.47%     0.00%  016  [.] 0x3fdc71c71c71c71c                                                                                    -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               |          
+                --10.47%--0xa200000322
+                          |          
+                           --10.45%--main
+                                     |          
+                                      --9.34%--propagation(Mesh*, Mesh const*)
+
+    10.47%     0.00%  016  [.] 0x000000a200000322                                                                                    -      -            
+            |
+            ---0xa200000322
+               |          
+                --10.45%--main
+                          |          
+                           --9.34%--propagation(Mesh*, Mesh const*)
+
+     9.35%     9.30%  016  [.] propagation(Mesh*, Mesh const*)                                                                       -      -            
+            |          
+             --9.30%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --9.29%--propagation(Mesh*, Mesh const*)
+
+     5.18%     5.09%  016  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                           -      -            
+     3.11%     1.11%  000  [.] save_frame(_IO_FILE*, Mesh const*)                                                                    -      -            
+            |          
+             --2.00%--save_frame(_IO_FILE*, Mesh const*)
+                       |          
+                        --1.03%--_IO_fwrite
+                                  |          
+                                   --1.02%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.99%     1.98%  000  [.] __memmove_avx512_unaligned_erms                                                                       -      -            
+            |          
+             --1.96%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --1.96%--__memmove_avx512_unaligned_erms
+
+     1.75%     0.00%  031  [.] 0xffffffffa680012b                                                                                    -      -            
+            |
+            ---0xffffffffa680012b
+               |          
+                --1.74%--0xffffffffa7d94660
+                          |          
+                           --1.61%--0xffffffffa6a8af36
+                                     0xffffffffa70060c2
+                                     |          
+                                      --1.33%--0xffffffffc2e603ca
+                                                0xffffffffc2e602da
+                                                0xffffffffc2e5ef21
+                                                0xffffffffc2e762e6
+                                                0xffffffffc2e7afaf
+
+     1.74%     0.00%  031  [.] 0xffffffffa7d94660                                                                                    -      -            
+            |
+            ---0xffffffffa7d94660
+               |          
+                --1.61%--0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          |          
+                           --1.33%--0xffffffffc2e603ca
+                                     0xffffffffc2e602da
+                                     0xffffffffc2e5ef21
+                                     0xffffffffc2e762e6
+                                     0xffffffffc2e7afaf
+
+     1.63%     0.00%  031  [k] 0xd389485354415541                                                                                    -      -            
+            |
+            ---0xd389485354415541
+               0x7288ac802fd5
+               0x7288a89882ab
+               0x7288a898728b
+               |          
+                --1.33%--0x7288a8ace016
+                          0x7288a8b0a5bd
+                          0x7288a8b28f5a
+                          0x7288a8c3d671
+                          __GI___ioctl
+                          0xffffffffa680012b
+                          0xffffffffa7d94660
+                          0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.63%     0.00%  031  [.] 0x00007288ac802fd5                                                                                    -      -            
+            |
+            ---0x7288ac802fd5
+               0x7288a89882ab
+               0x7288a898728b
+               |          
+                --1.33%--0x7288a8ace016
+                          0x7288a8b0a5bd
+                          0x7288a8b28f5a
+                          0x7288a8c3d671
+                          __GI___ioctl
+                          0xffffffffa680012b
+                          0xffffffffa7d94660
+                          0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.63%     0.00%  031  [.] 0x00007288a89882ab                                                                                    -      -            
+            |
+            ---0x7288a89882ab
+               0x7288a898728b
+               |          
+                --1.33%--0x7288a8ace016
+                          0x7288a8b0a5bd
+                          0x7288a8b28f5a
+                          0x7288a8c3d671
+                          __GI___ioctl
+                          0xffffffffa680012b
+                          0xffffffffa7d94660
+                          0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.63%     0.00%  031  [.] 0x00007288a898728b                                                                                    -      -            
+            |
+            ---0x7288a898728b
+               |          
+                --1.33%--0x7288a8ace016
+                          0x7288a8b0a5bd
+                          0x7288a8b28f5a
+                          0x7288a8c3d671
+                          __GI___ioctl
+                          0xffffffffa680012b
+                          0xffffffffa7d94660
+                          0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.61%     0.00%  031  [.] __GI___ioctl                                                                                          -      -            
+            |          
+             --1.61%--__GI___ioctl
+                       0xffffffffa680012b
+                       0xffffffffa7d94660
+                       0xffffffffa6a8af36
+                       0xffffffffa70060c2
+                       |          
+                        --1.33%--0xffffffffc2e603ca
+                                  0xffffffffc2e602da
+                                  0xffffffffc2e5ef21
+                                  0xffffffffc2e762e6
+                                  0xffffffffc2e7afaf
+
+     1.61%     0.00%  031  [.] 0xffffffffa6a8af36                                                                                    -      -            
+            |
+            ---0xffffffffa6a8af36
+               0xffffffffa70060c2
+               |          
+                --1.33%--0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.61%     0.00%  031  [.] 0xffffffffa70060c2                                                                                    -      -            
+            |
+            ---0xffffffffa70060c2
+               |          
+                --1.33%--0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.57%     0.00%  000  [.] 0xffffffffa680012b                                                                                    -      -            
+            |          
+             --1.57%--0xffffffffa680012b
+                       |          
+                        --1.54%--0xffffffffa7d94660
+                                  |          
+                                   --1.12%--0xffffffffa6a89d89
+                                             0xffffffffa6fe8529
+
+     1.54%     0.00%  000  [.] 0xffffffffa7d94660                                                                                    -      -            
+            |          
+             --1.54%--0xffffffffa7d94660
+                       |          
+                        --1.12%--0xffffffffa6a89d89
+                                  0xffffffffa6fe8529
+
+     1.53%     0.00%  031  [.] 0xffffffffc11685af                                                                                    -      -            
+            |
+            ---0xffffffffc11685af
+               |          
+                --1.41%--0xffffffffc102c15d
+                          |          
+                           --1.38%--0xffffffffc10024ee
+                                     |          
+                                      --1.21%--0xffffffffc0f5d040
+                                                |          
+                                                 --1.03%--0xffffffffc0f1f8d8
+
+     1.50%     0.57%  016  [.] save_frame(_IO_FILE*, Mesh const*)                                                                    -      -            
+     1.41%     0.00%  031  [.] 0xffffffffc102c15d                                                                                    -      -            
+            |
+            ---0xffffffffc102c15d
+               |          
+                --1.38%--0xffffffffc10024ee
+                          |          
+                           --1.21%--0xffffffffc0f5d040
+                                     |          
+                                      --1.03%--0xffffffffc0f1f8d8
+
+     1.38%     0.00%  031  [.] 0xffffffffc10024ee                                                                                    -      -            
+            |
+            ---0xffffffffc10024ee
+               |          
+                --1.21%--0xffffffffc0f5d040
+                          |          
+                           --1.03%--0xffffffffc0f1f8d8
+
+     1.36%     1.36%  031  [k] 0xffffffffa6c36c3a                                                                                    -      -            
+            |
+            ---0xd389485354415541
+               0x7288ac802fd5
+               0x7288a89882ab
+               0x7288a898728b
+               |          
+                --1.11%--0x7288a8ace016
+                          0x7288a8b0a5bd
+                          0x7288a8b28f5a
+                          0x7288a8c3d671
+                          __GI___ioctl
+                          0xffffffffa680012b
+                          0xffffffffa7d94660
+                          0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0x00007288a8ace016                                                                                    -      -            
+            |
+            ---0x7288a8ace016
+               0x7288a8b0a5bd
+               0x7288a8b28f5a
+               0x7288a8c3d671
+               __GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0x00007288a8b0a5bd                                                                                    -      -            
+            |
+            ---0x7288a8b0a5bd
+               0x7288a8b28f5a
+               0x7288a8c3d671
+               __GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0x00007288a8b28f5a                                                                                    -      -            
+            |
+            ---0x7288a8b28f5a
+               0x7288a8c3d671
+               __GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0x00007288a8c3d671                                                                                    -      -            
+            |
+            ---0x7288a8c3d671
+               __GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0xffffffffc2e603ca                                                                                    -      -            
+            |
+            ---0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0xffffffffc2e602da                                                                                    -      -            
+            |
+            ---0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0xffffffffc2e5ef21                                                                                    -      -            
+            |
+            ---0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0xffffffffc2e762e6                                                                                    -      -            
+            |
+            ---0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  031  [.] 0xffffffffc2e7afaf                                                                                    -      -            
+            |
+            ---0xffffffffc2e7afaf
+
+     1.21%     0.00%  031  [.] 0xffffffffc0f5d040                                                                                    -      -            
+            |
+            ---0xffffffffc0f5d040
+               |          
+                --1.03%--0xffffffffc0f1f8d8
+
+     1.17%     0.01%  000  [.] __GI___libc_write                                                                                     -      -            
+            |          
+             --1.16%--__GI___libc_write
+                       |          
+                        --1.13%--0xffffffffa680012b
+                                  |          
+                                   --1.12%--0xffffffffa7d94660
+                                             0xffffffffa6a89d89
+                                             0xffffffffa6fe8529
+
+     1.17%     0.00%  000  [.] _IO_file_xsputn@@GLIBC_2.2.5                                                                          -      -            
+            |          
+             --1.17%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.16%     0.00%  000  [.] _IO_file_write@@GLIBC_2.2.5                                                                           -      -            
+            |
+            ---_IO_file_write@@GLIBC_2.2.5
+               |          
+                --1.16%--__GI___libc_write
+                          |          
+                           --1.13%--0xffffffffa680012b
+                                     |          
+                                      --1.12%--0xffffffffa7d94660
+                                                0xffffffffa6a89d89
+                                                0xffffffffa6fe8529
+
+     1.14%     0.00%  000  [.] 0x3fbc71c71c71c71c                                                                                    -      -            
+            |
+            ---0x3fbc71c71c71c71c
+               |          
+                --1.12%--0xa1
+                          special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.12%     0.00%  000  [.] 0xffffffffa6fe8529                                                                                    -      -            
+            |          
+             --1.12%--0xffffffffa6fe8529
+
+     1.12%     0.00%  000  [.] 0x00000000000000a1                                                                                    -      -            
+            |
+            ---0xa1
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.12%     0.00%  000  [.] 0xffffffffa6a89d89                                                                                    -      -            
+            |
+            ---0xffffffffa6a89d89
+               0xffffffffa6fe8529
+
+     1.04%     0.00%  031  [.] 0xffffffffc0f1f8d8                                                                                    -      -            
+            |
+            ---0xffffffffc0f1f8d8
+
+     1.03%     0.00%  000  [.] _IO_fwrite                                                                                            -      -            
+            |
+            ---_IO_fwrite
+               |          
+                --1.02%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.01%     0.00%  031  [.] 0xffffffffc117980e                                                                                    -      -            
+            |
+            ---0xffffffffc117980e
+               0xffffffffc11685af
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

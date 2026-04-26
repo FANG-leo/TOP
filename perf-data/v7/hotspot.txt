@@ -1,0 +1,553 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 46K of event 'cycles:P'
+# Event count (approx.): 54531442426
+#
+# Children      Self  Symbol                                                                                                    IPC   [IPC Coverage]
+# ........  ........  ........................................................................................................  ....................
+#
+    43.81%     0.00%  [.] 0x3f9c71c71c71c71c                                                                                    -      -            
+            |          
+             --43.81%--collision(Mesh*, Mesh const*)
+                       |          
+                        --43.69%--GOMP_parallel
+                                  |          
+                                   --43.64%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    40.73%     0.00%  [.] collision(Mesh*, Mesh const*)                                                                         -      -            
+            |          
+             --40.72%--collision(Mesh*, Mesh const*)
+                       |          
+                        --40.61%--GOMP_parallel
+                                  |          
+                                   --40.56%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    40.62%     0.02%  [.] GOMP_parallel                                                                                         -      -            
+            |          
+             --40.60%--GOMP_parallel
+                       |          
+                        --40.56%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    40.61%    40.41%  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                      -      -            
+            |          
+             --40.41%--0x3f9c71c71c71c71c
+                       |          
+                        --40.40%--collision(Mesh*, Mesh const*)
+                                  GOMP_parallel
+                                  |          
+                                   --40.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    31.90%     0.00%  [k] 0x000000a200000322                                                                                    -      -            
+            |          
+             --31.84%--main
+                       |          
+                       |--28.29%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --2.92%--__memmove_avx512_unaligned_erms
+
+    31.59%     0.00%  [.] 0x3fdc71c71c71c71c                                                                                    -      -            
+            |          
+             --31.58%--0xa200000322
+                       |          
+                        --31.53%--main
+                                  |          
+                                  |--28.29%--propagation(Mesh*, Mesh const*)
+                                  |          
+                                   --2.92%--__memmove_avx512_unaligned_erms
+
+    29.37%     0.01%  [.] main                                                                                                  -      -            
+            |          
+             --29.35%--main
+                       |          
+                       |--26.32%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --2.71%--__memmove_avx512_unaligned_erms
+
+    26.34%    26.23%  [.] propagation(Mesh*, Mesh const*)                                                                       -      -            
+            |          
+             --26.22%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --26.21%--propagation(Mesh*, Mesh const*)
+
+    14.67%    14.45%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                           -      -            
+            |          
+             --1.53%--0x3fbc71c71c71c71c
+                       0xa1
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     5.12%     0.00%  [k] 0xffffffffa680012b                                                                                    -      -            
+            |          
+             --5.12%--0xffffffffa680012b
+                       |          
+                        --4.99%--0xffffffffa7d94660
+                                  |          
+                                  |--1.72%--0xffffffffa6a8af36
+                                  |          0xffffffffa70060c2
+                                  |          |          
+                                  |           --1.34%--0xffffffffc2e603ca
+                                  |                     0xffffffffc2e602da
+                                  |                     |          
+                                  |                      --1.34%--0xffffffffc2e5ef21
+                                  |                                0xffffffffc2e762e6
+                                  |                                0xffffffffc2e7afaf
+                                  |          
+                                   --1.64%--0xffffffffa6a89d89
+                                             0xffffffffa6fe8529
+                                             |          
+                                              --1.44%--0xffffffffa6fe8481
+                                                        |          
+                                                         --1.26%--0xffffffffa6fe7eeb
+                                                                   0xffffffffa70f1aef
+                                                                   |          
+                                                                    --1.11%--0xffffffffa70f14dd
+
+     4.99%     0.00%  [k] 0xffffffffa7d94660                                                                                    -      -            
+            |          
+             --4.99%--0xffffffffa7d94660
+                       |          
+                       |--1.72%--0xffffffffa6a8af36
+                       |          0xffffffffa70060c2
+                       |          |          
+                       |           --1.34%--0xffffffffc2e603ca
+                       |                     0xffffffffc2e602da
+                       |                     |          
+                       |                      --1.34%--0xffffffffc2e5ef21
+                       |                                0xffffffffc2e762e6
+                       |                                0xffffffffc2e7afaf
+                       |          
+                        --1.64%--0xffffffffa6a89d89
+                                  0xffffffffa6fe8529
+                                  |          
+                                   --1.44%--0xffffffffa6fe8481
+                                             |          
+                                              --1.26%--0xffffffffa6fe7eeb
+                                                        0xffffffffa70f1aef
+                                                        |          
+                                                         --1.11%--0xffffffffa70f14dd
+
+     4.31%     1.57%  [.] save_frame(_IO_FILE*, Mesh const*)                                                                    -      -            
+            |          
+             --2.74%--save_frame(_IO_FILE*, Mesh const*)
+                       |          
+                        --1.37%--_IO_fwrite
+                                  |          
+                                   --1.36%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     3.09%     0.00%  [.] collision(Mesh*, Mesh const*)                                                                         -      -            
+            |          
+             --3.08%--GOMP_parallel
+                       collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.08%     0.00%  [.] GOMP_parallel                                                                                         -      -            
+            |
+            ---collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.08%     3.08%  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                      -      -            
+            |          
+             --3.08%--0x3f9c71c71c71c71c
+                       collision(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     2.75%     2.74%  [.] __memmove_avx512_unaligned_erms                                                                       -      -            
+            |          
+             --2.71%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --2.70%--__memmove_avx512_unaligned_erms
+
+     2.74%     0.00%  [.] main                                                                                                  -      -            
+            |          
+             --1.97%--propagation(Mesh*, Mesh const*)
+
+     1.97%     1.97%  [.] propagation(Mesh*, Mesh const*)                                                                       -      -            
+            |          
+             --1.97%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --1.96%--propagation(Mesh*, Mesh const*)
+
+     1.77%     0.00%  [k] 0xd389485354415541                                                                                    -      -            
+            |          
+             --1.63%--0x7288ac802fd5
+                       0x7288a89882ab
+                       0x7288a898728b
+                       |          
+                        --1.33%--0x7288a8ace016
+                                  0x7288a8b0a5bd
+                                  0x7288a8b28f5a
+                                  0x7288a8c3d671
+                                  __GI___ioctl
+                                  0xffffffffa680012b
+                                  0xffffffffa7d94660
+                                  0xffffffffa6a8af36
+                                  0xffffffffa70060c2
+                                  0xffffffffc2e603ca
+                                  0xffffffffc2e602da
+                                  0xffffffffc2e5ef21
+                                  0xffffffffc2e762e6
+                                  0xffffffffc2e7afaf
+
+     1.72%     0.00%  [.] __GI___ioctl                                                                                          -      -            
+            |          
+             --1.72%--__GI___ioctl
+                       0xffffffffa680012b
+                       0xffffffffa7d94660
+                       0xffffffffa6a8af36
+                       0xffffffffa70060c2
+                       |          
+                        --1.34%--0xffffffffc2e603ca
+                                  0xffffffffc2e602da
+                                  |          
+                                   --1.34%--0xffffffffc2e5ef21
+                                             0xffffffffc2e762e6
+                                             0xffffffffc2e7afaf
+
+     1.72%     0.00%  [.] 0xffffffffa6a8af36                                                                                    -      -            
+            |
+            ---0xffffffffa70060c2
+               |          
+                --1.34%--0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          |          
+                           --1.34%--0xffffffffc2e5ef21
+                                     0xffffffffc2e762e6
+                                     0xffffffffc2e7afaf
+
+     1.72%     0.00%  [.] 0xffffffffa70060c2                                                                                    -      -            
+            |          
+             --1.34%--0xffffffffc2e603ca
+                       0xffffffffc2e602da
+                       |          
+                        --1.34%--0xffffffffc2e5ef21
+                                  0xffffffffc2e762e6
+                                  0xffffffffc2e7afaf
+
+     1.68%     0.00%  [.] 0x3fbc71c71c71c71c                                                                                    -      -            
+            |          
+             --1.65%--0xa1
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.65%     0.00%  [.] 0x00000000000000a1                                                                                    -      -            
+            |
+            ---special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.65%     0.00%  [.] 0xffffffffa6fe8529                                                                                    -      -            
+            |          
+             --1.64%--0xffffffffa6fe8529
+                       |          
+                        --1.44%--0xffffffffa6fe8481
+                                  |          
+                                   --1.26%--0xffffffffa6fe7eeb
+                                             0xffffffffa70f1aef
+                                             |          
+                                              --1.11%--0xffffffffa70f14dd
+
+     1.64%     0.00%  [.] 0xffffffffa6a89d89                                                                                    -      -            
+            |
+            ---0xffffffffa6fe8529
+               |          
+                --1.44%--0xffffffffa6fe8481
+                          |          
+                           --1.26%--0xffffffffa6fe7eeb
+                                     0xffffffffa70f1aef
+                                     |          
+                                      --1.11%--0xffffffffa70f14dd
+
+     1.63%     0.00%  [.] 0x00007288ac802fd5                                                                                    -      -            
+            |
+            ---0x7288a89882ab
+               0x7288a898728b
+               |          
+                --1.33%--0x7288a8ace016
+                          0x7288a8b0a5bd
+                          0x7288a8b28f5a
+                          0x7288a8c3d671
+                          __GI___ioctl
+                          0xffffffffa680012b
+                          0xffffffffa7d94660
+                          0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.63%     0.00%  [.] 0x00007288a89882ab                                                                                    -      -            
+            |
+            ---0x7288a898728b
+               |          
+                --1.33%--0x7288a8ace016
+                          0x7288a8b0a5bd
+                          0x7288a8b28f5a
+                          0x7288a8c3d671
+                          __GI___ioctl
+                          0xffffffffa680012b
+                          0xffffffffa7d94660
+                          0xffffffffa6a8af36
+                          0xffffffffa70060c2
+                          0xffffffffc2e603ca
+                          0xffffffffc2e602da
+                          0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.63%     0.00%  [.] 0x00007288a898728b                                                                                    -      -            
+            |          
+             --1.33%--0x7288a8ace016
+                       0x7288a8b0a5bd
+                       0x7288a8b28f5a
+                       0x7288a8c3d671
+                       __GI___ioctl
+                       0xffffffffa680012b
+                       0xffffffffa7d94660
+                       0xffffffffa6a8af36
+                       0xffffffffa70060c2
+                       0xffffffffc2e603ca
+                       0xffffffffc2e602da
+                       0xffffffffc2e5ef21
+                       0xffffffffc2e762e6
+                       0xffffffffc2e7afaf
+
+     1.63%     0.00%  [.] 0xffffffffc11685af                                                                                    -      -            
+            |          
+             --1.50%--0xffffffffc102c15d
+                       |          
+                        --1.47%--0xffffffffc10024ee
+                                  |          
+                                   --1.21%--0xffffffffc0f5d040
+                                             |          
+                                              --1.03%--0xffffffffc0f1f8d8
+
+     1.62%     0.02%  [.] __GI___libc_write                                                                                     -      -            
+            |          
+             --1.60%--__GI___libc_write
+                       |          
+                        --1.56%--0xffffffffa680012b
+                                  |          
+                                   --1.54%--0xffffffffa7d94660
+                                             0xffffffffa6a89d89
+                                             0xffffffffa6fe8529
+                                             |          
+                                              --1.35%--0xffffffffa6fe8481
+                                                        |          
+                                                         --1.18%--0xffffffffa6fe7eeb
+                                                                   0xffffffffa70f1aef
+                                                                   |          
+                                                                    --1.05%--0xffffffffa70f14dd
+
+     1.57%     0.01%  [.] _IO_file_xsputn@@GLIBC_2.2.5                                                                          -      -            
+            |          
+             --1.56%--_IO_file_xsputn@@GLIBC_2.2.5
+                       |          
+                        --1.10%--_IO_file_write@@GLIBC_2.2.5
+                                  __GI___libc_write
+                                  |          
+                                   --1.07%--0xffffffffa680012b
+                                             |          
+                                              --1.07%--0xffffffffa7d94660
+                                                        0xffffffffa6a89d89
+                                                        0xffffffffa6fe8529
+
+     1.55%     0.00%  [.] _IO_file_write@@GLIBC_2.2.5                                                                           -      -            
+            |          
+             --1.55%--__GI___libc_write
+                       |          
+                        --1.52%--0xffffffffa680012b
+                                  |          
+                                   --1.50%--0xffffffffa7d94660
+                                             0xffffffffa6a89d89
+                                             0xffffffffa6fe8529
+                                             |          
+                                              --1.32%--0xffffffffa6fe8481
+                                                        |          
+                                                         --1.18%--0xffffffffa6fe7eeb
+                                                                   0xffffffffa70f1aef
+                                                                   |          
+                                                                    --1.05%--0xffffffffa70f14dd
+
+     1.50%     0.00%  [.] 0xffffffffc102c15d                                                                                    -      -            
+            |          
+             --1.47%--0xffffffffc10024ee
+                       |          
+                        --1.21%--0xffffffffc0f5d040
+                                  |          
+                                   --1.03%--0xffffffffc0f1f8d8
+
+     1.47%     0.00%  [.] 0xffffffffc10024ee                                                                                    -      -            
+            |          
+             --1.21%--0xffffffffc0f5d040
+                       |          
+                        --1.03%--0xffffffffc0f1f8d8
+
+     1.46%     1.46%  [k] 0xffffffffa6c36c3a                                                                                    -      -            
+            |          
+             --1.44%--0xd389485354415541
+                       |          
+                        --1.36%--0x7288ac802fd5
+                                  0x7288a89882ab
+                                  0x7288a898728b
+                                  |          
+                                   --1.11%--0x7288a8ace016
+                                             0x7288a8b0a5bd
+                                             0x7288a8b28f5a
+                                             0x7288a8c3d671
+                                             __GI___ioctl
+                                             0xffffffffa680012b
+                                             0xffffffffa7d94660
+                                             0xffffffffa6a8af36
+                                             0xffffffffa70060c2
+                                             0xffffffffc2e603ca
+                                             0xffffffffc2e602da
+                                             0xffffffffc2e5ef21
+                                             0xffffffffc2e762e6
+                                             0xffffffffc2e7afaf
+
+     1.44%     0.00%  [.] 0xffffffffa6fe8481                                                                                    -      -            
+            |          
+             --1.26%--0xffffffffa6fe7eeb
+                       0xffffffffa70f1aef
+                       |          
+                        --1.11%--0xffffffffa70f14dd
+
+     1.40%     0.00%  [.] 0x0000635659116415                                                                                    -      -            
+            |
+            ---__libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+               |          
+                --1.04%--0x6356591162f4
+                          |          
+                           --1.04%--event_base_loop
+
+     1.37%     0.00%  [.] _IO_fwrite                                                                                            -      -            
+            |          
+             --1.37%--_IO_fwrite
+                       |          
+                        --1.36%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.34%     0.00%  [.] 0xffffffffc2e603ca                                                                                    -      -            
+            |
+            ---0xffffffffc2e602da
+               |          
+                --1.34%--0xffffffffc2e5ef21
+                          0xffffffffc2e762e6
+                          0xffffffffc2e7afaf
+
+     1.34%     0.00%  [.] 0xffffffffc2e602da                                                                                    -      -            
+            |          
+             --1.34%--0xffffffffc2e5ef21
+                       0xffffffffc2e762e6
+                       0xffffffffc2e7afaf
+
+     1.34%     0.00%  [.] 0xffffffffc2e5ef21                                                                                    -      -            
+            |
+            ---0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.34%     0.00%  [.] 0xffffffffc2e762e6                                                                                    -      -            
+            |
+            ---0xffffffffc2e7afaf
+
+     1.34%     0.00%  [.] 0xffffffffc2e7afaf                                                                                    -      -            
+     1.33%     0.00%  [.] 0x00007288a8ace016                                                                                    -      -            
+            |
+            ---0x7288a8b0a5bd
+               0x7288a8b28f5a
+               0x7288a8c3d671
+               __GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  [.] 0x00007288a8b0a5bd                                                                                    -      -            
+            |
+            ---0x7288a8b28f5a
+               0x7288a8c3d671
+               __GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  [.] 0x00007288a8b28f5a                                                                                    -      -            
+            |
+            ---0x7288a8c3d671
+               __GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.33%     0.00%  [.] 0x00007288a8c3d671                                                                                    -      -            
+            |
+            ---__GI___ioctl
+               0xffffffffa680012b
+               0xffffffffa7d94660
+               0xffffffffa6a8af36
+               0xffffffffa70060c2
+               0xffffffffc2e603ca
+               0xffffffffc2e602da
+               0xffffffffc2e5ef21
+               0xffffffffc2e762e6
+               0xffffffffc2e7afaf
+
+     1.26%     0.00%  [.] 0xffffffffa70f1aef                                                                                    -      -            
+            |          
+             --1.26%--0xffffffffa70f1aef
+                       |          
+                        --1.11%--0xffffffffa70f14dd
+
+     1.26%     0.00%  [.] 0xffffffffa6fe7eeb                                                                                    -      -            
+            |
+            ---0xffffffffa70f1aef
+               |          
+                --1.11%--0xffffffffa70f14dd
+
+     1.21%     0.00%  [.] 0xffffffffc0f5d040                                                                                    -      -            
+            |          
+             --1.03%--0xffffffffc0f1f8d8
+
+     1.11%     1.09%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                           -      -            
+     1.11%     0.00%  [.] 0xffffffffa70f14dd                                                                                    -      -            
+            |          
+             --1.11%--0xffffffffa70f14dd
+
+     1.07%     0.00%  [.] 0xffffffffc117980e                                                                                    -      -            
+            |
+            ---0xffffffffc11685af
+
+     1.04%     0.00%  [.] 0x00006356591162f4                                                                                    -      -            
+            |          
+             --1.04%--event_base_loop
+
+     1.04%     0.00%  [.] 0xffffffffc0f1f8d8                                                                                    -      -            
+     1.03%     0.14%  [.] compute_bounce_back(double*)                                                                          -      -            
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
