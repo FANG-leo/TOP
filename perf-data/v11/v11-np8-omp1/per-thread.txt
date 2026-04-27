@@ -1,0 +1,1128 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 220K of event 'cycles:P'
+# Event count (approx.): 230206448897
+#
+# Children      Self  Command           Pid:Command       Symbol                                                                                                         IPC   [IPC Coverage]
+# ........  ........  ............  ....................  .............................................................................................................  ....................
+#
+    11.04%     0.00%  top.lbm-exe    296647:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --11.04%--main
+                       |          
+                       |--6.97%--PMPI_Barrier
+                       |          |          
+                       |           --6.97%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --6.16%--ompi_request_default_wait
+                       |                                |          
+                       |                                 --5.70%--opal_progress
+                       |          
+                       |--1.47%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--1.18%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --1.10%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+
+    10.91%     0.00%  top.lbm-exe    296647:top.lbm-exe   [.] 0x3fdc3badc06b0d90                                                                                         -      -            
+            |
+            ---0x3fdc3badc06b0d90
+               |          
+                --10.91%--0x1600000322
+                          |          
+                           --10.91%--main
+                                     |          
+                                     |--6.97%--PMPI_Barrier
+                                     |          |          
+                                     |           --6.97%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |                     |          
+                                     |                      --6.16%--ompi_request_default_wait
+                                     |                                |          
+                                     |                                 --5.70%--opal_progress
+                                     |          
+                                     |--1.47%--collision(Mesh*, Mesh const*)
+                                     |          
+                                     |--1.18%--propagation(Mesh*, Mesh const*)
+                                     |          
+                                      --1.10%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+
+    10.91%     0.00%  top.lbm-exe    296647:top.lbm-exe   [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --10.91%--main
+                          |          
+                          |--6.97%--PMPI_Barrier
+                          |          |          
+                          |           --6.97%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --6.16%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --5.70%--opal_progress
+                          |          
+                          |--1.47%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--1.18%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --1.10%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+
+    10.71%     0.00%  top.lbm-exe    296648:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --10.71%--main
+                       |          
+                       |--5.78%--PMPI_Barrier
+                       |          |          
+                       |           --5.77%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --5.55%--ompi_request_default_wait
+                       |                                |          
+                       |                                 --5.40%--opal_progress
+                       |          
+                       |--1.93%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --1.59%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --1.01%--mca_pml_ob1_send
+                       |          
+                       |--1.50%--collision(Mesh*, Mesh const*)
+                       |          
+                        --1.20%--propagation(Mesh*, Mesh const*)
+
+    10.58%     0.00%  top.lbm-exe    296648:top.lbm-exe   [.] 0x3fdbd32c7f160cb7                                                                                         -      -            
+            |
+            ---0x3fdbd32c7f160cb7
+               |          
+                --10.58%--0x1600000322
+                          |          
+                           --10.58%--main
+                                     |          
+                                     |--5.78%--PMPI_Barrier
+                                     |          |          
+                                     |           --5.77%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |                     |          
+                                     |                      --5.55%--ompi_request_default_wait
+                                     |                                |          
+                                     |                                 --5.40%--opal_progress
+                                     |          
+                                     |--1.93%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                     |          |          
+                                     |           --1.59%--PMPI_Sendrecv
+                                     |                     |          
+                                     |                      --1.01%--mca_pml_ob1_send
+                                     |          
+                                     |--1.50%--collision(Mesh*, Mesh const*)
+                                     |          
+                                      --1.20%--propagation(Mesh*, Mesh const*)
+
+    10.58%     0.00%  top.lbm-exe    296648:top.lbm-exe   [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --10.58%--main
+                          |          
+                          |--5.78%--PMPI_Barrier
+                          |          |          
+                          |           --5.77%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --5.55%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --5.40%--opal_progress
+                          |          
+                          |--1.93%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --1.59%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --1.01%--mca_pml_ob1_send
+                          |          
+                          |--1.50%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.20%--propagation(Mesh*, Mesh const*)
+
+    10.35%     0.00%  top.lbm-exe    296649:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --10.35%--main
+                       |          
+                       |--4.45%--PMPI_Barrier
+                       |          |          
+                       |           --4.45%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --4.25%--ompi_request_default_wait
+                       |                                |          
+                       |                                 --4.12%--opal_progress
+                       |          
+                       |--2.88%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --2.55%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --2.05%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --1.97%--opal_progress
+                       |          
+                       |--1.50%--collision(Mesh*, Mesh const*)
+                       |          
+                        --1.21%--propagation(Mesh*, Mesh const*)
+
+    10.22%     0.00%  top.lbm-exe    296649:top.lbm-exe   [.] 0x3fdb7aca98728ec7                                                                                         -      -            
+            |
+            ---0x3fdb7aca98728ec7
+               |          
+                --10.22%--0x1600000322
+                          |          
+                           --10.22%--main
+                                     |          
+                                     |--4.45%--PMPI_Barrier
+                                     |          |          
+                                     |           --4.45%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |                     |          
+                                     |                      --4.25%--ompi_request_default_wait
+                                     |                                |          
+                                     |                                 --4.12%--opal_progress
+                                     |          
+                                     |--2.88%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                     |          |          
+                                     |           --2.55%--PMPI_Sendrecv
+                                     |                     |          
+                                     |                      --2.05%--mca_pml_ob1_send
+                                     |                                |          
+                                     |                                 --1.97%--opal_progress
+                                     |          
+                                     |--1.50%--collision(Mesh*, Mesh const*)
+                                     |          
+                                      --1.21%--propagation(Mesh*, Mesh const*)
+
+    10.22%     0.00%  top.lbm-exe    296649:top.lbm-exe   [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --10.22%--main
+                          |          
+                          |--4.45%--PMPI_Barrier
+                          |          |          
+                          |           --4.45%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --4.25%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --4.12%--opal_progress
+                          |          
+                          |--2.88%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --2.55%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --2.05%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --1.97%--opal_progress
+                          |          
+                          |--1.50%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.21%--propagation(Mesh*, Mesh const*)
+
+    10.14%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --10.14%--main
+                       |          
+                       |--3.80%--0x7e3e31357a14
+                       |          |          
+                       |           --3.48%--0x7e3e3126ba4e
+                       |                     |          
+                       |                      --2.66%--0x7e3e2d02d355
+                       |                                |          
+                       |                                 --2.50%--0x7e3e310d33b4
+                       |          
+                       |--3.37%--0x7e3e31249530
+                       |          |          
+                       |           --3.37%--0x7e3e3129163d
+                       |                     |          
+                       |                      --3.20%--0x7e3e31232945
+                       |                                |          
+                       |                                 --3.11%--0x7e3e310d3419
+                       |          
+                       |--1.52%--0x7e3e3135f54a
+                       |          
+                        --1.16%--0x7e3e31361b69
+
+    10.03%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] 0x3fdb5a2dfc571406                                                                                         -      -            
+            |
+            ---0x3fdb5a2dfc571406
+               |          
+                --10.03%--0x1600000322
+                          |          
+                           --10.03%--main
+                                     |          
+                                     |--3.80%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                     |          |          
+                                     |           --3.48%--PMPI_Sendrecv
+                                     |                     |          
+                                     |                      --2.66%--mca_pml_ob1_send
+                                     |                                |          
+                                     |                                 --2.50%--opal_progress
+                                     |          
+                                     |--3.37%--PMPI_Barrier
+                                     |          |          
+                                     |           --3.37%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |                     |          
+                                     |                      --3.20%--ompi_request_default_wait
+                                     |                                |          
+                                     |                                 --3.11%--opal_progress
+                                     |          
+                                     |--1.52%--collision(Mesh*, Mesh const*)
+                                     |          
+                                      --1.16%--propagation(Mesh*, Mesh const*)
+
+    10.03%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --10.03%--main
+                          |          
+                          |--3.80%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --3.48%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --2.66%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --2.50%--opal_progress
+                          |          
+                          |--3.37%--PMPI_Barrier
+                          |          |          
+                          |           --3.37%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --3.20%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --3.11%--opal_progress
+                          |          
+                          |--1.52%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.16%--propagation(Mesh*, Mesh const*)
+
+     9.97%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] main                                                                                                       -      -            
+            |
+            ---main
+               |          
+               |--4.61%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+               |          |          
+               |           --4.28%--PMPI_Sendrecv
+               |                     |          
+               |                      --3.71%--mca_pml_ob1_send
+               |                                |          
+               |                                 --3.60%--opal_progress
+               |          
+               |--2.42%--PMPI_Barrier
+               |          |          
+               |           --2.42%--ompi_coll_base_barrier_intra_recursivedoubling
+               |                     |          
+               |                      --2.31%--ompi_request_default_wait
+               |                                |          
+               |                                 --2.20%--opal_progress
+               |          
+               |--1.48%--collision(Mesh*, Mesh const*)
+               |          
+                --1.18%--propagation(Mesh*, Mesh const*)
+
+     9.86%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] 0x3fdb7e1b4a70d2c7                                                                                         -      -            
+            |
+            ---0x3fdb7e1b4a70d2c7
+               |          
+                --9.86%--0x1600000322
+                          |          
+                           --9.85%--main
+                                     |          
+                                     |--4.61%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                     |          |          
+                                     |           --4.28%--PMPI_Sendrecv
+                                     |                     |          
+                                     |                      --3.71%--mca_pml_ob1_send
+                                     |                                |          
+                                     |                                 --3.60%--opal_progress
+                                     |          
+                                     |--2.42%--PMPI_Barrier
+                                     |          |          
+                                     |           --2.42%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |                     |          
+                                     |                      --2.31%--ompi_request_default_wait
+                                     |                                |          
+                                     |                                 --2.20%--opal_progress
+                                     |          
+                                     |--1.48%--collision(Mesh*, Mesh const*)
+                                     |          
+                                      --1.18%--propagation(Mesh*, Mesh const*)
+
+     9.86%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --9.85%--main
+                          |          
+                          |--4.61%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --4.28%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --3.71%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --3.60%--opal_progress
+                          |          
+                          |--2.42%--PMPI_Barrier
+                          |          |          
+                          |           --2.42%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --2.31%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --2.20%--opal_progress
+                          |          
+                          |--1.48%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.18%--propagation(Mesh*, Mesh const*)
+
+     9.82%     0.00%  top.lbm-exe    296646:top.lbm-exe   [.] main                                                                                                       -      -            
+            |
+            ---main
+               |          
+               |--6.29%--PMPI_Barrier
+               |          |          
+               |           --6.29%--ompi_coll_base_barrier_intra_recursivedoubling
+               |                     |          
+               |                      --6.08%--ompi_request_default_wait
+               |                                |          
+               |                                 --5.90%--opal_progress
+               |          
+               |--1.42%--collision(Mesh*, Mesh const*)
+               |          
+                --1.19%--propagation(Mesh*, Mesh const*)
+
+     9.82%     0.00%  top.lbm-exe    296662:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --9.82%--main
+                       |          
+                       |--5.96%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --5.80%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --4.94%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --4.58%--opal_progress
+                       |          
+                       |--1.58%--collision(Mesh*, Mesh const*)
+                       |          
+                        --1.25%--propagation(Mesh*, Mesh const*)
+
+     9.79%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --9.79%--main
+                       |          
+                       |--5.65%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --5.32%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --4.56%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --4.27%--opal_progress
+                       |          
+                       |--1.60%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--1.24%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --1.03%--PMPI_Barrier
+                                  |          
+                                   --1.03%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     9.73%     0.00%  top.lbm-exe    296662:top.lbm-exe   [.] 0x3fdc403f932a6460                                                                                         -      -            
+            |
+            ---0x3fdc403f932a6460
+               0x1600000322
+               |          
+                --9.73%--main
+                          |          
+                          |--5.96%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --5.80%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --4.94%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --4.58%--opal_progress
+                          |          
+                          |--1.58%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.25%--propagation(Mesh*, Mesh const*)
+
+     9.73%     0.00%  top.lbm-exe    296662:top.lbm-exe   [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --9.73%--main
+                          |          
+                          |--5.96%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --5.80%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --4.94%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --4.58%--opal_progress
+                          |          
+                          |--1.58%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.25%--propagation(Mesh*, Mesh const*)
+
+     9.70%     0.00%  top.lbm-exe    296646:top.lbm-exe   [k] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --9.69%--main
+                          |          
+                          |--6.29%--PMPI_Barrier
+                          |          |          
+                          |           --6.29%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --6.08%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --5.90%--opal_progress
+                          |          
+                          |--1.42%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.19%--propagation(Mesh*, Mesh const*)
+
+     9.69%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] 0x3fdbd875d243b76b                                                                                         -      -            
+            |
+            ---0x3fdbd875d243b76b
+               |          
+                --9.69%--0x1600000322
+                          main
+                          |          
+                          |--5.65%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --5.32%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --4.56%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --4.27%--opal_progress
+                          |          
+                          |--1.60%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--1.24%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --1.03%--PMPI_Barrier
+                                     |          
+                                      --1.03%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     9.69%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               main
+               |          
+               |--5.65%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+               |          |          
+               |           --5.32%--PMPI_Sendrecv
+               |                     |          
+               |                      --4.56%--mca_pml_ob1_send
+               |                                |          
+               |                                 --4.27%--opal_progress
+               |          
+               |--1.60%--collision(Mesh*, Mesh const*)
+               |          
+               |--1.24%--propagation(Mesh*, Mesh const*)
+               |          
+                --1.03%--PMPI_Barrier
+                          |          
+                           --1.03%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     9.62%     0.00%  top.lbm-exe    296646:top.lbm-exe   [.] 0x3fdc71c71c71c71c                                                                                         -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               |          
+                --9.62%--0x1600000322
+                          |          
+                           --9.61%--main
+                                     |          
+                                     |--6.29%--PMPI_Barrier
+                                     |          |          
+                                     |           --6.29%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |                     |          
+                                     |                      --6.08%--ompi_request_default_wait
+                                     |                                |          
+                                     |                                 --5.90%--opal_progress
+                                     |          
+                                     |--1.42%--collision(Mesh*, Mesh const*)
+                                     |          
+                                      --1.19%--propagation(Mesh*, Mesh const*)
+
+     7.62%     1.36%  top.lbm-exe    296662:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+            |--6.25%--opal_progress
+            |          
+             --1.07%--0x3fdc403f932a6460
+                       0x1600000322
+                       main
+
+     7.43%     1.13%  top.lbm-exe    296657:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+             --6.30%--opal_progress
+
+     7.34%     1.14%  top.lbm-exe    296649:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+             --6.21%--opal_progress
+
+     7.32%     1.33%  top.lbm-exe    296648:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+            |--5.98%--opal_progress
+            |          
+             --1.21%--0x3fdbd32c7f160cb7
+                       0x1600000322
+                       main
+                       |          
+                        --1.01%--PMPI_Barrier
+                                  ompi_coll_base_barrier_intra_recursivedoubling
+
+     7.20%     1.10%  top.lbm-exe    296660:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+             --6.10%--opal_progress
+
+     7.19%     1.27%  top.lbm-exe    296652:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+            |--5.92%--opal_progress
+            |          
+             --1.08%--0x3fdb5a2dfc571406
+                       0x1600000322
+                       main
+
+     7.06%     1.36%  top.lbm-exe    296647:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+            |--5.70%--opal_progress
+            |          
+             --1.29%--0x3fdc3badc06b0d90
+                       0x1600000322
+                       main
+                       |          
+                        --1.25%--PMPI_Barrier
+                                  ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --1.17%--ompi_request_default_wait
+                                             |          
+                                              --1.10%--opal_progress
+
+     6.97%     0.00%  top.lbm-exe    296647:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --6.97%--PMPI_Barrier
+                       |          
+                        --6.97%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --6.16%--ompi_request_default_wait
+                                             |          
+                                              --5.70%--opal_progress
+
+     6.97%     0.00%  top.lbm-exe    296647:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --6.97%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --6.16%--ompi_request_default_wait
+                                  |          
+                                   --5.70%--opal_progress
+
+     6.60%     0.15%  top.lbm-exe    296662:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --6.45%--mca_pml_ob1_send
+                       |          
+                        --6.05%--opal_progress
+
+     6.45%     0.67%  top.lbm-exe    296646:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+             --5.78%--opal_progress
+
+     6.29%     0.00%  top.lbm-exe    296646:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --6.29%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --6.08%--ompi_request_default_wait
+                                     |          
+                                      --5.90%--opal_progress
+
+     6.29%     0.00%  top.lbm-exe    296646:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --6.29%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --6.08%--ompi_request_default_wait
+                                  |          
+                                   --5.90%--opal_progress
+
+     6.16%     0.14%  top.lbm-exe    296647:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --6.02%--ompi_request_default_wait
+                       |          
+                        --5.58%--opal_progress
+
+     6.09%     0.10%  top.lbm-exe    296646:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --5.99%--ompi_request_default_wait
+                       |          
+                        --5.81%--opal_progress
+
+     5.99%     0.13%  top.lbm-exe    296660:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --5.86%--mca_pml_ob1_send
+                       |          
+                        --5.53%--opal_progress
+
+     5.96%     0.16%  top.lbm-exe    296662:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --5.80%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --5.79%--PMPI_Sendrecv
+                                  |          
+                                   --4.94%--mca_pml_ob1_send
+                                             |          
+                                              --4.58%--opal_progress
+
+     5.80%     0.00%  top.lbm-exe    296662:top.lbm-exe   [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --5.79%--PMPI_Sendrecv
+                       |          
+                        --4.94%--mca_pml_ob1_send
+                                  |          
+                                   --4.58%--opal_progress
+
+     5.78%     0.00%  top.lbm-exe    296648:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --5.78%--PMPI_Barrier
+                       |          
+                        --5.77%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --5.55%--ompi_request_default_wait
+                                             |          
+                                              --5.40%--opal_progress
+
+     5.77%     0.00%  top.lbm-exe    296648:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --5.77%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --5.55%--ompi_request_default_wait
+                                  |          
+                                   --5.40%--opal_progress
+
+     5.75%     0.11%  top.lbm-exe    296648:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --5.64%--ompi_request_default_wait
+                       |          
+                        --5.50%--opal_progress
+
+     5.65%     0.32%  top.lbm-exe    296660:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --5.33%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --5.32%--PMPI_Sendrecv
+                                  |          
+                                   --4.56%--mca_pml_ob1_send
+                                             |          
+                                              --4.27%--opal_progress
+
+     5.32%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --5.32%--PMPI_Sendrecv
+                       |          
+                        --4.56%--mca_pml_ob1_send
+                                  |          
+                                   --4.27%--opal_progress
+
+     4.92%     0.09%  top.lbm-exe    296657:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --4.83%--mca_pml_ob1_send
+                       |          
+                        --4.65%--opal_progress
+
+     4.61%     0.32%  top.lbm-exe    296657:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --4.29%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --4.27%--PMPI_Sendrecv
+                                  |          
+                                   --3.71%--mca_pml_ob1_send
+                                             |          
+                                              --3.60%--opal_progress
+
+     4.48%     0.08%  top.lbm-exe    296649:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --4.40%--ompi_request_default_wait
+                       |          
+                        --4.27%--opal_progress
+
+     4.46%     0.00%  top.lbm-exe    296649:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --4.45%--PMPI_Barrier
+                       |          
+                        --4.45%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --4.25%--ompi_request_default_wait
+                                             |          
+                                              --4.12%--opal_progress
+
+     4.45%     0.00%  top.lbm-exe    296649:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --4.45%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --4.25%--ompi_request_default_wait
+                                  |          
+                                   --4.12%--opal_progress
+
+     4.28%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --4.27%--PMPI_Sendrecv
+                       |          
+                        --3.71%--mca_pml_ob1_send
+                                  |          
+                                   --3.60%--opal_progress
+
+     3.81%     0.31%  top.lbm-exe    296652:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --3.49%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --3.48%--PMPI_Sendrecv
+                                  |          
+                                   --2.66%--mca_pml_ob1_send
+                                             |          
+                                              --2.50%--opal_progress
+
+     3.64%     0.09%  top.lbm-exe    296652:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --3.56%--mca_pml_ob1_send
+                       |          
+                        --3.36%--opal_progress
+
+     3.48%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --3.48%--PMPI_Sendrecv
+                       |          
+                        --2.66%--mca_pml_ob1_send
+                                  |          
+                                   --2.50%--opal_progress
+
+     3.45%     0.07%  top.lbm-exe    296652:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --3.38%--ompi_request_default_wait
+                       |          
+                        --3.29%--opal_progress
+
+     3.37%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --3.37%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --3.20%--ompi_request_default_wait
+                                     |          
+                                      --3.11%--opal_progress
+
+     3.37%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --3.36%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --3.20%--ompi_request_default_wait
+                                  |          
+                                   --3.11%--opal_progress
+
+     2.89%     0.33%  top.lbm-exe    296649:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --2.56%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --2.55%--PMPI_Sendrecv
+                                  |          
+                                   --2.05%--mca_pml_ob1_send
+                                             |          
+                                              --1.97%--opal_progress
+
+     2.83%     0.05%  top.lbm-exe    296649:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --2.78%--mca_pml_ob1_send
+                       |          
+                        --2.67%--opal_progress
+
+     2.55%     0.00%  top.lbm-exe    296649:top.lbm-exe   [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --2.55%--PMPI_Sendrecv
+                       |          
+                        --2.05%--mca_pml_ob1_send
+                                  |          
+                                   --1.97%--opal_progress
+
+     2.49%     0.04%  top.lbm-exe    296657:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --2.45%--ompi_request_default_wait
+                       |          
+                        --2.34%--opal_progress
+
+     2.42%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --2.42%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --2.31%--ompi_request_default_wait
+                                     |          
+                                      --2.20%--opal_progress
+
+     2.42%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --2.41%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --2.31%--ompi_request_default_wait
+                                  |          
+                                   --2.20%--opal_progress
+
+     1.94%     0.34%  top.lbm-exe    296648:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --1.60%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --1.59%--PMPI_Sendrecv
+                                  |          
+                                   --1.01%--mca_pml_ob1_send
+
+     1.71%     0.00%  top.lbm-exe    296662:top.lbm-exe   [.] save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)                                                             -      -            
+            |
+            ---save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+               PMPI_Send
+               |          
+                --1.65%--mca_pml_ob1_send
+                          |          
+                           --1.60%--opal_progress
+
+     1.71%     0.00%  top.lbm-exe    296662:top.lbm-exe   [.] PMPI_Send                                                                                                  -      -            
+            |
+            ---PMPI_Send
+               |          
+                --1.65%--mca_pml_ob1_send
+                          |          
+                           --1.60%--opal_progress
+
+     1.60%     1.59%  top.lbm-exe    296660:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.59%--0x3fdbd875d243b76b
+                       0x1600000322
+                       main
+                       |          
+                        --1.59%--collision(Mesh*, Mesh const*)
+
+     1.59%     0.00%  top.lbm-exe    296648:top.lbm-exe   [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --1.58%--PMPI_Sendrecv
+                       |          
+                        --1.00%--mca_pml_ob1_send
+
+     1.58%     1.57%  top.lbm-exe    296662:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.57%--0x3fdc403f932a6460
+                       0x1600000322
+                       main
+                       |          
+                        --1.57%--collision(Mesh*, Mesh const*)
+
+     1.58%     0.05%  top.lbm-exe    296648:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --1.53%--mca_pml_ob1_send
+                       |          
+                        --1.41%--opal_progress
+
+     1.52%     1.51%  top.lbm-exe    296652:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.51%--0x3fdb5a2dfc571406
+                       0x1600000322
+                       main
+                       |          
+                        --1.51%--collision(Mesh*, Mesh const*)
+
+     1.50%     1.50%  top.lbm-exe    296649:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.50%--0x3fdb7aca98728ec7
+                       0x1600000322
+                       main
+                       |          
+                        --1.50%--collision(Mesh*, Mesh const*)
+
+     1.50%     1.49%  top.lbm-exe    296648:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.49%--0x3fdbd32c7f160cb7
+                       0x1600000322
+                       |          
+                        --1.49%--main
+                                  |          
+                                   --1.49%--collision(Mesh*, Mesh const*)
+
+     1.48%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)                                                             -      -            
+            |
+            ---save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+               PMPI_Send
+               |          
+                --1.41%--mca_pml_ob1_send
+                          |          
+                           --1.38%--opal_progress
+
+     1.48%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] PMPI_Send                                                                                                  -      -            
+            |
+            ---PMPI_Send
+               |          
+                --1.41%--mca_pml_ob1_send
+                          |          
+                           --1.38%--opal_progress
+
+     1.48%     1.47%  top.lbm-exe    296657:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.47%--0x3fdb7e1b4a70d2c7
+                       0x1600000322
+                       main
+                       |          
+                        --1.47%--collision(Mesh*, Mesh const*)
+
+     1.47%     1.46%  top.lbm-exe    296647:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.46%--0x3fdc3badc06b0d90
+                       0x1600000322
+                       main
+                       |          
+                        --1.46%--collision(Mesh*, Mesh const*)
+
+     1.45%     0.00%  top.lbm-exe    296646:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                                         -      -            
+            |          
+             --1.45%--0xffffffffa5c0012b
+                       |          
+                        --1.44%--0xffffffffa7194660
+
+     1.44%     0.00%  top.lbm-exe    296646:top.lbm-exe   [.] 0xffffffffa7194660                                                                                         -      -            
+            |          
+             --1.44%--0xffffffffa7194660
+
+     1.43%     1.42%  top.lbm-exe    296646:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.42%--0x3fdc71c71c71c71c
+                       0x1600000322
+                       main
+                       |          
+                        --1.42%--collision(Mesh*, Mesh const*)
+
+     1.25%     1.24%  top.lbm-exe    296662:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.24%--0x3fdc403f932a6460
+                       0x1600000322
+                       main
+                       |          
+                        --1.24%--propagation(Mesh*, Mesh const*)
+
+     1.25%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)                                                             -      -            
+            |
+            ---save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+               PMPI_Send
+               |          
+                --1.19%--mca_pml_ob1_send
+                          |          
+                           --1.13%--opal_progress
+
+     1.25%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] PMPI_Send                                                                                                  -      -            
+            |
+            ---PMPI_Send
+               |          
+                --1.19%--mca_pml_ob1_send
+                          |          
+                           --1.13%--opal_progress
+
+     1.25%     1.24%  top.lbm-exe    296660:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.24%--0x3fdbd875d243b76b
+                       0x1600000322
+                       main
+                       |          
+                        --1.24%--propagation(Mesh*, Mesh const*)
+
+     1.21%     1.20%  top.lbm-exe    296649:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.20%--0x3fdb7aca98728ec7
+                       0x1600000322
+                       |          
+                        --1.20%--main
+                                  |          
+                                   --1.20%--propagation(Mesh*, Mesh const*)
+
+     1.20%     1.19%  top.lbm-exe    296648:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.19%--0x3fdbd32c7f160cb7
+                       0x1600000322
+                       main
+                       |          
+                        --1.19%--propagation(Mesh*, Mesh const*)
+
+     1.20%     1.19%  top.lbm-exe    296646:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.19%--0x3fdc71c71c71c71c
+                       0x1600000322
+                       main
+                       |          
+                        --1.19%--propagation(Mesh*, Mesh const*)
+
+     1.19%     1.17%  top.lbm-exe    296657:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.17%--0x3fdb7e1b4a70d2c7
+                       0x1600000322
+                       main
+                       |          
+                        --1.17%--propagation(Mesh*, Mesh const*)
+
+     1.18%     1.18%  top.lbm-exe    296647:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.18%--0x3fdc3badc06b0d90
+                       0x1600000322
+                       main
+                       |          
+                        --1.18%--propagation(Mesh*, Mesh const*)
+
+     1.17%     0.02%  top.lbm-exe    296660:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.15%--ompi_request_default_wait
+                       |          
+                        --1.12%--opal_progress
+
+     1.17%     1.16%  top.lbm-exe    296652:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --1.16%--0x3fdb5a2dfc571406
+                       0x1600000322
+                       main
+                       |          
+                        --1.15%--propagation(Mesh*, Mesh const*)
+
+     1.10%     0.32%  top.lbm-exe    296647:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+     1.09%     0.00%  mpirun         296633:mpirun        [.] 0xffffffffa5c0012b                                                                                         -      -            
+            |          
+             --1.09%--0xffffffffa5c0012b
+                       |          
+                        --1.07%--0xffffffffa7194660
+
+     1.08%     1.08%  top.lbm-exe    296662:top.lbm-exe   [.] 0x000000000007bd37                                                                                         -      -            
+     1.07%     0.00%  mpirun         296633:mpirun        [.] 0xffffffffa7194660                                                                                         -      -            
+            |          
+             --1.07%--0xffffffffa7194660
+
+     1.05%     0.00%  top.lbm-exe    296657:top.lbm-exe   [.] 0x00007139cc4af166                                                                                         -      -            
+            |
+            ---0x7139cc4af166
+
+     1.04%     0.40%  top.lbm-exe    296646:top.lbm-exe   [.] save_frame(_IO_FILE*, Mesh const*)                                                                         -      -            
+     1.03%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --1.03%--PMPI_Barrier
+                       |          
+                        --1.03%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     1.03%     0.00%  top.lbm-exe    296660:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --1.03%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     1.02%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)                                                             -      -            
+            |
+            ---save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+               PMPI_Send
+
+     1.02%     0.00%  top.lbm-exe    296652:top.lbm-exe   [.] PMPI_Send                                                                                                  -      -            
+            |
+            ---PMPI_Send
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

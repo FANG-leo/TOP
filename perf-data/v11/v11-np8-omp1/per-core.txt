@@ -1,0 +1,1339 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 220K of event 'cycles:P'
+# Event count (approx.): 230206448897
+#
+# Children      Self  CPU  Symbol                                                                                                         IPC   [IPC Coverage]
+# ........  ........  ...  .............................................................................................................  ....................
+#
+     8.56%     0.00%  030  [.] main                                                                                                       -      -            
+            |
+            ---main
+               |          
+               |--3.84%--PMPI_Barrier
+               |          |          
+               |           --3.83%--ompi_coll_base_barrier_intra_recursivedoubling
+               |                     |          
+               |                      --3.70%--ompi_request_default_wait
+               |                                |          
+               |                                 --3.28%--opal_progress
+               |          
+               |--2.08%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+               |          |          
+               |           --1.86%--PMPI_Sendrecv
+               |                     |          
+               |                      --1.52%--mca_pml_ob1_send
+               |                                |          
+               |                                 --1.40%--opal_progress
+               |          
+               |--1.30%--collision(Mesh*, Mesh const*)
+               |          
+                --1.06%--propagation(Mesh*, Mesh const*)
+
+     8.51%     0.00%  030  [k] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --8.50%--main
+                          |          
+                          |--3.84%--PMPI_Barrier
+                          |          |          
+                          |           --3.83%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --3.70%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --3.28%--opal_progress
+                          |          
+                          |--2.08%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --1.86%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --1.52%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --1.40%--opal_progress
+                          |          
+                          |--1.30%--collision(Mesh*, Mesh const*)
+                          |          
+                           --1.06%--propagation(Mesh*, Mesh const*)
+
+     8.37%     0.00%  027  [.] main                                                                                                       -      -            
+            |          
+             --8.37%--main
+                       |          
+                       |--3.42%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --3.15%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --2.64%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --2.53%--opal_progress
+                       |          
+                       |--2.47%--PMPI_Barrier
+                       |          |          
+                       |           --2.47%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --2.36%--ompi_request_default_wait
+                       |                                |          
+                       |                                |--1.24%--opal_progress
+                       |                                |          
+                       |                                 --1.03%--opal_progress
+                       |          
+                        --1.23%--collision(Mesh*, Mesh const*)
+
+     8.29%     0.00%  025  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --8.29%--main
+                          |          
+                          |--3.48%--PMPI_Barrier
+                          |          |          
+                          |           --3.48%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --3.33%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --3.08%--opal_progress
+                          |          
+                          |--2.45%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --2.19%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --1.78%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --1.47%--opal_progress
+                          |          
+                           --1.23%--collision(Mesh*, Mesh const*)
+
+     8.26%     0.00%  027  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --8.26%--main
+                          |          
+                          |--3.42%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --3.15%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --2.64%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --2.53%--opal_progress
+                          |          
+                          |--2.47%--PMPI_Barrier
+                          |          |          
+                          |           --2.47%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --2.36%--ompi_request_default_wait
+                          |                                |          
+                          |                                |--1.24%--opal_progress
+                          |                                |          
+                          |                                 --1.03%--opal_progress
+                          |          
+                           --1.23%--collision(Mesh*, Mesh const*)
+
+     8.16%     0.00%  029  [.] main                                                                                                       -      -            
+            |
+            ---main
+               |          
+               |--4.79%--PMPI_Barrier
+               |          |          
+               |           --4.79%--ompi_coll_base_barrier_intra_recursivedoubling
+               |                     |          
+               |                      --4.36%--ompi_request_default_wait
+               |                                |          
+               |                                 --4.12%--opal_progress
+               |          
+               |--1.13%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+               |          
+                --1.09%--collision(Mesh*, Mesh const*)
+
+     8.03%     0.00%  029  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --8.03%--main
+                          |          
+                          |--4.79%--PMPI_Barrier
+                          |          |          
+                          |           --4.79%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --4.36%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --4.12%--opal_progress
+                          |          
+                          |--1.13%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          
+                           --1.09%--collision(Mesh*, Mesh const*)
+
+     8.02%     0.00%  028  [.] main                                                                                                       -      -            
+            |          
+             --8.01%--main
+                       |          
+                       |--3.44%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --3.25%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --2.60%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --2.09%--opal_progress
+                       |          
+                       |--2.23%--PMPI_Barrier
+                       |          |          
+                       |           --2.23%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --2.13%--ompi_request_default_wait
+                       |                                |          
+                       |                                 --1.68%--opal_progress
+                       |          
+                        --1.21%--collision(Mesh*, Mesh const*)
+
+     7.97%     0.00%  028  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --7.97%--main
+                          |          
+                          |--3.44%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --3.25%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --2.60%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --2.09%--opal_progress
+                          |          
+                          |--2.23%--PMPI_Barrier
+                          |          |          
+                          |           --2.23%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --2.13%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --1.68%--opal_progress
+                          |          
+                           --1.21%--collision(Mesh*, Mesh const*)
+
+     7.58%     0.00%  025  [.] 0x3fdb7aca98728ec7                                                                                         -      -            
+            |
+            ---0x3fdb7aca98728ec7
+               |          
+                --7.58%--0x1600000322
+                          |          
+                           --7.58%--main
+                                     |          
+                                     |--3.32%--PMPI_Barrier
+                                     |          |          
+                                     |           --3.32%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |                     |          
+                                     |                      --3.17%--ompi_request_default_wait
+                                     |                                |          
+                                     |                                 --3.08%--opal_progress
+                                     |          
+                                     |--2.12%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                     |          |          
+                                     |           --1.89%--PMPI_Sendrecv
+                                     |                     |          
+                                     |                      --1.52%--mca_pml_ob1_send
+                                     |                                |          
+                                     |                                 --1.47%--opal_progress
+                                     |          
+                                      --1.11%--collision(Mesh*, Mesh const*)
+
+     7.33%     0.00%  024  [.] main                                                                                                       -      -            
+            |          
+             --7.33%--main
+                       |          
+                       |--2.90%--PMPI_Barrier
+                       |          |          
+                       |           --2.90%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --2.71%--ompi_request_default_wait
+                       |                                |          
+                       |                                 --1.36%--opal_progress
+                       |          
+                       |--2.24%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --2.04%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --1.72%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --1.07%--opal_progress
+                       |          
+                        --1.13%--collision(Mesh*, Mesh const*)
+
+     7.28%     0.00%  024  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --7.28%--main
+                          |          
+                          |--2.90%--PMPI_Barrier
+                          |          |          
+                          |           --2.90%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --2.71%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --1.36%--opal_progress
+                          |          
+                          |--2.24%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --2.04%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --1.72%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --1.07%--opal_progress
+                          |          
+                           --1.13%--collision(Mesh*, Mesh const*)
+
+     6.20%     0.00%  025  [.] main                                                                                                       -      -            
+            |          
+             --6.20%--main
+                       |          
+                       |--2.70%--PMPI_Barrier
+                       |          |          
+                       |           --2.69%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --2.58%--ompi_request_default_wait
+                       |                                |          
+                       |                                 --2.51%--opal_progress
+                       |          
+                        --1.73%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                  |          
+                                   --1.54%--PMPI_Sendrecv
+                                             |          
+                                              --1.24%--mca_pml_ob1_send
+                                                        |          
+                                                         --1.20%--opal_progress
+
+     6.09%     0.00%  031  [.] main                                                                                                       -      -            
+            |          
+             --6.09%--main
+                       |          
+                       |--2.88%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --2.69%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --2.25%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --1.22%--opal_progress
+                       |          
+                        --1.31%--PMPI_Barrier
+                                  ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --1.24%--ompi_request_default_wait
+                                             |          
+                                              --1.20%--opal_progress
+
+     6.06%     0.98%  027  [.] opal_progress                                                                                              -      -            
+            |          
+             --5.08%--opal_progress
+
+     5.99%     0.92%  025  [.] opal_progress                                                                                              -      -            
+            |          
+             --5.07%--opal_progress
+
+     5.95%     0.00%  031  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --5.95%--main
+                          |          
+                          |--2.88%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --2.69%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --2.25%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --1.22%--opal_progress
+                          |          
+                           --1.31%--PMPI_Barrier
+                                     ompi_coll_base_barrier_intra_recursivedoubling
+                                     |          
+                                      --1.24%--ompi_request_default_wait
+                                                |          
+                                                 --1.20%--opal_progress
+
+     5.86%     1.05%  028  [.] opal_progress                                                                                              -      -            
+            |          
+             --4.81%--opal_progress
+
+     5.83%     0.70%  030  [.] opal_progress                                                                                              -      -            
+            |          
+             --5.13%--opal_progress
+
+     5.36%     1.01%  029  [.] opal_progress                                                                                              -      -            
+            |          
+             --4.35%--opal_progress
+
+     5.32%     0.00%  030  [.] 0x3fdc71c71c71c71c                                                                                         -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               0x1600000322
+               |          
+                --5.32%--main
+                          |          
+                           --3.50%--PMPI_Barrier
+                                     |          
+                                      --3.50%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --3.38%--ompi_request_default_wait
+                                                           |          
+                                                            --3.28%--opal_progress
+
+     5.20%     0.00%  026  [.] main                                                                                                       -      -            
+            |
+            ---main
+               |          
+               |--1.87%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+               |          |          
+               |           --1.72%--PMPI_Sendrecv
+               |                     |          
+               |                      --1.44%--mca_pml_ob1_send
+               |          
+                --1.81%--PMPI_Barrier
+                          |          
+                           --1.81%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |          
+                                      --1.69%--ompi_request_default_wait
+
+     5.18%     0.00%  026  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --5.18%--main
+                          |          
+                          |--1.87%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --1.72%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --1.44%--mca_pml_ob1_send
+                          |          
+                           --1.81%--PMPI_Barrier
+                                     |          
+                                      --1.81%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --1.69%--ompi_request_default_wait
+
+     5.11%     0.89%  024  [.] opal_progress                                                                                              -      -            
+            |          
+             --4.23%--opal_progress
+
+     4.83%     0.00%  027  [.] 0x3fdb7e1b4a70d2c7                                                                                         -      -            
+            |
+            ---0x3fdb7e1b4a70d2c7
+               |          
+                --4.83%--0x1600000322
+                          main
+                          |          
+                          |--2.26%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --2.10%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --1.84%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --1.79%--opal_progress
+                          |          
+                           --1.17%--PMPI_Barrier
+                                     |          
+                                      --1.17%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --1.13%--ompi_request_default_wait
+                                                           |          
+                                                            --1.07%--opal_progress
+
+     4.79%     0.00%  029  [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --4.79%--PMPI_Barrier
+                       |          
+                        --4.79%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --4.36%--ompi_request_default_wait
+                                             |          
+                                              --4.12%--opal_progress
+
+     4.79%     0.00%  029  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --4.79%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --4.36%--ompi_request_default_wait
+                                  |          
+                                   --4.12%--opal_progress
+
+     4.59%     0.00%  010  [.] main                                                                                                       -      -            
+            |          
+             --4.59%--main
+                       |          
+                       |--2.02%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --1.90%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --1.57%--mca_pml_ob1_send
+                       |          
+                        --1.22%--PMPI_Barrier
+                                  |          
+                                   --1.22%--ompi_coll_base_barrier_intra_recursivedoubling
+                                             |          
+                                              --1.16%--ompi_request_default_wait
+                                                        |          
+                                                         --1.02%--opal_progress
+
+     4.58%     0.00%  028  [.] 0x3fdc403f932a6460                                                                                         -      -            
+            |
+            ---0x3fdc403f932a6460
+               0x1600000322
+               main
+               |          
+                --2.80%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          
+                           --2.72%--PMPI_Sendrecv
+                                     |          
+                                      --2.27%--mca_pml_ob1_send
+                                                |          
+                                                 --2.09%--opal_progress
+
+     4.56%     0.00%  010  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               main
+               |          
+               |--2.02%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+               |          |          
+               |           --1.90%--PMPI_Sendrecv
+               |                     |          
+               |                      --1.57%--mca_pml_ob1_send
+               |          
+                --1.22%--PMPI_Barrier
+                          |          
+                           --1.22%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |          
+                                      --1.16%--ompi_request_default_wait
+                                                |          
+                                                 --1.02%--opal_progress
+
+     4.44%     0.09%  029  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --4.36%--ompi_request_default_wait
+                       |          
+                        --4.12%--opal_progress
+
+     4.37%     0.68%  031  [.] opal_progress                                                                                              -      -            
+            |          
+             --3.70%--opal_progress
+
+     4.20%     0.00%  029  [.] 0x3fdc3badc06b0d90                                                                                         -      -            
+            |
+            ---0x3fdc3badc06b0d90
+               |          
+                --4.20%--0x1600000322
+                          |          
+                           --4.20%--main
+                                     |          
+                                      --2.72%--PMPI_Barrier
+                                                |          
+                                                 --2.72%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                           |          
+                                                            --2.37%--ompi_request_default_wait
+                                                                      |          
+                                                                       --2.18%--opal_progress
+
+     3.93%     0.00%  015  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --3.93%--main
+                          |          
+                           --2.14%--PMPI_Barrier
+                                     |          
+                                      --2.14%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --1.98%--ompi_request_default_wait
+
+     3.89%     0.00%  015  [.] main                                                                                                       -      -            
+            |
+            ---main
+               |          
+                --2.12%--PMPI_Barrier
+                          |          
+                           --2.12%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |          
+                                      --1.96%--ompi_request_default_wait
+                                                |          
+                                                 --1.89%--opal_progress
+
+     3.84%     0.00%  030  [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --3.83%--PMPI_Barrier
+                       |          
+                        --3.83%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --3.70%--ompi_request_default_wait
+                                             |          
+                                              --3.28%--opal_progress
+
+     3.83%     0.00%  030  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --3.83%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --3.70%--ompi_request_default_wait
+                                  |          
+                                   --3.28%--opal_progress
+
+     3.82%     0.00%  029  [.] 0x3fdbd32c7f160cb7                                                                                         -      -            
+            |
+            ---0x3fdbd32c7f160cb7
+               |          
+                --3.82%--0x1600000322
+                          |          
+                           --3.82%--main
+                                     |          
+                                      --2.08%--PMPI_Barrier
+                                                |          
+                                                 --2.07%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                           |          
+                                                            --1.99%--ompi_request_default_wait
+                                                                      |          
+                                                                       --1.94%--opal_progress
+
+     3.77%     0.06%  030  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --3.71%--ompi_request_default_wait
+                       |          
+                        --3.23%--opal_progress
+
+     3.68%     0.60%  026  [.] opal_progress                                                                                              -      -            
+            |          
+             --3.07%--opal_progress
+
+     3.53%     0.07%  027  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --3.46%--mca_pml_ob1_send
+                       |          
+                        --3.30%--opal_progress
+
+     3.52%     0.06%  025  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --3.46%--ompi_request_default_wait
+                       |          
+                        --3.20%--opal_progress
+
+     3.52%     0.08%  028  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --3.44%--mca_pml_ob1_send
+                       |          
+                        --2.74%--opal_progress
+
+     3.48%     0.00%  025  [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --3.48%--PMPI_Barrier
+                       |          
+                        --3.48%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --3.33%--ompi_request_default_wait
+                                             |          
+                                              --3.08%--opal_progress
+
+     3.48%     0.00%  025  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --3.48%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --3.33%--ompi_request_default_wait
+                                  |          
+                                   --3.08%--opal_progress
+
+     3.45%     0.58%  010  [.] opal_progress                                                                                              -      -            
+            |          
+             --2.87%--opal_progress
+
+     3.44%     0.19%  028  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --3.26%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --3.25%--PMPI_Sendrecv
+                                  |          
+                                   --2.60%--mca_pml_ob1_send
+                                             |          
+                                              --2.09%--opal_progress
+
+     3.42%     0.26%  027  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --3.16%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --3.15%--PMPI_Sendrecv
+                                  |          
+                                   --2.64%--mca_pml_ob1_send
+                                             |          
+                                              --2.53%--opal_progress
+
+     3.28%     0.00%  028  [.] 0x3fdbd32c7f160cb7                                                                                         -      -            
+            |
+            ---0x3fdbd32c7f160cb7
+               0x1600000322
+               |          
+                --3.27%--main
+                          |          
+                           --1.80%--PMPI_Barrier
+                                     |          
+                                      --1.80%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --1.72%--ompi_request_default_wait
+                                                           |          
+                                                            --1.68%--opal_progress
+
+     3.25%     0.00%  028  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --3.25%--PMPI_Sendrecv
+                       |          
+                        --2.60%--mca_pml_ob1_send
+                                  |          
+                                   --2.09%--opal_progress
+
+     3.15%     0.01%  027  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --3.15%--PMPI_Sendrecv
+                       |          
+                        --2.63%--mca_pml_ob1_send
+                                  |          
+                                   --2.53%--opal_progress
+
+     3.11%     0.00%  030  [.] 0x3fdbd875d243b76b                                                                                         -      -            
+            |
+            ---0x3fdbd875d243b76b
+               0x1600000322
+               main
+               |          
+                --1.81%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          
+                           --1.70%--PMPI_Sendrecv
+                                     |          
+                                      --1.43%--mca_pml_ob1_send
+                                                |          
+                                                 --1.32%--opal_progress
+
+     2.95%     0.06%  031  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --2.89%--mca_pml_ob1_send
+                       |          
+                        --1.56%--opal_progress
+
+     2.90%     0.00%  024  [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --2.90%--PMPI_Barrier
+                       |          
+                        --2.89%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --2.71%--ompi_request_default_wait
+                                             |          
+                                              --1.36%--opal_progress
+
+     2.90%     0.00%  024  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --2.90%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --2.71%--ompi_request_default_wait
+                                  |          
+                                   --1.36%--opal_progress
+
+     2.88%     0.18%  031  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --2.70%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --2.69%--PMPI_Sendrecv
+                                  |          
+                                   --2.25%--mca_pml_ob1_send
+                                             |          
+                                              --1.22%--opal_progress
+
+     2.83%     0.00%  031  [.] 0x3fdbd875d243b76b                                                                                         -      -            
+            |
+            ---0x3fdbd875d243b76b
+               0x1600000322
+               main
+               |          
+                --1.66%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          
+                           --1.56%--PMPI_Sendrecv
+                                     |          
+                                      --1.31%--mca_pml_ob1_send
+                                                |          
+                                                 --1.22%--opal_progress
+
+     2.80%     0.06%  024  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --2.74%--ompi_request_default_wait
+                       |          
+                        --1.33%--opal_progress
+
+     2.78%     0.00%  013  [.] main                                                                                                       -      -            
+            |          
+             --2.78%--main
+                       |          
+                        --1.70%--PMPI_Barrier
+                                  |          
+                                   --1.70%--ompi_coll_base_barrier_intra_recursivedoubling
+                                             |          
+                                              --1.52%--ompi_request_default_wait
+                                                        |          
+                                                         --1.37%--opal_progress
+
+     2.76%     0.00%  013  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --2.76%--main
+                          |          
+                           --1.70%--PMPI_Barrier
+                                     |          
+                                      --1.70%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --1.52%--ompi_request_default_wait
+                                                           |          
+                                                            --1.37%--opal_progress
+
+     2.74%     0.00%  027  [.] 0x3fdb5a2dfc571406                                                                                         -      -            
+            |
+            ---0x3fdb5a2dfc571406
+               0x1600000322
+               |          
+                --2.74%--main
+                          |          
+                           --1.03%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+
+     2.74%     0.43%  015  [.] opal_progress                                                                                              -      -            
+            |          
+             --2.32%--opal_progress
+
+     2.72%     0.00%  008  [.] main                                                                                                       -      -            
+            |
+            ---main
+               |          
+                --1.11%--PMPI_Barrier
+                          |          
+                           --1.11%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |          
+                                      --1.06%--ompi_request_default_wait
+
+     2.70%     0.00%  008  [k] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               main
+               |          
+                --1.11%--PMPI_Barrier
+                          |          
+                           --1.11%--ompi_coll_base_barrier_intra_recursivedoubling
+                                     |          
+                                      --1.06%--ompi_request_default_wait
+
+     2.69%     0.00%  031  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --2.69%--PMPI_Sendrecv
+                       |          
+                        --2.25%--mca_pml_ob1_send
+                                  |          
+                                   --1.22%--opal_progress
+
+     2.62%     0.00%  024  [.] 0x3fdc3badc06b0d90                                                                                         -      -            
+            |
+            ---0x3fdc3badc06b0d90
+               |          
+                --2.62%--0x1600000322
+                          main
+                          |          
+                           --1.64%--PMPI_Barrier
+                                     |          
+                                      --1.64%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --1.51%--ompi_request_default_wait
+                                                           |          
+                                                            --1.41%--opal_progress
+
+     2.51%     0.05%  027  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --2.47%--ompi_request_default_wait
+                       |          
+                       |--1.30%--opal_progress
+                       |          
+                        --1.07%--opal_progress
+
+     2.47%     0.00%  027  [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --2.47%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --2.36%--ompi_request_default_wait
+                                     |          
+                                     |--1.24%--opal_progress
+                                     |          
+                                      --1.03%--opal_progress
+
+     2.47%     0.00%  027  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --2.46%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --2.36%--ompi_request_default_wait
+                                  |          
+                                  |--1.24%--opal_progress
+                                  |          
+                                   --1.03%--opal_progress
+
+     2.45%     0.25%  025  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --2.20%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --2.19%--PMPI_Sendrecv
+                                  |          
+                                   --1.78%--mca_pml_ob1_send
+                                             |          
+                                              --1.47%--opal_progress
+
+     2.43%     0.04%  025  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --2.39%--mca_pml_ob1_send
+                       |          
+                        --1.92%--opal_progress
+
+     2.31%     0.05%  024  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --2.26%--mca_pml_ob1_send
+
+     2.30%     0.04%  028  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --2.26%--ompi_request_default_wait
+                       |          
+                        --1.70%--opal_progress
+
+     2.24%     0.20%  024  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --2.05%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --2.04%--PMPI_Sendrecv
+                                  |          
+                                   --1.72%--mca_pml_ob1_send
+                                             |          
+                                              --1.07%--opal_progress
+
+     2.23%     0.00%  028  [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --2.23%--PMPI_Barrier
+                       |          
+                        --2.23%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --2.13%--ompi_request_default_wait
+                                             |          
+                                              --1.68%--opal_progress
+
+     2.23%     0.00%  028  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --2.23%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --2.13%--ompi_request_default_wait
+                                  |          
+                                   --1.68%--opal_progress
+
+     2.22%     0.00%  012  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --2.22%--main
+                          |          
+                           --1.03%--PMPI_Barrier
+                                     |          
+                                      --1.02%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     2.19%     0.00%  025  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --2.19%--PMPI_Sendrecv
+                       |          
+                        --1.77%--mca_pml_ob1_send
+                                  |          
+                                   --1.47%--opal_progress
+
+     2.16%     0.05%  010  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --2.11%--mca_pml_ob1_send
+                       |          
+                        --1.54%--opal_progress
+
+     2.14%     0.00%  015  [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --2.14%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --1.98%--ompi_request_default_wait
+
+     2.14%     0.00%  015  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --2.13%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --1.98%--ompi_request_default_wait
+
+     2.12%     0.00%  025  [.] main                                                                                                       -      -            
+            |          
+             --2.12%--main
+
+     2.10%     0.00%  013  [.] 0x3fdc3badc06b0d90                                                                                         -      -            
+            |
+            ---0x3fdc3badc06b0d90
+               |          
+                --2.10%--0x1600000322
+                          |          
+                           --2.10%--main
+                                     |          
+                                      --1.35%--PMPI_Barrier
+                                                |          
+                                                 --1.35%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                           |          
+                                                            --1.17%--ompi_request_default_wait
+                                                                      |          
+                                                                       --1.09%--opal_progress
+
+     2.08%     0.21%  030  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --1.87%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --1.86%--PMPI_Sendrecv
+                                  |          
+                                   --1.52%--mca_pml_ob1_send
+                                             |          
+                                              --1.40%--opal_progress
+
+     2.04%     0.00%  024  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --2.04%--PMPI_Sendrecv
+                       |          
+                        --1.72%--mca_pml_ob1_send
+                                  |          
+                                   --1.07%--opal_progress
+
+     2.02%     0.04%  030  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --1.99%--mca_pml_ob1_send
+                       |          
+                        --1.85%--opal_progress
+
+     2.02%     0.12%  010  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --1.90%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --1.90%--PMPI_Sendrecv
+                                  |          
+                                   --1.57%--mca_pml_ob1_send
+
+     2.01%     0.04%  015  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.97%--ompi_request_default_wait
+
+     1.96%     0.00%  009  [.] main                                                                                                       -      -            
+            |
+            ---main
+
+     1.96%     0.00%  008  [k] 0x3fdb5a2dfc571406                                                                                         -      -            
+            |
+            ---0x3fdb5a2dfc571406
+               0x1600000322
+               main
+
+     1.92%     0.00%  012  [.] main                                                                                                       -      -            
+            |          
+             --1.92%--main
+
+     1.92%     0.31%  008  [.] opal_progress                                                                                              -      -            
+            |          
+             --1.61%--opal_progress
+
+     1.90%     0.00%  009  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               |          
+                --1.90%--main
+
+     1.90%     0.00%  010  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --1.90%--PMPI_Sendrecv
+                       |          
+                        --1.57%--mca_pml_ob1_send
+
+     1.89%     0.03%  026  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --1.85%--mca_pml_ob1_send
+                       |          
+                        --1.17%--opal_progress
+
+     1.88%     0.15%  026  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --1.73%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --1.72%--PMPI_Sendrecv
+                                  |          
+                                   --1.44%--mca_pml_ob1_send
+
+     1.86%     0.00%  030  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --1.86%--PMPI_Sendrecv
+                       |          
+                        --1.59%--mca_pml_ob1_send
+                                  |          
+                                   --1.47%--opal_progress
+
+     1.83%     0.00%  010  [.] 0x3fdb5a2dfc571406                                                                                         -      -            
+            |
+            ---0x3fdb5a2dfc571406
+               |          
+                --1.83%--0x1600000322
+                          main
+
+     1.81%     0.00%  026  [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --1.81%--PMPI_Barrier
+                       |          
+                        --1.80%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --1.69%--ompi_request_default_wait
+
+     1.81%     0.00%  026  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --1.80%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --1.69%--ompi_request_default_wait
+
+     1.80%     0.35%  013  [.] opal_progress                                                                                              -      -            
+            |          
+             --1.45%--opal_progress
+
+     1.77%     0.03%  026  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.74%--ompi_request_default_wait
+                       |          
+                        --1.01%--opal_progress
+
+     1.72%     0.00%  026  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --1.72%--PMPI_Sendrecv
+                       |          
+                        --1.44%--mca_pml_ob1_send
+
+     1.70%     0.00%  013  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --1.70%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --1.52%--ompi_request_default_wait
+                                  |          
+                                   --1.37%--opal_progress
+
+     1.70%     0.00%  013  [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --1.70%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --1.52%--ompi_request_default_wait
+                                     |          
+                                      --1.37%--opal_progress
+
+     1.69%     0.00%  024  [.] 0x3fdb5a2dfc571406                                                                                         -      -            
+            |
+            ---0x3fdb5a2dfc571406
+               0x1600000322
+               main
+
+     1.66%     0.00%  011  [.] main                                                                                                       -      -            
+            |          
+             --1.66%--main
+
+     1.64%     0.00%  011  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               main
+
+     1.61%     0.31%  012  [.] opal_progress                                                                                              -      -            
+            |          
+             --1.30%--opal_progress
+
+     1.59%     0.00%  015  [.] 0x3fdc71c71c71c71c                                                                                         -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               0x1600000322
+               |          
+                --1.59%--main
+                          |          
+                           --1.05%--PMPI_Barrier
+                                     |          
+                                      --1.05%--ompi_coll_base_barrier_intra_recursivedoubling
+                                                |          
+                                                 --1.01%--ompi_request_default_wait
+
+     1.53%     0.04%  013  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.49%--ompi_request_default_wait
+                       |          
+                        --1.34%--opal_progress
+
+     1.46%     0.23%  009  [.] opal_progress                                                                                              -      -            
+            |          
+             --1.22%--opal_progress
+
+     1.37%     0.02%  031  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.34%--ompi_request_default_wait
+                       |          
+                        --1.30%--opal_progress
+
+     1.32%     0.00%  031  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --1.31%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --1.24%--ompi_request_default_wait
+                                  |          
+                                   --1.20%--opal_progress
+
+     1.31%     0.00%  031  [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --1.31%--PMPI_Barrier
+                       ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --1.24%--ompi_request_default_wait
+                                  |          
+                                   --1.20%--opal_progress
+
+     1.31%     0.00%  012  [.] 0x3fdbd32c7f160cb7                                                                                         -      -            
+            |
+            ---0x3fdbd32c7f160cb7
+               0x1600000322
+               |          
+                --1.31%--main
+
+     1.30%     1.29%  030  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+     1.30%     0.00%  026  [.] 0x3fdb7e1b4a70d2c7                                                                                         -      -            
+            |
+            ---0x3fdb7e1b4a70d2c7
+               0x1600000322
+               main
+
+     1.28%     0.00%  010  [.] 0x3fdc403f932a6460                                                                                         -      -            
+            |
+            ---0x3fdc403f932a6460
+               0x1600000322
+               main
+
+     1.27%     0.00%  014  [.] main                                                                                                       -      -            
+            |
+            ---main
+
+     1.26%     0.02%  010  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.24%--ompi_request_default_wait
+                       |          
+                        --1.08%--opal_progress
+
+     1.25%     0.19%  011  [.] opal_progress                                                                                              -      -            
+            |          
+             --1.07%--opal_progress
+
+     1.23%     1.22%  027  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+     1.23%     0.00%  014  [.] 0x0000001600000322                                                                                         -      -            
+            |
+            ---0x1600000322
+               main
+
+     1.23%     1.22%  025  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --1.11%--0x3fdb7aca98728ec7
+                       0x1600000322
+                       main
+                       |          
+                        --1.11%--collision(Mesh*, Mesh const*)
+
+     1.22%     0.00%  010  [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --1.22%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --1.16%--ompi_request_default_wait
+                                     |          
+                                      --1.02%--opal_progress
+
+     1.22%     0.00%  010  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --1.22%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --1.16%--ompi_request_default_wait
+                                  |          
+                                   --1.02%--opal_progress
+
+     1.21%     1.20%  028  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+     1.17%     0.00%  014  [.] 0x3fdbd875d243b76b                                                                                         -      -            
+            |
+            ---0x3fdbd875d243b76b
+               0x1600000322
+               main
+
+     1.14%     1.13%  024  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+     1.13%     0.26%  029  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+     1.12%     0.00%  031  [.] 0x3fdb7e1b4a70d2c7                                                                                         -      -            
+            |
+            ---0x3fdb7e1b4a70d2c7
+               0x1600000322
+               |          
+                --1.12%--main
+
+     1.12%     0.00%  015  [.] 0x3fdc3badc06b0d90                                                                                         -      -            
+            |
+            ---0x3fdc3badc06b0d90
+               0x1600000322
+               main
+
+     1.11%     0.00%  008  [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --1.11%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |          
+                           --1.06%--ompi_request_default_wait
+
+     1.11%     0.02%  008  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.09%--ompi_request_default_wait
+
+     1.11%     0.00%  008  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --1.11%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --1.06%--ompi_request_default_wait
+
+     1.10%     1.09%  029  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+     1.08%     0.00%  024  [.] 0x3fdbd875d243b76b                                                                                         -      -            
+            |
+            ---0x3fdbd875d243b76b
+               |          
+                --1.08%--0x1600000322
+                          main
+
+     1.06%     1.06%  030  [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+     1.03%     0.00%  012  [.] PMPI_Barrier                                                                                               -      -            
+            |
+            ---PMPI_Barrier
+               |          
+                --1.02%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     1.02%     0.00%  012  [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --1.02%--ompi_coll_base_barrier_intra_recursivedoubling
+
+     1.02%     0.02%  012  [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --1.00%--ompi_request_default_wait
+
+     1.01%     0.00%  024  [.] 0x3fdc403f932a6460                                                                                         -      -            
+            |
+            ---0x3fdc403f932a6460
+               0x1600000322
+               |          
+                --1.01%--main
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

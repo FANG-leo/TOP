@@ -1,0 +1,303 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 47K of event 'cycles:P'
+# Event count (approx.): 55082503863
+#
+# Children      Self  Command           Pid:Command       Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............  ....................  ............................................................................................  ....................
+#
+    76.94%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] main                                                                                      -      -            
+            |          
+             --76.93%--main
+                       |          
+                       |--43.95%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--29.00%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --3.00%--__memmove_avx512_unaligned_erms
+
+    76.71%     0.00%  top.lbm-exe    293442:top.lbm-exe   [k] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+                --76.67%--main
+                          |          
+                          |--43.95%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--29.00%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --3.00%--__memmove_avx512_unaligned_erms
+
+    76.37%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               |          
+                --76.37%--0xa200000322
+                          |          
+                           --76.34%--main
+                                     |          
+                                     |--43.95%--collision(Mesh*, Mesh const*)
+                                     |          
+                                     |--29.00%--propagation(Mesh*, Mesh const*)
+                                     |          
+                                      --3.00%--__memmove_avx512_unaligned_erms
+
+    43.96%    43.75%  top.lbm-exe    293442:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --43.75%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --43.75%--main
+                                  |          
+                                   --43.74%--collision(Mesh*, Mesh const*)
+
+    29.01%    28.87%  top.lbm-exe    293442:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --28.87%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --28.85%--propagation(Mesh*, Mesh const*)
+
+    15.81%    15.52%  top.lbm-exe    293442:top.lbm-exe   [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --1.63%--0x3fbc71c71c71c71c
+                       |          
+                        --1.63%--0x72f1448ee850
+                                  0x7ffc7bddf1d8
+                                  special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     4.43%     1.69%  top.lbm-exe    293442:top.lbm-exe   [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --2.74%--save_frame(_IO_FILE*, Mesh const*)
+                       |          
+                        --1.60%--_IO_fwrite
+                                  |          
+                                   --1.59%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     3.03%     3.00%  top.lbm-exe    293442:top.lbm-exe   [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --2.99%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --2.99%--__memmove_avx512_unaligned_erms
+
+     2.43%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.42%--0xffffffffa5c0012b
+                       |          
+                        --2.39%--0xffffffffa7194660
+                                  |          
+                                   --1.79%--0xffffffffa5e89d89
+                                             |          
+                                              --1.79%--0xffffffffa63e8529
+                                                        |          
+                                                         --1.53%--0xffffffffa63e8481
+                                                                   |          
+                                                                    --1.31%--0xffffffffa63e7eeb
+                                                                              0xffffffffa64f1aef
+                                                                              |          
+                                                                               --1.15%--0xffffffffa64f14dd
+
+     2.40%     0.01%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.39%--0xffffffffa7194660
+                       |          
+                        --1.79%--0xffffffffa5e89d89
+                                  |          
+                                   --1.79%--0xffffffffa63e8529
+                                             |          
+                                              --1.53%--0xffffffffa63e8481
+                                                        |          
+                                                         --1.31%--0xffffffffa63e7eeb
+                                                                   0xffffffffa64f1aef
+                                                                   |          
+                                                                    --1.15%--0xffffffffa64f14dd
+
+     1.86%     0.02%  top.lbm-exe    293442:top.lbm-exe   [.] __GI___libc_write                                                                         -      -            
+            |          
+             --1.84%--__GI___libc_write
+                       |          
+                        --1.82%--0xffffffffa5c0012b
+                                  |          
+                                   --1.79%--0xffffffffa7194660
+                                             |          
+                                              --1.79%--0xffffffffa5e89d89
+                                                        |          
+                                                         --1.79%--0xffffffffa63e8529
+                                                                   |          
+                                                                    --1.53%--0xffffffffa63e8481
+                                                                              |          
+                                                                               --1.31%--0xffffffffa63e7eeb
+                                                                                         0xffffffffa64f1aef
+                                                                                         |          
+                                                                                          --1.15%--0xffffffffa64f14dd
+
+     1.85%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] _IO_file_xsputn@@GLIBC_2.2.5                                                              -      -            
+            |          
+             --1.84%--_IO_file_xsputn@@GLIBC_2.2.5
+                       |          
+                        --1.26%--_IO_file_write@@GLIBC_2.2.5
+                                  __GI___libc_write
+                                  |          
+                                   --1.24%--0xffffffffa5c0012b
+                                             |          
+                                              --1.23%--0xffffffffa7194660
+                                                        |          
+                                                         --1.22%--0xffffffffa5e89d89
+                                                                   |          
+                                                                    --1.22%--0xffffffffa63e8529
+
+     1.85%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] _IO_file_write@@GLIBC_2.2.5                                                               -      -            
+            |          
+             --1.84%--_IO_file_write@@GLIBC_2.2.5
+                       |          
+                        --1.84%--__GI___libc_write
+                                  |          
+                                   --1.82%--0xffffffffa5c0012b
+                                             |          
+                                              --1.79%--0xffffffffa7194660
+                                                        |          
+                                                         --1.79%--0xffffffffa5e89d89
+                                                                   |          
+                                                                    --1.79%--0xffffffffa63e8529
+                                                                              |          
+                                                                               --1.53%--0xffffffffa63e8481
+                                                                                         |          
+                                                                                          --1.31%--0xffffffffa63e7eeb
+                                                                                                    0xffffffffa64f1aef
+                                                                                                    |          
+                                                                                                     --1.15%--0xffffffffa64f14dd
+
+     1.79%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa5e89d89                                                                        -      -            
+            |          
+             --1.79%--0xffffffffa5e89d89
+                       |          
+                        --1.79%--0xffffffffa63e8529
+                                  |          
+                                   --1.53%--0xffffffffa63e8481
+                                             |          
+                                              --1.31%--0xffffffffa63e7eeb
+                                                        0xffffffffa64f1aef
+                                                        |          
+                                                         --1.15%--0xffffffffa64f14dd
+
+     1.79%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa63e8529                                                                        -      -            
+            |
+            ---0xffffffffa63e8529
+               |          
+                --1.53%--0xffffffffa63e8481
+                          |          
+                           --1.31%--0xffffffffa63e7eeb
+                                     0xffffffffa64f1aef
+                                     |          
+                                      --1.15%--0xffffffffa64f14dd
+
+     1.66%     0.00%  top.lbm-exe    293442:top.lbm-exe   [k] 0x3fbc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fbc71c71c71c71c
+               |          
+                --1.64%--0x72f1448ee850
+                          0x7ffc7bddf1d8
+                          special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.64%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0x000072f1448ee850                                                                        -      -            
+            |
+            ---0x72f1448ee850
+               0x7ffc7bddf1d8
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.64%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0x00007ffc7bddf1d8                                                                        -      -            
+            |
+            ---0x7ffc7bddf1d8
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.63%     0.00%  mpirun         293429:mpirun        [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --1.63%--0xffffffffa5c0012b
+                       |          
+                        --1.55%--0xffffffffa7194660
+
+     1.60%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] _IO_fwrite                                                                                -      -            
+            |          
+             --1.59%--_IO_fwrite
+                       |          
+                        --1.59%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.55%     0.00%  mpirun         293429:mpirun        [.] 0xffffffffa7194660                                                                        -      -            
+            |
+            ---0xffffffffa7194660
+
+     1.53%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa63e8481                                                                        -      -            
+            |
+            ---0xffffffffa63e8481
+               |          
+                --1.31%--0xffffffffa63e7eeb
+                          0xffffffffa64f1aef
+                          |          
+                           --1.15%--0xffffffffa64f14dd
+
+     1.42%     0.00%  mpirun         293429:mpirun        [.] 0x0000570231a8c415                                                                        -      -            
+            |
+            ---0x570231a8c415
+               __libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+               |          
+                --1.05%--0x570231a8c2f4
+                          |          
+                           --1.04%--event_base_loop
+
+     1.42%     0.00%  mpirun         293429:mpirun        [.] __libc_start_main@@GLIBC_2.34                                                             -      -            
+            |
+            ---__libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+               |          
+                --1.05%--0x570231a8c2f4
+                          |          
+                           --1.04%--event_base_loop
+
+     1.42%     0.00%  mpirun         293429:mpirun        [.] __libc_start_call_main                                                                    -      -            
+            |
+            ---__libc_start_call_main
+               |          
+                --1.05%--0x570231a8c2f4
+                          |          
+                           --1.04%--event_base_loop
+
+     1.31%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa63e7eeb                                                                        -      -            
+            |
+            ---0xffffffffa63e7eeb
+               0xffffffffa64f1aef
+               |          
+                --1.15%--0xffffffffa64f14dd
+
+     1.31%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa64f1aef                                                                        -      -            
+            |
+            ---0xffffffffa64f1aef
+               |          
+                --1.15%--0xffffffffa64f14dd
+
+     1.15%     0.00%  top.lbm-exe    293442:top.lbm-exe   [.] 0xffffffffa64f14dd                                                                        -      -            
+            |
+            ---0xffffffffa64f14dd
+
+     1.05%     0.02%  mpirun         293429:mpirun        [.] event_base_loop                                                                           -      -            
+            |          
+             --1.04%--event_base_loop
+
+     1.05%     0.00%  mpirun         293429:mpirun        [.] 0x0000570231a8c2f4                                                                        -      -            
+            |
+            ---0x570231a8c2f4
+               |          
+                --1.04%--event_base_loop
+
+     1.02%     0.18%  top.lbm-exe    293442:top.lbm-exe   [.] compute_bounce_back(double*)                                                              -      -            
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
