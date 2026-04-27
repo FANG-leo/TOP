@@ -1,0 +1,323 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 50K of event 'cycles:P'
+# Event count (approx.): 57960022386
+#
+# Children      Self  CPU  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ...  ............................................................................................  ....................
+#
+    41.63%     0.01%  000  [.] GOMP_parallel                                                                             -      -            
+            |          
+             --41.63%--GOMP_parallel
+                       |          
+                       |--24.12%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--15.20%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --2.25%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    31.92%     0.00%  016  [.] GOMP_parallel                                                                             -      -            
+            |          
+             --31.92%--GOMP_parallel
+                       |          
+                       |--18.38%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--11.77%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --1.73%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    24.18%     0.00%  000  [.] 0x3f9c71c71c71c71c                                                                        -      -            
+            |
+            ---0x3f9c71c71c71c71c
+               collision(Mesh*, Mesh const*)
+               |          
+                --24.13%--GOMP_parallel
+                          |          
+                           --24.12%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    24.18%     0.00%  000  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |
+            ---collision(Mesh*, Mesh const*)
+               |          
+                --24.13%--GOMP_parallel
+                          |          
+                           --24.12%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    24.13%    24.01%  000  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --24.01%--0x3f9c71c71c71c71c
+                       collision(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    19.98%     0.00%  000  [k] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+               |--15.27%--propagation(Mesh*, Mesh const*)
+               |          |          
+               |           --15.27%--propagation_interior_core(Mesh*, Mesh const*)
+               |                     |          
+               |                      --15.22%--GOMP_parallel
+               |                                |          
+               |                                 --15.20%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+               |--2.78%--main
+               |          |          
+               |           --2.31%--propagation_finish_boundary(Mesh*, Mesh const*)
+               |                     |          
+               |                      --2.28%--GOMP_parallel
+               |                                |          
+               |                                 --2.25%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+                --1.89%--__memmove_avx512_unaligned_erms
+
+    19.66%     0.00%  000  [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               0xa200000322
+               |          
+               |--15.27%--propagation(Mesh*, Mesh const*)
+               |          |          
+               |           --15.27%--propagation_interior_core(Mesh*, Mesh const*)
+               |                     |          
+               |                      --15.22%--GOMP_parallel
+               |                                |          
+               |                                 --15.20%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+               |--2.46%--main
+               |          |          
+               |           --2.31%--propagation_finish_boundary(Mesh*, Mesh const*)
+               |                     |          
+               |                      --2.28%--GOMP_parallel
+               |                                |          
+               |                                 --2.25%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+                --1.89%--__memmove_avx512_unaligned_erms
+
+    18.42%     0.00%  016  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --18.42%--collision(Mesh*, Mesh const*)
+                       |          
+                        --18.39%--GOMP_parallel
+                                  |          
+                                   --18.38%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    18.42%     0.00%  016  [.] 0x3f9c71c71c71c71c                                                                        -      -            
+            |
+            ---0x3f9c71c71c71c71c
+               collision(Mesh*, Mesh const*)
+               |          
+                --18.39%--GOMP_parallel
+                          |          
+                           --18.38%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    18.39%    18.27%  016  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --18.27%--0x3f9c71c71c71c71c
+                       collision(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --18.27%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    15.28%     0.00%  000  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --15.27%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --15.27%--propagation_interior_core(Mesh*, Mesh const*)
+                                  |          
+                                   --15.22%--GOMP_parallel
+                                             |          
+                                              --15.20%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    15.27%     0.00%  000  [.] propagation_interior_core(Mesh*, Mesh const*)                                             -      -            
+            |          
+             --15.27%--propagation_interior_core(Mesh*, Mesh const*)
+                       |          
+                        --15.22%--GOMP_parallel
+                                  |          
+                                   --15.20%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    15.20%    15.13%  000  [.] propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]                          -      -            
+            |          
+             --15.13%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       propagation(Mesh*, Mesh const*)
+                       propagation_interior_core(Mesh*, Mesh const*)
+                       |          
+                        --15.12%--GOMP_parallel
+                                  |          
+                                   --15.12%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    15.07%     0.00%  016  [k] 0x3fdc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               |          
+                --15.07%--0xa200000322
+                          |          
+                          |--11.82%--propagation(Mesh*, Mesh const*)
+                          |          |          
+                          |           --11.81%--propagation_interior_core(Mesh*, Mesh const*)
+                          |                     |          
+                          |                      --11.79%--GOMP_parallel
+                          |                                |          
+                          |                                 --11.77%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                          |--1.91%--main
+                          |          |          
+                          |           --1.76%--propagation_finish_boundary(Mesh*, Mesh const*)
+                          |                     |          
+                          |                      --1.74%--GOMP_parallel
+                          |                                |          
+                          |                                 --1.73%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --1.34%--__memmove_avx512_unaligned_erms
+
+    15.07%     0.00%  016  [k] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+               |--11.82%--propagation(Mesh*, Mesh const*)
+               |          |          
+               |           --11.81%--propagation_interior_core(Mesh*, Mesh const*)
+               |                     |          
+               |                      --11.79%--GOMP_parallel
+               |                                |          
+               |                                 --11.77%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+               |--1.91%--main
+               |          |          
+               |           --1.76%--propagation_finish_boundary(Mesh*, Mesh const*)
+               |                     |          
+               |                      --1.74%--GOMP_parallel
+               |                                |          
+               |                                 --1.73%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+                --1.34%--__memmove_avx512_unaligned_erms
+
+    11.82%     0.00%  016  [.] propagation_interior_core(Mesh*, Mesh const*)                                             -      -            
+            |          
+             --11.81%--propagation_interior_core(Mesh*, Mesh const*)
+                       |          
+                        --11.79%--GOMP_parallel
+                                  |          
+                                   --11.77%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    11.82%     0.00%  016  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |
+            ---propagation(Mesh*, Mesh const*)
+               |          
+                --11.81%--propagation_interior_core(Mesh*, Mesh const*)
+                          |          
+                           --11.79%--GOMP_parallel
+                                     |          
+                                      --11.77%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    11.78%    11.73%  016  [.] propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]                          -      -            
+            |          
+             --11.73%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       propagation(Mesh*, Mesh const*)
+                       propagation_interior_core(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --11.72%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     8.54%     8.40%  000  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+     6.46%     6.35%  016  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+     2.99%     0.01%  000  [.] main                                                                                      -      -            
+            |          
+             --2.98%--main
+                       |          
+                        --2.31%--propagation_finish_boundary(Mesh*, Mesh const*)
+                                  |          
+                                   --2.28%--GOMP_parallel
+                                             |          
+                                              --2.25%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     2.54%     0.90%  000  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --1.63%--save_frame(_IO_FILE*, Mesh const*)
+
+     2.31%     0.01%  000  [.] propagation_finish_boundary(Mesh*, Mesh const*)                                           -      -            
+            |          
+             --2.31%--propagation_finish_boundary(Mesh*, Mesh const*)
+                       |          
+                        --2.28%--GOMP_parallel
+                                  |          
+                                   --2.25%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     2.27%     2.13%  000  [.] propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]                        -      -            
+            |          
+             --2.13%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       propagation_finish_boundary(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --2.12%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     1.98%     0.71%  016  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --1.27%--save_frame(_IO_FILE*, Mesh const*)
+
+     1.97%     0.01%  016  [.] main                                                                                      -      -            
+            |          
+             --1.96%--main
+                       |          
+                        --1.76%--propagation_finish_boundary(Mesh*, Mesh const*)
+                                  |          
+                                   --1.74%--GOMP_parallel
+                                             |          
+                                              --1.73%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     1.91%     1.89%  000  [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --1.88%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --1.88%--__memmove_avx512_unaligned_erms
+
+     1.76%     0.00%  016  [.] propagation_finish_boundary(Mesh*, Mesh const*)                                           -      -            
+            |          
+             --1.76%--propagation_finish_boundary(Mesh*, Mesh const*)
+                       |          
+                        --1.74%--GOMP_parallel
+                                  |          
+                                   --1.73%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     1.74%     1.68%  016  [.] propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]                        -      -            
+            |          
+             --1.68%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       propagation_finish_boundary(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --1.67%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     1.61%     0.01%  000  [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --1.61%--0xffffffffa5c0012b
+                       |          
+                        --1.56%--0xffffffffa7194660
+
+     1.56%     0.00%  000  [.] 0xffffffffa7194660                                                                        -      -            
+            |
+            ---0xffffffffa7194660
+
+     1.35%     1.33%  016  [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --1.33%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --1.33%--__memmove_avx512_unaligned_erms
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

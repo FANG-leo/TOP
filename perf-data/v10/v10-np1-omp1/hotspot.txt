@@ -1,0 +1,337 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 50K of event 'cycles:P'
+# Event count (approx.): 57960022386
+#
+# Children      Self  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............................................................................................  ....................
+#
+    73.55%     0.01%  [.] GOMP_parallel                                                                             -      -            
+            |          
+             --73.54%--GOMP_parallel
+                       |          
+                       |--42.50%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--26.97%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --3.98%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    42.60%     0.00%  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --42.59%--collision(Mesh*, Mesh const*)
+                       |          
+                        --42.52%--GOMP_parallel
+                                  |          
+                                   --42.50%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    42.59%     0.00%  [.] 0x3f9c71c71c71c71c                                                                        -      -            
+            |
+            ---collision(Mesh*, Mesh const*)
+               |          
+                --42.52%--GOMP_parallel
+                          |          
+                           --42.50%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    42.52%    42.29%  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --42.29%--0x3f9c71c71c71c71c
+                       collision(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --42.28%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    35.05%     0.00%  [k] 0x000000a200000322                                                                        -      -            
+            |          
+            |--27.09%--propagation(Mesh*, Mesh const*)
+            |          |          
+            |           --27.08%--propagation_interior_core(Mesh*, Mesh const*)
+            |                     |          
+            |                      --27.01%--GOMP_parallel
+            |                                |          
+            |                                 --26.97%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+            |--4.69%--main
+            |          |          
+            |           --4.07%--propagation_finish_boundary(Mesh*, Mesh const*)
+            |                     |          
+            |                      --4.02%--GOMP_parallel
+            |                                |          
+            |                                 --3.98%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --3.23%--__memmove_avx512_unaligned_erms
+
+    34.73%     0.00%  [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |          
+             --34.73%--0xa200000322
+                       |          
+                       |--27.09%--propagation(Mesh*, Mesh const*)
+                       |          |          
+                       |           --27.08%--propagation_interior_core(Mesh*, Mesh const*)
+                       |                     |          
+                       |                      --27.01%--GOMP_parallel
+                       |                                |          
+                       |                                 --26.97%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--4.37%--main
+                       |          |          
+                       |           --4.07%--propagation_finish_boundary(Mesh*, Mesh const*)
+                       |                     |          
+                       |                      --4.02%--GOMP_parallel
+                       |                                |          
+                       |                                 --3.98%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --3.23%--__memmove_avx512_unaligned_erms
+
+    27.09%     0.00%  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --27.09%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --27.08%--propagation_interior_core(Mesh*, Mesh const*)
+                                  |          
+                                   --27.01%--GOMP_parallel
+                                             |          
+                                              --26.97%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    27.09%     0.00%  [.] propagation_interior_core(Mesh*, Mesh const*)                                             -      -            
+            |          
+             --27.08%--propagation_interior_core(Mesh*, Mesh const*)
+                       |          
+                        --27.01%--GOMP_parallel
+                                  |          
+                                   --26.97%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    26.98%    26.86%  [.] propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]                          -      -            
+            |          
+             --26.86%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       propagation(Mesh*, Mesh const*)
+                       propagation_interior_core(Mesh*, Mesh const*)
+                       |          
+                        --26.85%--GOMP_parallel
+                                  |          
+                                   --26.84%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    15.00%    14.75%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --1.61%--0xa1
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     4.52%     1.61%  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --2.90%--save_frame(_IO_FILE*, Mesh const*)
+                       |          
+                        --1.51%--_IO_fwrite
+                                  |          
+                                   --1.50%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     4.29%     0.01%  [k] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --4.29%--0xffffffffa5c0012b
+                       |          
+                        --4.16%--0xffffffffa7194660
+                                  |          
+                                   --1.72%--0xffffffffa5e89d89
+                                             |          
+                                              --1.72%--0xffffffffa63e8529
+                                                        |          
+                                                         --1.47%--0xffffffffa63e8481
+                                                                   |          
+                                                                    --1.28%--0xffffffffa63e7eeb
+                                                                              0xffffffffa64f1aef
+                                                                              |          
+                                                                               --1.15%--0xffffffffa64f14dd
+
+     4.16%     0.01%  [k] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --4.16%--0xffffffffa7194660
+                       |          
+                        --1.72%--0xffffffffa5e89d89
+                                  |          
+                                   --1.72%--0xffffffffa63e8529
+                                             |          
+                                              --1.47%--0xffffffffa63e8481
+                                                        |          
+                                                         --1.28%--0xffffffffa63e7eeb
+                                                                   0xffffffffa64f1aef
+                                                                   |          
+                                                                    --1.15%--0xffffffffa64f14dd
+
+     4.14%     0.02%  [.] main                                                                                      -      -            
+            |          
+             --4.13%--main
+                       |          
+                        --3.82%--propagation_finish_boundary(Mesh*, Mesh const*)
+                                  |          
+                                   --3.78%--GOMP_parallel
+                                             |          
+                                              --3.74%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.08%     0.01%  [.] propagation_finish_boundary(Mesh*, Mesh const*)                                           -      -            
+            |          
+             --4.07%--propagation_finish_boundary(Mesh*, Mesh const*)
+                       |          
+                        --4.02%--GOMP_parallel
+                                  |          
+                                   --3.98%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.01%     3.81%  [.] propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]                        -      -            
+            |          
+             --3.81%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       propagation_finish_boundary(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --3.79%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.30%     3.24%  [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --3.22%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --3.21%--__memmove_avx512_unaligned_erms
+
+     1.76%     0.00%  [.] __GI___libc_write                                                                         -      -            
+            |          
+             --1.76%--__GI___libc_write
+                       |          
+                        --1.74%--0xffffffffa5c0012b
+                                  |          
+                                   --1.73%--0xffffffffa7194660
+                                             |          
+                                              --1.72%--0xffffffffa5e89d89
+                                                        |          
+                                                         --1.72%--0xffffffffa63e8529
+                                                                   |          
+                                                                    --1.47%--0xffffffffa63e8481
+                                                                              |          
+                                                                               --1.28%--0xffffffffa63e7eeb
+                                                                                         0xffffffffa64f1aef
+                                                                                         |          
+                                                                                          --1.15%--0xffffffffa64f14dd
+
+     1.73%     0.01%  [.] _IO_file_xsputn@@GLIBC_2.2.5                                                              -      -            
+            |          
+             --1.72%--_IO_file_xsputn@@GLIBC_2.2.5
+                       |          
+                        --1.21%--_IO_file_write@@GLIBC_2.2.5
+                                  |          
+                                   --1.20%--__GI___libc_write
+                                             |          
+                                              --1.20%--0xffffffffa5c0012b
+                                                        |          
+                                                         --1.19%--0xffffffffa7194660
+                                                                   |          
+                                                                    --1.19%--0xffffffffa5e89d89
+                                                                              0xffffffffa63e8529
+
+     1.73%     0.00%  [.] _IO_file_write@@GLIBC_2.2.5                                                               -      -            
+            |          
+             --1.72%--_IO_file_write@@GLIBC_2.2.5
+                       |          
+                        --1.71%--__GI___libc_write
+                                  |          
+                                   --1.70%--0xffffffffa5c0012b
+                                             |          
+                                              --1.69%--0xffffffffa7194660
+                                                        |          
+                                                         --1.69%--0xffffffffa5e89d89
+                                                                   0xffffffffa63e8529
+                                                                   |          
+                                                                    --1.45%--0xffffffffa63e8481
+                                                                              |          
+                                                                               --1.28%--0xffffffffa63e7eeb
+                                                                                         0xffffffffa64f1aef
+                                                                                         |          
+                                                                                          --1.15%--0xffffffffa64f14dd
+
+     1.72%     0.00%  [.] 0xffffffffa5e89d89                                                                        -      -            
+            |          
+             --1.72%--0xffffffffa63e8529
+                       |          
+                        --1.47%--0xffffffffa63e8481
+                                  |          
+                                   --1.28%--0xffffffffa63e7eeb
+                                             0xffffffffa64f1aef
+                                             |          
+                                              --1.15%--0xffffffffa64f14dd
+
+     1.72%     0.00%  [.] 0xffffffffa63e8529                                                                        -      -            
+            |          
+             --1.47%--0xffffffffa63e8481
+                       |          
+                        --1.28%--0xffffffffa63e7eeb
+                                  0xffffffffa64f1aef
+                                  |          
+                                   --1.15%--0xffffffffa64f14dd
+
+     1.62%     0.00%  [.] __libc_start_main@@GLIBC_2.34                                                             -      -            
+            |          
+             --1.39%--__libc_start_call_main
+                       |          
+                        --1.02%--0x5707b3a8a2f4
+                                  event_base_loop
+
+     1.62%     0.00%  [.] 0x00000000000000a1                                                                        -      -            
+            |
+            ---special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.51%     0.00%  [.] _IO_fwrite                                                                                -      -            
+            |          
+             --1.51%--_IO_fwrite
+                       |          
+                        --1.50%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.47%     0.00%  [.] 0xffffffffa63e8481                                                                        -      -            
+            |          
+             --1.28%--0xffffffffa63e7eeb
+                       0xffffffffa64f1aef
+                       |          
+                        --1.15%--0xffffffffa64f14dd
+
+     1.39%     0.00%  [.] __libc_start_call_main                                                                    -      -            
+            |          
+             --1.02%--0x5707b3a8a2f4
+                       event_base_loop
+
+     1.36%     0.00%  [.] 0x00005707b3a8a415                                                                        -      -            
+            |
+            ---__libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+               |          
+                --1.02%--0x5707b3a8a2f4
+                          event_base_loop
+
+     1.28%     0.00%  [.] 0xffffffffa63e7eeb                                                                        -      -            
+            |          
+             --1.28%--0xffffffffa63e7eeb
+                       0xffffffffa64f1aef
+                       |          
+                        --1.15%--0xffffffffa64f14dd
+
+     1.28%     0.00%  [.] 0xffffffffa64f1aef                                                                        -      -            
+            |          
+             --1.28%--0xffffffffa64f1aef
+                       |          
+                        --1.15%--0xffffffffa64f14dd
+
+     1.15%     0.00%  [.] 0xffffffffa64f14dd                                                                        -      -            
+            |          
+             --1.15%--0xffffffffa64f14dd
+
+     1.05%     0.01%  [.] event_base_loop                                                                           -      -            
+            |          
+             --1.04%--event_base_loop
+
+     1.02%     0.00%  [.] 0x00005707b3a8a2f4                                                                        -      -            
+            |
+            ---event_base_loop
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

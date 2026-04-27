@@ -1,0 +1,1336 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 133K of event 'cycles:P'
+# Event count (approx.): 125730419431
+#
+# Children      Self  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............................................................................................  ....................
+#
+    63.12%     0.00%  [.] clone3                                                                                    -      -            
+            |
+            ---start_thread
+               |          
+               |--49.23%--0x76eeec39e79f
+               |          |          
+               |          |--24.73%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          |          
+               |          |--14.44%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          |          
+               |           --10.01%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |                     |          
+               |                     |--4.24%--0x76eeec3a18f3
+               |                     |          |          
+               |                     |           --4.01%--0xffffffffa5c0012b
+               |                     |                     |          
+               |                     |                      --3.58%--0xffffffffa7194660
+               |                     |                                |          
+               |                     |                                 --3.58%--0xffffffffa5e8be8d
+               |                     |                                           |          
+               |                     |                                            --3.56%--0xffffffffa60ccae9
+               |                     |                                                      |          
+               |                     |                                                       --3.55%--0xffffffffa60cc225
+               |                     |                                                                 |          
+               |                     |                                                                  --3.49%--0xffffffffa60d07a2
+               |                     |                                                                            |          
+               |                     |                                                                             --3.22%--0xffffffffa60d06a9
+               |                     |                                                                                       |          
+               |                     |                                                                                        --3.21%--0xffffffffa60cfe8a
+               |                     |                                                                                                  |          
+               |                     |                                                                                                   --3.18%--0xffffffffa71a32a7
+               |                     |                                                                                                             |          
+               |                     |                                                                                                              --1.61%--0xffffffffa71a2c58
+               |                     |                                                                                                                        |          
+               |                     |                                                                                                                         --1.60%--0xffffffffa5fd8c42
+               |                     |                                                                                                                                   |          
+               |                     |                                                                                                                                    --1.55%--0xffffffffa5fd5a42
+               |                     |          
+               |                     |--2.22%--0x76eeec3a18a6
+               |                     |          
+               |                      --1.63%--0x76eeec3a19a0
+               |                                |          
+               |                                 --1.62%--0xffffffffa5c0012b
+               |                                           |          
+               |                                            --1.56%--0xffffffffa7194660
+               |                                                      |          
+               |                                                       --1.55%--0xffffffffa5e8be8d
+               |                                                                 |          
+               |                                                                  --1.55%--0xffffffffa60ccae9
+               |                                                                            0xffffffffa60cc2ae
+               |                                                                            |          
+               |                                                                             --1.46%--0xffffffffa60cf9fd
+               |                                                                                       |          
+               |                                                                                        --1.45%--0xffffffffa5fe18ab
+               |          
+               |--7.08%--0x76eeec39e7ac
+               |          |          
+               |          |--3.99%--0x76eeec3a18f3
+               |          |          |          
+               |          |           --3.83%--0xffffffffa5c0012b
+               |          |                     |          
+               |          |                      --3.51%--0xffffffffa7194660
+               |          |                                |          
+               |          |                                 --3.51%--0xffffffffa5e8be8d
+               |          |                                           |          
+               |          |                                            --3.49%--0xffffffffa60ccae9
+               |          |                                                      |          
+               |          |                                                       --3.48%--0xffffffffa60cc225
+               |          |                                                                 |          
+               |          |                                                                  --3.44%--0xffffffffa60d07a2
+               |          |                                                                            |          
+               |          |                                                                             --3.14%--0xffffffffa60d06a9
+               |          |                                                                                       |          
+               |          |                                                                                        --3.13%--0xffffffffa60cfe8a
+               |          |                                                                                                  |          
+               |          |                                                                                                   --3.09%--0xffffffffa71a32a7
+               |          |                                                                                                             |          
+               |          |                                                                                                              --1.53%--0xffffffffa71a2c58
+               |          |                                                                                                                        |          
+               |          |                                                                                                                         --1.52%--0xffffffffa5fd8c42
+               |          |                                                                                                                                   |          
+               |          |                                                                                                                                    --1.49%--0xffffffffa5fd5a42
+               |          |          
+               |          |--1.64%--0x76eeec3a18a6
+               |          |          
+               |           --1.30%--0x76eeec3a19a0
+               |                     |          
+               |                      --1.29%--0xffffffffa5c0012b
+               |                                |          
+               |                                 --1.23%--0xffffffffa7194660
+               |                                           0xffffffffa5e8be8d
+               |                                           |          
+               |                                            --1.23%--0xffffffffa60ccae9
+               |                                                      |          
+               |                                                       --1.23%--0xffffffffa60cc2ae
+               |                                                                 |          
+               |                                                                  --1.16%--0xffffffffa60cf9fd
+               |                                                                            |          
+               |                                                                             --1.15%--0xffffffffa5fe18ab
+               |          
+               |--4.12%--0x76eeec3a16ee
+               |          |          
+               |           --3.96%--0xffffffffa5c0012b
+               |                     |          
+               |                      --3.49%--0xffffffffa7194660
+               |                                |          
+               |                                 --3.48%--0xffffffffa5e8be8d
+               |                                           |          
+               |                                            --3.45%--0xffffffffa60ccae9
+               |                                                      |          
+               |                                                       --3.44%--0xffffffffa60cc225
+               |                                                                 |          
+               |                                                                  --3.38%--0xffffffffa60d07a2
+               |                                                                            |          
+               |                                                                             --3.16%--0xffffffffa60d06a9
+               |                                                                                       |          
+               |                                                                                        --3.14%--0xffffffffa60cfe8a
+               |                                                                                                  |          
+               |                                                                                                   --3.11%--0xffffffffa71a32a7
+               |                                                                                                             |          
+               |                                                                                                              --1.73%--0xffffffffa71a2c58
+               |                                                                                                                        |          
+               |                                                                                                                         --1.72%--0xffffffffa5fd8c42
+               |                                                                                                                                   |          
+               |                                                                                                                                    --1.68%--0xffffffffa5fd5a42
+               |          
+                --1.68%--0x76eeec3a16c6
+
+    63.12%     0.00%  [.] start_thread                                                                              -      -            
+            |          
+            |--49.23%--0x76eeec39e79f
+            |          |          
+            |          |--24.73%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          |          
+            |          |--14.44%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          |          
+            |           --10.01%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |                     |          
+            |                     |--4.24%--0x76eeec3a18f3
+            |                     |          |          
+            |                     |           --4.01%--0xffffffffa5c0012b
+            |                     |                     |          
+            |                     |                      --3.58%--0xffffffffa7194660
+            |                     |                                |          
+            |                     |                                 --3.58%--0xffffffffa5e8be8d
+            |                     |                                           |          
+            |                     |                                            --3.56%--0xffffffffa60ccae9
+            |                     |                                                      |          
+            |                     |                                                       --3.55%--0xffffffffa60cc225
+            |                     |                                                                 |          
+            |                     |                                                                  --3.49%--0xffffffffa60d07a2
+            |                     |                                                                            |          
+            |                     |                                                                             --3.22%--0xffffffffa60d06a9
+            |                     |                                                                                       |          
+            |                     |                                                                                        --3.21%--0xffffffffa60cfe8a
+            |                     |                                                                                                  |          
+            |                     |                                                                                                   --3.18%--0xffffffffa71a32a7
+            |                     |                                                                                                             |          
+            |                     |                                                                                                              --1.61%--0xffffffffa71a2c58
+            |                     |                                                                                                                        |          
+            |                     |                                                                                                                         --1.60%--0xffffffffa5fd8c42
+            |                     |                                                                                                                                   |          
+            |                     |                                                                                                                                    --1.55%--0xffffffffa5fd5a42
+            |                     |          
+            |                     |--2.22%--0x76eeec3a18a6
+            |                     |          
+            |                      --1.63%--0x76eeec3a19a0
+            |                                |          
+            |                                 --1.62%--0xffffffffa5c0012b
+            |                                           |          
+            |                                            --1.56%--0xffffffffa7194660
+            |                                                      |          
+            |                                                       --1.55%--0xffffffffa5e8be8d
+            |                                                                 |          
+            |                                                                  --1.55%--0xffffffffa60ccae9
+            |                                                                            0xffffffffa60cc2ae
+            |                                                                            |          
+            |                                                                             --1.46%--0xffffffffa60cf9fd
+            |                                                                                       |          
+            |                                                                                        --1.45%--0xffffffffa5fe18ab
+            |          
+            |--7.08%--0x76eeec39e7ac
+            |          |          
+            |          |--3.99%--0x76eeec3a18f3
+            |          |          |          
+            |          |           --3.83%--0xffffffffa5c0012b
+            |          |                     |          
+            |          |                      --3.51%--0xffffffffa7194660
+            |          |                                |          
+            |          |                                 --3.51%--0xffffffffa5e8be8d
+            |          |                                           |          
+            |          |                                            --3.49%--0xffffffffa60ccae9
+            |          |                                                      |          
+            |          |                                                       --3.48%--0xffffffffa60cc225
+            |          |                                                                 |          
+            |          |                                                                  --3.44%--0xffffffffa60d07a2
+            |          |                                                                            |          
+            |          |                                                                             --3.14%--0xffffffffa60d06a9
+            |          |                                                                                       |          
+            |          |                                                                                        --3.13%--0xffffffffa60cfe8a
+            |          |                                                                                                  |          
+            |          |                                                                                                   --3.09%--0xffffffffa71a32a7
+            |          |                                                                                                             |          
+            |          |                                                                                                              --1.53%--0xffffffffa71a2c58
+            |          |                                                                                                                        |          
+            |          |                                                                                                                         --1.52%--0xffffffffa5fd8c42
+            |          |                                                                                                                                   |          
+            |          |                                                                                                                                    --1.49%--0xffffffffa5fd5a42
+            |          |          
+            |          |--1.64%--0x76eeec3a18a6
+            |          |          
+            |           --1.30%--0x76eeec3a19a0
+            |                     |          
+            |                      --1.29%--0xffffffffa5c0012b
+            |                                |          
+            |                                 --1.23%--0xffffffffa7194660
+            |                                           0xffffffffa5e8be8d
+            |                                           |          
+            |                                            --1.23%--0xffffffffa60ccae9
+            |                                                      |          
+            |                                                       --1.23%--0xffffffffa60cc2ae
+            |                                                                 |          
+            |                                                                  --1.16%--0xffffffffa60cf9fd
+            |                                                                            |          
+            |                                                                             --1.15%--0xffffffffa5fe18ab
+            |          
+            |--4.12%--0x76eeec3a16ee
+            |          |          
+            |           --3.96%--0xffffffffa5c0012b
+            |                     |          
+            |                      --3.49%--0xffffffffa7194660
+            |                                |          
+            |                                 --3.48%--0xffffffffa5e8be8d
+            |                                           |          
+            |                                            --3.45%--0xffffffffa60ccae9
+            |                                                      |          
+            |                                                       --3.44%--0xffffffffa60cc225
+            |                                                                 |          
+            |                                                                  --3.38%--0xffffffffa60d07a2
+            |                                                                            |          
+            |                                                                             --3.16%--0xffffffffa60d06a9
+            |                                                                                       |          
+            |                                                                                        --3.14%--0xffffffffa60cfe8a
+            |                                                                                                  |          
+            |                                                                                                   --3.11%--0xffffffffa71a32a7
+            |                                                                                                             |          
+            |                                                                                                              --1.73%--0xffffffffa71a2c58
+            |                                                                                                                        |          
+            |                                                                                                                         --1.72%--0xffffffffa5fd8c42
+            |                                                                                                                                   |          
+            |                                                                                                                                    --1.68%--0xffffffffa5fd5a42
+            |          
+             --1.68%--0x76eeec3a16c6
+
+    57.69%     0.00%  [.] 0x000076eeec39e79f                                                                        -      -            
+            |          
+            |--29.06%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+            |--16.89%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --11.69%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--4.92%--0x76eeec3a18f3
+                       |          |          
+                       |           --4.63%--0xffffffffa5c0012b
+                       |                     |          
+                       |                      --4.16%--0xffffffffa7194660
+                       |                                |          
+                       |                                 --4.15%--0xffffffffa5e8be8d
+                       |                                           |          
+                       |                                            --4.12%--0xffffffffa60ccae9
+                       |                                                      |          
+                       |                                                       --4.11%--0xffffffffa60cc225
+                       |                                                                 |          
+                       |                                                                  --4.04%--0xffffffffa60d07a2
+                       |                                                                            |          
+                       |                                                                             --3.73%--0xffffffffa60d06a9
+                       |                                                                                       |          
+                       |                                                                                        --3.72%--0xffffffffa60cfe8a
+                       |                                                                                                  |          
+                       |                                                                                                   --3.69%--0xffffffffa71a32a7
+                       |                                                                                                             |          
+                       |                                                                                                              --1.86%--0xffffffffa71a2c58
+                       |                                                                                                                        |          
+                       |                                                                                                                         --1.85%--0xffffffffa5fd8c42
+                       |                                                                                                                                   |          
+                       |                                                                                                                                    --1.80%--0xffffffffa5fd5a42
+                       |          
+                       |--2.60%--0x76eeec3a18a6
+                       |          
+                        --1.92%--0x76eeec3a19a0
+                                  |          
+                                   --1.90%--0xffffffffa5c0012b
+                                             |          
+                                              --1.83%--0xffffffffa7194660
+                                                        |          
+                                                         --1.83%--0xffffffffa5e8be8d
+                                                                   |          
+                                                                    --1.83%--0xffffffffa60ccae9
+                                                                              0xffffffffa60cc2ae
+                                                                              |          
+                                                                               --1.72%--0xffffffffa60cf9fd
+                                                                                         |          
+                                                                                          --1.71%--0xffffffffa5fe18ab
+
+    28.42%    28.25%  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+            |--24.60%--clone3
+            |          start_thread
+            |          |          
+            |           --24.58%--0x76eeec39e79f
+            |                     collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --3.65%--0x3f9c71c71c71c71c
+                       collision(Mesh*, Mesh const*)
+                       |          
+                        --3.65%--GOMP_parallel
+                                  |          
+                                   --3.64%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    24.76%     0.05%  [k] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --24.71%--0xffffffffa5c0012b
+                       |          
+                       |--22.72%--0xffffffffa7194660
+                       |          |          
+                       |           --20.60%--0xffffffffa5e8be8d
+                       |                     |          
+                       |                      --20.49%--0xffffffffa60ccae9
+                       |                                |          
+                       |                                |--14.46%--0xffffffffa60cc225
+                       |                                |          |          
+                       |                                |           --14.23%--0xffffffffa60d07a2
+                       |                                |                     |          
+                       |                                |                      --13.20%--0xffffffffa60d06a9
+                       |                                |                                |          
+                       |                                |                                 --13.15%--0xffffffffa60cfe8a
+                       |                                |                                           |          
+                       |                                |                                            --13.02%--0xffffffffa71a32a7
+                       |                                |                                                      |          
+                       |                                |                                                      |--6.44%--0xffffffffa71a2c58
+                       |                                |                                                      |          |          
+                       |                                |                                                      |           --6.39%--0xffffffffa5fd8c42
+                       |                                |                                                      |                     |          
+                       |                                |                                                      |                      --6.25%--0xffffffffa5fd5a42
+                       |                                |                                                      |                                |          
+                       |                                |                                                      |                                |--2.77%--0xffffffffa5ff85e4
+                       |                                |                                                      |                                |          |          
+                       |                                |                                                      |                                |           --1.49%--0xffffffffa5ff228c
+                       |                                |                                                      |                                |          
+                       |                                |                                                      |                                 --2.43%--0xffffffffa5ff8618
+                       |                                |                                                      |                                           |          
+                       |                                |                                                      |                                            --1.84%--0xffffffffa5ff82b9
+                       |                                |                                                      |          
+                       |                                |                                                      |--2.10%--0xffffffffa71a2c3d
+                       |                                |                                                      |          |          
+                       |                                |                                                      |           --2.02%--0xffffffffa5fdae30
+                       |                                |                                                      |                     |          
+                       |                                |                                                      |                      --1.91%--0xffffffffa5fda66d
+                       |                                |                                                      |                                |          
+                       |                                |                                                      |                                 --1.84%--0xffffffffa5ff206b
+                       |                                |                                                      |                                           |          
+                       |                                |                                                      |                                            --1.11%--0xffffffffa5ff1938
+                       |                                |                                                      |          
+                       |                                |                                                      |--1.31%--0xffffffffa71a2f36
+                       |                                |                                                      |          
+                       |                                |                                                       --1.02%--0xffffffffa71a2d2a
+                       |                                |          
+                       |                                 --6.01%--0xffffffffa60cc2ae
+                       |                                           |          
+                       |                                            --5.69%--0xffffffffa60cf9fd
+                       |                                                      |          
+                       |                                                       --5.64%--0xffffffffa5fe18ab
+                       |                                                                 |          
+                       |                                                                  --2.55%--0xffffffffa5fe135d
+                       |                                                                            |          
+                       |                                                                             --2.36%--0xffffffffa5fe0d7b
+                       |                                                                                       |          
+                       |                                                                                        --1.83%--0xffffffffa5fda416
+                       |          
+                        --1.09%--0xffffffffa7194778
+
+    22.75%     0.03%  [k] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --22.72%--0xffffffffa7194660
+                       |          
+                        --20.60%--0xffffffffa5e8be8d
+                                  |          
+                                   --20.49%--0xffffffffa60ccae9
+                                             |          
+                                             |--14.46%--0xffffffffa60cc225
+                                             |          |          
+                                             |           --14.23%--0xffffffffa60d07a2
+                                             |                     |          
+                                             |                      --13.20%--0xffffffffa60d06a9
+                                             |                                |          
+                                             |                                 --13.15%--0xffffffffa60cfe8a
+                                             |                                           |          
+                                             |                                            --13.02%--0xffffffffa71a32a7
+                                             |                                                      |          
+                                             |                                                      |--6.44%--0xffffffffa71a2c58
+                                             |                                                      |          |          
+                                             |                                                      |           --6.39%--0xffffffffa5fd8c42
+                                             |                                                      |                     |          
+                                             |                                                      |                      --6.25%--0xffffffffa5fd5a42
+                                             |                                                      |                                |          
+                                             |                                                      |                                |--2.77%--0xffffffffa5ff85e4
+                                             |                                                      |                                |          |          
+                                             |                                                      |                                |           --1.49%--0xffffffffa5ff228c
+                                             |                                                      |                                |          
+                                             |                                                      |                                 --2.43%--0xffffffffa5ff8618
+                                             |                                                      |                                           |          
+                                             |                                                      |                                            --1.84%--0xffffffffa5ff82b9
+                                             |                                                      |          
+                                             |                                                      |--2.10%--0xffffffffa71a2c3d
+                                             |                                                      |          |          
+                                             |                                                      |           --2.02%--0xffffffffa5fdae30
+                                             |                                                      |                     |          
+                                             |                                                      |                      --1.91%--0xffffffffa5fda66d
+                                             |                                                      |                                |          
+                                             |                                                      |                                 --1.84%--0xffffffffa5ff206b
+                                             |                                                      |                                           |          
+                                             |                                                      |                                            --1.11%--0xffffffffa5ff1938
+                                             |                                                      |          
+                                             |                                                      |--1.31%--0xffffffffa71a2f36
+                                             |                                                      |          
+                                             |                                                       --1.02%--0xffffffffa71a2d2a
+                                             |          
+                                              --6.01%--0xffffffffa60cc2ae
+                                                        |          
+                                                         --5.69%--0xffffffffa60cf9fd
+                                                                   |          
+                                                                    --5.64%--0xffffffffa5fe18ab
+                                                                              |          
+                                                                               --2.55%--0xffffffffa5fe135d
+                                                                                         |          
+                                                                                          --2.36%--0xffffffffa5fe0d7b
+                                                                                                    |          
+                                                                                                     --1.83%--0xffffffffa5fda416
+
+    20.63%     0.03%  [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --20.60%--0xffffffffa5e8be8d
+                       |          
+                        --20.49%--0xffffffffa60ccae9
+                                  |          
+                                  |--14.46%--0xffffffffa60cc225
+                                  |          |          
+                                  |           --14.23%--0xffffffffa60d07a2
+                                  |                     |          
+                                  |                      --13.20%--0xffffffffa60d06a9
+                                  |                                |          
+                                  |                                 --13.15%--0xffffffffa60cfe8a
+                                  |                                           |          
+                                  |                                            --13.02%--0xffffffffa71a32a7
+                                  |                                                      |          
+                                  |                                                      |--6.44%--0xffffffffa71a2c58
+                                  |                                                      |          |          
+                                  |                                                      |           --6.39%--0xffffffffa5fd8c42
+                                  |                                                      |                     |          
+                                  |                                                      |                      --6.25%--0xffffffffa5fd5a42
+                                  |                                                      |                                |          
+                                  |                                                      |                                |--2.77%--0xffffffffa5ff85e4
+                                  |                                                      |                                |          |          
+                                  |                                                      |                                |           --1.49%--0xffffffffa5ff228c
+                                  |                                                      |                                |          
+                                  |                                                      |                                 --2.43%--0xffffffffa5ff8618
+                                  |                                                      |                                           |          
+                                  |                                                      |                                            --1.84%--0xffffffffa5ff82b9
+                                  |                                                      |          
+                                  |                                                      |--2.10%--0xffffffffa71a2c3d
+                                  |                                                      |          |          
+                                  |                                                      |           --2.02%--0xffffffffa5fdae30
+                                  |                                                      |                     |          
+                                  |                                                      |                      --1.91%--0xffffffffa5fda66d
+                                  |                                                      |                                |          
+                                  |                                                      |                                 --1.84%--0xffffffffa5ff206b
+                                  |                                                      |                                           |          
+                                  |                                                      |                                            --1.11%--0xffffffffa5ff1938
+                                  |                                                      |          
+                                  |                                                      |--1.31%--0xffffffffa71a2f36
+                                  |                                                      |          
+                                  |                                                       --1.02%--0xffffffffa71a2d2a
+                                  |          
+                                   --6.01%--0xffffffffa60cc2ae
+                                             |          
+                                              --5.69%--0xffffffffa60cf9fd
+                                                        |          
+                                                         --5.64%--0xffffffffa5fe18ab
+                                                                   |          
+                                                                    --2.55%--0xffffffffa5fe135d
+                                                                              |          
+                                                                               --2.36%--0xffffffffa5fe0d7b
+                                                                                         |          
+                                                                                          --1.83%--0xffffffffa5fda416
+
+    20.52%     0.03%  [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --20.49%--0xffffffffa60ccae9
+                       |          
+                       |--14.46%--0xffffffffa60cc225
+                       |          |          
+                       |           --14.23%--0xffffffffa60d07a2
+                       |                     |          
+                       |                      --13.20%--0xffffffffa60d06a9
+                       |                                |          
+                       |                                 --13.15%--0xffffffffa60cfe8a
+                       |                                           |          
+                       |                                            --13.02%--0xffffffffa71a32a7
+                       |                                                      |          
+                       |                                                      |--6.44%--0xffffffffa71a2c58
+                       |                                                      |          |          
+                       |                                                      |           --6.39%--0xffffffffa5fd8c42
+                       |                                                      |                     |          
+                       |                                                      |                      --6.25%--0xffffffffa5fd5a42
+                       |                                                      |                                |          
+                       |                                                      |                                |--2.77%--0xffffffffa5ff85e4
+                       |                                                      |                                |          |          
+                       |                                                      |                                |           --1.49%--0xffffffffa5ff228c
+                       |                                                      |                                |          
+                       |                                                      |                                 --2.43%--0xffffffffa5ff8618
+                       |                                                      |                                           |          
+                       |                                                      |                                            --1.84%--0xffffffffa5ff82b9
+                       |                                                      |          
+                       |                                                      |--2.10%--0xffffffffa71a2c3d
+                       |                                                      |          |          
+                       |                                                      |           --2.02%--0xffffffffa5fdae30
+                       |                                                      |                     |          
+                       |                                                      |                      --1.91%--0xffffffffa5fda66d
+                       |                                                      |                                |          
+                       |                                                      |                                 --1.84%--0xffffffffa5ff206b
+                       |                                                      |                                           |          
+                       |                                                      |                                            --1.11%--0xffffffffa5ff1938
+                       |                                                      |          
+                       |                                                      |--1.31%--0xffffffffa71a2f36
+                       |                                                      |          
+                       |                                                       --1.02%--0xffffffffa71a2d2a
+                       |          
+                        --6.01%--0xffffffffa60cc2ae
+                                  |          
+                                   --5.69%--0xffffffffa60cf9fd
+                                             |          
+                                              --5.64%--0xffffffffa5fe18ab
+                                                        |          
+                                                         --2.55%--0xffffffffa5fe135d
+                                                                   |          
+                                                                    --2.36%--0xffffffffa5fe0d7b
+                                                                              |          
+                                                                               --1.83%--0xffffffffa5fda416
+
+    16.58%    16.44%  [.] propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]                          -      -            
+            |          
+            |--14.35%--clone3
+            |          start_thread
+            |          |          
+            |           --14.33%--0x76eeec39e79f
+            |                     |          
+            |                      --14.32%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --2.09%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       propagation(Mesh*, Mesh const*)
+                       propagation_interior_core(Mesh*, Mesh const*)
+                       |          
+                        --2.09%--GOMP_parallel
+                                  |          
+                                   --2.09%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    14.48%     0.02%  [k] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --14.46%--0xffffffffa60cc225
+                       |          
+                        --14.23%--0xffffffffa60d07a2
+                                  |          
+                                   --13.20%--0xffffffffa60d06a9
+                                             |          
+                                              --13.15%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --13.02%--0xffffffffa71a32a7
+                                                                   |          
+                                                                   |--6.44%--0xffffffffa71a2c58
+                                                                   |          |          
+                                                                   |           --6.39%--0xffffffffa5fd8c42
+                                                                   |                     |          
+                                                                   |                      --6.25%--0xffffffffa5fd5a42
+                                                                   |                                |          
+                                                                   |                                |--2.77%--0xffffffffa5ff85e4
+                                                                   |                                |          |          
+                                                                   |                                |           --1.49%--0xffffffffa5ff228c
+                                                                   |                                |          
+                                                                   |                                 --2.43%--0xffffffffa5ff8618
+                                                                   |                                           |          
+                                                                   |                                            --1.84%--0xffffffffa5ff82b9
+                                                                   |          
+                                                                   |--2.10%--0xffffffffa71a2c3d
+                                                                   |          |          
+                                                                   |           --2.02%--0xffffffffa5fdae30
+                                                                   |                     |          
+                                                                   |                      --1.91%--0xffffffffa5fda66d
+                                                                   |                                |          
+                                                                   |                                 --1.84%--0xffffffffa5ff206b
+                                                                   |                                           |          
+                                                                   |                                            --1.11%--0xffffffffa5ff1938
+                                                                   |          
+                                                                   |--1.31%--0xffffffffa71a2f36
+                                                                   |          
+                                                                    --1.02%--0xffffffffa71a2d2a
+
+    14.26%     0.03%  [k] 0xffffffffa60d07a2                                                                        -      -            
+            |          
+             --14.23%--0xffffffffa60d07a2
+                       |          
+                        --13.20%--0xffffffffa60d06a9
+                                  |          
+                                   --13.15%--0xffffffffa60cfe8a
+                                             |          
+                                              --13.02%--0xffffffffa71a32a7
+                                                        |          
+                                                        |--6.44%--0xffffffffa71a2c58
+                                                        |          |          
+                                                        |           --6.39%--0xffffffffa5fd8c42
+                                                        |                     |          
+                                                        |                      --6.25%--0xffffffffa5fd5a42
+                                                        |                                |          
+                                                        |                                |--2.77%--0xffffffffa5ff85e4
+                                                        |                                |          |          
+                                                        |                                |           --1.49%--0xffffffffa5ff228c
+                                                        |                                |          
+                                                        |                                 --2.43%--0xffffffffa5ff8618
+                                                        |                                           |          
+                                                        |                                            --1.84%--0xffffffffa5ff82b9
+                                                        |          
+                                                        |--2.10%--0xffffffffa71a2c3d
+                                                        |          |          
+                                                        |           --2.02%--0xffffffffa5fdae30
+                                                        |                     |          
+                                                        |                      --1.91%--0xffffffffa5fda66d
+                                                        |                                |          
+                                                        |                                 --1.84%--0xffffffffa5ff206b
+                                                        |                                           |          
+                                                        |                                            --1.11%--0xffffffffa5ff1938
+                                                        |          
+                                                        |--1.31%--0xffffffffa71a2f36
+                                                        |          
+                                                         --1.02%--0xffffffffa71a2d2a
+
+    13.80%     0.04%  [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --13.77%--0xffffffffa71a32a7
+                       |          
+                       |--6.86%--0xffffffffa71a2c58
+                       |          |          
+                       |           --6.80%--0xffffffffa5fd8c42
+                       |                     |          
+                       |                      --6.64%--0xffffffffa5fd5a42
+                       |                                |          
+                       |                                |--2.83%--0xffffffffa5ff85e4
+                       |                                |          |          
+                       |                                |           --1.49%--0xffffffffa5ff228c
+                       |                                |          
+                       |                                 --2.67%--0xffffffffa5ff8618
+                       |                                           |          
+                       |                                            --2.05%--0xffffffffa5ff82b9
+                       |          
+                       |--2.15%--0xffffffffa71a2c3d
+                       |          |          
+                       |           --2.07%--0xffffffffa5fdae30
+                       |                     |          
+                       |                      --1.95%--0xffffffffa5fda66d
+                       |                                |          
+                       |                                 --1.89%--0xffffffffa5ff206b
+                       |                                           |          
+                       |                                            --1.15%--0xffffffffa5ff1938
+                       |          
+                       |--1.35%--0xffffffffa71a2f36
+                       |          
+                        --1.11%--0xffffffffa71a2d2a
+
+    13.23%     0.03%  [k] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --13.20%--0xffffffffa60d06a9
+                       |          
+                        --13.15%--0xffffffffa60cfe8a
+                                  |          
+                                   --13.02%--0xffffffffa71a32a7
+                                             |          
+                                             |--6.44%--0xffffffffa71a2c58
+                                             |          |          
+                                             |           --6.39%--0xffffffffa5fd8c42
+                                             |                     |          
+                                             |                      --6.25%--0xffffffffa5fd5a42
+                                             |                                |          
+                                             |                                |--2.77%--0xffffffffa5ff85e4
+                                             |                                |          |          
+                                             |                                |           --1.49%--0xffffffffa5ff228c
+                                             |                                |          
+                                             |                                 --2.43%--0xffffffffa5ff8618
+                                             |                                           |          
+                                             |                                            --1.84%--0xffffffffa5ff82b9
+                                             |          
+                                             |--2.10%--0xffffffffa71a2c3d
+                                             |          |          
+                                             |           --2.02%--0xffffffffa5fdae30
+                                             |                     |          
+                                             |                      --1.91%--0xffffffffa5fda66d
+                                             |                                |          
+                                             |                                 --1.84%--0xffffffffa5ff206b
+                                             |                                           |          
+                                             |                                            --1.11%--0xffffffffa5ff1938
+                                             |          
+                                             |--1.31%--0xffffffffa71a2f36
+                                             |          
+                                              --1.02%--0xffffffffa71a2d2a
+
+    13.18%     0.03%  [k] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --13.15%--0xffffffffa60cfe8a
+                       |          
+                        --13.02%--0xffffffffa71a32a7
+                                  |          
+                                  |--6.44%--0xffffffffa71a2c58
+                                  |          |          
+                                  |           --6.39%--0xffffffffa5fd8c42
+                                  |                     |          
+                                  |                      --6.25%--0xffffffffa5fd5a42
+                                  |                                |          
+                                  |                                |--2.77%--0xffffffffa5ff85e4
+                                  |                                |          |          
+                                  |                                |           --1.49%--0xffffffffa5ff228c
+                                  |                                |          
+                                  |                                 --2.43%--0xffffffffa5ff8618
+                                  |                                           |          
+                                  |                                            --1.84%--0xffffffffa5ff82b9
+                                  |          
+                                  |--2.10%--0xffffffffa71a2c3d
+                                  |          |          
+                                  |           --2.02%--0xffffffffa5fdae30
+                                  |                     |          
+                                  |                      --1.91%--0xffffffffa5fda66d
+                                  |                                |          
+                                  |                                 --1.84%--0xffffffffa5ff206b
+                                  |                                           |          
+                                  |                                            --1.11%--0xffffffffa5ff1938
+                                  |          
+                                  |--1.31%--0xffffffffa71a2f36
+                                  |          
+                                   --1.02%--0xffffffffa71a2d2a
+
+    11.72%     2.10%  [.] propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]                        -      -            
+            |          
+            |--9.62%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          |          
+            |          |--4.86%--0x76eeec3a18f3
+            |          |          |          
+            |          |           --4.59%--0xffffffffa5c0012b
+            |          |                     |          
+            |          |                      --4.10%--0xffffffffa7194660
+            |          |                                |          
+            |          |                                 --4.10%--0xffffffffa5e8be8d
+            |          |                                           |          
+            |          |                                            --4.07%--0xffffffffa60ccae9
+            |          |                                                      |          
+            |          |                                                       --4.07%--0xffffffffa60cc225
+            |          |                                                                 |          
+            |          |                                                                  --4.00%--0xffffffffa60d07a2
+            |          |                                                                            |          
+            |          |                                                                             --3.69%--0xffffffffa60d06a9
+            |          |                                                                                       |          
+            |          |                                                                                        --3.67%--0xffffffffa60cfe8a
+            |          |                                                                                                  |          
+            |          |                                                                                                   --3.64%--0xffffffffa71a32a7
+            |          |                                                                                                             |          
+            |          |                                                                                                              --1.83%--0xffffffffa71a2c58
+            |          |                                                                                                                        |          
+            |          |                                                                                                                         --1.81%--0xffffffffa5fd8c42
+            |          |                                                                                                                                   |          
+            |          |                                                                                                                                    --1.77%--0xffffffffa5fd5a42
+            |          |          
+            |          |--2.48%--0x76eeec3a18a6
+            |          |          
+            |           --2.08%--0x76eeec3a19a0
+            |                     |          
+            |                      --2.05%--0xffffffffa5c0012b
+            |                                |          
+            |                                 --1.97%--0xffffffffa7194660
+            |                                           |          
+            |                                            --1.97%--0xffffffffa5e8be8d
+            |                                                      |          
+            |                                                       --1.96%--0xffffffffa60ccae9
+            |                                                                 0xffffffffa60cc2ae
+            |                                                                 |          
+            |                                                                  --1.85%--0xffffffffa60cf9fd
+            |                                                                            |          
+            |                                                                             --1.83%--0xffffffffa5fe18ab
+            |          
+             --1.80%--clone3
+                       start_thread
+                       |          
+                        --1.80%--0x76eeec39e79f
+                                  |          
+                                   --1.78%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    11.08%     0.00%  [.] 0x000076eeec3a18f3                                                                        -      -            
+            |          
+             --10.48%--0xffffffffa5c0012b
+                       |          
+                        --9.51%--0xffffffffa7194660
+                                  |          
+                                   --9.51%--0xffffffffa5e8be8d
+                                             |          
+                                              --9.44%--0xffffffffa60ccae9
+                                                        |          
+                                                         --9.43%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --9.27%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --8.53%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --8.49%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --8.41%--0xffffffffa71a32a7
+                                                                                                               |          
+                                                                                                               |--4.29%--0xffffffffa71a2c58
+                                                                                                               |          |          
+                                                                                                               |           --4.26%--0xffffffffa5fd8c42
+                                                                                                               |                     |          
+                                                                                                               |                      --4.16%--0xffffffffa5fd5a42
+                                                                                                               |                                |          
+                                                                                                               |                                |--2.03%--0xffffffffa5ff85e4
+                                                                                                               |                                |          |          
+                                                                                                               |                                |           --1.07%--0xffffffffa5ff228c
+                                                                                                               |                                |          
+                                                                                                               |                                 --1.35%--0xffffffffa5ff8618
+                                                                                                               |          
+                                                                                                                --1.45%--0xffffffffa71a2c3d
+                                                                                                                          |          
+                                                                                                                           --1.39%--0xffffffffa5fdae30
+                                                                                                                                     |          
+                                                                                                                                      --1.30%--0xffffffffa5fda66d
+                                                                                                                                                |          
+                                                                                                                                                 --1.26%--0xffffffffa5ff206b
+
+    10.80%     0.00%  [.] clone3                                                                                    -      -            
+            |          
+             --10.80%--start_thread
+                       |          
+                       |--8.46%--0x76eeec39e79f
+                       |          |          
+                       |          |--4.32%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          |          
+                       |          |--2.45%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          |          
+                       |           --1.67%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --1.15%--0x76eeec39e7ac
+
+    10.80%     0.00%  [.] start_thread                                                                              -      -            
+            |          
+            |--8.46%--0x76eeec39e79f
+            |          |          
+            |          |--4.32%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          |          
+            |          |--2.45%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          |          
+            |           --1.67%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.15%--0x76eeec39e7ac
+
+     9.01%     0.01%  [.] GOMP_parallel                                                                             -      -            
+            |          
+             --9.00%--GOMP_parallel
+                       |          
+                       |--3.66%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--2.10%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--1.66%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --1.04%--0x76eeec3a1747
+                                  |          
+                                   --1.03%--0xffffffffa5c0012b
+
+     8.23%     0.00%  [.] 0x000076eeec39e7ac                                                                        -      -            
+            |          
+            |--4.65%--0x76eeec3a18f3
+            |          |          
+            |           --4.46%--0xffffffffa5c0012b
+            |                     |          
+            |                      --4.09%--0xffffffffa7194660
+            |                                |          
+            |                                 --4.08%--0xffffffffa5e8be8d
+            |                                           |          
+            |                                            --4.05%--0xffffffffa60ccae9
+            |                                                      |          
+            |                                                       --4.05%--0xffffffffa60cc225
+            |                                                                 |          
+            |                                                                  --3.98%--0xffffffffa60d07a2
+            |                                                                            |          
+            |                                                                             --3.64%--0xffffffffa60d06a9
+            |                                                                                       |          
+            |                                                                                        --3.63%--0xffffffffa60cfe8a
+            |                                                                                                  |          
+            |                                                                                                   --3.59%--0xffffffffa71a32a7
+            |                                                                                                             |          
+            |                                                                                                              --1.78%--0xffffffffa71a2c58
+            |                                                                                                                        |          
+            |                                                                                                                         --1.77%--0xffffffffa5fd8c42
+            |                                                                                                                                   |          
+            |                                                                                                                                    --1.72%--0xffffffffa5fd5a42
+            |          
+            |--1.91%--0x76eeec3a18a6
+            |          
+             --1.50%--0x76eeec3a19a0
+                       |          
+                        --1.48%--0xffffffffa5c0012b
+                                  |          
+                                   --1.41%--0xffffffffa7194660
+                                             0xffffffffa5e8be8d
+                                             |          
+                                              --1.41%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.41%--0xffffffffa60cc2ae
+                                                                   |          
+                                                                    --1.33%--0xffffffffa60cf9fd
+                                                                              |          
+                                                                               --1.32%--0xffffffffa5fe18ab
+
+     8.19%     0.00%  [k] 0x000000a200000322                                                                        -      -            
+            |          
+            |--3.63%--propagation(Mesh*, Mesh const*)
+            |          |          
+            |           --3.63%--propagation_interior_core(Mesh*, Mesh const*)
+            |                     |          
+            |                      --3.14%--GOMP_parallel
+            |                                |          
+            |                                 --2.46%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+            |--3.07%--main
+            |          |          
+            |           --2.74%--propagation_finish_boundary(Mesh*, Mesh const*)
+            |                     |          
+            |                      --2.37%--GOMP_parallel
+            |                                |          
+            |                                 --1.94%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.46%--__memmove_avx512_unaligned_erms
+
+     8.04%     0.00%  [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |          
+             --8.04%--0xa200000322
+                       |          
+                       |--3.63%--propagation(Mesh*, Mesh const*)
+                       |          |          
+                       |           --3.63%--propagation_interior_core(Mesh*, Mesh const*)
+                       |                     |          
+                       |                      --3.14%--GOMP_parallel
+                       |                                |          
+                       |                                 --2.46%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--2.92%--main
+                       |          |          
+                       |           --2.74%--propagation_finish_boundary(Mesh*, Mesh const*)
+                       |                     |          
+                       |                      --2.37%--GOMP_parallel
+                       |                                |          
+                       |                                 --1.94%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --1.46%--__memmove_avx512_unaligned_erms
+
+     6.88%     0.02%  [.] 0xffffffffa71a2c58                                                                        -      -            
+            |          
+             --6.86%--0xffffffffa71a2c58
+                       |          
+                        --6.80%--0xffffffffa5fd8c42
+                                  |          
+                                   --6.64%--0xffffffffa5fd5a42
+                                             |          
+                                             |--2.83%--0xffffffffa5ff85e4
+                                             |          |          
+                                             |           --1.49%--0xffffffffa5ff228c
+                                             |          
+                                              --2.67%--0xffffffffa5ff8618
+                                                        |          
+                                                         --2.05%--0xffffffffa5ff82b9
+
+     6.84%     0.03%  [.] 0xffffffffa5fd8c42                                                                        -      -            
+            |          
+             --6.80%--0xffffffffa5fd8c42
+                       |          
+                        --6.64%--0xffffffffa5fd5a42
+                                  |          
+                                  |--2.83%--0xffffffffa5ff85e4
+                                  |          |          
+                                  |           --1.49%--0xffffffffa5ff228c
+                                  |          
+                                   --2.67%--0xffffffffa5ff8618
+                                             |          
+                                              --2.05%--0xffffffffa5ff82b9
+
+     6.66%     0.02%  [.] 0xffffffffa5fd5a42                                                                        -      -            
+            |          
+             --6.64%--0xffffffffa5fd5a42
+                       |          
+                       |--2.83%--0xffffffffa5ff85e4
+                       |          |          
+                       |           --1.49%--0xffffffffa5ff228c
+                       |          
+                        --2.67%--0xffffffffa5ff8618
+                                  |          
+                                   --2.05%--0xffffffffa5ff82b9
+
+     6.42%     0.00%  [k] 0x3f9c71c71c71c71c                                                                        -      -            
+            |          
+             --5.48%--collision(Mesh*, Mesh const*)
+                       |          
+                        --4.98%--GOMP_parallel
+                                  |          
+                                   --4.26%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     6.12%     5.94%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+     6.01%     0.00%  [.] 0xffffffffa60cc2ae                                                                        -      -            
+            |          
+             --6.01%--0xffffffffa60cc2ae
+                       |          
+                        --5.69%--0xffffffffa60cf9fd
+                                  |          
+                                   --5.64%--0xffffffffa5fe18ab
+                                             |          
+                                              --2.55%--0xffffffffa5fe135d
+                                                        |          
+                                                         --2.36%--0xffffffffa5fe0d7b
+                                                                   |          
+                                                                    --1.83%--0xffffffffa5fda416
+
+     5.70%     0.00%  [.] 0xffffffffa60cf9fd                                                                        -      -            
+            |          
+             --5.69%--0xffffffffa60cf9fd
+                       |          
+                        --5.64%--0xffffffffa5fe18ab
+                                  |          
+                                   --2.55%--0xffffffffa5fe135d
+                                             |          
+                                              --2.36%--0xffffffffa5fe0d7b
+                                                        |          
+                                                         --1.83%--0xffffffffa5fda416
+
+     5.64%     0.02%  [.] 0xffffffffa5fe18ab                                                                        -      -            
+            |          
+             --5.63%--0xffffffffa5fe18ab
+                       |          
+                        --2.55%--0xffffffffa5fe135d
+                                  |          
+                                   --2.36%--0xffffffffa5fe0d7b
+                                             |          
+                                              --1.83%--0xffffffffa5fda416
+
+     5.17%     0.00%  [.] 0x000076eeec3a16ee                                                                        -      -            
+            |          
+             --4.96%--0xffffffffa5c0012b
+                       |          
+                        --4.36%--0xffffffffa7194660
+                                  |          
+                                   --4.36%--0xffffffffa5e8be8d
+                                             |          
+                                              --4.32%--0xffffffffa60ccae9
+                                                        |          
+                                                         --4.31%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --4.23%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --3.95%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --3.93%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --3.89%--0xffffffffa71a32a7
+                                                                                                               |          
+                                                                                                                --2.15%--0xffffffffa71a2c58
+                                                                                                                          |          
+                                                                                                                           --2.14%--0xffffffffa5fd8c42
+                                                                                                                                     |          
+                                                                                                                                      --2.09%--0xffffffffa5fd5a42
+                                                                                                                                                |          
+                                                                                                                                                 --1.08%--0xffffffffa5ff8618
+
+     5.12%     0.00%  [.] 0x000076eeec3a18a6                                                                        -      -            
+     4.92%     4.89%  [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.30%--clone3
+                       start_thread
+                       |          
+                        --4.30%--0x76eeec39e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.72%     0.00%  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --4.71%--collision(Mesh*, Mesh const*)
+                       |          
+                        --4.29%--GOMP_parallel
+                                  |          
+                                   --3.66%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.25%     0.00%  [.] 0x000076eeec3a19a0                                                                        -      -            
+            |          
+             --4.20%--0xffffffffa5c0012b
+                       |          
+                        --4.02%--0xffffffffa7194660
+                                  |          
+                                   --4.02%--0xffffffffa5e8be8d
+                                             |          
+                                              --4.02%--0xffffffffa60ccae9
+                                                        |          
+                                                         --4.02%--0xffffffffa60cc2ae
+                                                                   |          
+                                                                    --3.79%--0xffffffffa60cf9fd
+                                                                              |          
+                                                                               --3.76%--0xffffffffa5fe18ab
+                                                                                         |          
+                                                                                          --1.56%--0xffffffffa5fe135d
+                                                                                                    |          
+                                                                                                     --1.45%--0xffffffffa5fe0d7b
+                                                                                                               |          
+                                                                                                                --1.12%--0xffffffffa5fda416
+
+     3.10%     0.00%  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --3.10%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --3.10%--propagation_interior_core(Mesh*, Mesh const*)
+                                  |          
+                                   --2.68%--GOMP_parallel
+                                             |          
+                                              --2.10%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.10%     0.00%  [.] propagation_interior_core(Mesh*, Mesh const*)                                             -      -            
+            |          
+             --3.10%--propagation_interior_core(Mesh*, Mesh const*)
+                       |          
+                        --2.68%--GOMP_parallel
+                                  |          
+                                   --2.10%--propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     2.85%     0.02%  [.] 0xffffffffa5ff85e4                                                                        -      -            
+            |          
+             --2.83%--0xffffffffa5ff85e4
+                       |          
+                        --1.49%--0xffffffffa5ff228c
+
+     2.81%     2.78%  [.] propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]                          -      -            
+            |          
+             --2.43%--clone3
+                       start_thread
+                       |          
+                        --2.43%--0x76eeec39e79f
+                                  propagation_interior_core(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     2.68%     0.01%  [.] 0xffffffffa5ff8618                                                                        -      -            
+            |          
+             --2.67%--0xffffffffa5ff8618
+                       |          
+                        --2.05%--0xffffffffa5ff82b9
+
+     2.55%     0.00%  [.] 0xffffffffa5fe135d                                                                        -      -            
+            |          
+             --2.55%--0xffffffffa5fe135d
+                       |          
+                        --2.36%--0xffffffffa5fe0d7b
+                                  |          
+                                   --1.83%--0xffffffffa5fda416
+
+     2.53%     0.01%  [.] main                                                                                      -      -            
+            |          
+             --2.52%--main
+                       |          
+                        --2.35%--propagation_finish_boundary(Mesh*, Mesh const*)
+                                  |          
+                                   --2.04%--GOMP_parallel
+                                             |          
+                                              --1.66%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     2.40%     0.01%  [.] 0xffffffffa5fe0d7b                                                                        -      -            
+            |          
+             --2.39%--0xffffffffa5fe0d7b
+                       |          
+                        --1.85%--0xffffffffa5fda416
+
+     2.37%     0.01%  [.] 0xffffffffa5fda416                                                                        -      -            
+            |          
+             --2.36%--0xffffffffa5fda416
+
+     2.35%     0.00%  [.] propagation_finish_boundary(Mesh*, Mesh const*)                                           -      -            
+            |          
+             --2.35%--propagation_finish_boundary(Mesh*, Mesh const*)
+                       |          
+                        --2.03%--GOMP_parallel
+                                  |          
+                                   --1.66%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     2.34%     0.03%  [.] 0xffffffffa5fda66d                                                                        -      -            
+            |          
+             --2.30%--0xffffffffa5fda66d
+                       |          
+                        --2.23%--0xffffffffa5ff206b
+                                  |          
+                                   --1.24%--0xffffffffa5ff1938
+
+     2.26%     0.02%  [.] 0xffffffffa5ff206b                                                                        -      -            
+            |          
+             --2.23%--0xffffffffa5ff206b
+                       |          
+                        --1.24%--0xffffffffa5ff1938
+
+     2.17%     0.00%  [.] 0x000076eeec3a1747                                                                        -      -            
+            |          
+             --2.15%--0xffffffffa5c0012b
+                       |          
+                        --2.00%--0xffffffffa7194660
+                                  |          
+                                   --1.99%--0xffffffffa5e8be8d
+                                             |          
+                                              --1.99%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.99%--0xffffffffa60cc2ae
+                                                                   |          
+                                                                    --1.90%--0xffffffffa60cf9fd
+                                                                              |          
+                                                                               --1.88%--0xffffffffa5fe18ab
+
+     2.16%     0.01%  [.] 0xffffffffa71a2c3d                                                                        -      -            
+            |          
+             --2.15%--0xffffffffa71a2c3d
+                       |          
+                        --2.07%--0xffffffffa5fdae30
+                                  |          
+                                   --1.95%--0xffffffffa5fda66d
+                                             |          
+                                              --1.89%--0xffffffffa5ff206b
+                                                        |          
+                                                         --1.15%--0xffffffffa5ff1938
+
+     2.16%     0.00%  [.] 0x000076eeec3a16c6                                                                        -      -            
+     2.09%     0.02%  [.] 0xffffffffa5fdae30                                                                        -      -            
+            |          
+             --2.07%--0xffffffffa5fdae30
+                       |          
+                        --1.95%--0xffffffffa5fda66d
+                                  |          
+                                   --1.89%--0xffffffffa5ff206b
+                                             |          
+                                              --1.15%--0xffffffffa5ff1938
+
+     2.05%     0.01%  [.] 0xffffffffa5ff82b9                                                                        -      -            
+            |          
+             --2.05%--0xffffffffa5ff82b9
+
+     1.96%     0.35%  [.] propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]                        -      -            
+            |          
+             --1.61%--propagation_finish_boundary(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     1.89%     0.05%  [.] 0xffffffffa5ff1938                                                                        -      -            
+            |          
+             --1.84%--0xffffffffa5ff1938
+
+     1.77%     0.64%  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --1.13%--save_frame(_IO_FILE*, Mesh const*)
+
+     1.72%     1.72%  [.] 0x00000000000258ab                                                                        -      -            
+            |          
+             --1.49%--clone3
+                       start_thread
+
+     1.71%     1.71%  [.] 0x00000000000258a6                                                                        -      -            
+            |          
+             --1.50%--clone3
+                       start_thread
+
+     1.51%     0.02%  [.] 0xffffffffa5ff228c                                                                        -      -            
+            |          
+             --1.49%--0xffffffffa5ff228c
+
+     1.49%     0.00%  [.] GOMP_parallel                                                                             -      -            
+            |          
+             --1.49%--GOMP_parallel
+
+     1.40%     0.03%  [.] 0xffffffffa5ff06b4                                                                        -      -            
+            |          
+             --1.37%--0xffffffffa5ff06b4
+
+     1.38%     0.03%  [.] 0xffffffffa71a2f36                                                                        -      -            
+            |          
+             --1.35%--0xffffffffa71a2f36
+
+     1.33%     0.00%  [.] 0x000076eeec3a01d1                                                                        -      -            
+     1.27%     1.24%  [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --1.23%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       |          
+                        --1.23%--__memmove_avx512_unaligned_erms
+
+     1.13%     0.02%  [.] 0xffffffffa71a2d2a                                                                        -      -            
+            |          
+             --1.11%--0xffffffffa71a2d2a
+
+     1.11%     0.02%  [.] 0xffffffffa7194778                                                                        -      -            
+            |          
+             --1.09%--0xffffffffa7194778
+
+     1.07%     0.03%  [.] 0xffffffffa5fd6b1d                                                                        -      -            
+            |          
+             --1.04%--0xffffffffa5fd6b1d
+                       |          
+                        --1.03%--0xffffffffa71acabf
+
+     1.04%     1.01%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+     1.04%     0.01%  [.] 0xffffffffa71acabf                                                                        -      -            
+            |          
+             --1.03%--0xffffffffa71acabf
+
+     1.01%     0.49%  [k] 0xffffffffa71acde4                                                                        -      -            
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
