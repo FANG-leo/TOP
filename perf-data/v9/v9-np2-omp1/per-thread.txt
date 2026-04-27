@@ -1,0 +1,752 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 54K of event 'cycles:P'
+# Event count (approx.): 63676237659
+#
+# Children      Self  Command           Pid:Command       Symbol                                                                                                         IPC   [IPC Coverage]
+# ........  ........  ............  ....................  .............................................................................................................  ....................
+#
+    31.13%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] GOMP_parallel                                                                                              -      -            
+            |          
+             --31.13%--GOMP_parallel
+                       |          
+                       |--18.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --12.68%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    31.07%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] GOMP_parallel                                                                                              -      -            
+            |          
+             --31.07%--GOMP_parallel
+                       |          
+                       |--18.33%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --12.69%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    19.15%     0.01%  top.lbm-exe    257738:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --19.14%--main
+                       |          
+                       |--12.75%--propagation(Mesh*, Mesh const*)
+                       |          |          
+                       |           --12.72%--GOMP_parallel
+                       |                     |          
+                       |                      --12.69%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--3.23%--PMPI_Barrier
+                       |          |          
+                       |           --3.21%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |                     |          
+                       |                      --2.72%--ompi_request_default_wait
+                       |                                |          
+                       |                                 --2.42%--opal_progress
+                       |          
+                       |--1.57%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --1.35%--__memmove_avx512_unaligned_erms
+
+    18.92%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] 0x3fdb5a2dfc571406                                                                                         -      -            
+            |
+            ---0x3fdb5a2dfc571406
+               0x5200000322
+               |          
+                --18.91%--main
+                          |          
+                          |--12.75%--propagation(Mesh*, Mesh const*)
+                          |          |          
+                          |           --12.72%--GOMP_parallel
+                          |                     |          
+                          |                      --12.69%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                          |--3.24%--PMPI_Barrier
+                          |          |          
+                          |           --3.22%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --2.72%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --2.42%--opal_progress
+                          |          
+                          |--1.57%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          
+                           --1.35%--__memmove_avx512_unaligned_erms
+
+    18.92%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] 0x0000005200000322                                                                                         -      -            
+            |
+            ---0x5200000322
+               |          
+                --18.91%--main
+                          |          
+                          |--12.75%--propagation(Mesh*, Mesh const*)
+                          |          |          
+                          |           --12.72%--GOMP_parallel
+                          |                     |          
+                          |                      --12.69%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                          |--3.24%--PMPI_Barrier
+                          |          |          
+                          |           --3.22%--ompi_coll_base_barrier_intra_recursivedoubling
+                          |                     |          
+                          |                      --2.72%--ompi_request_default_wait
+                          |                                |          
+                          |                                 --2.42%--opal_progress
+                          |          
+                          |--1.57%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          
+                           --1.35%--__memmove_avx512_unaligned_erms
+
+    18.48%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --18.47%--collision(Mesh*, Mesh const*)
+                       |          
+                        --18.41%--GOMP_parallel
+                                  |          
+                                   --18.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    18.47%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0x3f9c71c71c71c71c                                                                                         -      -            
+            |
+            ---0x3f9c71c71c71c71c
+               collision(Mesh*, Mesh const*)
+               |          
+                --18.41%--GOMP_parallel
+                          |          
+                           --18.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    18.41%    18.31%  top.lbm-exe    257737:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                           -      -            
+            |          
+             --18.30%--0x3f9c71c71c71c71c
+                       collision(Mesh*, Mesh const*)
+                       |          
+                        --18.30%--GOMP_parallel
+                                  |          
+                                   --18.30%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    18.40%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+             --18.40%--collision(Mesh*, Mesh const*)
+                       |          
+                        --18.34%--GOMP_parallel
+                                  |          
+                                   --18.33%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    18.40%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] 0x3fa6240b692d19a5                                                                                         -      -            
+            |
+            ---0x3fa6240b692d19a5
+               collision(Mesh*, Mesh const*)
+               |          
+                --18.34%--GOMP_parallel
+                          |          
+                           --18.33%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    18.33%    18.28%  top.lbm-exe    257738:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                           -      -            
+            |          
+             --18.28%--0x3fa6240b692d19a5
+                       collision(Mesh*, Mesh const*)
+                       GOMP_parallel
+                       |          
+                        --18.27%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    17.02%     0.02%  top.lbm-exe    257737:top.lbm-exe   [.] main                                                                                                       -      -            
+            |          
+             --17.00%--main
+                       |          
+                       |--12.76%--0x71df855fd4c6
+                       |          |          
+                       |           --12.71%--0x71df85194977
+                       |                     |          
+                       |                      --12.68%--0x71df855fb832
+                       |          
+                       |--1.59%--0x71df855f5bc4
+                       |          |          
+                       |           --1.02%--0x71df85509a4e
+                       |          
+                        --1.40%--0x71df84fa167f
+
+    16.79%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0x0000005200000322                                                                                         -      -            
+            |
+            ---0x5200000322
+               |          
+                --16.77%--main
+                          |          
+                          |--12.76%--propagation(Mesh*, Mesh const*)
+                          |          |          
+                          |           --12.71%--GOMP_parallel
+                          |                     |          
+                          |                      --12.68%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                          |--1.59%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --1.02%--PMPI_Sendrecv
+                          |          
+                           --1.41%--__memmove_avx512_unaligned_erms
+
+    16.51%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0x3fdc71c71c71c71c                                                                                         -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               |          
+                --16.51%--0x5200000322
+                          |          
+                           --16.50%--main
+                                     |          
+                                     |--12.76%--propagation(Mesh*, Mesh const*)
+                                     |          |          
+                                     |           --12.71%--GOMP_parallel
+                                     |                     |          
+                                     |                      --12.68%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                                     |          
+                                     |--1.59%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                     |          |          
+                                     |           --1.02%--PMPI_Sendrecv
+                                     |          
+                                      --1.41%--__memmove_avx512_unaligned_erms
+
+    12.76%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --12.75%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --12.71%--GOMP_parallel
+                                  |          
+                                   --12.68%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    12.75%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+             --12.75%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --12.72%--GOMP_parallel
+                                  |          
+                                   --12.69%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    12.71%    12.53%  top.lbm-exe    257738:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                         -      -            
+            |          
+             --12.53%--0x3fdb5a2dfc571406
+                       0x5200000322
+                       main
+                       propagation(Mesh*, Mesh const*)
+                       |          
+                        --12.53%--GOMP_parallel
+                                  |          
+                                   --12.52%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    12.70%    12.53%  top.lbm-exe    257737:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                                         -      -            
+            |          
+             --12.53%--0x3fdc71c71c71c71c
+                       0x5200000322
+                       main
+                       propagation(Mesh*, Mesh const*)
+                       |          
+                        --12.52%--GOMP_parallel
+                                  |          
+                                   --12.50%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     7.13%     1.61%  top.lbm-exe    257738:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+             --5.52%--opal_progress
+
+     6.71%     6.61%  top.lbm-exe    257737:top.lbm-exe   [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                                -      -            
+     6.69%     6.61%  top.lbm-exe    257738:top.lbm-exe   [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                                -      -            
+     4.14%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                                         -      -            
+            |          
+             --4.13%--0xffffffffa5c0012b
+                       |          
+                        --4.03%--0xffffffffa7194660
+                                  |          
+                                  |--1.82%--0xffffffffa5e8b893
+                                  |          |          
+                                  |           --1.82%--0xffffffffa63357e7
+                                  |                     |          
+                                  |                      --1.80%--0xffffffffa633574b
+                                  |                                |          
+                                  |                                 --1.64%--0xffffffffa63354ad
+                                  |          
+                                   --1.46%--0xffffffffa5e89d89
+                                             0xffffffffa63e8529
+                                             |          
+                                              --1.31%--0xffffffffa63e8481
+                                                        |          
+                                                         --1.15%--0xffffffffa63e7eeb
+                                                                   |          
+                                                                    --1.15%--0xffffffffa64f1aef
+                                                                              |          
+                                                                               --1.02%--0xffffffffa64f14dd
+
+     4.04%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa7194660                                                                                         -      -            
+            |          
+             --4.03%--0xffffffffa7194660
+                       |          
+                       |--1.82%--0xffffffffa5e8b893
+                       |          |          
+                       |           --1.82%--0xffffffffa63357e7
+                       |                     |          
+                       |                      --1.80%--0xffffffffa633574b
+                       |                                |          
+                       |                                 --1.64%--0xffffffffa63354ad
+                       |          
+                        --1.46%--0xffffffffa5e89d89
+                                  0xffffffffa63e8529
+                                  |          
+                                   --1.31%--0xffffffffa63e8481
+                                             |          
+                                              --1.15%--0xffffffffa63e7eeb
+                                                        |          
+                                                         --1.15%--0xffffffffa64f1aef
+                                                                   |          
+                                                                    --1.02%--0xffffffffa64f14dd
+
+     3.92%     0.11%  top.lbm-exe    257738:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --3.82%--mca_pml_ob1_send
+                       |          
+                        --3.49%--opal_progress
+
+     3.70%     1.44%  top.lbm-exe    257737:top.lbm-exe   [.] save_frame(_IO_FILE*, Mesh const*)                                                                         -      -            
+            |          
+             --2.27%--save_frame(_IO_FILE*, Mesh const*)
+                       |          
+                        --1.36%--_IO_fwrite
+                                  |          
+                                   --1.35%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     3.54%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)                                                             -      -            
+            |
+            ---save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+               PMPI_Send
+               |          
+                --2.97%--mca_pml_ob1_send
+                          |          
+                           --2.66%--opal_progress
+
+     3.54%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] PMPI_Send                                                                                                  -      -            
+            |
+            ---PMPI_Send
+               |          
+                --2.97%--mca_pml_ob1_send
+                          |          
+                           --2.66%--opal_progress
+
+     3.24%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] PMPI_Barrier                                                                                               -      -            
+            |          
+             --3.24%--PMPI_Barrier
+                       |          
+                        --3.21%--ompi_coll_base_barrier_intra_recursivedoubling
+                                  |          
+                                   --2.72%--ompi_request_default_wait
+                                             |          
+                                              --2.42%--opal_progress
+
+     3.22%     0.01%  top.lbm-exe    257738:top.lbm-exe   [.] ompi_coll_base_barrier_intra_recursivedoubling                                                             -      -            
+            |          
+             --3.21%--ompi_coll_base_barrier_intra_recursivedoubling
+                       |          
+                        --2.72%--ompi_request_default_wait
+                                  |          
+                                   --2.42%--opal_progress
+
+     2.74%     0.10%  top.lbm-exe    257738:top.lbm-exe   [.] ompi_request_default_wait                                                                                  -      -            
+            |          
+             --2.64%--ompi_request_default_wait
+                       |          
+                        --2.34%--opal_progress
+
+     2.35%     0.11%  top.lbm-exe    257737:top.lbm-exe   [.] opal_progress                                                                                              -      -            
+            |          
+             --2.23%--opal_progress
+                       |          
+                        --1.87%--0x71df7f3fa1d8
+                                  mca_btl_vader_poll_handle_frag
+                                  |          
+                                   --1.85%--0x71df7f232a94
+                                             0x71df7f231c6a
+                                             |          
+                                              --1.85%--mca_pml_ob1_recv_request_progress_rget
+                                                        |          
+                                                         --1.84%--mca_pml_ob1_recv_request_get_frag
+                                                                   |          
+                                                                    --1.83%--process_vm_readv
+                                                                              |          
+                                                                               --1.82%--0xffffffffa5c0012b
+                                                                                         |          
+                                                                                          --1.81%--0xffffffffa7194660
+                                                                                                    0xffffffffa5e8b893
+                                                                                                    |          
+                                                                                                     --1.81%--0xffffffffa63357e7
+                                                                                                               |          
+                                                                                                                --1.78%--0xffffffffa633574b
+                                                                                                                          |          
+                                                                                                                           --1.62%--0xffffffffa63354ad
+
+     2.05%     0.01%  mpirun         257713:mpirun        [.] 0xffffffffa5c0012b                                                                                         -      -            
+            |          
+             --2.04%--0xffffffffa5c0012b
+                       |          
+                        --1.97%--0xffffffffa7194660
+
+     1.97%     0.00%  mpirun         257713:mpirun        [.] 0xffffffffa7194660                                                                                         -      -            
+            |
+            ---0xffffffffa7194660
+
+     1.90%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] mca_btl_vader_poll_handle_frag                                                                             -      -            
+            |          
+             --1.89%--mca_btl_vader_poll_handle_frag
+                       |          
+                        --1.87%--0x71df7f232a94
+                                  0x71df7f231c6a
+                                  |          
+                                   --1.87%--mca_pml_ob1_recv_request_progress_rget
+                                             |          
+                                              --1.87%--mca_pml_ob1_recv_request_get_frag
+                                                        |          
+                                                         --1.85%--process_vm_readv
+                                                                   |          
+                                                                    --1.83%--0xffffffffa5c0012b
+                                                                              |          
+                                                                               --1.82%--0xffffffffa7194660
+                                                                                         0xffffffffa5e8b893
+                                                                                         |          
+                                                                                          --1.82%--0xffffffffa63357e7
+                                                                                                    |          
+                                                                                                     --1.79%--0xffffffffa633574b
+                                                                                                               |          
+                                                                                                                --1.64%--0xffffffffa63354ad
+
+     1.88%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] mca_pml_ob1_recv_request_progress_rget                                                                     -      -            
+            |          
+             --1.88%--mca_pml_ob1_recv_request_progress_rget
+                       |          
+                        --1.87%--mca_pml_ob1_recv_request_get_frag
+                                  |          
+                                   --1.85%--process_vm_readv
+                                             |          
+                                              --1.84%--0xffffffffa5c0012b
+                                                        |          
+                                                         --1.82%--0xffffffffa7194660
+                                                                   0xffffffffa5e8b893
+                                                                   |          
+                                                                    --1.82%--0xffffffffa63357e7
+                                                                              |          
+                                                                               --1.80%--0xffffffffa633574b
+                                                                                         |          
+                                                                                          --1.64%--0xffffffffa63354ad
+
+     1.87%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0x000071df7f3fa1d8                                                                                         -      -            
+            |
+            ---0x71df7f3fa1d8
+               mca_btl_vader_poll_handle_frag
+               |          
+                --1.85%--0x71df7f232a94
+                          0x71df7f231c6a
+                          |          
+                           --1.85%--mca_pml_ob1_recv_request_progress_rget
+                                     |          
+                                      --1.84%--mca_pml_ob1_recv_request_get_frag
+                                                |          
+                                                 --1.83%--process_vm_readv
+                                                           |          
+                                                            --1.82%--0xffffffffa5c0012b
+                                                                      |          
+                                                                       --1.81%--0xffffffffa7194660
+                                                                                 0xffffffffa5e8b893
+                                                                                 |          
+                                                                                  --1.81%--0xffffffffa63357e7
+                                                                                            |          
+                                                                                             --1.78%--0xffffffffa633574b
+                                                                                                       |          
+                                                                                                        --1.62%--0xffffffffa63354ad
+
+     1.87%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0x000071df7f232a94                                                                                         -      -            
+            |
+            ---0x71df7f232a94
+               0x71df7f231c6a
+               |          
+                --1.87%--mca_pml_ob1_recv_request_progress_rget
+                          |          
+                           --1.87%--mca_pml_ob1_recv_request_get_frag
+                                     |          
+                                      --1.85%--process_vm_readv
+                                                |          
+                                                 --1.83%--0xffffffffa5c0012b
+                                                           |          
+                                                            --1.82%--0xffffffffa7194660
+                                                                      0xffffffffa5e8b893
+                                                                      |          
+                                                                       --1.82%--0xffffffffa63357e7
+                                                                                 |          
+                                                                                  --1.79%--0xffffffffa633574b
+                                                                                            |          
+                                                                                             --1.64%--0xffffffffa63354ad
+
+     1.87%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0x000071df7f231c6a                                                                                         -      -            
+            |
+            ---0x71df7f231c6a
+               |          
+                --1.87%--mca_pml_ob1_recv_request_progress_rget
+                          |          
+                           --1.87%--mca_pml_ob1_recv_request_get_frag
+                                     |          
+                                      --1.85%--process_vm_readv
+                                                |          
+                                                 --1.83%--0xffffffffa5c0012b
+                                                           |          
+                                                            --1.82%--0xffffffffa7194660
+                                                                      0xffffffffa5e8b893
+                                                                      |          
+                                                                       --1.82%--0xffffffffa63357e7
+                                                                                 |          
+                                                                                  --1.79%--0xffffffffa633574b
+                                                                                            |          
+                                                                                             --1.64%--0xffffffffa63354ad
+
+     1.87%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] mca_pml_ob1_recv_request_get_frag                                                                          -      -            
+            |          
+             --1.87%--mca_pml_ob1_recv_request_get_frag
+                       |          
+                        --1.85%--process_vm_readv
+                                  |          
+                                   --1.84%--0xffffffffa5c0012b
+                                             |          
+                                              --1.82%--0xffffffffa7194660
+                                                        0xffffffffa5e8b893
+                                                        |          
+                                                         --1.82%--0xffffffffa63357e7
+                                                                   |          
+                                                                    --1.80%--0xffffffffa633574b
+                                                                              |          
+                                                                               --1.64%--0xffffffffa63354ad
+
+     1.86%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] process_vm_readv                                                                                           -      -            
+            |          
+             --1.85%--process_vm_readv
+                       |          
+                        --1.84%--0xffffffffa5c0012b
+                                  |          
+                                   --1.82%--0xffffffffa7194660
+                                             0xffffffffa5e8b893
+                                             |          
+                                              --1.82%--0xffffffffa63357e7
+                                                        |          
+                                                         --1.80%--0xffffffffa633574b
+                                                                   |          
+                                                                    --1.64%--0xffffffffa63354ad
+
+     1.82%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa63357e7                                                                                         -      -            
+            |          
+             --1.82%--0xffffffffa63357e7
+                       |          
+                        --1.80%--0xffffffffa633574b
+                                  |          
+                                   --1.64%--0xffffffffa63354ad
+
+     1.82%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa5e8b893                                                                                         -      -            
+            |
+            ---0xffffffffa5e8b893
+               |          
+                --1.82%--0xffffffffa63357e7
+                          |          
+                           --1.80%--0xffffffffa633574b
+                                     |          
+                                      --1.64%--0xffffffffa63354ad
+
+     1.80%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa633574b                                                                                         -      -            
+            |
+            ---0xffffffffa633574b
+               |          
+                --1.64%--0xffffffffa63354ad
+
+     1.64%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa63354ad                                                                                         -      -            
+            |          
+             --1.64%--0xffffffffa63354ad
+
+     1.60%     0.57%  top.lbm-exe    257737:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --1.03%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --1.02%--PMPI_Sendrecv
+
+     1.57%     0.59%  top.lbm-exe    257738:top.lbm-exe   [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+     1.51%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] _IO_file_xsputn@@GLIBC_2.2.5                                                                               -      -            
+            |          
+             --1.50%--_IO_file_xsputn@@GLIBC_2.2.5
+                       |          
+                        --1.03%--_IO_file_write@@GLIBC_2.2.5
+                                  |          
+                                   --1.03%--__GI___libc_write
+                                             |          
+                                              --1.03%--0xffffffffa5c0012b
+                                                        |          
+                                                         --1.02%--0xffffffffa7194660
+                                                                   |          
+                                                                    --1.02%--0xffffffffa5e89d89
+                                                                              0xffffffffa63e8529
+
+     1.50%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] __GI___libc_write                                                                                          -      -            
+            |          
+             --1.49%--__GI___libc_write
+                       |          
+                        --1.48%--0xffffffffa5c0012b
+                                  |          
+                                   --1.46%--0xffffffffa7194660
+                                             |          
+                                              --1.46%--0xffffffffa5e89d89
+                                                        0xffffffffa63e8529
+                                                        |          
+                                                         --1.31%--0xffffffffa63e8481
+                                                                   |          
+                                                                    --1.15%--0xffffffffa63e7eeb
+                                                                              |          
+                                                                               --1.15%--0xffffffffa64f1aef
+                                                                                         |          
+                                                                                          --1.02%--0xffffffffa64f14dd
+
+     1.50%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] _IO_file_write@@GLIBC_2.2.5                                                                                -      -            
+            |          
+             --1.49%--_IO_file_write@@GLIBC_2.2.5
+                       |          
+                        --1.49%--__GI___libc_write
+                                  |          
+                                   --1.48%--0xffffffffa5c0012b
+                                             |          
+                                              --1.46%--0xffffffffa7194660
+                                                        |          
+                                                         --1.46%--0xffffffffa5e89d89
+                                                                   0xffffffffa63e8529
+                                                                   |          
+                                                                    --1.31%--0xffffffffa63e8481
+                                                                              |          
+                                                                               --1.15%--0xffffffffa63e7eeb
+                                                                                         |          
+                                                                                          --1.15%--0xffffffffa64f1aef
+                                                                                                    |          
+                                                                                                     --1.02%--0xffffffffa64f14dd
+
+     1.49%     1.49%  top.lbm-exe    257738:top.lbm-exe   [.] 0x000000000007bd37                                                                                         -      -            
+     1.46%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa63e8529                                                                                         -      -            
+            |          
+             --1.46%--0xffffffffa63e8529
+                       |          
+                        --1.31%--0xffffffffa63e8481
+                                  |          
+                                   --1.15%--0xffffffffa63e7eeb
+                                             |          
+                                              --1.15%--0xffffffffa64f1aef
+                                                        |          
+                                                         --1.02%--0xffffffffa64f14dd
+
+     1.46%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa5e89d89                                                                                         -      -            
+            |
+            ---0xffffffffa5e89d89
+               0xffffffffa63e8529
+               |          
+                --1.31%--0xffffffffa63e8481
+                          |          
+                           --1.15%--0xffffffffa63e7eeb
+                                     |          
+                                      --1.15%--0xffffffffa64f1aef
+                                                |          
+                                                 --1.02%--0xffffffffa64f14dd
+
+     1.42%     1.41%  top.lbm-exe    257737:top.lbm-exe   [.] __memmove_avx512_unaligned_erms                                                                            -      -            
+            |          
+             --1.40%--0x3fdc71c71c71c71c
+                       0x5200000322
+                       main
+                       |          
+                        --1.40%--__memmove_avx512_unaligned_erms
+
+     1.37%     1.34%  top.lbm-exe    257738:top.lbm-exe   [.] __memmove_avx512_unaligned_erms                                                                            -      -            
+            |          
+             --1.34%--0x3fdb5a2dfc571406
+                       0x5200000322
+                       main
+                       |          
+                        --1.34%--__memmove_avx512_unaligned_erms
+
+     1.36%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] _IO_fwrite                                                                                                 -      -            
+            |
+            ---_IO_fwrite
+               |          
+                --1.35%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.35%     0.00%  mpirun         257713:mpirun        [.] 0x00005b9f48455415                                                                                         -      -            
+            |
+            ---0x5b9f48455415
+               __libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+               |          
+                --1.06%--0x5b9f484552f4
+                          event_base_loop
+
+     1.35%     0.00%  mpirun         257713:mpirun        [.] __libc_start_main@@GLIBC_2.34                                                                              -      -            
+            |
+            ---__libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+               |          
+                --1.06%--0x5b9f484552f4
+                          event_base_loop
+
+     1.35%     0.00%  mpirun         257713:mpirun        [.] __libc_start_call_main                                                                                     -      -            
+            |
+            ---__libc_start_call_main
+               |          
+                --1.06%--0x5b9f484552f4
+                          event_base_loop
+
+     1.31%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa63e8481                                                                                         -      -            
+            |
+            ---0xffffffffa63e8481
+               |          
+                --1.15%--0xffffffffa63e7eeb
+                          |          
+                           --1.15%--0xffffffffa64f1aef
+                                     |          
+                                      --1.02%--0xffffffffa64f14dd
+
+     1.23%     0.00%  top.lbm-exe    257738:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                                         -      -            
+            |          
+             --1.23%--0xffffffffa5c0012b
+                       |          
+                        --1.14%--0xffffffffa7194660
+
+     1.16%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa63e7eeb                                                                                         -      -            
+            |          
+             --1.15%--0xffffffffa63e7eeb
+                       |          
+                        --1.15%--0xffffffffa64f1aef
+                                  |          
+                                   --1.02%--0xffffffffa64f14dd
+
+     1.15%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa64f1aef                                                                                         -      -            
+            |
+            ---0xffffffffa64f1aef
+               |          
+                --1.02%--0xffffffffa64f14dd
+
+     1.15%     0.01%  top.lbm-exe    257738:top.lbm-exe   [.] 0xffffffffa7194660                                                                                         -      -            
+            |          
+             --1.14%--0xffffffffa7194660
+
+     1.07%     0.01%  mpirun         257713:mpirun        [.] event_base_loop                                                                                            -      -            
+            |          
+             --1.06%--event_base_loop
+
+     1.06%     0.00%  mpirun         257713:mpirun        [.] 0x00005b9f484552f4                                                                                         -      -            
+            |
+            ---0x5b9f484552f4
+               event_base_loop
+
+     1.02%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] 0xffffffffa64f14dd                                                                                         -      -            
+            |
+            ---0xffffffffa64f14dd
+
+     1.02%     0.00%  top.lbm-exe    257737:top.lbm-exe   [.] PMPI_Sendrecv                                                                                              -      -            
+            |
+            ---PMPI_Sendrecv
+
+     1.02%     0.01%  top.lbm-exe    257737:top.lbm-exe   [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --1.01%--mca_pml_ob1_send
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
