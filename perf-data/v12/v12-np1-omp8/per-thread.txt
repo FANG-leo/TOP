@@ -1,0 +1,1594 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 126K of event 'cycles:P'
+# Event count (approx.): 117884991572
+#
+# Children      Self  Command           Pid:Command       Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ............  ....................  ............................................................................................  ....................
+#
+    13.81%     0.01%  top.lbm-exe    245280:top.lbm-exe   [.] main                                                                                      -      -            
+            |          
+             --13.41%--0x572b59f069b9
+                       |          
+                       |--5.82%--0x7042033fe32d
+                       |          |          
+                       |           --5.39%--0x704202f94972
+                       |                     |          
+                       |                      --4.30%--0x7042033fb6dd
+                       |          
+                       |--5.74%--0x7042033fd1a1
+                       |          |          
+                       |           --5.27%--0x704202f94977
+                       |                     |          
+                       |                      --4.45%--0x7042033fabff
+                       |          
+                        --1.63%--0x704202da167f
+
+    13.72%     0.00%  top.lbm-exe    245280:top.lbm-exe   [k] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+                --13.69%--main
+                          |          
+                          |--5.88%--propagation(Mesh*, Mesh const*)
+                          |          |          
+                          |           --5.45%--GOMP_parallel
+                          |                     |          
+                          |                      --4.35%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                          |--5.80%--collision(Mesh*, Mesh const*)
+                          |          |          
+                          |           --5.33%--GOMP_parallel
+                          |                     |          
+                          |                      --4.49%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --1.65%--__memmove_avx512_unaligned_erms
+
+    13.57%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               |          
+                --13.56%--0xa200000322
+                          |          
+                           --13.54%--main
+                                     |          
+                                     |--5.88%--propagation(Mesh*, Mesh const*)
+                                     |          |          
+                                     |           --5.45%--GOMP_parallel
+                                     |                     |          
+                                     |                      --4.35%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                                     |          
+                                     |--5.80%--collision(Mesh*, Mesh const*)
+                                     |          |          
+                                     |           --5.33%--GOMP_parallel
+                                     |                     |          
+                                     |                      --4.49%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                                     |          
+                                      --1.65%--__memmove_avx512_unaligned_erms
+
+    10.78%     0.01%  top.lbm-exe    245280:top.lbm-exe   [.] GOMP_parallel                                                                             -      -            
+            |          
+             --10.77%--GOMP_parallel
+                       |          
+                       |--4.49%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                       |--4.35%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                       |          
+                        --1.24%--0x704202fa1747
+                                  |          
+                                   --1.24%--0xffffffffa5c0012b
+                                             |          
+                                              --1.13%--0xffffffffa7194660
+                                                        0xffffffffa5e8be8d
+                                                        |          
+                                                         --1.13%--0xffffffffa60ccae9
+                                                                   0xffffffffa60cc2ae
+                                                                   |          
+                                                                    --1.08%--0xffffffffa60cf9fd
+                                                                              |          
+                                                                               --1.07%--0xffffffffa5fe18ab
+
+    10.50%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] clone3                                                                                    -      -            
+            |
+            ---clone3
+               start_thread
+               |          
+                --8.79%--0x704202f9e79f
+                          |          
+                          |--4.39%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --4.03%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.50%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] start_thread                                                                              -      -            
+            |
+            ---start_thread
+               |          
+                --8.79%--0x704202f9e79f
+                          |          
+                          |--4.39%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --4.03%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.47%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] clone3                                                                                    -      -            
+            |
+            ---clone3
+               start_thread
+               |          
+                --8.72%--0x704202f9e79f
+                          |          
+                          |--4.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.94%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.47%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] start_thread                                                                              -      -            
+            |
+            ---start_thread
+               |          
+                --8.72%--0x704202f9e79f
+                          |          
+                          |--4.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.94%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.46%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] clone3                                                                                    -      -            
+            |
+            ---clone3
+               start_thread
+               |          
+                --8.77%--0x704202f9e79f
+                          |          
+                          |--4.41%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.99%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.46%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] start_thread                                                                              -      -            
+            |
+            ---start_thread
+               |          
+                --8.77%--0x704202f9e79f
+                          |          
+                          |--4.41%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.99%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.38%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] clone3                                                                                    -      -            
+            |
+            ---clone3
+               start_thread
+               |          
+                --8.72%--0x704202f9e79f
+                          |          
+                          |--4.41%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.92%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.38%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] start_thread                                                                              -      -            
+            |
+            ---start_thread
+               |          
+                --8.72%--0x704202f9e79f
+                          |          
+                          |--4.41%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.92%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.36%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] clone3                                                                                    -      -            
+            |
+            ---clone3
+               start_thread
+               |          
+                --8.67%--0x704202f9e79f
+                          |          
+                          |--4.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.88%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.36%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] start_thread                                                                              -      -            
+            |
+            ---start_thread
+               |          
+                --8.67%--0x704202f9e79f
+                          |          
+                          |--4.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.88%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.31%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] clone3                                                                                    -      -            
+            |
+            ---clone3
+               start_thread
+               |          
+                --8.68%--0x704202f9e79f
+                          |          
+                          |--4.37%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.94%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.31%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] start_thread                                                                              -      -            
+            |
+            ---start_thread
+               |          
+                --8.68%--0x704202f9e79f
+                          |          
+                          |--4.37%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.94%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.24%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] clone3                                                                                    -      -            
+            |
+            ---clone3
+               start_thread
+               |          
+                --8.56%--0x704202f9e79f
+                          |          
+                          |--4.27%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.90%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+    10.24%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] start_thread                                                                              -      -            
+            |
+            ---start_thread
+               |          
+                --8.56%--0x704202f9e79f
+                          |          
+                          |--4.27%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+                          |          
+                           --3.90%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     8.79%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0x0000704202f9e79f                                                                        -      -            
+            |
+            ---0x704202f9e79f
+               |          
+               |--4.39%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+                --4.03%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     8.77%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0x0000704202f9e79f                                                                        -      -            
+            |
+            ---0x704202f9e79f
+               |          
+               |--4.41%--0x7042033fab91
+               |          
+                --3.99%--0x7042033fbd32
+
+     8.72%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0x0000704202f9e79f                                                                        -      -            
+            |
+            ---0x704202f9e79f
+               |          
+               |--4.40%--0x7042033fabb5
+               |          
+                --3.91%--0x7042033fb6d1
+
+     8.72%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0x0000704202f9e79f                                                                        -      -            
+            |
+            ---0x704202f9e79f
+               |          
+               |--4.39%--0x7042033fac3d
+               |          
+                --3.93%--0x7042033fb6eb
+
+     8.68%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0x0000704202f9e79f                                                                        -      -            
+            |
+            ---0x704202f9e79f
+               |          
+               |--4.37%--0x7042033facab
+               |          
+                --3.94%--0x7042033fbbca
+
+     8.67%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0x0000704202f9e79f                                                                        -      -            
+            |
+            ---0x704202f9e79f
+               |          
+               |--4.40%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+                --3.88%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     8.56%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0x0000704202f9e79f                                                                        -      -            
+            |
+            ---0x704202f9e79f
+               |          
+               |--4.27%--collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+               |          
+                --3.90%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     8.33%     8.20%  top.lbm-exe    245280:top.lbm-exe   [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --1.33%--0x3f9c71c71c71c71c
+                       0x7041e57068d0
+                       0x7ffc0db4a430
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     5.89%     0.01%  top.lbm-exe    245280:top.lbm-exe   [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --5.88%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --5.39%--0x704202f94972
+                                  |          
+                                   --4.30%--0x7042033fb6dd
+
+     5.80%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --5.80%--collision(Mesh*, Mesh const*)
+                       |          
+                        --5.27%--0x704202f94977
+                                  |          
+                                   --4.45%--0x7042033fabff
+
+     4.61%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --4.61%--0xffffffffa5c0012b
+                       |          
+                        --4.34%--0xffffffffa7194660
+                                  |          
+                                   --3.20%--0xffffffffa5e8be8d
+                                             |          
+                                              --3.19%--0xffffffffa60ccae9
+                                                        |          
+                                                        |--1.89%--0xffffffffa60cc2ae
+                                                        |          |          
+                                                        |           --1.81%--0xffffffffa60cf9fd
+                                                        |                     |          
+                                                        |                      --1.79%--0xffffffffa5fe18ab
+                                                        |          
+                                                         --1.29%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --1.28%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --1.19%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --1.18%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --1.17%--0xffffffffa71a32a7
+
+     4.50%     4.47%  top.lbm-exe    245280:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.47%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       collision(Mesh*, Mesh const*)
+                       |          
+                        --4.47%--GOMP_parallel
+                                  |          
+                                   --4.42%--0x7042033fabff
+
+     4.42%     4.39%  top.lbm-exe    245287:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.39%--clone3
+                       start_thread
+                       |          
+                        --4.38%--0x704202f9e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.41%     4.39%  top.lbm-exe    245285:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.39%--clone3
+                       start_thread
+                       |          
+                        --4.39%--0x704202f9e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.41%     4.38%  top.lbm-exe    245286:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.38%--clone3
+                       start_thread
+                       |          
+                        --4.37%--0x704202f9e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.40%     4.38%  top.lbm-exe    245289:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.38%--clone3
+                       start_thread
+                       |          
+                        --4.37%--0x704202f9e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.40%     4.37%  top.lbm-exe    245290:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.37%--clone3
+                       start_thread
+                       |          
+                        --4.37%--0x704202f9e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.38%     4.35%  top.lbm-exe    245288:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.35%--clone3
+                       start_thread
+                       |          
+                        --4.35%--0x704202f9e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.36%     2.96%  top.lbm-exe    245280:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.96%--0x3fdc71c71c71c71c
+            |          0xa200000322
+            |          main
+            |          propagation(Mesh*, Mesh const*)
+            |          GOMP_parallel
+            |          |          
+            |           --2.93%--0x7042033fb6dd
+            |          
+             --1.38%--0x7042033fbd58
+
+     4.35%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --4.34%--0xffffffffa7194660
+                       |          
+                        --3.20%--0xffffffffa5e8be8d
+                                  |          
+                                   --3.19%--0xffffffffa60ccae9
+                                             |          
+                                             |--1.89%--0xffffffffa60cc2ae
+                                             |          |          
+                                             |           --1.81%--0xffffffffa60cf9fd
+                                             |                     |          
+                                             |                      --1.79%--0xffffffffa5fe18ab
+                                             |          
+                                              --1.29%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.28%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.19%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.18%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.17%--0xffffffffa71a32a7
+
+     4.27%     4.24%  top.lbm-exe    245291:top.lbm-exe   [.] collision(Mesh*, Mesh const*) [clone ._omp_fn.0]                                          -      -            
+            |          
+             --4.24%--clone3
+                       start_thread
+                       |          
+                        --4.23%--0x704202f9e79f
+                                  collision(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     4.04%     2.79%  top.lbm-exe    245290:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.79%--clone3
+            |          start_thread
+            |          |          
+            |           --2.79%--0x704202f9e79f
+            |                     |          
+            |                      --2.78%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.24%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.99%     2.75%  top.lbm-exe    245285:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.75%--clone3
+            |          start_thread
+            |          |          
+            |           --2.75%--0x704202f9e79f
+            |                     |          
+            |                      --2.74%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.25%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.94%     2.69%  top.lbm-exe    245288:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.69%--clone3
+            |          start_thread
+            |          0x704202f9e79f
+            |          |          
+            |           --2.68%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.26%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.94%     2.74%  top.lbm-exe    245286:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.74%--clone3
+            |          start_thread
+            |          0x704202f9e79f
+            |          |          
+            |           --2.74%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.20%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.93%     2.72%  top.lbm-exe    245287:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.72%--clone3
+            |          start_thread
+            |          0x704202f9e79f
+            |          |          
+            |           --2.72%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.21%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.91%     2.70%  top.lbm-exe    245291:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.70%--clone3
+            |          start_thread
+            |          0x704202f9e79f
+            |          |          
+            |           --2.69%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.21%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.89%     2.67%  top.lbm-exe    245289:top.lbm-exe   [.] propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]                                        -      -            
+            |          
+            |--2.67%--clone3
+            |          start_thread
+            |          0x704202f9e79f
+            |          |          
+            |           --2.66%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+            |          
+             --1.22%--propagation(Mesh*, Mesh const*) [clone ._omp_fn.0]
+
+     3.20%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --3.20%--0xffffffffa5e8be8d
+                       |          
+                        --3.19%--0xffffffffa60ccae9
+                                  |          
+                                  |--1.89%--0xffffffffa60cc2ae
+                                  |          |          
+                                  |           --1.81%--0xffffffffa60cf9fd
+                                  |                     |          
+                                  |                      --1.79%--0xffffffffa5fe18ab
+                                  |          
+                                   --1.29%--0xffffffffa60cc225
+                                             |          
+                                              --1.28%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.19%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.18%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.17%--0xffffffffa71a32a7
+
+     3.19%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --3.19%--0xffffffffa60ccae9
+                       |          
+                       |--1.89%--0xffffffffa60cc2ae
+                       |          |          
+                       |           --1.81%--0xffffffffa60cf9fd
+                       |                     |          
+                       |                      --1.79%--0xffffffffa5fe18ab
+                       |          
+                        --1.29%--0xffffffffa60cc225
+                                  |          
+                                   --1.28%--0xffffffffa60d07a2
+                                             |          
+                                              --1.19%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.18%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.17%--0xffffffffa71a32a7
+
+     2.45%     0.01%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.45%--0xffffffffa5c0012b
+                       |          
+                        --2.24%--0xffffffffa7194660
+                                  |          
+                                   --2.24%--0xffffffffa5e8be8d
+                                             |          
+                                              --2.23%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.72%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --1.69%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --1.56%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --1.56%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --1.54%--0xffffffffa71a32a7
+
+     2.42%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.42%--0xffffffffa5c0012b
+                       |          
+                        --2.22%--0xffffffffa7194660
+                                  |          
+                                   --2.21%--0xffffffffa5e8be8d
+                                             |          
+                                              --2.20%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.66%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --1.65%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --1.52%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --1.51%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --1.49%--0xffffffffa71a32a7
+
+     2.41%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.40%--0xffffffffa5c0012b
+                       |          
+                        --2.20%--0xffffffffa7194660
+                                  |          
+                                   --2.20%--0xffffffffa5e8be8d
+                                             |          
+                                              --2.19%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.69%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --1.67%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --1.54%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --1.54%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --1.51%--0xffffffffa71a32a7
+
+     2.41%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.40%--0xffffffffa5c0012b
+                       |          
+                        --2.21%--0xffffffffa7194660
+                                  |          
+                                   --2.21%--0xffffffffa5e8be8d
+                                             |          
+                                              --2.19%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.68%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --1.65%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --1.54%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --1.53%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --1.52%--0xffffffffa71a32a7
+
+     2.39%     0.01%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.39%--0xffffffffa5c0012b
+                       |          
+                        --2.17%--0xffffffffa7194660
+                                  0xffffffffa5e8be8d
+                                  |          
+                                   --2.15%--0xffffffffa60ccae9
+                                             |          
+                                              --1.70%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.67%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.56%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.55%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.53%--0xffffffffa71a32a7
+
+     2.38%     0.01%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.37%--0xffffffffa5c0012b
+                       |          
+                        --2.16%--0xffffffffa7194660
+                                  |          
+                                   --2.16%--0xffffffffa5e8be8d
+                                             |          
+                                              --2.14%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.67%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --1.65%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --1.53%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --1.52%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --1.51%--0xffffffffa71a32a7
+
+     2.34%     0.01%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --2.33%--0xffffffffa5c0012b
+                       |          
+                        --2.14%--0xffffffffa7194660
+                                  |          
+                                   --2.13%--0xffffffffa5e8be8d
+                                             |          
+                                              --2.12%--0xffffffffa60ccae9
+                                                        |          
+                                                         --1.62%--0xffffffffa60cc225
+                                                                   |          
+                                                                    --1.61%--0xffffffffa60d07a2
+                                                                              |          
+                                                                               --1.48%--0xffffffffa60d06a9
+                                                                                         |          
+                                                                                          --1.48%--0xffffffffa60cfe8a
+                                                                                                    |          
+                                                                                                     --1.46%--0xffffffffa71a32a7
+
+     2.25%     0.01%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.24%--0xffffffffa7194660
+                       |          
+                        --2.24%--0xffffffffa5e8be8d
+                                  |          
+                                   --2.23%--0xffffffffa60ccae9
+                                             |          
+                                              --1.72%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.69%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.56%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.56%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.54%--0xffffffffa71a32a7
+
+     2.24%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --2.24%--0xffffffffa5e8be8d
+                       |          
+                        --2.23%--0xffffffffa60ccae9
+                                  |          
+                                   --1.72%--0xffffffffa60cc225
+                                             |          
+                                              --1.69%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.56%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.56%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.54%--0xffffffffa71a32a7
+
+     2.23%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --2.23%--0xffffffffa60ccae9
+                       |          
+                        --1.72%--0xffffffffa60cc225
+                                  |          
+                                   --1.69%--0xffffffffa60d07a2
+                                             |          
+                                              --1.56%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.56%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.54%--0xffffffffa71a32a7
+
+     2.22%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.22%--0xffffffffa7194660
+                       |          
+                        --2.21%--0xffffffffa5e8be8d
+                                  |          
+                                   --2.20%--0xffffffffa60ccae9
+                                             |          
+                                              --1.66%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.65%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.52%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.51%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.49%--0xffffffffa71a32a7
+
+     2.22%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --2.21%--0xffffffffa5e8be8d
+                       |          
+                        --2.20%--0xffffffffa60ccae9
+                                  |          
+                                   --1.66%--0xffffffffa60cc225
+                                             |          
+                                              --1.65%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.52%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.51%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.49%--0xffffffffa71a32a7
+
+     2.21%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.21%--0xffffffffa7194660
+                       |          
+                        --2.21%--0xffffffffa5e8be8d
+                                  |          
+                                   --2.19%--0xffffffffa60ccae9
+                                             |          
+                                              --1.68%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.65%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.54%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.53%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.52%--0xffffffffa71a32a7
+
+     2.21%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --2.21%--0xffffffffa5e8be8d
+                       |          
+                        --2.19%--0xffffffffa60ccae9
+                                  |          
+                                   --1.68%--0xffffffffa60cc225
+                                             |          
+                                              --1.65%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.54%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.53%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.52%--0xffffffffa71a32a7
+
+     2.21%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --2.20%--0xffffffffa5e8be8d
+                       |          
+                        --2.19%--0xffffffffa60ccae9
+                                  |          
+                                   --1.69%--0xffffffffa60cc225
+                                             |          
+                                              --1.67%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.54%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.54%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.51%--0xffffffffa71a32a7
+
+     2.20%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.20%--0xffffffffa7194660
+                       |          
+                        --2.20%--0xffffffffa5e8be8d
+                                  |          
+                                   --2.19%--0xffffffffa60ccae9
+                                             |          
+                                              --1.69%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.67%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.54%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.54%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.51%--0xffffffffa71a32a7
+
+     2.20%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --2.20%--0xffffffffa60ccae9
+                       |          
+                        --1.66%--0xffffffffa60cc225
+                                  |          
+                                   --1.65%--0xffffffffa60d07a2
+                                             |          
+                                              --1.52%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.51%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.49%--0xffffffffa71a32a7
+
+     2.19%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --2.19%--0xffffffffa60ccae9
+                       |          
+                        --1.69%--0xffffffffa60cc225
+                                  |          
+                                   --1.67%--0xffffffffa60d07a2
+                                             |          
+                                              --1.54%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.54%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.51%--0xffffffffa71a32a7
+
+     2.19%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --2.19%--0xffffffffa60ccae9
+                       |          
+                        --1.68%--0xffffffffa60cc225
+                                  |          
+                                   --1.65%--0xffffffffa60d07a2
+                                             |          
+                                              --1.54%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.53%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.52%--0xffffffffa71a32a7
+
+     2.17%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --2.17%--0xffffffffa5e8be8d
+                       |          
+                        --2.15%--0xffffffffa60ccae9
+                                  |          
+                                   --1.70%--0xffffffffa60cc225
+                                             |          
+                                              --1.67%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.56%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.55%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.53%--0xffffffffa71a32a7
+
+     2.17%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.17%--0xffffffffa7194660
+                       0xffffffffa5e8be8d
+                       |          
+                        --2.15%--0xffffffffa60ccae9
+                                  |          
+                                   --1.70%--0xffffffffa60cc225
+                                             |          
+                                              --1.67%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.56%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.55%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.53%--0xffffffffa71a32a7
+
+     2.16%     0.01%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.16%--0xffffffffa7194660
+                       |          
+                        --2.16%--0xffffffffa5e8be8d
+                                  |          
+                                   --2.14%--0xffffffffa60ccae9
+                                             |          
+                                              --1.67%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.65%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.53%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.52%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.51%--0xffffffffa71a32a7
+
+     2.16%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --2.16%--0xffffffffa5e8be8d
+                       |          
+                        --2.14%--0xffffffffa60ccae9
+                                  |          
+                                   --1.67%--0xffffffffa60cc225
+                                             |          
+                                              --1.65%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.53%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.52%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.51%--0xffffffffa71a32a7
+
+     2.16%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --2.15%--0xffffffffa60ccae9
+                       |          
+                        --1.70%--0xffffffffa60cc225
+                                  |          
+                                   --1.67%--0xffffffffa60d07a2
+                                             |          
+                                              --1.56%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.55%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.53%--0xffffffffa71a32a7
+
+     2.15%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --2.14%--0xffffffffa60ccae9
+                       |          
+                        --1.67%--0xffffffffa60cc225
+                                  |          
+                                   --1.65%--0xffffffffa60d07a2
+                                             |          
+                                              --1.53%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.52%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.51%--0xffffffffa71a32a7
+
+     2.14%     0.01%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa5e8be8d                                                                        -      -            
+            |          
+             --2.13%--0xffffffffa5e8be8d
+                       |          
+                        --2.12%--0xffffffffa60ccae9
+                                  |          
+                                   --1.62%--0xffffffffa60cc225
+                                             |          
+                                              --1.61%--0xffffffffa60d07a2
+                                                        |          
+                                                         --1.48%--0xffffffffa60d06a9
+                                                                   |          
+                                                                    --1.48%--0xffffffffa60cfe8a
+                                                                              |          
+                                                                               --1.46%--0xffffffffa71a32a7
+
+     2.14%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --2.14%--0xffffffffa7194660
+                       |          
+                        --2.13%--0xffffffffa5e8be8d
+                                  |          
+                                   --2.12%--0xffffffffa60ccae9
+                                             |          
+                                              --1.62%--0xffffffffa60cc225
+                                                        |          
+                                                         --1.61%--0xffffffffa60d07a2
+                                                                   |          
+                                                                    --1.48%--0xffffffffa60d06a9
+                                                                              |          
+                                                                               --1.48%--0xffffffffa60cfe8a
+                                                                                         |          
+                                                                                          --1.46%--0xffffffffa71a32a7
+
+     2.12%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa60ccae9                                                                        -      -            
+            |          
+             --2.12%--0xffffffffa60ccae9
+                       |          
+                        --1.62%--0xffffffffa60cc225
+                                  |          
+                                   --1.61%--0xffffffffa60d07a2
+                                             |          
+                                              --1.48%--0xffffffffa60d06a9
+                                                        |          
+                                                         --1.48%--0xffffffffa60cfe8a
+                                                                   |          
+                                                                    --1.46%--0xffffffffa71a32a7
+
+     2.02%     0.75%  top.lbm-exe    245280:top.lbm-exe   [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --1.26%--0x7042033f43b6
+
+     1.90%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa60cc2ae                                                                        -      -            
+            |          
+             --1.89%--0xffffffffa60cc2ae
+                       |          
+                        --1.81%--0xffffffffa60cf9fd
+                                  |          
+                                   --1.79%--0xffffffffa5fe18ab
+
+     1.81%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa60cf9fd                                                                        -      -            
+            |          
+             --1.81%--0xffffffffa60cf9fd
+                       |          
+                        --1.79%--0xffffffffa5fe18ab
+
+     1.80%     0.01%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa5fe18ab                                                                        -      -            
+            |          
+             --1.79%--0xffffffffa5fe18ab
+
+     1.72%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.72%--0xffffffffa60cc225
+                       |          
+                        --1.69%--0xffffffffa60d07a2
+                                  |          
+                                   --1.56%--0xffffffffa60d06a9
+                                             |          
+                                              --1.56%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.54%--0xffffffffa71a32a7
+
+     1.70%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.70%--0xffffffffa60cc225
+                       |          
+                        --1.67%--0xffffffffa60d07a2
+                                  |          
+                                   --1.56%--0xffffffffa60d06a9
+                                             |          
+                                              --1.55%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.53%--0xffffffffa71a32a7
+
+     1.69%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.69%--0xffffffffa60cc225
+                       |          
+                        --1.67%--0xffffffffa60d07a2
+                                  |          
+                                   --1.54%--0xffffffffa60d06a9
+                                             |          
+                                              --1.54%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.51%--0xffffffffa71a32a7
+
+     1.69%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |          
+             --1.69%--0xffffffffa60d07a2
+                       |          
+                        --1.56%--0xffffffffa60d06a9
+                                  |          
+                                   --1.56%--0xffffffffa60cfe8a
+                                             |          
+                                              --1.54%--0xffffffffa71a32a7
+
+     1.68%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.68%--0xffffffffa60cc225
+                       |          
+                        --1.65%--0xffffffffa60d07a2
+                                  |          
+                                   --1.54%--0xffffffffa60d06a9
+                                             |          
+                                              --1.53%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.52%--0xffffffffa71a32a7
+
+     1.67%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |          
+             --1.67%--0xffffffffa60d07a2
+                       |          
+                        --1.54%--0xffffffffa60d06a9
+                                  |          
+                                   --1.54%--0xffffffffa60cfe8a
+                                             |          
+                                              --1.51%--0xffffffffa71a32a7
+
+     1.67%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |          
+             --1.67%--0xffffffffa60d07a2
+                       |          
+                        --1.56%--0xffffffffa60d06a9
+                                  |          
+                                   --1.55%--0xffffffffa60cfe8a
+                                             |          
+                                              --1.53%--0xffffffffa71a32a7
+
+     1.67%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.67%--0xffffffffa60cc225
+                       |          
+                        --1.65%--0xffffffffa60d07a2
+                                  |          
+                                   --1.53%--0xffffffffa60d06a9
+                                             |          
+                                              --1.52%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.51%--0xffffffffa71a32a7
+
+     1.66%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.66%--0xffffffffa60cc225
+                       |          
+                        --1.65%--0xffffffffa60d07a2
+                                  |          
+                                   --1.52%--0xffffffffa60d06a9
+                                             |          
+                                              --1.51%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.49%--0xffffffffa71a32a7
+
+     1.66%     1.65%  top.lbm-exe    245280:top.lbm-exe   [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --1.64%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --1.63%--__memmove_avx512_unaligned_erms
+
+     1.65%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |
+            ---0xffffffffa60d07a2
+               |          
+                --1.54%--0xffffffffa60d06a9
+                          |          
+                           --1.53%--0xffffffffa60cfe8a
+                                     |          
+                                      --1.52%--0xffffffffa71a32a7
+
+     1.65%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |
+            ---0xffffffffa60d07a2
+               |          
+                --1.53%--0xffffffffa60d06a9
+                          |          
+                           --1.52%--0xffffffffa60cfe8a
+                                     |          
+                                      --1.51%--0xffffffffa71a32a7
+
+     1.65%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |
+            ---0xffffffffa60d07a2
+               |          
+                --1.52%--0xffffffffa60d06a9
+                          |          
+                           --1.51%--0xffffffffa60cfe8a
+                                     |          
+                                      --1.49%--0xffffffffa71a32a7
+
+     1.63%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.62%--0xffffffffa60cc225
+                       |          
+                        --1.61%--0xffffffffa60d07a2
+                                  |          
+                                   --1.48%--0xffffffffa60d06a9
+                                             |          
+                                              --1.48%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.46%--0xffffffffa71a32a7
+
+     1.61%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |          
+             --1.61%--0xffffffffa60d07a2
+                       |          
+                        --1.48%--0xffffffffa60d06a9
+                                  |          
+                                   --1.48%--0xffffffffa60cfe8a
+                                             |          
+                                              --1.46%--0xffffffffa71a32a7
+
+     1.58%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.57%--0xffffffffa71a32a7
+
+     1.57%     0.01%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.56%--0xffffffffa60d06a9
+                       |          
+                        --1.56%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.54%--0xffffffffa71a32a7
+
+     1.57%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.56%--0xffffffffa71a32a7
+
+     1.56%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.56%--0xffffffffa60d06a9
+                       |          
+                        --1.55%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.53%--0xffffffffa71a32a7
+
+     1.56%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.56%--0xffffffffa60cfe8a
+                       |          
+                        --1.54%--0xffffffffa71a32a7
+
+     1.56%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.55%--0xffffffffa60cfe8a
+                       |          
+                        --1.53%--0xffffffffa71a32a7
+
+     1.55%     0.01%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.55%--0xffffffffa71a32a7
+
+     1.55%     0.01%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.54%--0xffffffffa71a32a7
+
+     1.55%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.54%--0xffffffffa71a32a7
+
+     1.55%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.54%--0xffffffffa60d06a9
+                       |          
+                        --1.54%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.51%--0xffffffffa71a32a7
+
+     1.54%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.54%--0xffffffffa60cfe8a
+                       |          
+                        --1.51%--0xffffffffa71a32a7
+
+     1.54%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.54%--0xffffffffa60d06a9
+                       |          
+                        --1.53%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.52%--0xffffffffa71a32a7
+
+     1.53%     0.01%  top.lbm-exe    245289:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.53%--0xffffffffa60cfe8a
+                       |          
+                        --1.52%--0xffffffffa71a32a7
+
+     1.53%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.53%--0xffffffffa60d06a9
+                       |          
+                        --1.52%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.51%--0xffffffffa71a32a7
+
+     1.52%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.52%--0xffffffffa60cfe8a
+                       |          
+                        --1.51%--0xffffffffa71a32a7
+
+     1.52%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.52%--0xffffffffa60d06a9
+                       |          
+                        --1.51%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.49%--0xffffffffa71a32a7
+
+     1.52%     0.01%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.51%--0xffffffffa60cfe8a
+                       |          
+                        --1.49%--0xffffffffa71a32a7
+
+     1.52%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.51%--0xffffffffa71a32a7
+
+     1.50%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.50%--0xffffffffa71a32a7
+
+     1.49%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.48%--0xffffffffa60d06a9
+                       |          
+                        --1.48%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.46%--0xffffffffa71a32a7
+
+     1.48%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.48%--0xffffffffa60cfe8a
+                       |          
+                        --1.46%--0xffffffffa71a32a7
+
+     1.35%     0.00%  top.lbm-exe    245287:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.29%--0xffffffffa5c0012b
+                          |          
+                           --1.15%--0xffffffffa7194660
+                                     |          
+                                      --1.15%--0xffffffffa5e8be8d
+                                                |          
+                                                 --1.14%--0xffffffffa60ccae9
+                                                           |          
+                                                            --1.14%--0xffffffffa60cc225
+                                                                      |          
+                                                                       --1.13%--0xffffffffa60d07a2
+                                                                                 |          
+                                                                                  --1.04%--0xffffffffa60d06a9
+                                                                                            |          
+                                                                                             --1.03%--0xffffffffa60cfe8a
+                                                                                                       |          
+                                                                                                        --1.02%--0xffffffffa71a32a7
+
+     1.35%     0.00%  top.lbm-exe    245291:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.29%--0xffffffffa5c0012b
+                          |          
+                           --1.16%--0xffffffffa7194660
+                                     0xffffffffa5e8be8d
+                                     |          
+                                      --1.15%--0xffffffffa60ccae9
+                                                |          
+                                                 --1.15%--0xffffffffa60cc225
+                                                           |          
+                                                            --1.12%--0xffffffffa60d07a2
+                                                                      |          
+                                                                       --1.04%--0xffffffffa60d06a9
+                                                                                 |          
+                                                                                  --1.03%--0xffffffffa60cfe8a
+                                                                                            |          
+                                                                                             --1.02%--0xffffffffa71a32a7
+
+     1.35%     0.00%  top.lbm-exe    245286:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.27%--0xffffffffa5c0012b
+                          |          
+                           --1.15%--0xffffffffa7194660
+                                     0xffffffffa5e8be8d
+                                     |          
+                                      --1.15%--0xffffffffa60ccae9
+                                                |          
+                                                 --1.14%--0xffffffffa60cc225
+                                                           |          
+                                                            --1.13%--0xffffffffa60d07a2
+                                                                      |          
+                                                                       --1.03%--0xffffffffa60d06a9
+                                                                                 |          
+                                                                                  --1.03%--0xffffffffa60cfe8a
+                                                                                            |          
+                                                                                             --1.02%--0xffffffffa71a32a7
+
+     1.34%     0.00%  top.lbm-exe    245285:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.28%--0xffffffffa5c0012b
+                          |          
+                           --1.16%--0xffffffffa7194660
+                                     0xffffffffa5e8be8d
+                                     |          
+                                      --1.15%--0xffffffffa60ccae9
+                                                |          
+                                                 --1.15%--0xffffffffa60cc225
+                                                           |          
+                                                            --1.12%--0xffffffffa60d07a2
+                                                                      |          
+                                                                       --1.03%--0xffffffffa60d06a9
+                                                                                 |          
+                                                                                  --1.03%--0xffffffffa60cfe8a
+                                                                                            |          
+                                                                                             --1.02%--0xffffffffa71a32a7
+
+     1.34%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0x3f9c71c71c71c71c                                                                        -      -            
+            |
+            ---0x3f9c71c71c71c71c
+               |          
+                --1.34%--0x7041e57068d0
+                          0x7ffc0db4a430
+                          special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.34%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0x00007041e57068d0                                                                        -      -            
+            |
+            ---0x7041e57068d0
+               0x7ffc0db4a430
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.34%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0x00007ffc0db4a430                                                                        -      -            
+            |
+            ---0x7ffc0db4a430
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.30%     0.00%  top.lbm-exe    245290:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.23%--0xffffffffa5c0012b
+                          |          
+                           --1.11%--0xffffffffa7194660
+                                     |          
+                                      --1.11%--0xffffffffa5e8be8d
+                                                |          
+                                                 --1.10%--0xffffffffa60ccae9
+                                                           |          
+                                                            --1.10%--0xffffffffa60cc225
+                                                                      |          
+                                                                       --1.09%--0xffffffffa60d07a2
+
+     1.30%     0.00%  top.lbm-exe    245289:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.24%--0xffffffffa5c0012b
+                          |          
+                           --1.13%--0xffffffffa7194660
+                                     |          
+                                      --1.13%--0xffffffffa5e8be8d
+                                                |          
+                                                 --1.12%--0xffffffffa60ccae9
+                                                           |          
+                                                            --1.11%--0xffffffffa60cc225
+                                                                      |          
+                                                                       --1.09%--0xffffffffa60d07a2
+                                                                                 |          
+                                                                                  --1.01%--0xffffffffa60d06a9
+                                                                                            |          
+                                                                                             --1.01%--0xffffffffa60cfe8a
+
+     1.29%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa60cc225                                                                        -      -            
+            |          
+             --1.29%--0xffffffffa60cc225
+                       |          
+                        --1.28%--0xffffffffa60d07a2
+                                  |          
+                                   --1.19%--0xffffffffa60d06a9
+                                             |          
+                                              --1.18%--0xffffffffa60cfe8a
+                                                        |          
+                                                         --1.17%--0xffffffffa71a32a7
+
+     1.28%     0.01%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa71a32a7                                                                        -      -            
+            |          
+             --1.28%--0xffffffffa71a32a7
+
+     1.28%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa60d07a2                                                                        -      -            
+            |          
+             --1.28%--0xffffffffa60d07a2
+                       |          
+                        --1.19%--0xffffffffa60d06a9
+                                  |          
+                                   --1.18%--0xffffffffa60cfe8a
+                                             |          
+                                              --1.17%--0xffffffffa71a32a7
+
+     1.27%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.21%--0xffffffffa5c0012b
+                          |          
+                           --1.12%--0xffffffffa7194660
+                                     0xffffffffa5e8be8d
+                                     |          
+                                      --1.11%--0xffffffffa60ccae9
+                                                |          
+                                                 --1.11%--0xffffffffa60cc225
+                                                           |          
+                                                            --1.10%--0xffffffffa60d07a2
+                                                                      |          
+                                                                       --1.02%--0xffffffffa60d06a9
+                                                                                 |          
+                                                                                  --1.02%--0xffffffffa60cfe8a
+                                                                                            |          
+                                                                                             --1.01%--0xffffffffa71a32a7
+
+     1.26%     0.00%  top.lbm-exe    245288:top.lbm-exe   [.] 0x0000704202fa18f3                                                                        -      -            
+            |
+            ---0x704202fa18f3
+               |          
+                --1.20%--0xffffffffa5c0012b
+                          |          
+                           --1.09%--0xffffffffa7194660
+                                     |          
+                                      --1.09%--0xffffffffa5e8be8d
+                                                |          
+                                                 --1.09%--0xffffffffa60ccae9
+                                                           |          
+                                                            --1.08%--0xffffffffa60cc225
+                                                                      |          
+                                                                       --1.07%--0xffffffffa60d07a2
+
+     1.25%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0x0000704202fa1747                                                                        -      -            
+            |
+            ---0x704202fa1747
+               |          
+                --1.24%--0xffffffffa5c0012b
+                          |          
+                           --1.13%--0xffffffffa7194660
+                                     0xffffffffa5e8be8d
+                                     |          
+                                      --1.13%--0xffffffffa60ccae9
+                                                0xffffffffa60cc2ae
+                                                |          
+                                                 --1.08%--0xffffffffa60cf9fd
+                                                           |          
+                                                            --1.07%--0xffffffffa5fe18ab
+
+     1.19%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa60d06a9                                                                        -      -            
+            |          
+             --1.19%--0xffffffffa60d06a9
+                       |          
+                        --1.18%--0xffffffffa60cfe8a
+                                  |          
+                                   --1.17%--0xffffffffa71a32a7
+
+     1.18%     0.00%  top.lbm-exe    245280:top.lbm-exe   [.] 0xffffffffa60cfe8a                                                                        -      -            
+            |          
+             --1.18%--0xffffffffa60cfe8a
+                       |          
+                        --1.17%--0xffffffffa71a32a7
+
+     1.17%     0.00%  mpirun         245265:mpirun        [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --1.17%--0xffffffffa5c0012b
+                       |          
+                        --1.12%--0xffffffffa7194660
+
+     1.12%     0.00%  mpirun         245265:mpirun        [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --1.12%--0xffffffffa7194660
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

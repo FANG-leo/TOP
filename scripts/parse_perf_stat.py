@@ -113,6 +113,13 @@ def parse_perf_file(path: Path) -> dict[str, object]:
             except (TypeError, ValueError):
                 pass
 
+    if isinstance(summary.get("task_clock_seconds"), float) and isinstance(summary.get("cpu_utilization"), float):
+        cpu_utilization = float(summary["cpu_utilization"])
+        if cpu_utilization > 0.0:
+            # perf task-clock is summed CPU time across all active CPUs/threads.
+            # Divide by average CPU utilization to estimate wall-clock elapsed time.
+            summary["elapsed_seconds_est"] = float(summary["task_clock_seconds"]) / cpu_utilization
+
     if "L1-dcache-loads" in metrics:
         summary["l1_dcache_loads"] = float(metrics["L1-dcache-loads"]["value"])
 
@@ -160,6 +167,7 @@ def merge_runs(items: list[dict[str, object]]) -> list[dict[str, object]]:
         for key in (
             "ipc_computed",
             "cpu_utilization",
+            "elapsed_seconds_est",
             "branch_miss_rate_pct",
             "branch_prediction_hit_rate_pct",
             "cache_miss_rate_pct",
@@ -201,6 +209,9 @@ def aggregate_runs(runs: list[dict[str, object]]) -> dict[str, object]:
     task_clock_values = [
         run["task_clock_seconds"] for run in runs if isinstance(run.get("task_clock_seconds"), float)
     ]
+    elapsed_values = [
+        run["elapsed_seconds_est"] for run in runs if isinstance(run.get("elapsed_seconds_est"), float)
+    ]
 
     aggregate: dict[str, object] = {
         "runs": runs,
@@ -226,6 +237,8 @@ def aggregate_runs(runs: list[dict[str, object]]) -> dict[str, object]:
 
     if task_clock_values:
         aggregate["task_clock_seconds_avg"] = statistics.mean(task_clock_values)
+    if elapsed_values:
+        aggregate["elapsed_seconds_est_avg"] = statistics.mean(elapsed_values)
 
     return aggregate
 
@@ -238,10 +251,10 @@ def format_float(value: object, digits: int = 2) -> str:
 
 def print_markdown(aggregate: dict[str, object]) -> None:
     print(
-        "| File | FOM (MLUPS) | IPC | CPU Util | Cache Hit Rate | Branch Pred Hit | "
+        "| File | FOM (MLUPS) | IPC | CPU Util | Elapsed (s) | Cache Hit Rate | Branch Pred Hit | "
         "L1 Hit Rate | Task Clock (s) | Memory Accesses | |"
     )
-    print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
+    print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
     for run in aggregate["runs"]:
         run = dict(run)
         memory_access = "n/a"
@@ -254,6 +267,7 @@ def print_markdown(aggregate: dict[str, object]) -> None:
             f"{format_float(run.get('fom_mlups'))} | "
             f"{format_float(run.get('ipc_computed'))} | "
             f"{format_float(run.get('cpu_utilization'), 3)} | "
+            f"{format_float(run.get('elapsed_seconds_est'), 3)} | "
             f"{format_float(run.get('cache_hit_rate_pct'))}% | "
             f"{format_float(run.get('branch_prediction_hit_rate_pct'))}% | "
             f"{format_float(run.get('l1_dcache_hit_rate_pct'))}% | "
@@ -266,6 +280,7 @@ def print_markdown(aggregate: dict[str, object]) -> None:
             f"| Average | {format_float(aggregate.get('fom_mlups_avg'))} | "
             f"{format_float(aggregate.get('ipc_avg'))} | "
             f"{format_float(aggregate.get('cpu_utilization_avg'), 3)} | "
+            f"{format_float(aggregate.get('elapsed_seconds_est_avg'), 3)} | "
             f"{format_float(aggregate.get('cache_hit_rate_pct_avg'))}% | "
             f"{format_float(aggregate.get('branch_prediction_hit_rate_pct_avg'))}% | "
             f"{100.0 - float(aggregate['l1_dcache_miss_rate_pct_avg']):.2f}% | "

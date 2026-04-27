@@ -1,0 +1,978 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 88K of event 'cycles:P'
+# Event count (approx.): 92209648493
+#
+# Children      Self  Symbol                                                                                                         IPC   [IPC Coverage]
+# ........  ........  .............................................................................................................  ....................
+#
+    72.01%     0.00%  [k] 0x0000002a00000322                                                                                         -      -            
+            |          
+             --71.96%--main
+                       |          
+                       |--26.64%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--22.31%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --19.80%--PMPI_Sendrecv
+                       |                     |          
+                       |                     |--15.08%--mca_pml_ob1_send
+                       |                     |          |          
+                       |                     |          |--11.90%--opal_progress
+                       |                     |          |          
+                       |                     |           --1.93%--opal_progress
+                       |                     |          
+                       |                      --1.47%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --1.41%--opal_progress
+                       |          
+                       |--20.04%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --2.09%--__memmove_avx512_unaligned_erms
+
+    51.41%     0.01%  [.] main                                                                                                       -      -            
+            |          
+             --51.40%--main
+                       |          
+                       |--19.05%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--15.89%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --14.08%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --11.70%--mca_pml_ob1_send
+                       |                                |          
+                       |                                |--9.28%--opal_progress
+                       |                                |          
+                       |                                 --1.97%--opal_progress
+                       |          
+                       |--14.42%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --1.48%--__memmove_avx512_unaligned_erms
+
+    26.06%     4.72%  [.] opal_progress                                                                                              -      -            
+            |          
+            |--21.35%--opal_progress
+            |          |          
+            |           --1.18%--0x7a1a7b03a1d8
+            |                     |          
+            |                      --1.18%--mca_btl_vader_poll_handle_frag
+            |                                |          
+            |                                 --1.15%--0x7a1a7ad83a94
+            |                                           |          
+            |                                            --1.15%--0x7a1a7ad82c6a
+            |                                                      mca_pml_ob1_recv_request_progress_rget
+            |                                                      |          
+            |                                                       --1.15%--mca_pml_ob1_recv_request_get_frag
+            |                                                                 |          
+            |                                                                  --1.13%--process_vm_readv
+            |                                                                            |          
+            |                                                                             --1.11%--0xffffffffa5c0012b
+            |                                                                                       |          
+            |                                                                                        --1.10%--0xffffffffa7194660
+            |                                                                                                  |          
+            |                                                                                                   --1.10%--0xffffffffa5e8b893
+            |                                                                                                             0xffffffffa63357e7
+            |                                                                                                             |          
+            |                                                                                                              --1.07%--0xffffffffa633574b
+            |          
+            |--1.52%--save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+            |          PMPI_Send
+            |          |          
+            |           --1.41%--mca_pml_ob1_send
+            |                     |          
+            |                      --1.24%--opal_progress
+            |          
+             --1.05%--0x3fdbd32c7f160cb7
+                       0x2a00000322
+                       main
+                       |          
+                        --1.04%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                  PMPI_Sendrecv
+
+    21.53%     0.01%  [.] main                                                                                                       -      -            
+            |          
+             --21.52%--main
+                       |          
+                       |--7.60%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--6.42%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          |          
+                       |           --5.72%--PMPI_Sendrecv
+                       |                     |          
+                       |                      --5.13%--mca_pml_ob1_send
+                       |                                |          
+                       |                                 --4.91%--opal_progress
+                       |          
+                        --5.61%--propagation(Mesh*, Mesh const*)
+
+    19.81%     0.02%  [.] PMPI_Sendrecv                                                                                              -      -            
+            |          
+             --19.78%--PMPI_Sendrecv
+                       |          
+                       |--15.07%--mca_pml_ob1_send
+                       |          |          
+                       |          |--11.90%--opal_progress
+                       |          |          
+                       |           --1.93%--opal_progress
+                       |          
+                        --1.47%--mca_pml_ob1_send
+                                  |          
+                                   --1.41%--opal_progress
+
+    19.16%     0.00%  [.] 0x3fdbd32c7f160cb7                                                                                         -      -            
+            |          
+             --19.16%--0x2a00000322
+                       |          
+                        --19.16%--main
+                                  |          
+                                  |--7.03%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                  |          |          
+                                  |           --6.20%--PMPI_Sendrecv
+                                  |                     |          
+                                  |                      --5.88%--mca_pml_ob1_send
+                                  |                                |          
+                                  |                                 --5.68%--opal_progress
+                                  |                                           |          
+                                  |                                            --1.18%--0x7a1a7b03a1d8
+                                  |                                                      |          
+                                  |                                                       --1.18%--mca_btl_vader_poll_handle_frag
+                                  |                                                                 |          
+                                  |                                                                  --1.15%--0x7a1a7ad83a94
+                                  |                                                                            |          
+                                  |                                                                             --1.15%--0x7a1a7ad82c6a
+                                  |                                                                                       mca_pml_ob1_recv_request_progress_rget
+                                  |                                                                                       |          
+                                  |                                                                                        --1.15%--mca_pml_ob1_recv_request_get_frag
+                                  |                                                                                                  |          
+                                  |                                                                                                   --1.13%--process_vm_readv
+                                  |                                                                                                             |          
+                                  |                                                                                                              --1.11%--0xffffffffa5c0012b
+                                  |                                                                                                                        |          
+                                  |                                                                                                                         --1.10%--0xffffffffa7194660
+                                  |                                                                                                                                   |          
+                                  |                                                                                                                                    --1.10%--0xffffffffa5e8b893
+                                  |                                                                                                                                              0xffffffffa63357e7
+                                  |                                                                                                                                              |          
+                                  |                                                                                                                                               --1.07%--0xffffffffa633574b
+                                  |          
+                                  |--6.37%--collision(Mesh*, Mesh const*)
+                                  |          
+                                   --5.08%--propagation(Mesh*, Mesh const*)
+
+    19.06%    18.96%  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+            |--5.17%--0x3fdb5a2dfc571406
+            |          0x2a00000322
+            |          main
+            |          collision(Mesh*, Mesh const*)
+            |          
+            |--4.66%--0x3fdbd875d243b76b
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --4.65%--collision(Mesh*, Mesh const*)
+            |          
+            |--4.58%--0x3fdc71c71c71c71c
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --4.58%--collision(Mesh*, Mesh const*)
+            |          
+             --4.54%--0x3fdbd32c7f160cb7
+                       0x2a00000322
+                       main
+                       collision(Mesh*, Mesh const*)
+
+    17.81%     0.00%  [.] 0x3fdb5a2dfc571406                                                                                         -      -            
+            |          
+             --17.81%--0x2a00000322
+                       |          
+                        --17.81%--main
+                                  |          
+                                  |--7.30%--collision(Mesh*, Mesh const*)
+                                  |          
+                                  |--5.00%--propagation(Mesh*, Mesh const*)
+                                  |          
+                                   --4.90%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                             |          
+                                              --4.04%--PMPI_Sendrecv
+                                                        |          
+                                                         --3.26%--mca_pml_ob1_send
+                                                                   |          
+                                                                    --3.12%--opal_progress
+
+    17.74%     0.00%  [.] 0x3fdbd875d243b76b                                                                                         -      -            
+            |
+            ---0x2a00000322
+               |          
+                --17.74%--main
+                          |          
+                          |--6.49%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--5.57%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                          |          |          
+                          |           --5.15%--PMPI_Sendrecv
+                          |                     |          
+                          |                      --4.38%--mca_pml_ob1_send
+                          |                                |          
+                          |                                 --4.21%--opal_progress
+                          |          
+                           --5.07%--propagation(Mesh*, Mesh const*)
+
+    17.34%     0.51%  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --16.83%--mca_pml_ob1_send
+                       |          
+                       |--11.67%--opal_progress
+                       |          
+                        --3.54%--opal_progress
+
+    17.11%     0.00%  [.] 0x3fdc71c71c71c71c                                                                                         -      -            
+            |
+            ---0x2a00000322
+               |          
+                --17.07%--main
+                          |          
+                          |--6.48%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--4.89%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --4.82%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                                     |          
+                                      --4.40%--PMPI_Sendrecv
+                                                |          
+                                                 --4.23%--mca_pml_ob1_send
+                                                           |          
+                                                            --4.04%--opal_progress
+
+    15.90%     1.75%  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --14.16%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --14.07%--PMPI_Sendrecv
+                                  |          
+                                   --11.70%--mca_pml_ob1_send
+                                             |          
+                                             |--9.28%--opal_progress
+                                             |          
+                                              --1.97%--opal_progress
+
+    14.45%    14.35%  [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+            |--3.65%--0x3fdbd32c7f160cb7
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --3.65%--propagation(Mesh*, Mesh const*)
+            |          
+            |--3.60%--0x3fdbd875d243b76b
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --3.60%--propagation(Mesh*, Mesh const*)
+            |          
+            |--3.60%--0x3fdb5a2dfc571406
+            |          0x2a00000322
+            |          |          
+            |           --3.60%--main
+            |                     |          
+            |                      --3.60%--propagation(Mesh*, Mesh const*)
+            |          
+             --3.49%--0x3fdc71c71c71c71c
+                       0x2a00000322
+                       |          
+                        --3.48%--main
+                                  |          
+                                   --3.48%--propagation(Mesh*, Mesh const*)
+
+     8.66%     0.01%  [k] 0xffffffffa5c0012b                                                                                         -      -            
+            |          
+             --8.66%--0xffffffffa5c0012b
+                       |          
+                        --8.53%--0xffffffffa7194660
+                                  |          
+                                  |--4.61%--0xffffffffa5e8b893
+                                  |          |          
+                                  |           --4.61%--0xffffffffa63357e7
+                                  |                     |          
+                                  |                      --4.52%--0xffffffffa633574b
+                                  |                                |          
+                                  |                                 --3.96%--0xffffffffa63354ad
+                                  |                                           |          
+                                  |                                           |--1.86%--0xffffffffa633518e
+                                  |                                           |          |          
+                                  |                                           |           --1.86%--0xffffffffa62f7b89
+                                  |                                           |                     |          
+                                  |                                           |                      --1.84%--0xffffffffa62f72a9
+                                  |                                           |                                |          
+                                  |                                           |                                 --1.58%--0xffffffffa62f5fa7
+                                  |                                           |                                           |          
+                                  |                                           |                                            --1.30%--0xffffffffa62f5e6a
+                                  |                                           |                                                      |          
+                                  |                                           |                                                       --1.20%--0xffffffffa62f5c9a
+                                  |                                           |                                                                 |          
+                                  |                                           |                                                                  --1.13%--0xffffffffa62f5707
+                                  |                                           |          
+                                  |                                            --1.63%--0xffffffffa6335231
+                                  |                                                      |          
+                                  |                                                       --1.56%--0xffffffffa679e31f
+                                  |                                                                 |          
+                                  |                                                                  --1.29%--0xffffffffa679dc98
+                                  |          
+                                   --1.00%--0xffffffffa5e89d89
+                                             0xffffffffa63e8529
+
+     8.53%     0.01%  [k] 0xffffffffa7194660                                                                                         -      -            
+            |          
+             --8.53%--0xffffffffa7194660
+                       |          
+                       |--4.61%--0xffffffffa5e8b893
+                       |          |          
+                       |           --4.61%--0xffffffffa63357e7
+                       |                     |          
+                       |                      --4.52%--0xffffffffa633574b
+                       |                                |          
+                       |                                 --3.96%--0xffffffffa63354ad
+                       |                                           |          
+                       |                                           |--1.86%--0xffffffffa633518e
+                       |                                           |          |          
+                       |                                           |           --1.86%--0xffffffffa62f7b89
+                       |                                           |                     |          
+                       |                                           |                      --1.84%--0xffffffffa62f72a9
+                       |                                           |                                |          
+                       |                                           |                                 --1.58%--0xffffffffa62f5fa7
+                       |                                           |                                           |          
+                       |                                           |                                            --1.30%--0xffffffffa62f5e6a
+                       |                                           |                                                      |          
+                       |                                           |                                                       --1.20%--0xffffffffa62f5c9a
+                       |                                           |                                                                 |          
+                       |                                           |                                                                  --1.13%--0xffffffffa62f5707
+                       |                                           |          
+                       |                                            --1.63%--0xffffffffa6335231
+                       |                                                      |          
+                       |                                                       --1.56%--0xffffffffa679e31f
+                       |                                                                 |          
+                       |                                                                  --1.29%--0xffffffffa679dc98
+                       |          
+                        --1.00%--0xffffffffa5e89d89
+                                  0xffffffffa63e8529
+
+     7.60%     7.55%  [.] collision(Mesh*, Mesh const*)                                                                              -      -            
+            |          
+            |--2.10%--0x3fdb5a2dfc571406
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --2.09%--collision(Mesh*, Mesh const*)
+            |          
+            |--1.85%--0x3fdc71c71c71c71c
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --1.85%--collision(Mesh*, Mesh const*)
+            |          
+            |--1.80%--0x3fdbd875d243b76b
+            |          0x2a00000322
+            |          main
+            |          collision(Mesh*, Mesh const*)
+            |          
+             --1.80%--0x3fdbd32c7f160cb7
+                       0x2a00000322
+                       main
+                       collision(Mesh*, Mesh const*)
+
+     7.53%     0.24%  [.] mca_pml_ob1_send                                                                                           -      -            
+            |          
+             --7.29%--mca_pml_ob1_send
+                       |          
+                       |--2.43%--opal_progress
+                       |          
+                       |--2.29%--opal_progress
+                       |          
+                       |--1.11%--opal_progress
+                       |          
+                        --1.07%--opal_progress
+
+     7.48%     0.00%  [.] PMPI_Send                                                                                                  -      -            
+            |          
+             --7.01%--mca_pml_ob1_send
+                       |          
+                       |--3.50%--opal_progress
+                       |          
+                        --3.14%--opal_progress
+
+     6.71%     6.59%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                                -      -            
+            |          
+            |--1.55%--0x3fbc71c71c71c71c
+            |          0x7657f860f950
+            |          0x7fff6fa8e658
+            |          special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+            |          
+             --1.47%--0x3fa3e048aa0e8001
+                       0x73537dfcccb0
+                       0x7fffe186a558
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     6.43%     0.68%  [.] lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)                                                               -      -            
+            |          
+             --5.75%--lbm_comm_halo_exchange(lbm_comm_t_s*, Mesh*)
+                       |          
+                        --5.72%--PMPI_Sendrecv
+                                  |          
+                                   --5.13%--mca_pml_ob1_send
+                                             |          
+                                              --4.91%--opal_progress
+
+     5.77%     0.00%  [.] save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)                                                             -      -            
+            |          
+             --5.76%--save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+                       |          
+                        --4.89%--PMPI_Send
+                                  |          
+                                   --4.64%--mca_pml_ob1_send
+                                             |          
+                                              --4.44%--opal_progress
+
+     5.63%     5.59%  [.] propagation(Mesh*, Mesh const*)                                                                            -      -            
+            |          
+            |--1.44%--0x3fdbd875d243b76b
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --1.44%--propagation(Mesh*, Mesh const*)
+            |          
+            |--1.40%--0x3fdbd32c7f160cb7
+            |          0x2a00000322
+            |          main
+            |          |          
+            |           --1.40%--propagation(Mesh*, Mesh const*)
+            |          
+            |--1.38%--0x3fdb5a2dfc571406
+            |          0x2a00000322
+            |          main
+            |          propagation(Mesh*, Mesh const*)
+            |          
+             --1.37%--0x3fdc71c71c71c71c
+                       0x2a00000322
+                       main
+                       |          
+                        --1.36%--propagation(Mesh*, Mesh const*)
+
+     4.72%     0.01%  [.] process_vm_readv                                                                                           -      -            
+            |          
+             --4.71%--process_vm_readv
+                       |          
+                        --4.66%--0xffffffffa5c0012b
+                                  |          
+                                   --4.61%--0xffffffffa7194660
+                                             |          
+                                              --4.61%--0xffffffffa5e8b893
+                                                        |          
+                                                         --4.61%--0xffffffffa63357e7
+                                                                   |          
+                                                                    --4.52%--0xffffffffa633574b
+                                                                              |          
+                                                                               --3.96%--0xffffffffa63354ad
+                                                                                         |          
+                                                                                         |--1.86%--0xffffffffa633518e
+                                                                                         |          |          
+                                                                                         |           --1.86%--0xffffffffa62f7b89
+                                                                                         |                     |          
+                                                                                         |                      --1.84%--0xffffffffa62f72a9
+                                                                                         |                                |          
+                                                                                         |                                 --1.58%--0xffffffffa62f5fa7
+                                                                                         |                                           |          
+                                                                                         |                                            --1.30%--0xffffffffa62f5e6a
+                                                                                         |                                                      |          
+                                                                                         |                                                       --1.20%--0xffffffffa62f5c9a
+                                                                                         |                                                                 |          
+                                                                                         |                                                                  --1.13%--0xffffffffa62f5707
+                                                                                         |          
+                                                                                          --1.63%--0xffffffffa6335231
+                                                                                                    |          
+                                                                                                     --1.56%--0xffffffffa679e31f
+                                                                                                               |          
+                                                                                                                --1.29%--0xffffffffa679dc98
+
+     4.61%     0.00%  [.] 0xffffffffa5e8b893                                                                                         -      -            
+            |          
+             --4.61%--0xffffffffa5e8b893
+                       |          
+                        --4.61%--0xffffffffa63357e7
+                                  |          
+                                   --4.52%--0xffffffffa633574b
+                                             |          
+                                              --3.96%--0xffffffffa63354ad
+                                                        |          
+                                                        |--1.86%--0xffffffffa633518e
+                                                        |          |          
+                                                        |           --1.86%--0xffffffffa62f7b89
+                                                        |                     |          
+                                                        |                      --1.84%--0xffffffffa62f72a9
+                                                        |                                |          
+                                                        |                                 --1.58%--0xffffffffa62f5fa7
+                                                        |                                           |          
+                                                        |                                            --1.30%--0xffffffffa62f5e6a
+                                                        |                                                      |          
+                                                        |                                                       --1.20%--0xffffffffa62f5c9a
+                                                        |                                                                 |          
+                                                        |                                                                  --1.13%--0xffffffffa62f5707
+                                                        |          
+                                                         --1.63%--0xffffffffa6335231
+                                                                   |          
+                                                                    --1.56%--0xffffffffa679e31f
+                                                                              |          
+                                                                               --1.29%--0xffffffffa679dc98
+
+     4.61%     0.00%  [.] 0xffffffffa63357e7                                                                                         -      -            
+            |          
+             --4.52%--0xffffffffa633574b
+                       |          
+                        --3.96%--0xffffffffa63354ad
+                                  |          
+                                  |--1.86%--0xffffffffa633518e
+                                  |          |          
+                                  |           --1.86%--0xffffffffa62f7b89
+                                  |                     |          
+                                  |                      --1.84%--0xffffffffa62f72a9
+                                  |                                |          
+                                  |                                 --1.58%--0xffffffffa62f5fa7
+                                  |                                           |          
+                                  |                                            --1.30%--0xffffffffa62f5e6a
+                                  |                                                      |          
+                                  |                                                       --1.20%--0xffffffffa62f5c9a
+                                  |                                                                 |          
+                                  |                                                                  --1.13%--0xffffffffa62f5707
+                                  |          
+                                   --1.63%--0xffffffffa6335231
+                                             |          
+                                              --1.56%--0xffffffffa679e31f
+                                                        |          
+                                                         --1.29%--0xffffffffa679dc98
+
+     4.52%     0.00%  [.] 0xffffffffa633574b                                                                                         -      -            
+            |          
+             --4.52%--0xffffffffa633574b
+                       |          
+                        --3.96%--0xffffffffa63354ad
+                                  |          
+                                  |--1.86%--0xffffffffa633518e
+                                  |          |          
+                                  |           --1.86%--0xffffffffa62f7b89
+                                  |                     |          
+                                  |                      --1.84%--0xffffffffa62f72a9
+                                  |                                |          
+                                  |                                 --1.58%--0xffffffffa62f5fa7
+                                  |                                           |          
+                                  |                                            --1.30%--0xffffffffa62f5e6a
+                                  |                                                      |          
+                                  |                                                       --1.20%--0xffffffffa62f5c9a
+                                  |                                                                 |          
+                                  |                                                                  --1.13%--0xffffffffa62f5707
+                                  |          
+                                   --1.63%--0xffffffffa6335231
+                                             |          
+                                              --1.56%--0xffffffffa679e31f
+                                                        |          
+                                                         --1.29%--0xffffffffa679dc98
+
+     4.09%     4.09%  [.] 0x000000000007bd37                                                                                         -      -            
+            |          
+             --1.38%--save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+                       PMPI_Send
+                       |          
+                        --1.31%--mca_pml_ob1_send
+                                  |          
+                                   --1.27%--opal_progress
+
+     3.96%     0.00%  [.] 0xffffffffa63354ad                                                                                         -      -            
+            |          
+             --3.96%--0xffffffffa63354ad
+                       |          
+                       |--1.86%--0xffffffffa633518e
+                       |          |          
+                       |           --1.86%--0xffffffffa62f7b89
+                       |                     |          
+                       |                      --1.84%--0xffffffffa62f72a9
+                       |                                |          
+                       |                                 --1.58%--0xffffffffa62f5fa7
+                       |                                           |          
+                       |                                            --1.30%--0xffffffffa62f5e6a
+                       |                                                      |          
+                       |                                                       --1.20%--0xffffffffa62f5c9a
+                       |                                                                 |          
+                       |                                                                  --1.13%--0xffffffffa62f5707
+                       |          
+                        --1.63%--0xffffffffa6335231
+                                  |          
+                                   --1.56%--0xffffffffa679e31f
+                                             |          
+                                              --1.29%--0xffffffffa679dc98
+
+     3.37%     0.01%  [.] mca_pml_ob1_recv_request_progress_rget                                                                     -      -            
+            |          
+             --3.36%--mca_pml_ob1_recv_request_progress_rget
+                       |          
+                        --3.35%--mca_pml_ob1_recv_request_get_frag
+                                  |          
+                                   --3.31%--process_vm_readv
+                                             |          
+                                              --3.28%--0xffffffffa5c0012b
+                                                        |          
+                                                         --3.25%--0xffffffffa7194660
+                                                                   |          
+                                                                    --3.25%--0xffffffffa5e8b893
+                                                                              |          
+                                                                               --3.25%--0xffffffffa63357e7
+                                                                                         |          
+                                                                                          --3.18%--0xffffffffa633574b
+                                                                                                    |          
+                                                                                                     --2.76%--0xffffffffa63354ad
+                                                                                                               |          
+                                                                                                               |--1.29%--0xffffffffa633518e
+                                                                                                               |          |          
+                                                                                                               |           --1.28%--0xffffffffa62f7b89
+                                                                                                               |                     |          
+                                                                                                               |                      --1.27%--0xffffffffa62f72a9
+                                                                                                               |                                |          
+                                                                                                               |                                 --1.09%--0xffffffffa62f5fa7
+                                                                                                               |          
+                                                                                                                --1.14%--0xffffffffa6335231
+                                                                                                                          |          
+                                                                                                                           --1.10%--0xffffffffa679e31f
+
+     3.37%     0.01%  [.] mca_pml_ob1_recv_request_get_frag                                                                          -      -            
+            |          
+             --3.36%--mca_pml_ob1_recv_request_get_frag
+                       |          
+                        --3.31%--process_vm_readv
+                                  |          
+                                   --3.28%--0xffffffffa5c0012b
+                                             |          
+                                              --3.25%--0xffffffffa7194660
+                                                        |          
+                                                         --3.25%--0xffffffffa5e8b893
+                                                                   |          
+                                                                    --3.25%--0xffffffffa63357e7
+                                                                              |          
+                                                                               --3.18%--0xffffffffa633574b
+                                                                                         |          
+                                                                                          --2.76%--0xffffffffa63354ad
+                                                                                                    |          
+                                                                                                    |--1.29%--0xffffffffa633518e
+                                                                                                    |          |          
+                                                                                                    |           --1.28%--0xffffffffa62f7b89
+                                                                                                    |                     |          
+                                                                                                    |                      --1.27%--0xffffffffa62f72a9
+                                                                                                    |                                |          
+                                                                                                    |                                 --1.09%--0xffffffffa62f5fa7
+                                                                                                    |          
+                                                                                                     --1.14%--0xffffffffa6335231
+                                                                                                               |          
+                                                                                                                --1.10%--0xffffffffa679e31f
+
+     2.99%     0.00%  [.] save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)                                                             -      -            
+            |          
+             --2.59%--PMPI_Send
+                       |          
+                        --2.37%--mca_pml_ob1_send
+                                  |          
+                                  |--1.17%--opal_progress
+                                  |          
+                                   --1.02%--opal_progress
+
+     2.70%     2.64%  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                                                -      -            
+     2.47%     0.03%  [.] mca_btl_vader_poll_handle_frag                                                                             -      -            
+            |          
+             --2.44%--mca_btl_vader_poll_handle_frag
+
+     2.16%     0.00%  [.] 0x3fbc71c71c71c71c                                                                                         -      -            
+            |          
+             --2.15%--0x7657f860f950
+                       0x7fff6fa8e658
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.16%     2.11%  [.] __memmove_avx512_unaligned_erms                                                                            -      -            
+     2.15%     0.00%  [.] 0x00007657f860f950                                                                                         -      -            
+            |
+            ---0x7fff6fa8e658
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.15%     0.00%  [.] 0x00007fff6fa8e658                                                                                         -      -            
+            |
+            ---special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.12%     0.00%  [.] 0x3fa3e048aa0e8001                                                                                         -      -            
+            |
+            ---0x73537dfcccb0
+               0x7fffe186a558
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.12%     0.00%  [.] 0x000073537dfcccb0                                                                                         -      -            
+            |
+            ---0x7fffe186a558
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.12%     0.00%  [.] 0x00007fffe186a558                                                                                         -      -            
+            |
+            ---special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     2.10%     0.00%  [.] __libc_start_main@@GLIBC_2.34                                                                              -      -            
+            |          
+             --1.20%--__libc_start_call_main
+
+     2.03%     0.75%  [.] save_frame(_IO_FILE*, Mesh const*)                                                                         -      -            
+            |          
+             --1.27%--save_frame(_IO_FILE*, Mesh const*)
+
+     1.96%     1.92%  [.] (anonymous namespace)::pack_row(Mesh const*, unsigned int, std::vector<double, std::allocator<double> >&)  -      -            
+            |          
+             --1.93%--(anonymous namespace)::pack_row(Mesh const*, unsigned int, std::vector<double, std::allocator<double> >&)
+
+     1.87%     0.00%  [.] 0xffffffffa633518e                                                                                         -      -            
+            |          
+             --1.86%--0xffffffffa633518e
+                       |          
+                        --1.86%--0xffffffffa62f7b89
+                                  |          
+                                   --1.84%--0xffffffffa62f72a9
+                                             |          
+                                              --1.58%--0xffffffffa62f5fa7
+                                                        |          
+                                                         --1.30%--0xffffffffa62f5e6a
+                                                                   |          
+                                                                    --1.20%--0xffffffffa62f5c9a
+                                                                              |          
+                                                                               --1.13%--0xffffffffa62f5707
+
+     1.86%     0.00%  [.] 0xffffffffa62f7b89                                                                                         -      -            
+            |          
+             --1.86%--0xffffffffa62f7b89
+                       |          
+                        --1.84%--0xffffffffa62f72a9
+                                  |          
+                                   --1.58%--0xffffffffa62f5fa7
+                                             |          
+                                              --1.30%--0xffffffffa62f5e6a
+                                                        |          
+                                                         --1.20%--0xffffffffa62f5c9a
+                                                                   |          
+                                                                    --1.13%--0xffffffffa62f5707
+
+     1.85%     0.00%  [.] 0xffffffffa62f72a9                                                                                         -      -            
+            |          
+             --1.84%--0xffffffffa62f72a9
+                       |          
+                        --1.58%--0xffffffffa62f5fa7
+                                  |          
+                                   --1.30%--0xffffffffa62f5e6a
+                                             |          
+                                              --1.20%--0xffffffffa62f5c9a
+                                                        |          
+                                                         --1.13%--0xffffffffa62f5707
+
+     1.71%     1.03%  [.] 0xffffffffa679dc98                                                                                         -      -            
+     1.63%     0.05%  [.] 0xffffffffa6335231                                                                                         -      -            
+            |          
+             --1.58%--0xffffffffa6335231
+                       |          
+                        --1.51%--0xffffffffa679e31f
+                                  |          
+                                   --1.24%--0xffffffffa679dc98
+
+     1.58%     0.03%  [.] 0xffffffffa62f5fa7                                                                                         -      -            
+            |          
+             --1.55%--0xffffffffa62f5fa7
+                       |          
+                        --1.27%--0xffffffffa62f5e6a
+                                  |          
+                                   --1.17%--0xffffffffa62f5c9a
+                                             |          
+                                              --1.10%--0xffffffffa62f5707
+
+     1.58%     0.04%  [.] 0xffffffffa679e31f                                                                                         -      -            
+            |          
+             --1.54%--0xffffffffa679e31f
+                       |          
+                        --1.27%--0xffffffffa679dc98
+
+     1.42%     0.01%  [.] mca_pml_ob1_recv_request_progress_rget                                                                     -      -            
+            |          
+             --1.41%--mca_pml_ob1_recv_request_progress_rget
+                       |          
+                        --1.40%--mca_pml_ob1_recv_request_get_frag
+                                  |          
+                                   --1.39%--process_vm_readv
+                                             |          
+                                              --1.38%--0xffffffffa5c0012b
+                                                        |          
+                                                         --1.36%--0xffffffffa7194660
+                                                                   0xffffffffa5e8b893
+                                                                   0xffffffffa63357e7
+                                                                   |          
+                                                                    --1.34%--0xffffffffa633574b
+                                                                              |          
+                                                                               --1.20%--0xffffffffa63354ad
+
+     1.41%     0.01%  [.] mca_pml_ob1_recv_request_get_frag                                                                          -      -            
+            |          
+             --1.40%--mca_pml_ob1_recv_request_get_frag
+                       |          
+                        --1.39%--process_vm_readv
+                                  |          
+                                   --1.38%--0xffffffffa5c0012b
+                                             |          
+                                              --1.36%--0xffffffffa7194660
+                                                        0xffffffffa5e8b893
+                                                        0xffffffffa63357e7
+                                                        |          
+                                                         --1.34%--0xffffffffa633574b
+                                                                   |          
+                                                                    --1.20%--0xffffffffa63354ad
+
+     1.31%     0.03%  [.] 0xffffffffa62f5e6a                                                                                         -      -            
+            |          
+             --1.28%--0xffffffffa62f5e6a
+                       |          
+                        --1.18%--0xffffffffa62f5c9a
+                                  |          
+                                   --1.11%--0xffffffffa62f5707
+
+     1.27%     0.00%  [k] 0x00005c6d5dad8030                                                                                         -      -            
+            |
+            ---save_frame_all_domain(_IO_FILE*, Mesh*, Mesh*)
+               PMPI_Recv
+               mca_pml_ob1_recv
+
+     1.27%     0.00%  [.] PMPI_Recv                                                                                                  -      -            
+            |
+            ---mca_pml_ob1_recv
+
+     1.24%     1.18%  [.] __memset_avx512_unaligned_erms                                                                             -      -            
+     1.21%     0.01%  [.] 0xffffffffa62f5c9a                                                                                         -      -            
+            |          
+             --1.19%--0xffffffffa62f5c9a
+                       |          
+                        --1.12%--0xffffffffa62f5707
+
+     1.20%     0.00%  [.] __libc_start_call_main                                                                                     -      -            
+     1.18%     0.00%  [.] 0x00007a1a7b03a1d8                                                                                         -      -            
+            |          
+             --1.18%--mca_btl_vader_poll_handle_frag
+                       |          
+                        --1.15%--0x7a1a7ad83a94
+                                  |          
+                                   --1.15%--0x7a1a7ad82c6a
+                                             mca_pml_ob1_recv_request_progress_rget
+                                             |          
+                                              --1.15%--mca_pml_ob1_recv_request_get_frag
+                                                        |          
+                                                         --1.13%--process_vm_readv
+                                                                   |          
+                                                                    --1.11%--0xffffffffa5c0012b
+                                                                              |          
+                                                                               --1.10%--0xffffffffa7194660
+                                                                                         |          
+                                                                                          --1.10%--0xffffffffa5e8b893
+                                                                                                    0xffffffffa63357e7
+                                                                                                    |          
+                                                                                                     --1.07%--0xffffffffa633574b
+
+     1.18%     0.00%  [.] 0x00006256fe08a415                                                                                         -      -            
+            |
+            ---__libc_start_main@@GLIBC_2.34
+               __libc_start_call_main
+
+     1.16%     0.00%  [.] 0x00007a1a7ad83a94                                                                                         -      -            
+            |          
+             --1.16%--0x7a1a7ad82c6a
+                       mca_pml_ob1_recv_request_progress_rget
+                       |          
+                        --1.15%--mca_pml_ob1_recv_request_get_frag
+                                  |          
+                                   --1.13%--process_vm_readv
+                                             |          
+                                              --1.11%--0xffffffffa5c0012b
+                                                        |          
+                                                         --1.10%--0xffffffffa7194660
+                                                                   |          
+                                                                    --1.10%--0xffffffffa5e8b893
+                                                                              0xffffffffa63357e7
+                                                                              |          
+                                                                               --1.07%--0xffffffffa633574b
+
+     1.16%     0.00%  [.] 0x00007a1a7ad82c6a                                                                                         -      -            
+            |
+            ---mca_pml_ob1_recv_request_progress_rget
+               |          
+                --1.15%--mca_pml_ob1_recv_request_get_frag
+                          |          
+                           --1.13%--process_vm_readv
+                                     |          
+                                      --1.11%--0xffffffffa5c0012b
+                                                |          
+                                                 --1.10%--0xffffffffa7194660
+                                                           |          
+                                                            --1.10%--0xffffffffa5e8b893
+                                                                      0xffffffffa63357e7
+                                                                      |          
+                                                                       --1.07%--0xffffffffa633574b
+
+     1.15%     0.02%  [.] 0xffffffffa62f5707                                                                                         -      -            
+            |          
+             --1.13%--0xffffffffa62f5707
+
+     1.12%     0.00%  [k] 0000000000000000                                                                                           -      -            
+     1.04%     0.01%  [.] __GI___libc_write                                                                                          -      -            
+            |          
+             --1.04%--__GI___libc_write
+                       |          
+                        --1.03%--0xffffffffa5c0012b
+                                  |          
+                                   --1.01%--0xffffffffa7194660
+                                             |          
+                                              --1.00%--0xffffffffa5e89d89
+                                                        0xffffffffa63e8529
+
+     1.04%     0.01%  [.] event_base_loop                                                                                            -      -            
+            |          
+             --1.03%--event_base_loop
+
+     1.03%     0.03%  [.] mca_pml_ob1_recv_req_start                                                                                 -      -            
+            |          
+             --1.01%--mca_pml_ob1_recv_req_start
+
+     1.02%     0.01%  [.] mca_btl_vader_poll_handle_frag                                                                             -      -            
+            |          
+             --1.01%--mca_btl_vader_poll_handle_frag
+
+     1.02%     0.00%  [.] _IO_file_xsputn@@GLIBC_2.2.5                                                                               -      -            
+            |          
+             --1.02%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.02%     0.00%  [.] _IO_file_write@@GLIBC_2.2.5                                                                                -      -            
+            |          
+             --1.02%--_IO_file_write@@GLIBC_2.2.5
+                       |          
+                        --1.01%--__GI___libc_write
+                                  |          
+                                   --1.01%--0xffffffffa5c0012b
+
+     1.00%     0.00%  [.] 0xffffffffa5e89d89                                                                                         -      -            
+            |          
+             --1.00%--0xffffffffa5e89d89
+                       0xffffffffa63e8529
+
+     1.00%     0.00%  [.] 0xffffffffa63e8529                                                                                         -      -            
+            |          
+             --1.00%--0xffffffffa63e8529
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
