@@ -1,0 +1,256 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 49K of event 'cycles:P'
+# Event count (approx.): 56678108576
+#
+# Children      Self  CPU  Symbol                                                                                        IPC   [IPC Coverage]
+# ........  ........  ...  ............................................................................................  ....................
+#
+    49.97%     0.00%  016  [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               0xa200000322
+               |          
+                --49.94%--main
+                          |          
+                          |--29.19%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--18.50%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --1.98%--__memmove_avx512_unaligned_erms
+
+    49.97%     0.00%  016  [.] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+                --49.94%--main
+                          |          
+                          |--29.19%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--18.50%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --1.98%--__memmove_avx512_unaligned_erms
+
+    49.95%     0.01%  016  [.] main                                                                                      -      -            
+            |          
+             --49.94%--main
+                       |          
+                       |--29.19%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--18.50%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --1.98%--__memmove_avx512_unaligned_erms
+
+    29.19%    28.96%  016  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --28.96%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       collision(Mesh*, Mesh const*)
+
+    27.36%     0.00%  000  [.] main                                                                                      -      -            
+            |          
+             --27.35%--main
+                       |          
+                       |--15.62%--collision(Mesh*, Mesh const*)
+                       |          
+                       |--9.97%--propagation(Mesh*, Mesh const*)
+                       |          
+                        --1.04%--__memmove_avx512_unaligned_erms
+
+    27.13%     0.00%  000  [k] 0x000000a200000322                                                                        -      -            
+            |
+            ---0xa200000322
+               |          
+                --27.11%--main
+                          |          
+                          |--15.62%--collision(Mesh*, Mesh const*)
+                          |          
+                          |--9.97%--propagation(Mesh*, Mesh const*)
+                          |          
+                           --1.04%--__memmove_avx512_unaligned_erms
+
+    26.83%     0.00%  000  [.] 0x3fdc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fdc71c71c71c71c
+               |          
+                --26.82%--0xa200000322
+                          |          
+                           --26.81%--main
+                                     |          
+                                     |--15.62%--collision(Mesh*, Mesh const*)
+                                     |          
+                                     |--9.97%--propagation(Mesh*, Mesh const*)
+                                     |          
+                                      --1.04%--__memmove_avx512_unaligned_erms
+
+    18.51%    18.38%  016  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --18.38%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --18.38%--propagation(Mesh*, Mesh const*)
+
+    15.62%    15.53%  000  [.] collision(Mesh*, Mesh const*)                                                             -      -            
+            |          
+             --15.53%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       collision(Mesh*, Mesh const*)
+
+    10.19%     9.96%  016  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+            |          
+             --1.03%--0x3fbc71c71c71c71c
+                       0x77e9d0a23850
+                       0x7ffcee9e2e58
+                       special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     9.97%     9.92%  000  [.] propagation(Mesh*, Mesh const*)                                                           -      -            
+            |          
+             --9.92%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --9.92%--propagation(Mesh*, Mesh const*)
+
+     5.23%     5.15%  000  [.] special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)                               -      -            
+     2.91%     1.06%  016  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+            |          
+             --1.85%--save_frame(_IO_FILE*, Mesh const*)
+                       |          
+                        --1.05%--_IO_fwrite
+                                  |          
+                                   --1.04%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     2.00%     1.97%  016  [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --1.97%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       |          
+                        --1.97%--__memmove_avx512_unaligned_erms
+
+     1.47%     0.54%  000  [.] save_frame(_IO_FILE*, Mesh const*)                                                        -      -            
+     1.23%     0.00%  000  [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --1.23%--0xffffffffa5c0012b
+                       |          
+                        --1.22%--0xffffffffa7194660
+
+     1.23%     0.00%  016  [.] 0xffffffffa5c0012b                                                                        -      -            
+            |          
+             --1.23%--0xffffffffa5c0012b
+                       |          
+                        --1.21%--0xffffffffa7194660
+                                  |          
+                                   --1.15%--0xffffffffa5e89d89
+                                             |          
+                                              --1.15%--0xffffffffa63e8529
+                                                        |          
+                                                         --1.01%--0xffffffffa63e8481
+
+     1.22%     0.00%  000  [.] 0xffffffffa7194660                                                                        -      -            
+            |          
+             --1.22%--0xffffffffa7194660
+
+     1.22%     0.02%  016  [.] __GI___libc_write                                                                         -      -            
+            |          
+             --1.20%--__GI___libc_write
+                       |          
+                        --1.17%--0xffffffffa5c0012b
+                                  |          
+                                   --1.15%--0xffffffffa7194660
+                                             |          
+                                              --1.15%--0xffffffffa5e89d89
+                                                        0xffffffffa63e8529
+                                                        |          
+                                                         --1.01%--0xffffffffa63e8481
+
+     1.22%     0.01%  016  [.] _IO_file_xsputn@@GLIBC_2.2.5                                                              -      -            
+            |          
+             --1.21%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.21%     0.00%  016  [.] _IO_file_write@@GLIBC_2.2.5                                                               -      -            
+            |          
+             --1.20%--_IO_file_write@@GLIBC_2.2.5
+                       |          
+                        --1.20%--__GI___libc_write
+                                  |          
+                                   --1.18%--0xffffffffa5c0012b
+                                             |          
+                                              --1.15%--0xffffffffa7194660
+                                                        |          
+                                                         --1.15%--0xffffffffa5e89d89
+                                                                   |          
+                                                                    --1.15%--0xffffffffa63e8529
+                                                                              |          
+                                                                               --1.01%--0xffffffffa63e8481
+
+     1.21%     0.00%  016  [.] 0xffffffffa7194660                                                                        -      -            
+            |
+            ---0xffffffffa7194660
+               |          
+                --1.15%--0xffffffffa5e89d89
+                          |          
+                           --1.15%--0xffffffffa63e8529
+                                     |          
+                                      --1.01%--0xffffffffa63e8481
+
+     1.15%     0.00%  016  [.] 0xffffffffa5e89d89                                                                        -      -            
+            |
+            ---0xffffffffa5e89d89
+               |          
+                --1.15%--0xffffffffa63e8529
+                          |          
+                           --1.01%--0xffffffffa63e8481
+
+     1.15%     0.00%  016  [.] 0xffffffffa63e8529                                                                        -      -            
+            |
+            ---0xffffffffa63e8529
+               |          
+                --1.01%--0xffffffffa63e8481
+
+     1.05%     0.00%  016  [.] _IO_fwrite                                                                                -      -            
+            |
+            ---_IO_fwrite
+               |          
+                --1.04%--_IO_file_xsputn@@GLIBC_2.2.5
+
+     1.05%     1.04%  000  [.] __memmove_avx512_unaligned_erms                                                           -      -            
+            |          
+             --1.04%--0x3fdc71c71c71c71c
+                       0xa200000322
+                       main
+                       __memmove_avx512_unaligned_erms
+
+     1.05%     0.00%  016  [.] 0x3fbc71c71c71c71c                                                                        -      -            
+            |
+            ---0x3fbc71c71c71c71c
+               0x77e9d0a23850
+               0x7ffcee9e2e58
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.05%     0.00%  016  [.] 0x000077e9d0a23850                                                                        -      -            
+            |
+            ---0x77e9d0a23850
+               0x7ffcee9e2e58
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.05%     0.00%  016  [.] 0x00007ffcee9e2e58                                                                        -      -            
+            |
+            ---0x7ffcee9e2e58
+               special_cells(Mesh*, lbm_mesh_type_s*, lbm_comm_t_s const*)
+
+     1.01%     0.00%  016  [.] 0xffffffffa63e8481                                                                        -      -            
+            |
+            ---0xffffffffa63e8481
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
