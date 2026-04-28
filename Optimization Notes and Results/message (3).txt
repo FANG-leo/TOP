@@ -1,0 +1,47 @@
+优化原因（精确定位框架开销）：
+    在成功修复 MPI 死锁并确立 np=2, omp=1（双进程，各单线程）为当前最高效的黄金架构后，通信瓶颈已被基本消除（降至 9.4%），计算热点重新浮出水面。性能分析显示，collision()（约占 47%）和 propagation()（约占 34%）是绝对的主力开销。
+    同时，深入代码结构发现了一个致命的“框架冗余”：即使在指定单线程（omp=1）运行时，程序依然会在每次时间步迭代中，强行进入 OpenMP 的并行区域（包含多个 #pragma omp parallel for 和 omp single）。这种为了兼容多线程而留下的框架设计，为当前的单线程“快车道”施加了毫无必要的运行时调度负担。
+
+    优化过程（量身定制单线程快速通道）：
+    针对这两大计算内核，实施了相同的“绕路与简化”策略，彻底摆脱 OpenMP 枷锁：
+
+        分离串行与并行路径：在这两个核心函数中加入了环境探测，如果 omp_get_max_threads() <= 1，则直接执行纯串行逻辑，完全绕过 OpenMP 并行区域；同时保留了旧的多线程代码路径以备后续扩展测试。
+
+        局部辅助函数拆解：在 propagation() 中，将内部列、四边和四角的处理逻辑拆解为独立的局部 Lambda 辅助函数，使单线程调用更加清晰流畅。
+
+        内层循环指针扫描化：在 collision() 和 propagation() 的最内层连续计算循环中，摒弃了反复计算全局索引（idx）的笨重做法，转而使用面向特定列（Column）或平面（Plane）的基础指针递增扫描模式，进一步降低了寻址计算开销。
+        (注：在优化 collision() 期间，曾尝试过过度精简的算术公式重写，导致长周期运行后数值崩溃，证明了并非所有数学化简在 LBM 中都是安全的，该方案被果断废弃)。
+
+    优化结果与分析：
+    通过这两轮有针对性的“裁减冗余”，程序在纯净的 20,000 次基准测试中（无输出）获得了稳定且可观的提升：
+
+        宏观性能跃升：品质因数 (FOM) 从进入此轮优化前的 256.85 MLUPS 攀升至 269.57 MLUPS（仅优化碰撞），最终稳定在 276.30 MLUPS（双核全优化）。
+
+        微观效率改善：perf stat 测量显示，IPC（每周期指令数）从 0.97 提升至 1.11，证明消除了 OpenMP 运行时阻塞后，流水线变得更加通畅；同时 L1 缓存未命中率也因指针扫描带来的更好局部性，从 19.96% 降至 16.28%。
+
+        结论：这两次优化强有力地证明，对于高度优化的代码而言，“量身定制”远胜于“通用兼容”。在特定的黄金架构下，彻底抛弃无用的多线程框架包袱并简化底层寻址逻辑，是进一步突破性能天花板的有效手段。
+
+English Version
+
+    Reason for Optimization (Targeting Framework Overhead):
+    After successfully repairing the MPI deadlock and establishing np=2, omp=1 (2 MPI ranks, 1 OpenMP thread each) as the optimal "golden architecture," communication was no longer the primary bottleneck (dropping to ~9.4%). Profiling revealed that collision() (~47%) and propagation() (~34%) had reclaimed their spots as the dominant compute hotspots.
+    Crucially, structural analysis uncovered a significant "framework redundancy": even when executing strictly single-threaded (omp=1), the code still forced its way into OpenMP parallel regions (including multiple #pragma omp parallel for and omp single constructs) on every single timestep. This generalized multithreaded design imposed completely unnecessary runtime scheduling overhead on the currently preferred single-thread fast path.
+
+    Optimization Process (Tailoring the Single-Thread Fast Path):
+    The same "bypass and simplify" strategy was applied to both dominant kernels to shed the OpenMP burden:
+
+        Isolating Serial and Parallel Paths: Introduced an environment check (omp_get_max_threads() <= 1) within both kernels. If true, the code directly executes pure serial logic, bypassing the OpenMP parallel regions entirely (while preserving the multithreaded path for future tests).
+
+        Decomposing with Local Helpers: In propagation(), the logic for interior columns, edges, and corners was cleanly separated into independent local Lambda helpers, smoothing out the single-threaded execution flow.
+
+        Pointer-Walk Inner Loops: Inside the hottest contiguous loops of both collision() and propagation(), the heavy recalculation of global indices (idx) was abandoned. Instead, the code switched to advancing base-pointer scans tied to specific columns or planes, significantly reducing address generation overhead.
+        (Note: During collision() optimization, an over-aggressive arithmetic simplification attempt caused numerical instability in long-run tests, serving as a reminder that not all mathematical reductions are safe in LBM; it was quickly discarded).
+
+    Optimization Results & Analysis:
+    Through these two rounds of targeted "fat trimming," the program achieved steady and measurable gains in the clean 20,000-iteration benchmark (no output):
+
+        Macro Performance Surge: The Figure of Merit (FOM) climbed from a pre-optimization baseline of 256.85 MLUPS to 269.57 MLUPS (collision optimized), eventually settling at 276.30 MLUPS (both kernels optimized).
+
+        Micro Efficiency Improvements: perf stat data confirmed that IPC (Instructions Per Clock) increased from 0.97 to 1.11, proving that shedding OpenMP runtime overhead unblocked the instruction pipeline. Concurrently, the L1 cache miss rate dropped from 19.96% to 16.28% due to the enhanced spatial locality provided by pointer scanning.
+
+        Conclusion: These optimizations strongly reinforce that for highly tuned code, "custom-tailored" beats "universally compatible." On a specific golden architecture, completely shedding useless multithreading framework baggage and simplifying low-level addressing logic are highly effective methods for breaking through performance ceilings.

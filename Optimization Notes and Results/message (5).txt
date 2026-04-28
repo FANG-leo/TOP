@@ -1,0 +1,95 @@
+项目优化过程中的“负优化”与错路分析
+Analysis of "Negative Optimizations" and Dead Ends in the Project
+中文版本 (Chinese Version)
+
+在 LBM 求解器的优化过程中，我们经历了数次明确的“负优化”（Negative Results）。这些尝试虽然初衷是为了进一步提升性能，但测试结果均未能超越当时的最佳基准。以下是基于项目记录对这些错路的详细总结与剖析：
+1. OpenMP 多线程的并行负收益 (wuxiao3.md, wuxiao4.md)
+
+在单进程基准线已经高度优化（109.62 MLUPS）的情况下，试图通过引入 OpenMP 来获得加速的尝试彻底失败。
+
+    尝试过程：首先，仅对 collision() 内核的外层列循环添加了 #pragma omp parallel for，进行保守的多线程尝试。失败后，进一步将 OpenMP 扩展到 propagation() 内核，试图覆盖两大主要热点以增加并行比例。
+
+    测试结果：单内核并行版本性能降至 99.68 MLUPS。双内核并行版本性能进一步降至 91.56 MLUPS，均远低于串行最佳版本。
+
+    失败原因分析：
+
+        内存带宽争夺：propagation() 高度受限于内存流量。多线程并不能自动转化为加速，反而会导致多个线程争抢内存带宽，增加缓存压力。
+
+        反复的运行时开销：在 20,000 次迭代中，程序需要在多个阶段反复支付 OpenMP 线程团队建立、拆卸、任务分发和同步的开销。目前的网格尺寸不足以干净地掩盖这些运行时成本。
+
+        串行基准线过高：原本的单线程代码已经具备了 SoA 布局、restrict、SIMD 以及 -march=native 等极高强度的优化，留给朴素多线程提升的空间极小，导致并行开销轻易压倒了并行收益。
+
+2. 非阻塞 MPI 通信与计算重叠的结构性损耗 (optimism14.md)
+
+在修复双进程 MPI 通信后，试图使用经典的“通信掩盖计算”策略进一步压榨性能。
+
+    尝试过程：将原本同步的边界交换改为使用 MPI_Irecv/MPI_Isend 的非阻塞模式。同时将 propagation 步骤硬性拆分为两个内核：处理深层内部网格的内核（与通信重叠运行）和处理边界的收尾内核（在通信完成后运行）。
+
+    测试结果：耗时 20.79 秒，FOM 降至 250.36 MLUPS，未能击败前一版本简单的同步批量交换版本（20.27 秒 / 256.85 MLUPS）。
+
+    失败原因分析：
+
+        当前的局部问题规模下，可用的内部计算工作量不足以有效地掩盖通信延迟。
+
+        拆分传播步骤增加了额外的结构复杂性和运行时开销。
+
+        原本的同步批量交换版本已经足够高效，导致“重叠”策略能带来的理论收益变得极其微小。
+
+3. 碰撞内核的微观指令与算术干预 (wuxiao1.md, wuxiao2.md)
+
+试图通过微观代码重写来帮助编译器更好地进行调度和向量化，但并未取得预期收益。
+
+    尝试过程 1（指针提示与 SIMD）：将 restrict 关键字从实现层扩展到公共头文件接口层，并在 collision() 的连续内层循环上显式添加 #pragma omp simd 提示。
+
+    尝试过程 2（算术重写）：完全重写 collision() 的内层算术逻辑，放弃展开显式速度（vx, vy），转而首先计算守恒动量（mx, my）并复用 inv_density 等项，配合列指针扫描，以期缩短算术依赖链。
+
+    测试结果：提示优化的版本仅跑出 46.68 MLUPS；算术重写版本跑出 107.47 MLUPS，依然未能超越原有的串行基准测试结果。
+
+    结论：在不改变底层算法或数据布局的情况下，单纯缩短算术依赖或强化别名分析（Alias analysis）的微观重写，不足以产生超越既有高度优化基准线的性能突破。
+
+English Version
+
+Throughout the optimization of the LBM solver, we encountered several clear "negative results." While these attempts aimed to push performance further, empirical tests showed they failed to beat the established baselines. The following is a detailed summary and analysis of these dead ends based strictly on the project records:
+1. The Negative Scaling of OpenMP Multithreading (wuxiao3.md, wuxiao4.md)
+
+Attempting to introduce OpenMP acceleration to a highly optimized single-rank baseline (109.62 MLUPS) resulted in complete failure.
+
+    The Attempt: First, a conservative approach was taken by adding #pragma omp parallel for only to the outer column loop of the collision() kernel. After this failed, OpenMP was extended to the propagation() kernel to cover both dominant hotspots and increase the parallel fraction.
+
+    Test Results: The collision-only parallel version dropped to 99.68 MLUPS. The combined dual-kernel parallel version degraded further to 91.56 MLUPS, both performing significantly worse than the serial best.
+
+    Failure Analysis:
+
+        Memory Bandwidth Contention: propagation() is strongly memory-traffic dominated. Multithreading led to multiple threads competing for memory bandwidth and increasing cache pressure, rather than delivering a speedup.
+
+        Repeated Runtime Overhead: Across 20,000 iterations, the program repeatedly paid the costs of thread-team setup, teardown, worksharing, and synchronization. The current problem size is not large enough to cleanly hide these OpenMP overheads.
+
+        Overly Strong Serial Baseline: The baseline serial code was already heavily optimized with SoA layouts, restrict, SIMD, and -march=native. This left very little headroom for naive threaded speedup, causing parallel overhead to easily outweigh the parallel benefit.
+
+2. Structural Toll of Non-Blocking MPI Overlap (optimism14.md)
+
+After repairing the two-rank MPI path, an attempt was made to squeeze extra performance using the classic "overlap communication with computation" technique.
+
+    The Attempt: The synchronous halo exchange was replaced with a non-blocking MPI_Irecv/MPI_Isend phase. The propagation step was then split into two distinct kernels: an interior core (computed during communication) and a boundary finishing kernel (computed after transfer completion).
+
+    Test Results: The elapsed time was 20.79 seconds with a FOM of 250.36 MLUPS, failing to beat the simpler synchronous bulk-exchange version (20.27 s / 256.85 MLUPS).
+
+    Failure Analysis:
+
+        On the current local problem size, the available interior work was not large enough to effectively hide the communication latency.
+
+        Splitting the propagation kernel added extra structural complexity and execution overhead.
+
+        The already repaired synchronous bulk-exchange version was efficient enough that the theoretical opportunity for overlap was much smaller than expected.
+
+3. Micro-Instruction and Arithmetic Meddling (wuxiao1.md, wuxiao2.md)
+
+Attempts were made to aid compiler scheduling and vectorization through micro-level code rewrites, but they yielded no positive gains.
+
+    The Attempt 1 (Pointers & SIMD): Extended the restrict keyword to public header-level interfaces and added an explicit #pragma omp simd hint to the inner contiguous loop of collision().
+
+    The Attempt 2 (Arithmetic Rewrite): Completely rewrote the arithmetic of the inner collision() loop. Instead of expanding explicit velocities (vx, vy), it computed conserved moments (mx, my) first, reused inv_density, and utilized per-column pointers to shorten the dependency chain.
+
+    Test Results: The hinted version achieved only 46.68 MLUPS; the arithmetic rewrite reached 107.47 MLUPS, which still failed to surpass the existing serial best.
+
+    Conclusion: Without changing the numerical algorithm or data layout, micro-rewrites targeting arithmetic dependency chains or enforcing stronger alias analysis are insufficient to produce a performance breakthrough over an already highly optimized baseline.

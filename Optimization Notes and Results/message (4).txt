@@ -1,0 +1,48 @@
+第十七部分：时间步宏观结构与 MPI_Barrier 清理 (Part 17: Timestep and MPI_Barrier Cleanup)
+中文版本
+
+    优化原因（打破过度同步）：
+
+        在完成了对 collision() 和 propagation() 的内核级优化后，优化的重心转向了时间步层面的结构清理。
+
+        针对 np=2, omp=1 架构的分析显示，PMPI_Barrier（MPI 全局屏障同步）依然占据了约 8% 的运行开销。
+
+        在旧版本中，每个时间步包含三次显式的全局屏障（分别在处理特殊网格、碰撞内核以及边界交换/传播之后），这种“过度同步”无谓地增加了进程间的等待时间。
+
+    优化过程：
+
+        在主程序 main.cpp 中彻底删除了这三次逐步执行的 MPI_Barrier(...) 调用。
+
+        由于 MPI_Sendrecv 已经提供了必要的点对点阻塞同步，时间步现在完全依赖计算与通信的自然序列，而不再强制所有进程在每个中间阶段停顿等待。
+
+    优化结果：
+
+        性能提升：在无输出的基准测试中，FOM 从上一轮的 276.30 MLUPS 提升至 286.48 MLUPS。
+
+        实战成绩：在开启帧文件输出的完整测试中，程序达到了 257.83 MLUPS，并正确生成了 results14.raw。
+
+        结论：这次优化证明，在内核性能接近极限时，清理宏观的时间步结构和消除不必要的全局同步能带来比微观微调更显著的增益。
+
+English Version
+
+    Reason for Optimization (Breaking Over-Synchronization):
+
+        After completing kernel-level cleanups for collision() and propagation(), the optimization focus shifted toward the structural organization of the timestep.
+
+        Dedicated analysis of the np=2, omp=1 configuration showed that PMPI_Barrier still accounted for approximately 8% of the runtime.
+
+        The previous version contained three explicit global barriers per timestep (after special cells, collision, and halo-exchange/propagation), leading to "over-synchronization" that forced unnecessary waiting between ranks.
+
+    Optimization Process:
+
+        Removed all three per-timestep MPI_Barrier(...) calls within main.cpp.
+
+        The timestep now relies on the natural sequencing of local computation and the blocking MPI_Sendrecv used in halo exchanges, rather than forcing global synchronization at every intermediate stage.
+
+    Optimization Results:
+
+        Performance Gain: In the no-output benchmark, the FOM improved from 276.30 MLUPS to 286.48 MLUPS.
+
+        Real-world Performance: In a full 20,000-iteration run with output enabled, the solver reached 257.83 MLUPS while correctly producing results14.raw.
+
+        Conclusion: This round confirmed that once kernels are highly optimized, cleaning up timestep-level structures and removing redundant global synchronization can yield larger gains than local micro-optimizations.

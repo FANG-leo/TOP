@@ -1,0 +1,41 @@
+中文版本
+
+    优化原因：
+    在之前的多线程尝试（Optimism 9）失败后，分析显示内存带宽竞争和地址计算开销是主要瓶颈。本轮旨在通过降低内存系统的微观开销来提升效率，即在不改变算法语义的前提下，优化内存分配的对齐方式并简化热点循环中的寻址逻辑。
+
+    优化过程：
+
+        缓存行对齐分配：使用 posix_memalign(...) 将主网格数组和通信缓冲区严格对齐到 64 字节（即典型的缓存行大小）边界，确保 SIMD 加载/存储跨越缓存行的概率降至最低。
+
+        强制编译器对齐假设：在内核代码中使用 __builtin_assume_aligned(..., 64) 显式告知编译器指针已对齐，从而允许生成更高效的对齐访存指令。
+
+        内层循环指针扫描化：重写了 collision() 和 propagation() 的最内层循环。摒弃了基于索引（idx）的内存访问，改为使用连续递增的指针进行扫描，大幅减少了循环体内的地址重计算开销。
+
+    优化结果与关键对比：
+
+        绝对数据：单核配置下，耗时 24.60 秒，FOM 为 105.54 MLUPS。
+
+        关键性能飞跃（对比 OpenMP）：该版本（24.60s）显著快于此前联合开启 OpenMP 的 Optimism 9 版本（28.44s）。这表明通过对齐和寻址优化带来的单核效率提升，比盲目增加线程带来的“负优化”要有效得多。
+
+        局限性：虽然跑赢了 OpenMP，但仍以微弱差距落后于此前串行的最高纪录（Optimism 8 的 23.70s），说明微观寻址的改进在当前的极致基准下已接近边际效应。
+
+English Version
+
+    Reason for Optimization:
+    Following the failure of multi-threading attempts (Optimism 9), analysis suggested that memory bandwidth contention and address-calculation overhead were the primary bottlenecks. This round focused on microscopic memory system efficiency by optimizing allocation alignment and simplifying addressing logic within hot loops.
+
+    Optimization Process:
+
+        Cache-Line Aligned Allocation: Utilized posix_memalign(...) to align main mesh arrays and communication buffers to 64-byte boundaries, minimizing the chance of SIMD loads/stores splitting across cache lines.
+
+        Enforcing Alignment Hints: Used __builtin_assume_aligned(..., 64) to explicitly inform the compiler of pointer alignment, enabling the generation of more efficient aligned memory instructions.
+
+        Pointer-Walk Inner Loops: Rewrote the innermost loops of collision() and propagation() to use advancing pointer-increment scans instead of index-based (idx) access, significantly reducing per-iteration address recomputation.
+
+    Optimization Results & Key Comparisons:
+
+        Metrics: Achieved an elapsed time of 24.60 seconds and a FOM of 105.54 MLUPS in a single-rank configuration.
+
+        Major Improvement over OpenMP: This version (24.60s) is notably faster than the combined OpenMP version in Optimism 9 (28.44s). This proves that microscopic efficiency gains from alignment and pointer walking are far more effective than the "negative scaling" caused by over-threading.
+
+        Limitations: Despite outperforming the OpenMP version, it still lagged slightly behind the absolute serial peak (Optimism 8 at 23.70s), indicating that addressing-level micro-optimizations are reaching the point of diminishing returns on this highly tuned baseline.

@@ -1,0 +1,54 @@
+优化总结：联合开启 OpenMP (Optimism 9)
+中文版本
+
+    优化原因：
+    在之前的单核优化中，程序的串行性能已通过 SoA 重构和 SIMD 向量化达到了 109.62 MLUPS。性能分析显示，collision()（碰撞）和 propagation()（传播）是两个绝对主导的计算内核。由于此前仅对 collision() 开启 OpenMP 未能获得收益，本轮尝试将多线程并行扩展到这两个最重的内核，以期通过增加并行代码比例来突破单核瓶颈。
+
+    优化过程：
+
+        内核全面覆盖：保留 collision() 原有的 OpenMP 映射，并将线程级并行正式引入 propagation()。
+
+        并行实施方案：在 propagation() 的内部网格流传输区域外层使用 #pragma omp parallel 开启并行域，并配合 #pragma omp for schedule(static) 进行静态任务分发。
+
+        保持向量化基础：在开启多线程的同时，维持了内部连续循环的 SoA 布局和 SIMD 向量化指令，确保每个线程在执行时依然具备高效的指令并行度。
+
+    优化结果：
+    这是一次负优化（性能退化）。在单进程、8 线程（np=1, omp=8）配置下，FOM 仅为 91.56 MLUPS，耗时 28.44 秒。相比于此前最优的串行版本（109.62 MLUPS），速度反而下降了约 16.5%。
+
+    性能退化分析（为什么反而更慢了？）：
+    分析表明，多线程带来的额外开销彻底抵消并超过了并行计算的增益，主要原因如下：
+
+        内存带宽饱和与竞争：LBM 的 propagation 步骤是典型的访存密集型任务。由于之前的 SoA 和 SIMD 优化已经让单核能够极高效率地利用内存带宽，当 8 个线程同时启动时，它们会疯狂抢占 DDR 总线带宽，导致严重的访存冲突和缓存压力。
+
+        繁重的运行时同步开销：在 20,000 次迭代中，程序需要反复进入/退出 OpenMP 并行区域。对于 800x160 这种中等规模的网格，线程的启动、工作分发（Worksharing）以及在屏障（Barrier）处的互相等待时间，甚至超过了实际的计算时间。
+
+        同步点过多：在多线程化的 propagation 中，为了保证边界和角落处理的正确性，引入了多个同步点（single 区域和隐式屏障），这显著增加了排队等待成本。
+
+        阿姆达尔定律限制：即使两个主内核被并行化，special_cells() 和其他调度代码仍为串行执行，加上高昂的并行管理成本，使得整体性能受限。
+
+English Version
+
+    Reason for Optimization:
+    By this stage, the serial performance had reached 109.62 MLUPS through SoA refactoring and SIMD vectorization. Profiling confirmed that collision() and propagation() were the two dominant kernels. Since parallelizing only collision() yielded no gains previously, this round attempted to extend OpenMP to both heavy kernels to increase the parallel fraction and break the single-core ceiling.
+
+    Optimization Process:
+
+        Full Kernel Coverage: Retained the existing OpenMP directives in collision() and introduced thread-level parallelism to propagation().
+
+        Implementation Strategy: Utilized #pragma omp parallel to create a parallel region around the interior propagation sweep, with #pragma omp for schedule(static) for static worksharing.
+
+        Maintaining Vectorization: Ensured that the inner SoA loops kept their SIMD structure, allowing each thread to continue utilizing efficient 256-bit instructions.
+
+    Optimization Results:
+    This resulted in a negative optimization (performance regression). Under the single-rank, 8-thread configuration (np=1, omp=8), the FOM was only 91.56 MLUPS with an elapsed time of 28.44 seconds. This represents an approximate 16.5% slowdown compared to the best serial version (109.62 MLUPS).
+
+    Analysis of Performance Regression (Why was it slower?):
+    The analysis indicates that the multi-threading overhead completely overwhelmed the parallel computation gains due to the following factors:
+
+        Memory Bandwidth Saturation and Contention: LBM's propagation is heavily memory-bound. Since previous SoA and SIMD optimizations already allowed a single core to saturate much of the memory bandwidth, 8 threads competing for the same bus led to severe bandwidth contention and cache pressure.
+
+        Heavy Runtime Synchronization Overhead: With 20,000 iterations, the program repeatedly enters and exits OpenMP parallel regions. For a medium-sized grid (800x160), the time spent on thread team setup, worksharing, and waiting at barriers was greater than the actual computation time.
+
+        Excessive Synchronization Points: The threaded propagation required multiple sync points (via single regions and implicit barriers) to handle boundaries and corners safely, significantly increasing the wait-time cost.
+
+        Amdahl's Law Constraints: Even with the two main kernels parallelized, other logic like special_cells() and serial orchestration remained, and the high cost of parallel management capped any potential speedup.
